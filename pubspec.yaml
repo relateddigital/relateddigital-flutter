@@ -1,8 +1,7 @@
 name: relateddigital_flutter
 description: Related Digital Flutter SDK
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/relateddigital/relateddigital-flutter
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

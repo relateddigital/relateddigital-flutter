@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d92f42ad-b2eb-4317-8218-30a0405c9c29" name="Default Changelist" comment="" />
+    <list default="true" id="d92f42ad-b2eb-4317-8218-30a0405c9c29" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1rWx5Mkayd6EMmSKXEtJhdSfWJX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -29,6 +37,32 @@
       <option name="presentableId" value="Default" />
       <updated>1619105463029</updated>
     </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <created>1619105714691</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619105714691</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="118" y="25" key="CommitChangelistDialog2" timestamp="1619105714446">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="118" y="25" key="CommitChangelistDialog2/0.25.1440.875/1440.-1235.3840.2135@0.25.1440.875" timestamp="1619105714446" />
+    <state x="303" y="178" key="Vcs.Push.Dialog.v2" timestamp="1619105930392">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="303" y="178" key="Vcs.Push.Dialog.v2/0.25.1440.875/1440.-1235.3840.2135@0.25.1440.875" timestamp="1619105930392" />
+    <state x="525" y="339" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1619105663820">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="525" y="339" key="git4idea.remote.GitConfigureRemotesDialog/0.25.1440.875/1440.-1235.3840.2135@0.25.1440.875" timestamp="1619105663820" />
   </component>
 </project>
