@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d92f42ad-b2eb-4317-8218-30a0405c9c29" name="Default Changelist" comment="">
+    <list default="true" id="d92f42ad-b2eb-4317-8218-30a0405c9c29" name="Default Changelist" comment="untrivial change">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/relateddigital_flutter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/relateddigital_flutter.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,26 +57,36 @@
       <option name="project" value="LOCAL" />
       <updated>1619109729576</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="untrivial change">
+      <created>1619511056411</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1619511056411</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="license and pubspec update" />
     <MESSAGE value="workspace update" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace update" />
+    <MESSAGE value="untrivial change" />
+    <option name="LAST_COMMIT_MESSAGE" value="untrivial change" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="138" y="25" key="CommitChangelistDialog2" timestamp="1619109729345">
-      <screen x="0" y="25" width="1680" height="1025" />
+    <state x="3644" y="-635" width="911" height="1045" key="CommitChangelistDialog2" timestamp="1619522367731">
+      <screen x="1680" y="-1085" width="3840" height="2135" />
     </state>
     <state x="118" y="25" key="CommitChangelistDialog2/0.25.1440.875/1440.-1235.3840.2135@0.25.1440.875" timestamp="1619106021435" />
     <state x="138" y="25" key="CommitChangelistDialog2/0.25.1680.1025/1680.-1085.3840.2135@0.25.1680.1025" timestamp="1619109729345" />
-    <state x="354" y="204" key="Vcs.Push.Dialog.v2" timestamp="1619109739708">
-      <screen x="0" y="25" width="1680" height="1025" />
+    <state x="3644" y="-635" width="911" height="1045" key="CommitChangelistDialog2/0.25.1680.1025/1680.-1085.3840.2135@1680.-1085.3840.2135" timestamp="1619522367731" />
+    <state x="2489" y="-712" key="Vcs.Push.Dialog.v2" timestamp="1619511063033">
+      <screen x="1680" y="-1085" width="3840" height="2135" />
     </state>
     <state x="303" y="178" key="Vcs.Push.Dialog.v2/0.25.1440.875/1440.-1235.3840.2135@0.25.1440.875" timestamp="1619106023402" />
     <state x="354" y="204" key="Vcs.Push.Dialog.v2/0.25.1680.1025/1680.-1085.3840.2135@0.25.1680.1025" timestamp="1619109739707" />
+    <state x="2489" y="-712" key="Vcs.Push.Dialog.v2/0.25.1680.1025/1680.-1085.3840.2135@1680.-1085.3840.2135" timestamp="1619511063033" />
     <state x="525" y="339" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1619105663820">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
