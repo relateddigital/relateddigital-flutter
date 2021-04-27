@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://www.relateddigital.com/i/assets/rd-2019/images/svg/related-digital-logo.svg"/>
+  <img src="https://www.relateddigital.com/i/assets/rd-2019/images/svg/related-digital-logo.svg" width="400px;"/>
 </p>
 
 # Related Digital Flutter SDK
