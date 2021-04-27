@@ -1,6 +1,14 @@
-# relateddigital_flutter
+<p align="center">
+  <img src="https://www.relateddigital.com/i/assets/rd-2019/images/svg/related-digital-logo.svg"/>
+</p>
 
-Related Digital Flutter SDK
+# Related Digital Flutter SDK
+
+
+
+## relateddigital_flutter
+
+
 
 ## Getting Started
 
