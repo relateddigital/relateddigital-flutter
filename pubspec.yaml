@@ -19,7 +19,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: relateddigital_flutter.relateddigital_flutter
-        pluginClass: RelateddigitalFlutterPlugin
+        package: com.relateddigital.flutter
+        pluginClass: RelatedDigitalPlugin
       ios:
-        pluginClass: RelateddigitalFlutterPlugin
+        pluginClass: RelatedDigitalPlugin
