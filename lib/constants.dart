@@ -1,5 +1,5 @@
 class Constants {
-  static const String CHANNEL_NAME = 'RelatedDigitalPlugin';
+  static const String CHANNEL_NAME = 'relateddigital_flutter';
 
   static const String M_INIT = 'RD/init';
   static const String M_PERMISSION = 'RD/requestPermission';

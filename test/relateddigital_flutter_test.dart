@@ -18,6 +18,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await RelateddigitalFlutter.platformVersion, '42');
+    expect(await RelateddigitalFlutter().platformVersion, '42');
   });
 }
