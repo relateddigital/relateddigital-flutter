@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d92f42ad-b2eb-4317-8218-30a0405c9c29" name="Default Changelist" comment="untrivial change">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d92f42ad-b2eb-4317-8218-30a0405c9c29" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +61,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619511056411</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary=".idea/ folder add to .gitignore">
+      <created>1619522405746</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1619522405746</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -72,21 +76,26 @@
     <MESSAGE value="license and pubspec update" />
     <MESSAGE value="workspace update" />
     <MESSAGE value="untrivial change" />
-    <option name="LAST_COMMIT_MESSAGE" value="untrivial change" />
+    <MESSAGE value=".idea/ folder add to .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value=".idea/ folder add to .gitignore" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3644" y="-635" width="911" height="1045" key="CommitChangelistDialog2" timestamp="1619522367731">
+    <state x="3644" y="-635" width="911" height="1045" key="CommitChangelistDialog2" timestamp="1619522405550">
       <screen x="1680" y="-1085" width="3840" height="2135" />
     </state>
     <state x="118" y="25" key="CommitChangelistDialog2/0.25.1440.875/1440.-1235.3840.2135@0.25.1440.875" timestamp="1619106021435" />
     <state x="138" y="25" key="CommitChangelistDialog2/0.25.1680.1025/1680.-1085.3840.2135@0.25.1680.1025" timestamp="1619109729345" />
-    <state x="3644" y="-635" width="911" height="1045" key="CommitChangelistDialog2/0.25.1680.1025/1680.-1085.3840.2135@1680.-1085.3840.2135" timestamp="1619522367731" />
-    <state x="2489" y="-712" key="Vcs.Push.Dialog.v2" timestamp="1619511063033">
+    <state x="3644" y="-635" width="911" height="1045" key="CommitChangelistDialog2/0.25.1680.1025/1680.-1085.3840.2135@1680.-1085.3840.2135" timestamp="1619522405550" />
+    <state x="2489" y="-712" key="Vcs.Push.Dialog.v2" timestamp="1619522408339">
       <screen x="1680" y="-1085" width="3840" height="2135" />
     </state>
     <state x="303" y="178" key="Vcs.Push.Dialog.v2/0.25.1440.875/1440.-1235.3840.2135@0.25.1440.875" timestamp="1619106023402" />
     <state x="354" y="204" key="Vcs.Push.Dialog.v2/0.25.1680.1025/1680.-1085.3840.2135@0.25.1680.1025" timestamp="1619109739707" />
-    <state x="2489" y="-712" key="Vcs.Push.Dialog.v2/0.25.1680.1025/1680.-1085.3840.2135@1680.-1085.3840.2135" timestamp="1619511063033" />
+    <state x="2489" y="-712" key="Vcs.Push.Dialog.v2/0.25.1680.1025/1680.-1085.3840.2135@1680.-1085.3840.2135" timestamp="1619522408339" />
+    <state x="2701" y="-430" key="git4idea.merge.GitPullDialog" timestamp="1619522435973">
+      <screen x="1680" y="-1085" width="3840" height="2135" />
+    </state>
+    <state x="2701" y="-430" key="git4idea.merge.GitPullDialog/0.25.1680.1025/1680.-1085.3840.2135@1680.-1085.3840.2135" timestamp="1619522435973" />
     <state x="525" y="339" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1619105663820">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
