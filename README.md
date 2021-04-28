@@ -23,6 +23,20 @@ Geofence için de bir şeyler eklenmesi gerekiyor.
 
 
 
+
+
+
+
+IOS
+
+example podfile # platform :ios, 9 u '10.0' a çektim.
+
+
+podfile ve podspec'leri düzelt.
+
+
+
+
 ## relateddigital_flutter
 
 
