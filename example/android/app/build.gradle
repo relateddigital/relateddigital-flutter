@@ -28,9 +28,8 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "relateddigital_flutter.relateddigital_flutter_example"
-        minSdkVersion 16
+        applicationId "com.relateddigital.relateddigital_flutter_example"
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
