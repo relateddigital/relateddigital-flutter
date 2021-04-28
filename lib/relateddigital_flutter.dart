@@ -14,7 +14,7 @@ class RelateddigitalFlutter {
   String appAlias;
   String huaweiAppAlias;
 
-  RelatedDigitalPlugin() {
+  RelateddigitalFlutter() {
     _channel.setMethodCallHandler(_methodCallHandler);
   }
 

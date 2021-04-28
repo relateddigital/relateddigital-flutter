@@ -3,7 +3,7 @@ import 'dart:io';
 class Constants {
   static String APP_ALIAS = Platform.isIOS ? 'pragma-flutter-ios-demo' : 'pragma-flutter-android-demo';
   static String HUAWEI_APP_ALIAS = 'pragma-flutter-huawei-android-demo';
-  static String ANDROID_PUSH_INTENT = 'com.relateddigital.flutter.RelatedDigitalPlugin_example.MainActivity';
+  static String ANDROID_PUSH_INTENT = 'com.relateddigital.relateddigital_flutter_example.MainActivity';
   static bool LOG_ENABLED = true;
 
   static String ORGANIZATION_ID = '676D325830564761676D453D';

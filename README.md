@@ -6,6 +6,23 @@
 
 
 
+android app klasörüne google-services.json eklenecek
+huawei kısmını da test et
+
+AndroidManifest.xml'e EuroFirebaseMessagingService ve EuroHuaweiMessagingService eklenecek
+
+app build gradle'ına
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.huawei.agconnect'
+
+eklenmesi gerekiyor.
+
+
+Geofence için de bir şeyler eklenmesi gerekiyor.
+
+
+
 ## relateddigital_flutter
 
 

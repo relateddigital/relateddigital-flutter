@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.relateddigital.relateddigital_flutter_example">
    <application
-        android:label="relateddigital_flutter_example"
+        android:label="Relateddigital Flutter Example"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -37,5 +37,23 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+
+       <service
+           android:name="euromsg.com.euromobileandroid.service.EuroFirebaseMessagingService"
+           android:exported="false">
+           <intent-filter>
+               <action android:name="com.google.firebase.MESSAGING_EVENT" />
+           </intent-filter>
+       </service>
+
+       <service
+           android:name="euromsg.com.euromobileandroid.service.EuroHuaweiMessagingService"
+           android:exported="false">
+           <intent-filter>
+               <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+           </intent-filter>
+       </service>
+
     </application>
 </manifest>
