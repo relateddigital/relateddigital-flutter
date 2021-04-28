@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="relateddigital_flutter.relateddigital_flutter_example">
+    package="com.relateddigital.relateddigital_flutter_example">
    <application
         android:label="relateddigital_flutter_example"
         android:icon="@mipmap/ic_launcher">
