@@ -4,7 +4,7 @@
 
 # Related Digital Flutter SDK
 
-
+## ANDROID
 
 android app klasörüne google-services.json eklenecek
 huawei kısmını da test et
@@ -78,15 +78,38 @@ Geofence için de bir şeyler eklenmesi gerekiyor.
 
 
 
-IOS
+## IOS
+
+Runner.xcworkspace aç
+bütün targets için ios deployment target'ı 9.0'dan 10.0'a çıkar
+bütün targets'lar için deployment info'yu 9.0'dan 10.0'a çıkar
+
 
 example podfile # platform :ios, 9 u '10.0' a çektim.
+2. satırdaki comment'i kaldır
+
+example podfile son kısmı değiştirdim.
+
+
+
+
+
+
 
 
 podfile ve podspec'leri düzelt.
 
 
 
+
+
+
+
+
+
+
+
+<!---
 
 ## relateddigital_flutter
 
@@ -103,3 +126,4 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+-->
