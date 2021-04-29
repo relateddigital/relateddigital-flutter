@@ -18,8 +18,13 @@ class Constants {
   static const String M_FACEBOOK = 'RD/setFacebookId';
   static const String M_CUSTOM_EVENT = 'VL/customEvent';
   static const String M_REGISTER_EMAIL = 'RD/registerEmail';
+  static const String M_RECOMMENDATIONS = 'VL/getRecommendations';
+  static const String M_STORY_ITEM_CLICK = 'VL/onStoryItemClick';
+  static const String M_STORY_CLEAR_CACHE = 'VL/clearStoryCache';
+  static const String M_FAV_ATTRIBUTE = 'VL/getFavAttributes';
 
   static const String VL_TOKEN_KEY = 'RegisterToken';
   static const String VL_TOKEN_PARAM = 'OM.sys.TokenID';
   static const String VL_APP_ID_PARAM = 'OM.sys.AppID';
+  static const String STORY_VIEW_NAME = 'StoryView';
 }

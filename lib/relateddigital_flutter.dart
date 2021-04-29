@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:relateddigital_flutter/constants.dart';
+import 'package:relateddigital_flutter/rd_story_view.dart';
 import 'package:relateddigital_flutter/request_models.dart';
 import 'package:relateddigital_flutter/response_models.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +12,7 @@ class RelateddigitalFlutter {
   MethodChannel _channel = MethodChannel(Constants.CHANNEL_NAME);
   Function(RDTokenResponseModel) _setTokenHandler;
   Function(dynamic) _readNotificationHandler;
+  StoryPlatformCallbackHandler _storyPlatformCallbackHandler;
 
   String appAlias;
   String huaweiAppAlias;
@@ -33,6 +36,12 @@ class RelateddigitalFlutter {
     }
     else if(methodCall.method == Constants.M_NOTIFICATION_OPENED) {
       _readNotificationHandler(methodCall.arguments);
+    }
+    else if(methodCall.method == Constants.M_STORY_ITEM_CLICK) {
+      Map<String, String> map = {
+        'storyLink': methodCall.arguments['storyLink']
+      };
+      _storyPlatformCallbackHandler.onItemClick(map);
     }
   }
 
@@ -148,10 +157,49 @@ class RelateddigitalFlutter {
     });
   }
 
-  Future<String> get platformVersion async {
-    // change
-    // 0.0.3
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+  Future<List> getRecommendations(String zoneId, String productCode, {List filters}) async {
+    String rawResponse = await _channel.invokeMethod(Constants.M_RECOMMENDATIONS, {
+      'zoneId': zoneId,
+      'productCode': productCode,
+      'filters': filters ?? []
+    });
+
+    if(rawResponse != null && rawResponse.isNotEmpty) {
+      List result = json.decode(rawResponse);
+      return result;
+    }
+
+    return null;
   }
+
+  void setStoryPlatformHandler(StoryPlatformCallbackHandler handler) {
+    _storyPlatformCallbackHandler = handler;
+  }
+
+  Future<void> clearStoryCache() async {
+    if(Platform.isAndroid) {
+      await _channel.invokeMethod(Constants.M_STORY_CLEAR_CACHE);
+    }
+  }
+
+  Future<Map> getFavoriteAttributeActions({String actionId}) async {
+    try {
+      String rawResponse = await _channel.invokeMethod(Constants.M_FAV_ATTRIBUTE, {
+        'actionId': actionId
+      });
+
+      if(rawResponse != null && rawResponse.isNotEmpty) {
+        Map result = json.decode(rawResponse);
+        return result;
+      }
+    }
+    on Exception catch(ex) {
+      print(ex);
+      return null;
+    }
+
+    return null;
+  }
+
+
 }
