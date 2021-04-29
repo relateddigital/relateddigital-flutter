@@ -1,3 +1,6 @@
+
+
+/* sil sonra
 import Flutter
 import UIKit
 
@@ -12,3 +15,4 @@ public class SwiftRelateddigitalFlutterPlugin: NSObject, FlutterPlugin {
     result("iOS " + UIDevice.current.systemVersion)
   }
 }
+*/

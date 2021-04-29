@@ -6,9 +6,7 @@ Pod::Spec.new do |s|
   s.name             = 'relateddigital_flutter'
   s.version          = '0.0.1'
   s.summary          = 'Related Digital Flutter SDK'
-  s.description      = <<-DESC
-Related Digital Flutter SDK
-                       DESC
+  s.description      = 'Related Digital Flutter SDK'
   s.homepage         = 'http://relateddigital.com'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Related Digital' => 'developer@relateddigital.com' }

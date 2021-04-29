@@ -1,6 +1,4 @@
-
-/* sil sonra
-#import "RelateddigitalFlutterPlugin.h"
+#import "RelatedDigitalPlugin.h"
 #if __has_include(<relateddigital_flutter/relateddigital_flutter-Swift.h>)
 #import <relateddigital_flutter/relateddigital_flutter-Swift.h>
 #else
@@ -10,9 +8,8 @@
 #import "relateddigital_flutter-Swift.h"
 #endif
 
-@implementation RelateddigitalFlutterPlugin
+@implementation RelatedDigitalPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftRelateddigitalFlutterPlugin registerWithRegistrar:registrar];
+  [SwiftRelatedDigitalPlugin registerWithRegistrar:registrar];
 }
 @end
-*/
