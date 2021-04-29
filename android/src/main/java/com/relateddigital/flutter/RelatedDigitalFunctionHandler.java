@@ -6,9 +6,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.visilabs.Visilabs;
+import com.visilabs.VisilabsResponse;
+import com.visilabs.api.VisilabsCallback;
+import com.visilabs.api.VisilabsTargetFilter;
+import com.visilabs.api.VisilabsTargetRequest;
+import com.visilabs.favs.Favorites;
+import com.visilabs.favs.FavsResponse;
+import com.visilabs.inApp.VisilabsActionRequest;
+import com.visilabs.json.JSONArray;
+import com.visilabs.util.PersistentTargetManager;
+import com.visilabs.util.VisilabsConstant;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import euromsg.com.euromobileandroid.EuroMobileManager;
@@ -130,5 +143,93 @@ public class RelatedDigitalFunctionHandler {
                 Log.e("ERROR", errorMessage);
             }
         });
+    }
+
+    public void getRecommendations(String zoneId, String productCode, ArrayList<HashMap<String, Object>> filters, final MethodChannel.Result result) {
+        try {
+            List<VisilabsTargetFilter> visilabsRecoFilters = new ArrayList<VisilabsTargetFilter>();
+            HashMap<String,String> properties = new HashMap<String, String>();
+
+            for (HashMap<String, Object> filter : filters) {
+                String attribute = filter.get("attribute").toString();
+                String filterType = filter.get("filterType").toString();
+                String value = filter.get("value") != null ? filter.get("value").toString() : null;
+
+                VisilabsTargetFilter f = new VisilabsTargetFilter(attribute, filterType, value);
+                visilabsRecoFilters.add(f);
+            }
+
+            VisilabsTargetRequest targetRequest = Visilabs.CallAPI().buildTargetRequest(zoneId, productCode, properties, visilabsRecoFilters);
+            targetRequest.executeAsync(new VisilabsCallback() {
+                @Override
+                public void success(VisilabsResponse response) {
+                    try{
+                        String rawResponse = response.getRawResponse();
+                        result.success(rawResponse);
+                    }
+                    catch (Exception ex){
+                        ex.printStackTrace();
+
+                        HashMap<String, String> error = new HashMap<String, String>();
+                        error.put("error", ex.toString());
+                        result.success(error);
+                    }
+                }
+                @Override
+                public void fail(VisilabsResponse response) {
+                    HashMap<String, String> error = new HashMap<String, String>();
+                    error.put("error", response.getErrorMessage());
+                    result.success(error);
+                }
+            });
+        }
+        catch (Exception ex) {
+            HashMap<String, String> error = new HashMap<String, String>();
+            error.put("error", ex.toString());
+            result.success(error);
+        }
+    }
+
+    public void clearStoryCache() {
+        PersistentTargetManager.with(mContext).clearStoryCache();
+    }
+
+    public void getFavoriteAttributeActions(String actionId, final MethodChannel.Result result) {
+        try {
+            VisilabsActionRequest visilabsActionRequest;
+
+            if(actionId != null && !actionId.isEmpty()) {
+                visilabsActionRequest = Visilabs.CallAPI().requestActionId(actionId);
+            }
+            else {
+                visilabsActionRequest = Visilabs.CallAPI().requestActionId(VisilabsConstant.FavoriteAttributeAction);
+            }
+
+            visilabsActionRequest.executeAsyncAction(new VisilabsCallback() {
+
+                @Override
+                public void success(VisilabsResponse response) {
+
+                    Gson gson = new Gson();
+                    FavsResponse favsResponse = gson.fromJson(response.getRawResponse(), FavsResponse.class);
+
+                    if(favsResponse.getFavoriteAttributeAction().size() > 0) {
+                        Favorites favs = favsResponse.getFavoriteAttributeAction().get(0).getActiondata().getFavorites();
+                        result.success(gson.toJson(favs));
+                    }
+                    else {
+                        result.success(null);
+                    }
+                }
+
+                @Override
+                public void fail(VisilabsResponse response) {
+                    result.success(null);
+                }
+            });
+        }
+        catch (Exception e) {
+            result.error("ERROR", e.getMessage(), null);
+        }
     }
 }

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.visilabs.util.VisilabsConstant;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -35,6 +36,10 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), Constants.CHANNEL_NAME);
     channel.setMethodCallHandler(this);
+
+    flutterPluginBinding
+            .getPlatformViewRegistry()
+            .registerViewFactory(Constants.STORY_VIEW_NAME, new RelatedDigitalStoryViewFactory(flutterPluginBinding.getBinaryMessenger(), channel));
   }
 
   @Override
@@ -133,6 +138,21 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
 
       functionHandler.registerEmail(email, permission, isCommercial);
       result.success(null);
+    }
+    else if (call.method.equals(Constants.M_RECOMMENDATIONS)) {
+      String zoneId = call.argument("zoneId");
+      String productCode = call.argument("productCode");
+      ArrayList<HashMap<String, Object>> filters = call.argument("filters");
+
+      functionHandler.getRecommendations(zoneId, productCode, filters, result);
+    }
+    else if (call.method.equals(Constants.M_STORY_CLEAR_CACHE)) {
+      functionHandler.clearStoryCache();
+    }
+    else if (call.method.equals(Constants.M_FAV_ATTRIBUTE)) {
+      String actionId = call.argument("actionId");
+
+      functionHandler.getFavoriteAttributeActions(actionId, result);
     }
     else {
       result.notImplemented();

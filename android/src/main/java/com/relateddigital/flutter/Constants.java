@@ -20,6 +20,10 @@ public class Constants {
     public static String M_FACEBOOK = "RD/setFacebookId";
     public static String M_CUSTOM_EVENT = "VL/customEvent";
     public static String M_REGISTER_EMAIL = "RD/registerEmail";
+    public static String M_RECOMMENDATIONS = "VL/getRecommendations";
+    public static String M_STORY_ITEM_CLICK = "VL/onStoryItemClick";
+    public static String M_STORY_CLEAR_CACHE = "VL/clearStoryCache";
+    public static String M_FAV_ATTRIBUTE = "VL/getFavAttributes";
 
     public static String VL_CHANNEL = "Android";
     public static String VL_SEGMENT_URL = "http://lgr.visilabs.net";
@@ -28,4 +32,5 @@ public class Constants {
     public static String VL_ACTION_URL = "http://s.visilabs.net/actjson";
     public static String VL_GEOFENCE_URL = "http://s.visilabs.net/geojson";
     public static int VL_REQUEST_TIMEOUT = 30;
+    public static String STORY_VIEW_NAME = "StoryView";
 }
