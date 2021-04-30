@@ -2,7 +2,42 @@
   <img src="https://www.relateddigital.com/i/assets/rd-2019/images/svg/related-digital-logo.svg" width="400px;"/>
 </p>
 
-# Related Digital Flutter SDK
+[![pub package](https://img.shields.io/pub/v/relateddigital_flutter.svg)](https://pub.dartlang.org/packages/relateddigital_flutter)
+<a href="https://github.com/relateddigital/relateddigital-flutter/releases">
+    <img src="https://img.shields.io/github/release/CleverTap/clevertap-flutter.svg" />
+</a>
+
+# Table of Contents
+
+- [Introduction](#introduction)
+- [Installation](#Installation)
+- [Usage](#Usage)
+    - [Initializing](#Initializing)
+        - [Initial Parameters](#Initial-Parameters])
+        - [Debugging](#Debugging)
+    - [Data Collection](#Data-Collection)
+
+
+# Introduction
+
+This library is the official Flutter SDK of Related Digital.
+
+# Installation
+
+This library is the official Flutter SDK of Related Digital.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## ANDROID
 
