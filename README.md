@@ -73,8 +73,26 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 ```
 
+- Add the following services to your `AndroidManifest.xml`, within the `<application></application>` tags.
 
+```xml
+<service
+   android:name="euromsg.com.euromobileandroid.service.EuroFirebaseMessagingService"
+   android:exported="false">
+   <intent-filter>
+       <action android:name="com.google.firebase.MESSAGING_EVENT" />
+   </intent-filter>
+</service>
 
+<!-- skip if your app does not support HMS  -->
+<service
+   android:name="euromsg.com.euromobileandroid.service.EuroHuaweiMessagingService"
+   android:exported="false">
+   <intent-filter>
+       <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+   </intent-filter>
+</service>
+```
 
 
 
