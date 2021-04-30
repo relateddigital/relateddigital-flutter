@@ -62,5 +62,3 @@ public class RelatedDigitalStoryView implements PlatformView {
         }
     }
 }
-
-

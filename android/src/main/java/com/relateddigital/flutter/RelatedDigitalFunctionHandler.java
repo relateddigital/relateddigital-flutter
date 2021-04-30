@@ -53,7 +53,7 @@ public class RelatedDigitalFunctionHandler {
         EuroMobileManager euroMobileManager = EuroMobileManager.init(appAlias, huaweiAppAlias, mContext);
         euroMobileManager.registerToFCM(mContext);
         euroMobileManager.setPushIntent(pushIntent, mContext);
-        euroMobileManager.setChannelName("CHANNEL", mContext);
+        euroMobileManager.setChannelName("CHANNEL", mContext); // TODO: burada niye CHANNEL var?
     }
 
     public void initVisilabs(String organizationId, String siteId, String datasource, boolean geofenceEnabled) {
