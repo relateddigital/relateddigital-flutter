@@ -22,10 +22,14 @@
 
 This library is the official Flutter SDK of Related Digital.
 
+
 ## Requirements
 
 - iOS 10.0 or later
 - Android API level 21 or later
+
+
+
 
 # Installation
 
@@ -43,12 +47,46 @@ dependencies:
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 ```
 
-## Android
+
+# Android
+
+- Add the following lines to the `repositories` section in `project/build.gradle`
+
+```gradle
+google()
+jcenter()
+maven {url 'http://developer.huawei.com/repo/'} // skip if your app does not support HMS
+```
+
+- Add the following lines to the `dependencies` section in `project/build.gradle`
+
+```gradle
+classpath 'com.android.tools.build:gradle:4.1.3'
+classpath 'com.google.gms:google-services:4.3.5'
+classpath 'com.huawei.agconnect:agcp:1.4.1.300' // skip if your app does not support HMS
+```
+
+- Add the following lines to the end of `app/build.gradle`
+
+```gradle
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
+```
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+## IOS
 
 
 
