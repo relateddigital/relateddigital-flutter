@@ -200,6 +200,4 @@ class RelateddigitalFlutter {
 
     return null;
   }
-
-
 }
