@@ -9,24 +9,41 @@
 
 # Table of Contents
 
-- [Introduction](#introduction)
+- [Introduction](#Introduction)
+    - [Requirements](#Requirements)
 - [Installation](#Installation)
-- [Usage](#Usage)
-    - [Initializing](#Initializing)
-        - [Initial Parameters](#Initial-Parameters])
-        - [Debugging](#Debugging)
-    - [Data Collection](#Data-Collection)
+    - [Android](#Android)
+    - [IOS](#IOS)
+
+
 
 
 # Introduction
 
 This library is the official Flutter SDK of Related Digital.
 
+## Requirements
+
+- iOS 10.0 or later
+- Android API level 21 or later
+
 # Installation
 
-This library is the official Flutter SDK of Related Digital.
+- Edit your project's `pubspec.yaml` file:
 
+```yaml
+dependencies:
+    relateddigital_flutter: ^0.1.0
+```
+- Run `flutter pub get`
 
+- Import the package:
+
+```dart
+import 'package:relateddigital_flutter/relateddigital_flutter.dart';
+```
+
+## Android
 
 
 
