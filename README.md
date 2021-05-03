@@ -227,6 +227,35 @@ Related Digital uses events to collect data from mobile applications. The develo
 Some of the most common events:
 
 
+### Sign Up
+
+```dart
+String pageName = 'SignUp';
+Map<String, String> parameters = {
+  'OM.exVisitorID':'userId',
+  'OM.b_sgnp':'1'
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);
+```
+
+### Login
+
+```dart
+String pageName = 'Login';
+Map<String, String> parameters = {
+  'OM.exVisitorID':'userId',
+  'OM.b_login':'1'
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);
+```
+
+
+
+
+
+
+
+
 
 
 
