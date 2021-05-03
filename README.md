@@ -3,9 +3,6 @@
 </p>
 
 [![pub package](https://img.shields.io/pub/v/relateddigital_flutter.svg)](https://pub.dartlang.org/packages/relateddigital_flutter)
-<a href="https://github.com/relateddigital/relateddigital-flutter/releases">
-    <img src="https://img.shields.io/github/release/CleverTap/clevertap-flutter.svg" />
-</a>
 
 # Table of Contents
 
