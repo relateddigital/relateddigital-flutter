@@ -23,15 +23,20 @@
 
 
 
+
 # Introduction
 
 This library is the official Flutter SDK of Related Digital.
+
+
+
 
 
 ## Requirements
 
 - iOS 10.0 or later
 - Android API level 21 or later
+
 
 
 
@@ -51,6 +56,9 @@ dependencies:
 ```dart
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 ```
+
+
+
 
 
 ## Android
@@ -85,7 +93,9 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
        <action android:name="com.google.firebase.MESSAGING_EVENT" />
    </intent-filter>
 </service>
+```
 
+```xml
 <!-- skip if your app does not support HMS  -->
 <service
    android:name="euromsg.com.euromobileandroid.service.EuroHuaweiMessagingService"
@@ -101,6 +111,9 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 - If your app supports `HMS` add `agconnect-services.json` file to your application’s `app` directory.
 
 
+
+
+
 ## iOS
 
 - Change the ios platform version to 10.0 or higher in `Podfile`
@@ -109,20 +122,20 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 platform :ios, '10.0'
 ```
 
+- In your project directory, open the file `ios/Runner.xcworkspace` with Xcode.
 
+- Enable `Push Notifications` and `Background Modes->Remote Notifications` capabilities.
 
-4.1 Select your project settings and under Capabilities, enable Push Notifications
-4.2 Next, enable Background Modes and check Push Notifications
-
-
-
-
+![Xcode Push Capability](/screenshots/xcode-push-capability.png)
 
 
 
 
 
 # Usage
+
+
+
 
 
 ## Initializing
@@ -165,6 +178,9 @@ Future<void> initLib() async {
 ```
 
 
+
+
+
 ## Push Notifications
 
 
@@ -197,20 +213,16 @@ Future<void> requestPermission() async {
 }
 ```
 
+
+
+
+
 ## Data Collection
 
-Related Digital uses events to collect data from mobile applications. The developer needs to implement the methods provided by SDK. `customEvent`  
-is a generic method to track user events. `customEvent`  takes 2 parameters: pageName and properties.
+Related Digital uses events to collect data from mobile applications. The developer needs to implement the methods provided by SDK. `customEvent`  is a generic method to track user events. `customEvent`  takes 2 parameters: pageName and properties.
 
-* **pageName** : The current page of your application. If your event is not related to a page view
-, you should pass a value related to the event. If you pass an empty **String** the event would be considered invalid and discarded.
-* **parameters** : A collection of key/value pairs related to the event. If your event does not have additional data apart from page name
-, passing an empty **Map** acceptable.
-
-In SDK, apart from `customEvent`, there are 2 other methods to collect data: `login` and `signUp`.  
-As in the `customEvent` method, the `login` and `signUp` methods also take a mandatory and an optional parameter. 
-The first parameter is `exVisitorId`  which uniquely identifies the user and can not be empty. The second parameter `properties` is optional 
-and passsing an empty dictionary also valid.
+* **pageName** : The current page of your application. If your event is not related to a page view, you should pass a value related to the event. If you pass an empty **String** the event would be considered invalid and discarded.
+* **parameters** : A collection of key/value pairs related to the event. If your event does not have additional data apart from page name, passing an empty **Map** acceptable.
 
 Some of the most common events:
 
@@ -282,12 +294,9 @@ token için customEvent metodu çağırılabilir düşün?
 
 login and signUp metodları SDK'ya eklenmeli
 
-
-
-
 inAppNotificationsEnabled android için de kullanılır hale getirilebilir.
 
-
+RelatedDigitalChannelHandler enableLog Visilabs için de kullanılmalı.
 
 
 
@@ -336,7 +345,11 @@ example podfile son kısmı değiştirdim.
 
 podfile ve podspec'leri düzelt.
 
-
+<array>
+    <string>fetch</string>
+    <string>location</string>
+    <string>remote-notification</string>
+</array>
 
 
 
