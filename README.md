@@ -238,6 +238,7 @@ Map<String, String> parameters = {
 relatedDigitalPlugin.customEvent(pageName, parameters);
 ```
 
+
 ### Login
 
 ```dart
@@ -250,11 +251,133 @@ relatedDigitalPlugin.customEvent(pageName, parameters);
 ```
 
 
+### Page View
+
+Use the following implementation of `customEvent`  method to record the page name the visitor is currently viewing. You may add extra parameters to properties  **Map** or you may leave it empty.
+
+```dart
+String pageName = 'Page Name';
+Map<String, String> parameters = {};
+await relatedDigitalPlugin.customEvent(pageName, parameters);
+```
 
 
+### Product View
+
+Use the following implementation of `customEvent`  when the user displays a product in the mobile app.
+
+```dart
+String pageName = 'Product View';
+Map<String, String> parameters = {
+  'OM.pv' : productCode, 
+  'OM.pn' : productName, 
+  'OM.ppr' : productPrice, 
+  'OM.pv.1' : productBrand, 
+  'OM.inv': inventory // Number of items in stock
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);
+```
 
 
+### Add to Cart
 
+Use the following implementation of `customEvent`  when the user adds items to the cart or removes.
+
+```dart
+String pageName = 'Cart';
+Map<String, String> parameters = {
+  'OM.pbid' : basketID, 
+  'OM.pb' : 'Product1 Code;Product2 Code', 
+  'OM.pu' : 'Product1 Quantity;Product2 Quantity', 
+  'OM.ppr' : 'Product1 Price*Product1 Quantity;Product2 Price*Product2 Quantity'
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);
+```
+
+
+### Product Purchase
+
+Use the following implementation of `customEvent` when the user buys one or more items.
+
+```dart
+String pageName = 'Purchase';
+Map<String, String> parameters = {
+  'OM.tid' : transactionID, 
+  'OM.pp' : 'Product1 Code;Product2 Code', 
+  'OM.pu' : 'Product1 Quantity;Product2 Quantity', 
+  'OM.ppr' : 'Product1 Price*Product1 Quantity;Product2 Price*Product2 Quantity',
+  'OM.exVisitorID' : userId
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);
+```
+
+
+### Product Category Page View
+
+When the user views a category list page, use the following implementation of `customEvent`.
+
+```dart
+String pageName = 'Category View';
+Map<String, String> parameters = {
+  'OM.clist': '12345',
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);
+```
+
+
+### In App Search
+
+If the mobile app has a search functionality available, use the following implementation of `customEvent`.
+
+```dart
+String pageName = 'In App Search';
+Map<String, String> parameters = {
+  'OM.OSS': searchKeyword,
+  'OM.OSSR': searchResult.length,
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);
+```
+
+
+### Banner Click
+
+You can monitor banner click data using the following implementation of `customEvent`.
+
+```dart
+String pageName = 'Banner Click';
+Map<String, String> parameters = {
+  'OM.OSB': 'Banner Name/Banner Code',
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);;
+```
+
+
+### Add To Favorites
+
+When the user adds a product to their favorites, use the following implementation of `customEvent`.
+
+```dart
+String pageName = 'Add To Favorites';
+Map<String, String> parameters = {
+  'OM.pf' : productCode, 
+  'OM.pfu' : '1',
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);
+```
+
+
+### Remove from Favorites
+
+When the user removes a product from their favorites, use the following implementation of `customEvent`.
+
+```dart
+String pageName = 'Add To Favorites';
+Map<String, String> parameters = {
+  'OM.pf' : productCode, 
+  'OM.pfu' : '-1',
+};
+relatedDigitalPlugin.customEvent(pageName, parameters);
+```
 
 
 
