@@ -111,7 +111,8 @@ platform :ios, '10.0'
 
 
 
-
+4.1 Select your project settings and under Capabilities, enable Push Notifications
+4.2 Next, enable Background Modes and check Push Notifications
 
 
 
