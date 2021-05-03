@@ -13,7 +13,7 @@
     - [Requirements](#Requirements)
 - [Installation](#Installation)
     - [Android](#Android)
-    - [IOS](#IOS)
+    - [iOS](#iOS)
 
 
 
@@ -48,20 +48,17 @@ import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 ```
 
 
-# Android
+## Android
 
 - Add the following lines to the `repositories` section in `project/build.gradle`
 
 ```gradle
-google()
-jcenter()
 maven {url 'http://developer.huawei.com/repo/'} // skip if your app does not support HMS
 ```
 
 - Add the following lines to the `dependencies` section in `project/build.gradle`
 
 ```gradle
-classpath 'com.android.tools.build:gradle:4.1.3'
 classpath 'com.google.gms:google-services:4.3.5'
 classpath 'com.huawei.agconnect:agcp:1.4.1.300' // skip if your app does not support HMS
 ```
@@ -94,6 +91,24 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 </service>
 ```
 
+- Add `google-services.json` file to your application’s `app` directory.
+
+- If your app supports `HMS` add `agconnect-services.json` file to your application’s `app` directory.
+
+
+## iOS
+
+
+
+
+
+
+
+//TODO: google-services.json eklenecek
+
+//TODO: app/build.gradle defaultConfig altına  multiDexEnabled true gerekiyormuş?
+
+//TODO: project/build.gradle lintOptions android { { disable 'InvalidPackage' } } gerekli mi?
 
 
 
@@ -102,9 +117,6 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 
 
 
-
-
-## IOS
 
 
 
