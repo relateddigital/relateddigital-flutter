@@ -16,6 +16,9 @@
     - [iOS](#iOS)
 - [Usage](#Usage)
     - [Initializing](#Initializing)
+    - [Push Notifications](#Push-Notifications)
+        - [Requesting Permission & Retrieving Token](#Requesting-Permission-&-Retrieving-Token])
+    - [Data Collection](#Data-Collection)
 
 
 
@@ -100,9 +103,11 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 
 ## iOS
 
+- Change the ios platform version to 10.0 or higher in `Podfile`
 
-
-
+```ruby
+platform :ios, '10.0'
+```
 
 
 
@@ -132,7 +137,7 @@ import 'package:relateddigital_flutter/response_models.dart';
 Initialize the library
 
 ```dart
-final RelatedDigitalPlugin relatedDigitalPlugin = RelatedDigitalPlugin();
+final RelateddigitalFlutter relatedDigitalPlugin = RelateddigitalFlutter();
 
 @override
 void initState() {
@@ -143,7 +148,7 @@ void initState() {
 Future<void> initLib() async {
   var initRequest = RDInitRequestModel(
     appAlias: Platform.isIOS ? 'ios-alias' : 'android-alias',
-    huaweiAppAlias: 'huawei-alias', // Android only
+    huaweiAppAlias: 'huawei-alias', // pass empty String if your app does not support HMS
     androidPushIntent: 'com.test.MainActivity', // Android only
     organizationId: 'ORG_ID',
     siteId: 'SITE_ID',
@@ -159,6 +164,54 @@ Future<void> initLib() async {
 ```
 
 
+## Push Notifications
+
+
+### Requesting Permission & Retrieving Token
+
+Add the lines below to request push notification permission and retrieve token.
+
+```dart
+String token = '-';
+
+void _getTokenCallback(RDTokenResponseModel result) {
+  if(result != null && result.deviceToken != null && result.deviceToken.isNotEmpty) {
+    setState(() {
+      token = result.deviceToken;
+    });
+  }
+  else {
+    setState(() {
+      token = 'Token not retrieved';
+    });
+  }
+}
+
+void _readNotificationCallback(dynamic result) {
+  print(result);
+}
+
+Future<void> requestPermission() async {
+  await relatedDigitalPlugin.requestPermission(_getTokenCallback, _readNotificationCallback);
+}
+```
+
+## Data Collection
+
+Related Digital uses events to collect data from mobile applications. The developer needs to implement the methods provided by SDK. `customEvent`  
+is a generic method to track user events. `customEvent`  takes 2 parameters: pageName and properties.
+
+* **pageName** : The current page of your application. If your event is not related to a page view
+, you should pass a value related to the event. If you pass an empty **String** the event would be considered invalid and discarded.
+* **parameters** : A collection of key/value pairs related to the event. If your event does not have additional data apart from page name
+, passing an empty **Map** acceptable.
+
+In SDK, apart from `customEvent`, there are 2 other methods to collect data: `login` and `signUp`.  
+As in the `customEvent` method, the `login` and `signUp` methods also take a mandatory and an optional parameter. 
+The first parameter is `exVisitorId`  which uniquely identifies the user and can not be empty. The second parameter `properties` is optional 
+and passsing an empty dictionary also valid.
+
+Some of the most common events:
 
 
 
@@ -170,86 +223,86 @@ Future<void> initLib() async {
 
 
 
-//TODO: app/build.gradle defaultConfig altına  multiDexEnabled true gerekiyormuş?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---
+
+TODO:
+initVisilabs
+
+RelatedDigitalPlugin.java ve RelatedDigitalChannelHandler.swift içerisinde 
+euromsg parametreleri boş geliyor ise initEuroMsg çağırılmasın
+visilabs parametreleri boş geliyor ise initVisilabs çağırılmasın
+
+ya da init metoduna bunlarla ilgili bool parametre ekleyelim.
+
+FirebaseOperations.java ve HuaweiOperations.java altında eğer visilabs de kullanılıyor ise 
+token için customEvent metodu çağırılabilir düşün?
+
+login and signUp metodları SDK'ya eklenmeli
+
+
+
+
+inAppNotificationsEnabled android için de kullanılır hale getirilebilir.
+
+
+
+
+
+
+
+
+//TODO: app/build.gradle defaultConfig altına neden multiDexEnabled true gerekiyormuş?
 
 //TODO: project/build.gradle lintOptions android { { disable 'InvalidPackage' } } gerekli mi?
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## ANDROID
 
-android app klasörüne google-services.json eklenecek
 huawei kısmını da test et
 
-AndroidManifest.xml'e EuroFirebaseMessagingService ve EuroHuaweiMessagingService eklenecek
 
-<service
-           android:name="euromsg.com.euromobileandroid.service.EuroFirebaseMessagingService"
-           android:exported="false">
-           <intent-filter>
-               <action android:name="com.google.firebase.MESSAGING_EVENT" />
-           </intent-filter>
-       </service>
-
-       <service
-           android:name="euromsg.com.euromobileandroid.service.EuroHuaweiMessagingService"
-           android:exported="false">
-           <intent-filter>
-               <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
-           </intent-filter>
-       </service>
-
-
-
-proje build gradle'ının en üst kısmı
-
-buildscript {
-    repositories {
-        google()
-        jcenter()
-        maven {url 'http://developer.huawei.com/repo/'}
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.3'
-        classpath 'com.google.gms:google-services:4.3.5'
-        classpath 'com.huawei.agconnect:agcp:1.4.1.300'
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        maven {url 'http://developer.huawei.com/repo/'}
-    }
-}
-
-
-
-
-
-
-
-
-app build gradle'ına
-
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.huawei.agconnect'
-
-eklenmesi gerekiyor.
 
 minSdkVersion'ı 21 yapmak gerekiyor.
 
@@ -280,10 +333,6 @@ example podfile son kısmı değiştirdim.
 
 
 
-
-
-
-
 podfile ve podspec'leri düzelt.
 
 
@@ -294,23 +343,9 @@ podfile ve podspec'leri düzelt.
 
 
 
-
-
-<!---
-
-## relateddigital_flutter
+https://raw.githubusercontent.com/relateddigital/visilabs-ios/master/README.md ## Data Collection Vislabs yazıyor düzelt
 
 
 
-## Getting Started
-
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
 -->
