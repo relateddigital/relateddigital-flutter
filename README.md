@@ -12,13 +12,16 @@
 - [Introduction](#Introduction)
     - [Requirements](#Requirements)
 - [Installation](#Installation)
-    - [Android](#Android)
-    - [iOS](#iOS)
+    - [Platform Integration](#Platform-Integration)
+        - [Android](#Android)
+        - [iOS](#iOS)
 - [Usage](#Usage)
     - [Initializing](#Initializing)
     - [Push Notifications](#Push-Notifications)
         - [Requesting Permission & Retrieving Token](#Requesting-Permission-&-Retrieving-Token])
     - [Data Collection](#Data-Collection)
+    - [Targeting Actions](#Targeting-Actions)
+        - [In-App Messaging](#In-App-Messaging)
 
 
 
@@ -61,7 +64,10 @@ import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 
 
 
-## Android
+## Platform-Integration
+
+
+### Android
 
 - Add the following lines to the `repositories` section in `project/build.gradle`
 
@@ -111,10 +117,7 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 - If your app supports `HMS` add `agconnect-services.json` file to your application’s `app` directory.
 
 
-
-
-
-## iOS
+### iOS
 
 - Change the ios platform version to 10.0 or higher in `Podfile`
 
@@ -383,6 +386,24 @@ relatedDigitalPlugin.customEvent(pageName, parameters);
 
 
 
+## Targeting Actions
+
+
+### In-App Messaging
+
+**In-app messages** are notifications to your users when they are directly active in your mobile app. To enable **In-App Messaging** feature you need to set the value of `inAppNotificationsEnabled` parameter to `true` when calling `init` to initialize the SDK.
+
+The existence of a relevant **in-app message** for an event controlled by after each `customEvent` call. You can create and customize your **in-app messages** on https://intelligence.relateddigital.com/#Target/TargetingAction/TAList page of RMC administration panel.
+
+There are 9 types of **in-app messages**:
+
+|               Pop-up - Image, Header, Text & Button              | Mini-icon&text                                                             | Full Screen-image                                                |
+|:----------------------------------------------------------------:|----------------------------------------------------------------------------|------------------------------------------------------------------|
+| ![full](/screenshots/inappnotification/full.png)                 | ![mini](/screenshots/inappnotification/mini.png)                           | ![full_image](/screenshots/inappnotification/full_image.png)     |
+| Full Screen-image&button                                         | Pop-up - Image, Header, Text & Button                                      |                              Pop-up-Survey                       |
+| ![image_button](/screenshots/inappnotification/image_button.png) | ![image_text_button](/screenshots/inappnotification/image_text_button.png) | ![smile_rating](/screenshots/inappnotification/smile_rating.png) |
+| Pop-up - NPS with Text & Button                                  | Native Alert & Actionsheet                                                 |  NPS with numbers                                                   |
+| ![nps](/screenshots/inappnotification/nps.png)                   | ![nps_with_numbers](/screenshots/inappnotification/alert.png)   | ![nps_with_numbers](/screenshots/inappnotification/nps_with_numbers.png) |
 
 
 
