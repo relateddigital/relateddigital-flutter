@@ -47,7 +47,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.1.0
+    relateddigital_flutter: ^0.1.1
 ```
 - Run `flutter pub get`
 
@@ -468,8 +468,12 @@ inAppNotificationsEnabled android için de kullanılır hale getirilebilir.
 
 RelatedDigitalChannelHandler enableLog Visilabs için de kullanılmalı.
 
-
-
+BU KEYİ EKLEMEYİNCE EUROMSG REQUESTLERİ GİTMİYOR
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+</dict>
 
 
 
