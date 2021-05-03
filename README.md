@@ -14,6 +14,8 @@
 - [Installation](#Installation)
     - [Android](#Android)
     - [iOS](#iOS)
+- [Usage](#Usage)
+    - [Initializing](#Initializing)
 
 
 
@@ -104,7 +106,69 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 
 
 
-//TODO: google-services.json eklenecek
+
+
+
+
+
+
+
+
+
+
+# Usage
+
+
+## Initializing
+
+Import the library
+
+```dart
+import 'package:relateddigital_flutter/relateddigital_flutter.dart';
+import 'package:relateddigital_flutter/request_models.dart';
+import 'package:relateddigital_flutter/response_models.dart';
+```
+
+Initialize the library
+
+```dart
+final RelatedDigitalPlugin relatedDigitalPlugin = RelatedDigitalPlugin();
+
+@override
+void initState() {
+  super.initState();
+  initLib();
+}
+
+Future<void> initLib() async {
+  var initRequest = RDInitRequestModel(
+    appAlias: Platform.isIOS ? 'ios-alias' : 'android-alias',
+    huaweiAppAlias: 'huawei-alias', // Android only
+    androidPushIntent: 'com.test.MainActivity', // Android only
+    organizationId: 'ORG_ID',
+    siteId: 'SITE_ID',
+    dataSource: 'DATA_SOURCE',
+    maxGeofenceCount: 20,  // iOS only
+    geofenceEnabled: true,
+    inAppNotificationsEnabled: true, // iOS only
+    logEnabled: true,
+  );
+
+  await relatedDigitalPlugin.init(initRequest);
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 //TODO: app/build.gradle defaultConfig altına  multiDexEnabled true gerekiyormuş?
 
