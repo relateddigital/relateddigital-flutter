@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
       logEnabled: Constants.LOG_ENABLED,
     );
 
-    await relatedDigitalPlugin.init(initRequest);
+    await relatedDigitalPlugin.init(initRequest, _readNotificationCallback);
   }
 
   void _getTokenCallback(RDTokenResponseModel result) {
@@ -69,13 +69,8 @@ class _MyAppState extends State<MyApp> {
     print(result);
   }
 
-  void _storyClickHandler(Map<String, String> result) {
-    print('_storyClickHandler called');
-    print(result);
-  }
-
   Future<void> requestPermission() async {
-    await relatedDigitalPlugin.requestPermission(_getTokenCallback, _readNotificationCallback);
+    await relatedDigitalPlugin.requestPermission(_getTokenCallback);
   }
 
   Future<void> setEmail() async {
@@ -84,7 +79,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> registerEmail() async {
     bool permission = true;
-    bool isCommercial = true;
+    bool isCommercial = false;
     await relatedDigitalPlugin.registerEmail(email, permission: permission, isCommercial: isCommercial);
   }
 

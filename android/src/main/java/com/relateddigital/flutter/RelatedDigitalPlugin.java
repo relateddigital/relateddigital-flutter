@@ -3,6 +3,7 @@ package com.relateddigital.flutter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -58,6 +59,8 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
       functionHandler.initEuromsg(appAlias, huaweiAppAlias, pushIntent);
       functionHandler.initVisilabs(organizationId, siteId, dataSource, geofenceEnabled);
       VisilabsConstant.DEBUG = enableLog;
+
+      functionHandler.checkReportRead(mActivity.getIntent());
 
       result.success(null);
     }
@@ -166,7 +169,7 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
 
   @Override
   public boolean onNewIntent(Intent intent) {
-    return functionHandler.reportRead(intent);
+    return functionHandler.checkReportRead(intent);
   }
 
   @Override

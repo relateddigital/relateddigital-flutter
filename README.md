@@ -173,7 +173,11 @@ Future<void> initLib() async {
     logEnabled: true,
   );
 
-  await relatedDigitalPlugin.init(initRequest);
+  await relatedDigitalPlugin.init(initRequest, _readNotificationCallback);
+}
+
+void _readNotificationCallback(dynamic result) {
+  print(result);
 }
 ```
 
@@ -204,12 +208,8 @@ void _getTokenCallback(RDTokenResponseModel result) {
   }
 }
 
-void _readNotificationCallback(dynamic result) {
-  print(result);
-}
-
 Future<void> requestPermission() async {
-  await relatedDigitalPlugin.requestPermission(_getTokenCallback, _readNotificationCallback);
+  await relatedDigitalPlugin.requestPermission(_getTokenCallback);
 }
 ```
 

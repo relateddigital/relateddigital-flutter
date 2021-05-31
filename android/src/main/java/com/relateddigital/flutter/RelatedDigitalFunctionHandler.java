@@ -1,8 +1,10 @@
 package com.relateddigital.flutter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -116,11 +118,16 @@ public class RelatedDigitalFunctionHandler {
         EuroMobileManager.getInstance().sync(mContext);
     }
 
-    public boolean reportRead(Intent intent) {
-        if (intent.getExtras() != null) {
-            EuroMobileManager.getInstance().reportRead(intent.getExtras());
+    public boolean checkReportRead(Intent intent) {
+        if (intent.getExtras() != null && intent.getExtras().getSerializable("message") != null) {
+            try {
+                EuroMobileManager.getInstance().reportRead(intent.getExtras());
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
-            Map<String, String> readResult = Utilities.convertBundleToMap(intent);
+            Map<String, Object> readResult = Utilities.convertBundleToMap(intent);
             mChannel.invokeMethod(Constants.M_NOTIFICATION_OPENED, readResult);
         }
 

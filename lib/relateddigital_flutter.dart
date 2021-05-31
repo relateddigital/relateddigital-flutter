@@ -45,9 +45,10 @@ class RelateddigitalFlutter {
     }
   }
 
-  Future<void> init(RDInitRequestModel initRequest) async {
+  Future<void> init(RDInitRequestModel initRequest, Function(dynamic) notificationHandler) async {
     this.appAlias = initRequest.appAlias;
     this.huaweiAppAlias = initRequest.huaweiAppAlias;
+    this._readNotificationHandler = notificationHandler;
 
     await _channel.invokeMethod(Constants.M_INIT, {
       'appAlias': initRequest.appAlias,
@@ -63,10 +64,8 @@ class RelateddigitalFlutter {
     });
   }
 
-  Future<void> requestPermission(Function(RDTokenResponseModel) tokenHandler, Function(dynamic) notificationHandler) async {
+  Future<void> requestPermission(Function(RDTokenResponseModel) tokenHandler) async {
     _setTokenHandler = tokenHandler;
-    _readNotificationHandler = notificationHandler;
-
     await _channel.invokeMethod(Constants.M_PERMISSION);
   }
 
