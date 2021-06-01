@@ -21,6 +21,7 @@
     - [Data Collection](#Data-Collection)
     - [Targeting Actions](#Targeting-Actions)
         - [In-App Messaging](#In-App-Messaging)
+        - [Geofencing](#Geofencing)
 
 
 
@@ -510,12 +511,52 @@ There are 9 types of **in-app messages**:
 | ![nps](/screenshots/inappnotification/nps.png)                   | ![nps_with_numbers](/screenshots/inappnotification/alert.png)   | ![nps_with_numbers](/screenshots/inappnotification/nps_with_numbers.png) |
 
 
+### Geofencing
 
+#### IOS
+- In Xcode, add **NSLocationAlwaysAndWhenInUseUsageDescription** and **NSLocationWhenInUseUsageDescription** keys to the **Info.plist** file.
+- In Xcode, enable **Background fetch** and **Location updates** background modes.
+- When initializing plugin, set **geofenceEnabled** to **true**. Also provide a number for **maxGeofenceCount** parameter (max. 20 supported).
 
+#### Android
+- Add below permissions in your **AndroidManifest.xml**
+```xml
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+````
+- Add below meta-data parameters in your **AndroidManifest.xml**
+```xml
+<meta-data android:name="VisilabsOrganizationID" android:value="VisilabsOrganizationID" />
+<meta-data android:name="VisilabsSiteID" android:value="VisilabsSiteID" />
+<meta-data android:name="VisilabsSegmentURL" android:value="http://lgr.visilabs.net" />
+<meta-data android:name="VisilabsDataSource" android:value="VisilabsDataSource" />
+<meta-data android:name="VisilabsRealTimeURL" android:value="http://rt.visilabs.net" />
+<meta-data android:name="VisilabsChannel" android:value="Android" />
+<meta-data android:name="VisilabsGeofenceURL" android:value="http://s.visilabs.net/geojson" />
+<meta-data android:name="VisilabsGeofenceEnabled" android:value="true" />
 
+<!-- Parameters below are optional -->
 
+<meta-data android:name="VisilabsRequestTimeoutInSeconds" android:value="30" />
+<meta-data android:name="VisilabsRESTURL" android:value="VisilabsRESTURL" />
+<meta-data android:name="VisilabsEncryptedDataSource" android:value="VisilabsEncryptedDataSource" />
+<meta-data android:name="VisilabsTargetURL" android:value="http://s.visilabs.net/json" />
+<meta-data android:name="VisilabsActionURL" android:value="http://s.visilabs.net/actjson" />
+```
+- Add below service and receivers in your **AndroidManifest.xml**
+```xml
+<service android:name="com.visilabs.android.gps.geofence.GeofenceTransitionsIntentService"
+    android:enabled="true"
+    android:permission="android.permission.BIND_JOB_SERVICE" />
 
+<receiver android:name="com.visilabs.android.gps.geofence.VisilabsAlarm" android:exported="false"/>
 
+<receiver
+    android:name="com.visilabs.android.gps.geofence.GeofenceBroadcastReceiver"
+    android:enabled="true"
+    android:exported="true"/>
+```
 
 
 
