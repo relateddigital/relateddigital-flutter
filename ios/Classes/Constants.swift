@@ -21,6 +21,7 @@ class Constants {
     static let M_RECOMMENDATIONS = "VL/getRecommendations"
     static let M_STORY_ITEM_CLICK = "VL/onStoryItemClick"
     static let M_FAV_ATTRIBUTE = "VL/getFavAttributes"
+		static let M_LOGOUT = "VL/logout"
 
     static let VL_CHANNEL = "IOS"
     static let VL_REQUEST_TIMEOUT = 30

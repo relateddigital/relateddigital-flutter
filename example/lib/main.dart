@@ -137,6 +137,10 @@ class _MyAppState extends State<MyApp> {
     print(result);
   }
 
+  Future<void> logout() async {
+    await relatedDigitalPlugin.logout();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -202,6 +206,12 @@ class _MyAppState extends State<MyApp> {
                               registerEmail();
                             },
                             child: Text('Register Email')
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              logout();
+                            },
+                            child: Text('Logout')
                         ),
                         ElevatedButton(
                             onPressed: () {

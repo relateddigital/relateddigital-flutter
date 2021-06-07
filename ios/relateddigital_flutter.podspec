@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'Euromsg', '2.0.6'
-  s.dependency 'VisilabsIOS', '2.5.6'
+  s.dependency 'Euromsg', '2.2.1'
+  s.dependency 'VisilabsIOS', '2.6.0'
   s.platform = :ios, '10.0'
 
   # Flutter.framework does not contain a i386 slice.

@@ -26,6 +26,8 @@
 	<string>We need access to your location for better user experience.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need access to your location for better user experience.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>We use advertising identifier!</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

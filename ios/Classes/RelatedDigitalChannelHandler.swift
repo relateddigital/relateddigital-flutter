@@ -126,6 +126,10 @@ class RelatedDigitalChannelHandler: NSObject {
 			
 			self.functionHandler.getFavoriteAttributeActions(actionId: actionId, result: result)
 		}
+		else if(call.method == Constants.M_LOGOUT) {
+			self.functionHandler.logout()
+			result(nil)
+		}
 		else {
 			result(FlutterMethodNotImplemented)
 		}

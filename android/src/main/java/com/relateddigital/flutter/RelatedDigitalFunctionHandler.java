@@ -96,7 +96,7 @@ public class RelatedDigitalFunctionHandler {
     }
 
     public void setAppVersion(String appVersion) {
-        EuroMobileManager.getInstance().setAppVersion(appVersion);
+        EuroMobileManager.getInstance().setAppVersion(appVersion, mContext);
         EuroMobileManager.getInstance().sync(mContext);
     }
 
@@ -240,5 +240,10 @@ public class RelatedDigitalFunctionHandler {
         catch (Exception e) {
             result.error("ERROR", e.getMessage(), null);
         }
+    }
+
+    public void logout() {
+        EuroMobileManager.getInstance().removeUserProperties(mContext);
+        Visilabs.CallAPI().logout();
     }
 }

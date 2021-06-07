@@ -199,4 +199,8 @@ class RelateddigitalFlutter {
 
     return null;
   }
+
+  Future<void> logout() async {
+    await _channel.invokeMethod(Constants.M_LOGOUT);
+  }
 }

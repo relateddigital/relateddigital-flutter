@@ -487,7 +487,12 @@ Map<String, String> parameters = {
 relatedDigitalPlugin.customEvent(pageName, parameters);
 ```
 
+### Logout
+To remove all the user related data from local storage, use the method below.
 
+```dart
+await relatedDigitalPlugin.logout();
+```
 
 
 

@@ -157,6 +157,10 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
 
       functionHandler.getFavoriteAttributeActions(actionId, result);
     }
+    else if (call.method.equals(Constants.M_LOGOUT)) {
+      functionHandler.logout();
+      result.success(null);
+    }
     else {
       result.notImplemented();
     }

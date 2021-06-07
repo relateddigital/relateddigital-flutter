@@ -160,6 +160,11 @@ class RelatedDigitalFunctionHandler {
 			result(nil)
 		}
 	}
+	
+	public func logout() {
+		Euromsg.logout()
+		Visilabs.callAPI().logout()
+	}
 }
 
 public enum RelatedDigitalFavoriteAttribute: String, Encodable {

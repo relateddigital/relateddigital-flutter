@@ -1,11 +1,11 @@
 PODS:
-  - Euromsg (2.0.6)
+  - Euromsg (2.2.1)
   - Flutter (1.0.0)
   - relateddigital_flutter (0.0.1):
-    - Euromsg (= 2.0.6)
+    - Euromsg (= 2.2.1)
     - Flutter
-    - VisilabsIOS (= 2.5.6)
-  - VisilabsIOS (2.5.6)
+    - VisilabsIOS (= 2.6.0)
+  - VisilabsIOS (2.6.0)
 
 DEPENDENCIES:
   - Euromsg
@@ -24,10 +24,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/relateddigital_flutter/ios"
 
 SPEC CHECKSUMS:
-  Euromsg: 11aef230c52f54a09f140b5856bafc0d4bc13af0
+  Euromsg: b4e891f819c005bbad57584e7b4131cf8cf89fe4
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  relateddigital_flutter: 168bda111e3b586af27fdab37df12a561e11ff18
-  VisilabsIOS: ad2ccba9b5833750f45f6f32f7098af61827bda2
+  relateddigital_flutter: 1e92329523d41cd93091ca642d90d935b25294e0
+  VisilabsIOS: cd4c7a981ef46098ec6a827278ce72d7a69b40df
 
 PODFILE CHECKSUM: ae3cbafd7923d65435b2e8ab00afa88793391b9a
 
