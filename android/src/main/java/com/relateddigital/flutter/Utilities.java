@@ -38,7 +38,7 @@ public class Utilities {
                     map = gson.fromJson(messageJson, HashMap.class);
                 }
                 else {
-                    String value = bundle.getString(key);
+                    Object value = bundle.get(key);
                     map.put(key, value);
                 }
             }
