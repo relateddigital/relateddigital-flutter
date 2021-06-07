@@ -111,6 +111,25 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
    </intent-filter>
 </service>
 ```
+- Add below meta-data parameters in your **AndroidManifest.xml**
+```xml
+<meta-data android:name="VisilabsOrganizationID" android:value="VisilabsOrganizationID" />
+<meta-data android:name="VisilabsSiteID" android:value="VisilabsSiteID" />
+<meta-data android:name="VisilabsSegmentURL" android:value="http://lgr.visilabs.net" />
+<meta-data android:name="VisilabsDataSource" android:value="VisilabsDataSource" />
+<meta-data android:name="VisilabsRealTimeURL" android:value="http://rt.visilabs.net" />
+<meta-data android:name="VisilabsChannel" android:value="Android" />
+<meta-data android:name="VisilabsGeofenceURL" android:value="http://s.visilabs.net/geojson" />
+<meta-data android:name="VisilabsGeofenceEnabled" android:value="true" />
+
+<!-- Parameters below are optional -->
+
+<meta-data android:name="VisilabsRequestTimeoutInSeconds" android:value="30" />
+<meta-data android:name="VisilabsRESTURL" android:value="VisilabsRESTURL" />
+<meta-data android:name="VisilabsEncryptedDataSource" android:value="VisilabsEncryptedDataSource" />
+<meta-data android:name="VisilabsTargetURL" android:value="http://s.visilabs.net/json" />
+<meta-data android:name="VisilabsActionURL" android:value="http://s.visilabs.net/actjson" />
+```
 
 - Add `google-services.json` file to your application’s `app` directory.
 
@@ -530,25 +549,6 @@ There are 9 types of **in-app messages**:
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 ````
-- Add below meta-data parameters in your **AndroidManifest.xml**
-```xml
-<meta-data android:name="VisilabsOrganizationID" android:value="VisilabsOrganizationID" />
-<meta-data android:name="VisilabsSiteID" android:value="VisilabsSiteID" />
-<meta-data android:name="VisilabsSegmentURL" android:value="http://lgr.visilabs.net" />
-<meta-data android:name="VisilabsDataSource" android:value="VisilabsDataSource" />
-<meta-data android:name="VisilabsRealTimeURL" android:value="http://rt.visilabs.net" />
-<meta-data android:name="VisilabsChannel" android:value="Android" />
-<meta-data android:name="VisilabsGeofenceURL" android:value="http://s.visilabs.net/geojson" />
-<meta-data android:name="VisilabsGeofenceEnabled" android:value="true" />
-
-<!-- Parameters below are optional -->
-
-<meta-data android:name="VisilabsRequestTimeoutInSeconds" android:value="30" />
-<meta-data android:name="VisilabsRESTURL" android:value="VisilabsRESTURL" />
-<meta-data android:name="VisilabsEncryptedDataSource" android:value="VisilabsEncryptedDataSource" />
-<meta-data android:name="VisilabsTargetURL" android:value="http://s.visilabs.net/json" />
-<meta-data android:name="VisilabsActionURL" android:value="http://s.visilabs.net/actjson" />
-```
 - Add below service and receivers in your **AndroidManifest.xml**
 ```xml
 <service android:name="com.visilabs.android.gps.geofence.GeofenceTransitionsIntentService"
