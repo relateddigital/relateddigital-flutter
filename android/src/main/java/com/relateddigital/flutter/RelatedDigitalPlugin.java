@@ -45,125 +45,130 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-    if (call.method.equals(Constants.M_INIT)) {
-      String appAlias = call.argument("appAlias");
-      String huaweiAppAlias = call.argument("huaweiAppAlias");
-      String pushIntent = call.argument("pushIntent");
-      boolean enableLog = call.argument("enableLog");
+     try {
+       if (call.method.equals(Constants.M_INIT)) {
+         String appAlias = call.argument("appAlias");
+         String huaweiAppAlias = call.argument("huaweiAppAlias");
+         String pushIntent = call.argument("pushIntent");
+         boolean enableLog = call.argument("enableLog");
 
-      String organizationId = call.argument("organizationId");
-      String siteId = call.argument("siteId");
-      String dataSource = call.argument("dataSource");
-      boolean geofenceEnabled = call.argument("geofenceEnabled");
+         String organizationId = call.argument("organizationId");
+         String siteId = call.argument("siteId");
+         String dataSource = call.argument("dataSource");
+         boolean geofenceEnabled = call.argument("geofenceEnabled");
 
-      functionHandler.initEuromsg(appAlias, huaweiAppAlias, pushIntent);
-      functionHandler.initVisilabs(organizationId, siteId, dataSource, geofenceEnabled);
-      VisilabsConstant.DEBUG = enableLog;
+         functionHandler.initEuromsg(appAlias, huaweiAppAlias, pushIntent);
+         functionHandler.initVisilabs(organizationId, siteId, dataSource, geofenceEnabled);
+         VisilabsConstant.DEBUG = enableLog;
 
-      functionHandler.checkReportRead(mActivity.getIntent());
+         functionHandler.checkReportRead(mActivity.getIntent());
 
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_PERMISSION)) {
-      functionHandler.getToken();
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_EURO_USER_ID)) {
-      String userId = call.argument("userId");
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_PERMISSION)) {
+         functionHandler.getToken();
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_EURO_USER_ID)) {
+         String userId = call.argument("userId");
 
-      functionHandler.setEuroUserId(userId);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_EMAIL_WITH_PERMISSION)) {
-      String email = call.argument("email");
-      boolean permission = call.argument("permission");
+         functionHandler.setEuroUserId(userId);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_EMAIL_WITH_PERMISSION)) {
+         String email = call.argument("email");
+         boolean permission = call.argument("permission");
 
-      functionHandler.setEmail(email, permission);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_USER_PROPERTY)) {
-      String key = call.argument("key");
-      String value = call.argument("value");
+         functionHandler.setEmail(email, permission);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_USER_PROPERTY)) {
+         String key = call.argument("key");
+         String value = call.argument("value");
 
-      functionHandler.setUserProperty(key, value);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_APP_VERSION)) {
-      String appVersion = call.argument("appVersion");
+         functionHandler.setUserProperty(key, value);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_APP_VERSION)) {
+         String appVersion = call.argument("appVersion");
 
-      functionHandler.setAppVersion(appVersion);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_NOTIFICATION_PERMISSION)) {
-      boolean permission = call.argument("permission");
+         functionHandler.setAppVersion(appVersion);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_NOTIFICATION_PERMISSION)) {
+         boolean permission = call.argument("permission");
 
-      functionHandler.setPushNotificationPermission(permission);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_EMAIL_PERMISSION)) {
-      result.notImplemented();
-    }
-    else if (call.method.equals(Constants.M_PHONE_PERMISSION)) {
-      boolean permission = call.argument("permission");
+         functionHandler.setPushNotificationPermission(permission);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_EMAIL_PERMISSION)) {
+         result.notImplemented();
+       }
+       else if (call.method.equals(Constants.M_PHONE_PERMISSION)) {
+         boolean permission = call.argument("permission");
 
-      functionHandler.setPhonePermission(permission);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_BADGE)) {
-      result.notImplemented();
-    }
-    else if (call.method.equals(Constants.M_ADVERTISING)) {
-      result.notImplemented();
-    }
-    else if (call.method.equals(Constants.M_TWITTER)) {
-      String twitterId = call.argument("twitterId");
+         functionHandler.setPhonePermission(permission);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_BADGE)) {
+         result.notImplemented();
+       }
+       else if (call.method.equals(Constants.M_ADVERTISING)) {
+         result.notImplemented();
+       }
+       else if (call.method.equals(Constants.M_TWITTER)) {
+         String twitterId = call.argument("twitterId");
 
-      functionHandler.setTwitterId(twitterId);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_FACEBOOK)) {
-      String facebookId = call.argument("facebookId");
+         functionHandler.setTwitterId(twitterId);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_FACEBOOK)) {
+         String facebookId = call.argument("facebookId");
 
-      functionHandler.setFacebookId(facebookId);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_CUSTOM_EVENT)) {
-      String pageName = call.argument("pageName");
-      HashMap<String, String> parameters = call.argument("parameters");
+         functionHandler.setFacebookId(facebookId);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_CUSTOM_EVENT)) {
+         String pageName = call.argument("pageName");
+         HashMap<String, String> parameters = call.argument("parameters");
 
-      functionHandler.customEvent(pageName, parameters);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_REGISTER_EMAIL)) {
-      String email = call.argument("email");
-      boolean permission = call.argument("permission");
-      boolean isCommercial = call.argument("isCommercial");
+         functionHandler.customEvent(pageName, parameters);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_REGISTER_EMAIL)) {
+         String email = call.argument("email");
+         boolean permission = call.argument("permission");
+         boolean isCommercial = call.argument("isCommercial");
 
-      functionHandler.registerEmail(email, permission, isCommercial);
-      result.success(null);
-    }
-    else if (call.method.equals(Constants.M_RECOMMENDATIONS)) {
-      String zoneId = call.argument("zoneId");
-      String productCode = call.argument("productCode");
-      ArrayList<HashMap<String, Object>> filters = call.argument("filters");
+         functionHandler.registerEmail(email, permission, isCommercial);
+         result.success(null);
+       }
+       else if (call.method.equals(Constants.M_RECOMMENDATIONS)) {
+         String zoneId = call.argument("zoneId");
+         String productCode = call.argument("productCode");
+         ArrayList<HashMap<String, Object>> filters = call.argument("filters");
 
-      functionHandler.getRecommendations(zoneId, productCode, filters, result);
-    }
-    else if (call.method.equals(Constants.M_STORY_CLEAR_CACHE)) {
-      functionHandler.clearStoryCache();
-    }
-    else if (call.method.equals(Constants.M_FAV_ATTRIBUTE)) {
-      String actionId = call.argument("actionId");
+         functionHandler.getRecommendations(zoneId, productCode, filters, result);
+       }
+       else if (call.method.equals(Constants.M_STORY_CLEAR_CACHE)) {
+         functionHandler.clearStoryCache();
+       }
+       else if (call.method.equals(Constants.M_FAV_ATTRIBUTE)) {
+         String actionId = call.argument("actionId");
 
-      functionHandler.getFavoriteAttributeActions(actionId, result);
-    }
-    else if (call.method.equals(Constants.M_LOGOUT)) {
-      functionHandler.logout();
-      result.success(null);
-    }
-    else {
-      result.notImplemented();
-    }
+         functionHandler.getFavoriteAttributeActions(actionId, result);
+       }
+       else if (call.method.equals(Constants.M_LOGOUT)) {
+         functionHandler.logout();
+         result.success(null);
+       }
+       else {
+         result.notImplemented();
+       }
+     }
+     catch (Exception ex) {
+       ex.printStackTrace();
+     }
   }
 
   @Override

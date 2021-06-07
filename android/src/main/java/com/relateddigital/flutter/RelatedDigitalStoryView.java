@@ -44,21 +44,26 @@ public class RelatedDigitalStoryView implements PlatformView {
     }
 
     private void getStories(Context context, String actionId) {
-        StoryItemClickListener storyItemClickListener = new StoryItemClickListener() {
-            @Override
-            public void storyItemClicked(String storyLink) {
-                Map<String, String> result = new HashMap<String, String>();
-                result.put("storyLink", storyLink);
+        try {
+            StoryItemClickListener storyItemClickListener = new StoryItemClickListener() {
+                @Override
+                public void storyItemClicked(String storyLink) {
+                    Map<String, String> result = new HashMap<String, String>();
+                    result.put("storyLink", storyLink);
 
-                channel.invokeMethod(Constants.M_STORY_ITEM_CLICK, result);
+                    channel.invokeMethod(Constants.M_STORY_ITEM_CLICK, result);
+                }
+            };
+
+            if(actionId != null) {
+                recyclerView.setStoryActionId(context, actionId, storyItemClickListener);
             }
-        };
-
-        if(actionId != null) {
-            recyclerView.setStoryActionId(context, actionId, storyItemClickListener);
+            else {
+                recyclerView.setStoryAction(context, storyItemClickListener);
+            }
         }
-        else {
-            recyclerView.setStoryAction(context, storyItemClickListener);
+        catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }

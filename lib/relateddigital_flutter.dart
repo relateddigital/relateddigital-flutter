@@ -143,8 +143,8 @@ class RelateddigitalFlutter {
 
   Future<void> customEvent(String pageName, Map<String, String> parameters) async {
     await _channel.invokeMethod(Constants.M_CUSTOM_EVENT, {
-      'pageName': pageName,
-      'parameters': parameters
+      'pageName': pageName ?? '',
+      'parameters': parameters ?? Map<String, String>()
     });
   }
 

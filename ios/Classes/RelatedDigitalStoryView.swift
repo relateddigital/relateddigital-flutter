@@ -39,6 +39,14 @@ class RelatedDigitalStoryView: NSObject, FlutterPlatformView, VisilabsStoryURLDe
 	}
 	
 	func createNativeView(actionId: String?){
+		do {
+			try getStoryView(actionId: actionId)
+		} catch {
+			print(error)
+		}
+	}
+	
+	func getStoryView(actionId: String?) throws {
 		var _actionId: Int?
 		if(actionId != nil && actionId != "") {
 			_actionId = Int(actionId!)
@@ -51,6 +59,14 @@ class RelatedDigitalStoryView: NSObject, FlutterPlatformView, VisilabsStoryURLDe
 	}
 	
 	func urlClicked(_ url: URL) {
+		do {
+			try handleUrlClick(url)
+		} catch {
+			print(error)
+		}
+	}
+	
+	func handleUrlClick(_ url: URL) throws {
 		let result: NSMutableDictionary = NSMutableDictionary()
 		result.setValue(url.absoluteString, forKey: "storyLink")
 		

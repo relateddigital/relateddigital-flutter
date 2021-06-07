@@ -9,6 +9,14 @@ class RelatedDigitalChannelHandler: NSObject {
 	}
 	
 	public func handleResult(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+		do {
+			try handleCall(call, result: result)
+		} catch {
+			print(error)
+		}
+	}
+	
+	private func handleCall(_ call: FlutterMethodCall, result: @escaping FlutterResult) throws {
 		let args = call.arguments as? [String : Any]
 			
 		if(call.method == Constants.M_INIT) {
