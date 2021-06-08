@@ -24,15 +24,9 @@ class RelateddigitalFlutter {
   Future<dynamic> _methodCallHandler(MethodCall methodCall) async {
     if(methodCall.method == Constants.M_TOKEN_RETRIEVED) {
       RDTokenResponseModel response = RDTokenResponseModel.fromJson(methodCall.arguments);
-
-      Map<String, String> vlTokenParameters = {
-        Constants.VL_TOKEN_PARAM: response.deviceToken,
-        Constants.VL_APP_ID_PARAM: response.playServiceEnabled ? appAlias : huaweiAppAlias
-      };
-
-      this.customEvent(Constants.VL_TOKEN_KEY, vlTokenParameters);
-
+      
       _setTokenHandler(response);
+      _handleTokenRegister(response);
     }
     else if(methodCall.method == Constants.M_NOTIFICATION_OPENED) {
       _readNotificationHandler(methodCall.arguments);
@@ -217,6 +211,15 @@ class RelateddigitalFlutter {
       'exVisitorId': userId,
       'properties': properties ?? Map()
     });
+  }
+
+  void _handleTokenRegister(RDTokenResponseModel response) {
+    Map<String, String> vlTokenParameters = {
+      Constants.VL_TOKEN_PARAM: response.deviceToken,
+      Constants.VL_APP_ID_PARAM: response.playServiceEnabled ? appAlias : huaweiAppAlias
+    };
+
+    this.customEvent(Constants.VL_TOKEN_KEY, vlTokenParameters);
   }
 
   void _handleUtmParameters(dynamic payload) {
