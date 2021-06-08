@@ -137,6 +137,26 @@ class _MyAppState extends State<MyApp> {
     print(result);
   }
 
+  Future<void> login() async {
+    // optional
+    Map<String, String> properties = {
+      'OM.b_login':'1'
+    };
+
+    // await relatedDigitalPlugin.login(email);
+    await relatedDigitalPlugin.login(email, properties: properties);
+  }
+
+  Future<void> signUp() async {
+    // optional
+    // Map<String, String> properties = {
+    //   'OM.b_sgnp':'1'
+    // };
+
+    await relatedDigitalPlugin.signUp(email);
+    // await relatedDigitalPlugin.signUp(email, properties: properties);
+  }
+
   Future<void> logout() async {
     await relatedDigitalPlugin.logout();
   }
@@ -206,6 +226,18 @@ class _MyAppState extends State<MyApp> {
                               registerEmail();
                             },
                             child: Text('Register Email')
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              signUp();
+                            },
+                            child: Text('Sign Up')
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              login();
+                            },
+                            child: Text('Login')
                         ),
                         ElevatedButton(
                             onPressed: () {

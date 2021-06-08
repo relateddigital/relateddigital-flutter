@@ -162,6 +162,18 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          functionHandler.logout();
          result.success(null);
        }
+       else if (call.method.equals(Constants.M_LOGIN)) {
+         String exVisitorId = call.argument("exVisitorId");
+         HashMap<String, String> properties = call.argument("properties");
+
+         functionHandler.login(exVisitorId, properties);
+       }
+       else if (call.method.equals(Constants.M_SIGNUP)) {
+         String exVisitorId = call.argument("exVisitorId");
+         HashMap<String, String> properties = call.argument("properties");
+
+         functionHandler.signUp(exVisitorId, properties);
+       }
        else {
          result.notImplemented();
        }

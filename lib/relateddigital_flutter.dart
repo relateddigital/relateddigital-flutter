@@ -205,6 +205,20 @@ class RelateddigitalFlutter {
     await _channel.invokeMethod(Constants.M_LOGOUT);
   }
 
+  Future<void> login(String userId, {Map<String, String> properties}) async {
+    await _channel.invokeMethod(Constants.M_LOGIN, {
+      'exVisitorId': userId,
+      'properties': properties ?? Map()
+    });
+  }
+
+  Future<void> signUp(String userId, {Map<String, String> properties}) async {
+    await _channel.invokeMethod(Constants.M_SIGNUP, {
+      'exVisitorId': userId,
+      'properties': properties ?? Map()
+    });
+  }
+
   void _handleUtmParameters(dynamic payload) {
     try {
       if(payload != null && payload[Constants.VL_UTM_EVENT_PARAMS_KEY] != null) {

@@ -25,6 +25,8 @@ public class Constants {
     public static String M_STORY_CLEAR_CACHE = "VL/clearStoryCache";
     public static String M_FAV_ATTRIBUTE = "VL/getFavAttributes";
     public static String M_LOGOUT = "VL/logout";
+    public static String M_LOGIN = "VL/login";
+    public static String M_SIGNUP = "VL/signUp";
 
     public static String VL_CHANNEL = "Android";
     public static String VL_SEGMENT_URL = "http://lgr.visilabs.net";

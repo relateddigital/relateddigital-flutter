@@ -246,4 +246,22 @@ public class RelatedDigitalFunctionHandler {
         EuroMobileManager.getInstance().removeUserProperties(mContext);
         Visilabs.CallAPI().logout();
     }
+
+    public void login(String exVisitorId, HashMap<String, String> properties) {
+        if(properties == null || properties.isEmpty()) {
+            Visilabs.CallAPI().login(exVisitorId);
+        }
+        else {
+            Visilabs.CallAPI().login(exVisitorId, properties);
+        }
+    }
+
+    public void signUp(String exVisitorId, HashMap<String, String> properties) {
+        if(properties == null || properties.isEmpty()) {
+            Visilabs.CallAPI().signUp(exVisitorId);
+        }
+        else {
+            Visilabs.CallAPI().signUp(exVisitorId, properties);
+        }
+    }
 }

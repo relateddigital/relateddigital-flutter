@@ -138,6 +138,20 @@ class RelatedDigitalChannelHandler: NSObject {
 			self.functionHandler.logout()
 			result(nil)
 		}
+		else if(call.method == Constants.M_LOGIN) {
+			let exVisitorId = args?["exVisitorId"] as! String
+			let properties = args?["properties"] as? [String: String] ?? [:]
+			
+			self.functionHandler.login(exVisitorId: exVisitorId, properties: properties)
+			result(nil)
+		}
+		else if(call.method == Constants.M_SIGNUP) {
+			let exVisitorId = args?["exVisitorId"] as! String
+			let properties = args?["properties"] as? [String: String] ?? [:]
+			
+			self.functionHandler.signUp(exVisitorId: exVisitorId, properties: properties)
+			result(nil)
+		}
 		else {
 			result(FlutterMethodNotImplemented)
 		}

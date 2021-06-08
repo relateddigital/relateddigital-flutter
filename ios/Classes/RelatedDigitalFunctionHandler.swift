@@ -165,6 +165,24 @@ class RelatedDigitalFunctionHandler {
 		Euromsg.logout()
 		Visilabs.callAPI().logout()
 	}
+	
+	public func login(exVisitorId: String, properties: [String: String]) {
+		if(properties.isEmpty) {
+			Visilabs.callAPI().login(exVisitorId: exVisitorId)
+		}
+		else {
+			Visilabs.callAPI().login(exVisitorId: exVisitorId, properties: properties)
+		}
+	}
+	
+	public func signUp(exVisitorId: String, properties: [String: String]) {
+		if(properties.isEmpty) {
+			Visilabs.callAPI().signUp(exVisitorId: exVisitorId)
+		}
+		else {
+			Visilabs.callAPI().signUp(exVisitorId: exVisitorId, properties: properties)
+		}
+	}
 }
 
 public enum RelatedDigitalFavoriteAttribute: String, Encodable {
