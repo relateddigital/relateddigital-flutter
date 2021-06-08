@@ -357,24 +357,26 @@ Some of the most common events:
 ### Sign Up
 
 ```dart
-String pageName = 'SignUp';
-Map<String, String> parameters = {
-  'OM.exVisitorID':'userId',
+String userId = 'userId';
+// optional
+Map<String, String> properties = {
   'OM.b_sgnp':'1'
 };
-relatedDigitalPlugin.customEvent(pageName, parameters);
+
+await relatedDigitalPlugin.signUp(userId, properties: properties);
 ```
 
 
 ### Login
 
 ```dart
-String pageName = 'Login';
-Map<String, String> parameters = {
-  'OM.exVisitorID':'userId',
+String userId = 'userId';
+// optional
+Map<String, String> properties = {
   'OM.b_login':'1'
 };
-relatedDigitalPlugin.customEvent(pageName, parameters);
+
+await relatedDigitalPlugin.login(userId, properties: properties);
 ```
 
 
