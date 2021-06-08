@@ -137,7 +137,7 @@ public class RelatedDigitalFunctionHandler {
     }
 
     public void customEvent(String pageName, HashMap<String, String> parameters) {
-        Visilabs.CallAPI().customEvent(pageName, parameters, mActivity);
+        Visilabs.CallAPI().customEvent(pageName, parameters);
     }
 
     public void registerEmail(String email, boolean permission, boolean isCommercial) {
