@@ -36,6 +36,7 @@ class RelateddigitalFlutter {
     }
     else if(methodCall.method == Constants.M_NOTIFICATION_OPENED) {
       _readNotificationHandler(methodCall.arguments);
+      _handleUtmParameters(methodCall.arguments);
     }
     else if(methodCall.method == Constants.M_STORY_ITEM_CLICK) {
       Map<String, String> map = {
@@ -202,5 +203,31 @@ class RelateddigitalFlutter {
 
   Future<void> logout() async {
     await _channel.invokeMethod(Constants.M_LOGOUT);
+  }
+
+  void _handleUtmParameters(dynamic payload) {
+    try {
+      if(payload != null && payload[Constants.VL_UTM_EVENT_PARAMS_KEY] != null) {
+        dynamic payloadParams = payload[Constants.VL_UTM_EVENT_PARAMS_KEY];
+
+        String utmCampaign = payloadParams[Constants.VL_UTM_CAMPAIGN_PARAM] as String;
+        String utmSource = payloadParams[Constants.VL_UTM_SOURCE_PARAM] as String;
+        String utmMedium = payloadParams[Constants.VL_UTM_MEDIUM_PARAM] as String;
+
+        if((utmCampaign != null && utmCampaign.isNotEmpty) || 
+            (utmSource != null && utmSource.isNotEmpty) || 
+            (utmMedium != null && utmMedium.isNotEmpty)) {
+              Map<String, String> utmMap = {
+                Constants.VL_UTM_CAMPAIGN_PARAM: utmCampaign,
+                Constants.VL_UTM_SOURCE_PARAM: utmSource,
+                Constants.VL_UTM_MEDIUM_PARAM: utmMedium
+              };
+              this.customEvent(Constants.VL_UTM_EVENT_KEY, utmMap);
+            }
+      }
+    }
+    on Exception catch(ex) {
+      print(ex);
+    }
   }
 }

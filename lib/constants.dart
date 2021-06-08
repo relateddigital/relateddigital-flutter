@@ -28,4 +28,9 @@ class Constants {
   static const String VL_TOKEN_PARAM = 'OM.sys.TokenID';
   static const String VL_APP_ID_PARAM = 'OM.sys.AppID';
   static const String STORY_VIEW_NAME = 'StoryView';
+  static const String VL_UTM_CAMPAIGN_PARAM = 'utm_campaign';
+  static const String VL_UTM_SOURCE_PARAM = 'utm_source';
+  static const String VL_UTM_MEDIUM_PARAM = 'utm_medium';
+  static const String VL_UTM_EVENT_KEY = 'OM_evt.gif';
+  static const String VL_UTM_EVENT_PARAMS_KEY = 'params';
 }
