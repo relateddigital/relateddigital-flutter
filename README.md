@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://www.relateddigital.com/i/assets/rd-2019/images/svg/related-digital-logo.svg" width="400px;"/>
+  <img src="/screenshots/related-digital-logo.svg" width="400px;"/>
 </p>
 
 [![pub package](https://img.shields.io/pub/v/relateddigital_flutter.svg)](https://pub.dartlang.org/packages/relateddigital_flutter)
@@ -50,7 +50,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.1.4
+    relateddigital_flutter: ^0.1.8
 ```
 - Run `flutter pub get`
 
@@ -191,8 +191,9 @@ Future<void> initLib() async {
     dataSource: 'DATA_SOURCE',
     maxGeofenceCount: 20,  // iOS only
     geofenceEnabled: true,
-    inAppNotificationsEnabled: true, // iOS only
+    inAppNotificationsEnabled: true,
     logEnabled: true,
+    isIDFAEnabled: true,  // iOS only
   );
 
   await relatedDigitalPlugin.init(initRequest, _readNotificationCallback);
@@ -214,6 +215,9 @@ void _readNotificationCallback(dynamic result) {
 
 Add the lines below to request push notification permission and retrieve token.
 
+#### IOS
+- Instead of having to prompt the user for permission to send them push notifications, your app can request provisional authorization. In order to enable provisional authorization, you should set `isProvisional` parameter of `requestPermission` method to `true`.
+
 ```dart
 String token = '-';
 
@@ -231,7 +235,7 @@ void _getTokenCallback(RDTokenResponseModel result) {
 }
 
 Future<void> requestPermission() async {
-  await relatedDigitalPlugin.requestPermission(_getTokenCallback);
+  await relatedDigitalPlugin.requestPermission(_getTokenCallback, isProvisional: true);
 }
 ```
 
