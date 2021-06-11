@@ -38,7 +38,8 @@ class RelatedDigitalChannelHandler: NSObject {
 			result(nil)
 		}
 		else if(call.method == Constants.M_PERMISSION) {
-			self.functionHandler.requestPermission()
+            let isProvisional = args?["isProvisional"] as? Bool ?? false
+            self.functionHandler.requestPermission(isProvisional: isProvisional)
 			result(nil)
 		}
 		else if(call.method == Constants.M_EURO_USER_ID) {

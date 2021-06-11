@@ -60,9 +60,9 @@ class RelateddigitalFlutter {
     });
   }
 
-  Future<void> requestPermission(Function(RDTokenResponseModel) tokenHandler) async {
+  Future<void> requestPermission(Function(RDTokenResponseModel) tokenHandler, {bool isProvisional = false}) async {
     _setTokenHandler = tokenHandler;
-    await _channel.invokeMethod(Constants.M_PERMISSION);
+    await _channel.invokeMethod(Constants.M_PERMISSION, {'isProvisional': isProvisional});
   }
 
   Future<void> setEuroUserId(String userId) async {

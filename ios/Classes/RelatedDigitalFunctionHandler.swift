@@ -12,8 +12,12 @@ class RelatedDigitalFunctionHandler {
 		Visilabs.callAPI().loggingEnabled = enableLog
 	}
 	
-	public func requestPermission() {
-		Euromsg.askForNotificationPermission(register: true)
+    public func requestPermission(isProvisional: Bool) {
+        if (isProvisional) {
+            Euromsg.askForNotificationPermissionProvisional(register: true)
+        } else {
+            Euromsg.askForNotificationPermission(register: true)
+        }
 	}
 	
 	public func registerToken(deviceToken: Data) {
