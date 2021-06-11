@@ -52,7 +52,9 @@ class _MyAppState extends State<MyApp> {
 
   void _getTokenCallback(RDTokenResponseModel result) {
     print('RDTokenResponseModel ' + result.toString());
+
     if(result != null && result.deviceToken != null && result.deviceToken.isNotEmpty) {
+      print('RDTokenResponseModel ' + result.deviceToken);
       setState(() {
         token = result.deviceToken;
       });
@@ -70,7 +72,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> requestPermission() async {
-    await relatedDigitalPlugin.requestPermission(_getTokenCallback);
+    await relatedDigitalPlugin.requestPermission(_getTokenCallback, isProvisional: true);
   }
 
   Future<void> setEmail() async {
