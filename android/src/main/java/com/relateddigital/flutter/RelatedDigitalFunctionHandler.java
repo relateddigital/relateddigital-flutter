@@ -41,6 +41,7 @@ public class RelatedDigitalFunctionHandler {
     private final Activity mActivity;
     private String mAppAlias;
     private String mHuaweiAppAlias;
+    private boolean mInAppNotificationsEnabled;
 
     public RelatedDigitalFunctionHandler(Activity activity, MethodChannel channel) {
         mActivity = activity;
@@ -58,9 +59,9 @@ public class RelatedDigitalFunctionHandler {
         euroMobileManager.setChannelName("CHANNEL", mContext); // TODO: burada niye CHANNEL var?
     }
 
-    public void initVisilabs(String organizationId, String siteId, String datasource, boolean geofenceEnabled) {
+    public void initVisilabs(String organizationId, String siteId, String datasource, boolean geofenceEnabled, boolean inAppNotificationsEnabled) {
         // Visilabs.CreateAPI(organizationId, siteId, Constants.VL_SEGMENT_URL, datasource, Constants.VL_REALTIME_URL, Constants.VL_CHANNEL, mContext, Constants.VL_TARGET_URL, Constants.VL_ACTION_URL, Constants.VL_REQUEST_TIMEOUT, Constants.VL_GEOFENCE_URL, geofenceEnabled);
-
+        mInAppNotificationsEnabled = inAppNotificationsEnabled;
         Visilabs.CreateAPI(mContext);
     }
 
@@ -137,7 +138,11 @@ public class RelatedDigitalFunctionHandler {
     }
 
     public void customEvent(String pageName, HashMap<String, String> parameters) {
-        Visilabs.CallAPI().customEvent(pageName, parameters);
+        if(mInAppNotificationsEnabled) {
+            Visilabs.CallAPI().customEvent(pageName, parameters, mActivity);
+        } else {
+            Visilabs.CallAPI().customEvent(pageName, parameters);
+        }
     }
 
     public void registerEmail(String email, boolean permission, boolean isCommercial) {

@@ -56,9 +56,10 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          String siteId = call.argument("siteId");
          String dataSource = call.argument("dataSource");
          boolean geofenceEnabled = call.argument("geofenceEnabled");
+         boolean inAppNotificationsEnabled = call.argument("inAppNotificationsEnabled");
 
          functionHandler.initEuromsg(appAlias, huaweiAppAlias, pushIntent);
-         functionHandler.initVisilabs(organizationId, siteId, dataSource, geofenceEnabled);
+         functionHandler.initVisilabs(organizationId, siteId, dataSource, geofenceEnabled, inAppNotificationsEnabled);
          VisilabsConstant.DEBUG = enableLog;
 
          functionHandler.checkReportRead(mActivity.getIntent());
