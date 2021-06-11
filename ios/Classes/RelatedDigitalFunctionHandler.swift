@@ -7,8 +7,8 @@ class RelatedDigitalFunctionHandler {
 		Euromsg.configure(appAlias: appAlias, enableLog: enableLog)
 	}
 	
-	public func initVisilabs(organizationId: String, profileId: String, dataSource: String, inAppNotificationsEnabled: Bool, geofenceEnabled: Bool, maxGeofenceCount: Int, enableLog: Bool) {
-		Visilabs.createAPI(organizationId: organizationId, profileId: profileId, dataSource: dataSource, inAppNotificationsEnabled: inAppNotificationsEnabled, channel: Constants.VL_CHANNEL, requestTimeoutInSeconds: Constants.VL_REQUEST_TIMEOUT, geofenceEnabled: geofenceEnabled, maxGeofenceCount: maxGeofenceCount)
+	public func initVisilabs(organizationId: String, profileId: String, dataSource: String, inAppNotificationsEnabled: Bool, geofenceEnabled: Bool, maxGeofenceCount: Int, enableLog: Bool, isIDFAEnabled: Bool) {
+		Visilabs.createAPI(organizationId: organizationId, profileId: profileId, dataSource: dataSource, inAppNotificationsEnabled: inAppNotificationsEnabled, channel: Constants.VL_CHANNEL, requestTimeoutInSeconds: Constants.VL_REQUEST_TIMEOUT, geofenceEnabled: geofenceEnabled, maxGeofenceCount: maxGeofenceCount, isIDFAEnabled: isIDFAEnabled)
 		Visilabs.callAPI().loggingEnabled = enableLog
 	}
 	

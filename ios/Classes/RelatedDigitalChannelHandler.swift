@@ -29,9 +29,11 @@ class RelatedDigitalChannelHandler: NSObject {
 			let geofenceEnabled = args?["geofenceEnabled"] as! Bool;
 			let inAppNotificationsEnabled = args?["inAppNotificationsEnabled"] as! Bool;
 			let maxGeofenceCount = args?["maxGeofenceCount"] as! Int;
+            let isIDFAEnabled = args?["isIDFAEnabled"] as! Bool;
 			
 			self.functionHandler.initEuroMsg(appAlias: appAlias, enableLog: enableLog)
-			self.functionHandler.initVisilabs(organizationId: organizationId, profileId: siteId, dataSource: dataSource, inAppNotificationsEnabled: inAppNotificationsEnabled, geofenceEnabled: geofenceEnabled, maxGeofenceCount: maxGeofenceCount, enableLog: enableLog)
+            self.functionHandler.initVisilabs(organizationId: organizationId, profileId: siteId, dataSource: dataSource, inAppNotificationsEnabled: inAppNotificationsEnabled
+                                              , geofenceEnabled: geofenceEnabled, maxGeofenceCount: maxGeofenceCount, enableLog: enableLog, isIDFAEnabled: isIDFAEnabled)
 			
 			result(nil)
 		}

@@ -55,7 +55,8 @@ class RelateddigitalFlutter {
       'dataSource': initRequest.dataSource,
       'geofenceEnabled': initRequest.geofenceEnabled,
       'maxGeofenceCount': initRequest.maxGeofenceCount,
-      'inAppNotificationsEnabled': initRequest.inAppNotificationsEnabled
+      'inAppNotificationsEnabled': initRequest.inAppNotificationsEnabled,
+      'isIDFAEnabled': initRequest.isIDFAEnabled
     });
   }
 
