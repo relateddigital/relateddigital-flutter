@@ -6,9 +6,9 @@ typedef void TapCallback(String text);
 
 class TextInputListTile extends StatelessWidget {
   final String title;
+  final onSubmitted;
 
-
-  TextInputListTile({@required this.title,});
+  TextInputListTile({@required this.title, @required this.onSubmitted});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,12 @@ class TextInputListTile extends StatelessWidget {
       title: new TextField(
         decoration: new InputDecoration(
           border: InputBorder.none,
-          hintText: "Organization ID",
+          hintText: title,
         ),
+          onSubmitted: onSubmitted
       ),
     );
   }
+
+
 }

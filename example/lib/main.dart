@@ -17,14 +17,16 @@ void main() {
   runApp(RDExample());
 }
 
-
-
 class RDExample extends StatefulWidget {
   @override
   _RDExample createState() => _RDExample();
 }
 
 class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
+
+  final RelateddigitalFlutter relatedDigitalPlugin = RelateddigitalFlutter();
+
+
   TabController controller;
   final GlobalKey<NavigatorState> key = GlobalKey();
 
@@ -34,6 +36,29 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
     controller = TabController(length: 3, vsync: this);
     //initPlatformState();
     //addFlutterTag();
+    initLib();
+  }
+
+  Future<void> initLib() async {
+    var initRequest = RDInitRequestModel(
+      appAlias: Constants.APP_ALIAS,
+      huaweiAppAlias: Constants.HUAWEI_APP_ALIAS, // Android only
+      androidPushIntent: Constants.ANDROID_PUSH_INTENT, // Android only
+      organizationId: Constants.ORGANIZATION_ID,
+      siteId: Constants.SITE_ID,
+      dataSource: Constants.DATA_SOURCE,
+      maxGeofenceCount: Constants.MAX_GEOFENCE_COUNT,  // IOS only
+      geofenceEnabled: Constants.GEOFENCE_ENABLED,
+      inAppNotificationsEnabled: Constants.IN_APP_NOTIFICATIONS_ENABLED, // IOS only
+      logEnabled: Constants.LOG_ENABLED,
+    );
+
+    await relatedDigitalPlugin.init(initRequest, _readNotificationCallback);
+  }
+
+  void _readNotificationCallback(dynamic result) {
+    print('_readNotificationCallback');
+    print(result);
   }
 
   @override
@@ -51,7 +76,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   }
 
   Widget homeView() {
-    return Home();
+    return Home(relatedDigitalPlugin: relatedDigitalPlugin);
   }
 
   Widget tabBarView() {
@@ -59,7 +84,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
         onWillPop: null,
         child: Scaffold(
           body: TabBarView(
-            children: <Widget>[],
+            children: <Widget>[homeView(), homeView(), homeView()],
             controller: controller,
           ),
           bottomNavigationBar: bottomNavigationBar(),
