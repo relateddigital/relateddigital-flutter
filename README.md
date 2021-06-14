@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/screenshots/related-digital-logo.svg" width="400px;"/>
+  <img src="/screenshots/related-digital-logo.svg?raw=true" width="400px;"/>
 </p>
 
 [![pub package](https://img.shields.io/pub/v/relateddigital_flutter.svg)](https://pub.dartlang.org/packages/relateddigital_flutter)
@@ -18,6 +18,7 @@
         - [Requesting Permission & Retrieving Token](#Requesting-Permission-&-Retrieving-Token])
         - [Rich Push Notifications](#Rich-Push-Notifications)
         - [Carousel Push Notifications](#Carousel-Push-Notifications)
+        - [Set Push Permit](#Set-Push-Permit)
     - [Data Collection](#Data-Collection)
     - [Targeting Actions](#Targeting-Actions)
         - [In-App Messaging](#In-App-Messaging)
@@ -346,6 +347,13 @@ extension EMNotificationViewController: CarouselDelegate {
 		
 }
 
+```
+
+### Set Push Permit
+You can only call `setNotificationPermission` method to enable or disable push notifications for the application. 
+
+```dart
+relatedDigitalPlugin.setNotificationPermission(true);
 ```
 
 ## Data Collection
