@@ -150,8 +150,11 @@ platform :ios, '10.0'
 
 ![Xcode Push Capability](/screenshots/xcode-push-capability.png)
 
-
-
+- If you want to use **AdvertisingTrackingID** with **isIDFAEnabled** parameter (see [Usage](#Usage) below), you need to add this key to your **Info.plist** file for iOS 14 and above. 
+```xml
+<key>NSUserTrackingUsageDescription</key>
+<string>We use advertising identifier!</string>
+```
 
 
 # Usage
