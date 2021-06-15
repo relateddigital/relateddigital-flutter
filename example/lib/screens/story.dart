@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
+import 'package:relateddigital_flutter/rd_story_view.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
@@ -33,21 +34,17 @@ class _StoryState extends State<Story> {
             ),
             body: ListView(
               children: ListTile.divideTiles(context: context, tiles: [
-                TextInputListTile(
-                  title: Constants.appAlias,
-                  controller: tController, onSubmitted: null,),
-                ListTile(
-                  subtitle: Column(
-                    children: <Widget>[
-                      TextButton(
-                          child: Text('INITIALIZE'),
-                          style: Styles.buttonStyle,
-                          onPressed: () {
-                            //submit();
-                          })
-                    ],
-                  ),
-                )
+                SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 110,
+                    child: RDStoryView(
+                      actionId: '454',
+                      relatedDigitalPlugin: widget.relatedDigitalPlugin,
+                      onItemClick: (Map<String, String> result) {
+                        print(result);
+                      },
+                    )
+                ),
               ]).toList(),
             )));
   }

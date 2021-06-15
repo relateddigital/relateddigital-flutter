@@ -5,7 +5,6 @@ import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
 import 'package:relateddigital_flutter/response_models.dart';
 
-
 class Event extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
@@ -17,8 +16,22 @@ class Event extends StatefulWidget {
 
 class _EventState extends State<Event> {
   TextEditingController tController = TextEditingController();
-  var inAppTypes = ['mini', 'full', 'image_text_button'];
-  String ex;
+  var inAppTypes = [
+    'mini',
+    'full',
+    'full_image',
+    'image_button',
+    'image_text_button',
+    'smile_rating',
+    'nps_with_numbers',
+    'nps',
+    'alert_native',
+    'alert_actionsheet',
+    'mailsubsform',
+    'scratch-to-win',
+    'spintowin',
+  ];
+  String exVisitorId;
 
   @override
   void initState() {
@@ -36,45 +49,52 @@ class _EventState extends State<Event> {
               automaticallyImplyLeading: false,
             ),
             body: ListView(
-              children: ListTile.divideTiles(context: context, tiles: [
-                TextInputListTile(
-                  title: Constants.exVisitorId,
-                  controller: tController,
-                  onSubmitted: null,
-                ),
-                ListTile(
-                  subtitle: Column(
-                    children: <Widget>[
-                      TextButton(
-                          child: Text('Login'),
-                          style: Styles.buttonStyle,
-                          onPressed: () {
-                            login();
-                          })
-                    ],
-                  ),
-                )
-              ]).toList(),
+              children: ListTile.divideTiles(
+                      context: context,
+                      tiles: [
+                            TextInputListTile(
+                              title: Constants.exVisitorId,
+                              controller: tController,
+                              onSubmitted: null,
+                            ),
+                            ListTile(
+                              subtitle: Column(
+                                children: <Widget>[
+                                  TextButton(
+                                      child: Text('Login'),
+                                      style: Styles.buttonStyle,
+                                      onPressed: () {
+                                        login();
+                                      })
+                                ],
+                              ),
+                            )
+                          ] +
+                          getInAppListTiles())
+                  .toList(),
             )));
   }
 
-  void login() {
-    widget.relatedDigitalPlugin.requestPermission(_getTokenCallback, isProvisional: true);
-    //widget.relatedDigitalPlugin.login(tController.text);
+  Iterable<StatelessWidget> getInAppListTiles() {
+    List<StatelessWidget> tiles = [];
+    for (final inAppType in inAppTypes) {
+      tiles.add(ListTile(
+        subtitle: Column(
+          children: <Widget>[
+            TextButton(
+                child: Text(inAppType),
+                style: Styles.buttonStyle,
+                onPressed: () {
+                  widget.relatedDigitalPlugin.customEvent("InAppTest", {'OM.inapptype': inAppType});
+                })
+          ],
+        ),
+      ));
+    }
+    return tiles;
   }
 
-
-  void _getTokenCallback(RDTokenResponseModel result) {
-    if(result != null && result.deviceToken != null && result.deviceToken.isNotEmpty) {
-      print('Token ' + result.deviceToken);
-      setState(() {
-        //token = result.deviceToken;
-      });
-    }
-    else {
-      setState(() {
-        //token = 'Token not retrieved';
-      });
-    }
+  void login() {
+    widget.relatedDigitalPlugin.login(exVisitorId);
   }
 }

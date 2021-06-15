@@ -26,4 +26,5 @@ class Constants {
   static const String isIDFAEnabled = 'isIDFAEnabled';
 
   static const String exVisitorId = 'exVisitorId';
+  static const String token = 'token';
 }

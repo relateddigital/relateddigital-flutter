@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
+import 'package:relateddigital_flutter/response_models.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
@@ -34,21 +35,35 @@ class _PushState extends State<Push> {
             body: ListView(
               children: ListTile.divideTiles(context: context, tiles: [
                 TextInputListTile(
-                  title: Constants.appAlias,
+                  title: Constants.token,
                   controller: tController, onSubmitted: null,),
                 ListTile(
                   subtitle: Column(
                     children: <Widget>[
                       TextButton(
-                          child: Text('INITIALIZE'),
+                          child: Text('Request Permission'),
                           style: Styles.buttonStyle,
                           onPressed: () {
-                            //submit();
+                            this.widget.relatedDigitalPlugin.requestPermission(_getTokenCallback, isProvisional: true);
                           })
                     ],
                   ),
                 )
               ]).toList(),
             )));
+  }
+
+  void _getTokenCallback(RDTokenResponseModel result) {
+    print('RDTokenResponseModel ' + result.toString());
+    if(result != null && result.deviceToken != null && result.deviceToken.isNotEmpty) {
+      setState(() {
+        tController.text = result.deviceToken;
+      });
+    }
+    else {
+      setState(() {
+        tController.text = 'Token not retrieved';
+      });
+    }
   }
 }

@@ -32,6 +32,7 @@ class TextInputListTile extends StatelessWidget {
           inputFormatters: formatters,
           controller: controller,
           textAlign: TextAlign.right,
+          style: TextStyle(fontSize: 12),
           decoration: new InputDecoration(
             border: InputBorder.none,
             hintText: title,
