@@ -36,4 +36,6 @@ public class Constants {
     public static String VL_GEOFENCE_URL = "https://s.visilabs.net/geojson";
     public static int VL_REQUEST_TIMEOUT = 30;
     public static String STORY_VIEW_NAME = "StoryView";
+
+    public static String REGISTER_TOKEN = "RegisterToken";
 }

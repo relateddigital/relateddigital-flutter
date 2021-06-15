@@ -138,7 +138,7 @@ public class RelatedDigitalFunctionHandler {
     }
 
     public void customEvent(String pageName, HashMap<String, String> parameters) {
-        if(mInAppNotificationsEnabled && mActivity != null) {
+        if(mInAppNotificationsEnabled && mActivity != null && !Constants.REGISTER_TOKEN.equals(pageName)) {
             Visilabs.CallAPI().customEvent(pageName, parameters, mActivity);
         } else {
             Visilabs.CallAPI().customEvent(pageName, parameters);
