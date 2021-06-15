@@ -3,22 +3,18 @@ import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
-import 'package:relateddigital_flutter/response_models.dart';
 
-
-class Event extends StatefulWidget {
+class Story extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  Event({@required this.relatedDigitalPlugin});
+  Story({@required this.relatedDigitalPlugin});
 
   @override
-  _EventState createState() => _EventState();
+  _StoryState createState() => _StoryState();
 }
 
-class _EventState extends State<Event> {
+class _StoryState extends State<Story> {
   TextEditingController tController = TextEditingController();
-  var inAppTypes = ['mini', 'full', 'image_text_button'];
-  String ex;
 
   @override
   void initState() {
@@ -31,50 +27,28 @@ class _EventState extends State<Event> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
             appBar: AppBar(
-              title: const Text('Event'),
+              title: const Text('Story'),
               backgroundColor: Styles.borders,
               automaticallyImplyLeading: false,
             ),
             body: ListView(
               children: ListTile.divideTiles(context: context, tiles: [
                 TextInputListTile(
-                  title: Constants.exVisitorId,
-                  controller: tController,
-                  onSubmitted: null,
-                ),
+                  title: Constants.appAlias,
+                  controller: tController, onSubmitted: null,),
                 ListTile(
                   subtitle: Column(
                     children: <Widget>[
                       TextButton(
-                          child: Text('Login'),
+                          child: Text('INITIALIZE'),
                           style: Styles.buttonStyle,
                           onPressed: () {
-                            login();
+                            //submit();
                           })
                     ],
                   ),
                 )
               ]).toList(),
             )));
-  }
-
-  void login() {
-    widget.relatedDigitalPlugin.requestPermission(_getTokenCallback, isProvisional: true);
-    //widget.relatedDigitalPlugin.login(tController.text);
-  }
-
-
-  void _getTokenCallback(RDTokenResponseModel result) {
-    if(result != null && result.deviceToken != null && result.deviceToken.isNotEmpty) {
-      print('Token ' + result.deviceToken);
-      setState(() {
-        //token = result.deviceToken;
-      });
-    }
-    else {
-      setState(() {
-        //token = 'Token not retrieved';
-      });
-    }
   }
 }

@@ -1,9 +1,10 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:relateddigital_flutter_example/styles.dart';
+//import 'package:flutter/widgets.dart';
+//import 'package:flutter/material.dart';
+//import 'package:relateddigital_flutter_example/styles.dart';
 
 typedef void TapCallback(String text);
 
+/*
 class NotificationsEnabledButton extends StatelessWidget {
   final onPressed;
 
@@ -30,3 +31,4 @@ class NotificationsEnabledButton extends StatelessWidget {
     );
   }
 }
+ */

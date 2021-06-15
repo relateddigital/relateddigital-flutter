@@ -1,30 +1,66 @@
+import 'dart:convert';
+import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:relateddigital_flutter/request_models.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:relateddigital_flutter/relateddigital_flutter.dart';
+import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
-import 'package:relateddigital_flutter_example/widgets/notifications_enabled_button.dart';
-//import 'package:airship_flutter/airship_flutter.dart';
-
-import 'package:relateddigital_flutter/relateddigital_flutter.dart';
+import 'package:relateddigital_flutter_example/models/rd_profile.dart';
 
 class Home extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
+  final Function(dynamic) notificationHandler;
 
-  Home({@required this.relatedDigitalPlugin});
+  Home({@required this.relatedDigitalPlugin, @required this.notificationHandler});
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  String appAlias = "";
-  String huaweiAppAlias = "";
-  String organizationID = "";
-  String siteID = "";
-  bool inAppNotificationsEnabled = false;
+  HashMap<String, TextEditingController> tControllers = createControllers();
+  RDProfile rdProfile;
 
   @override
   void initState() {
+    rdProfile = RDProfile.fromConstant();
+    readSharedPreferences();
     super.initState();
+  }
+  readSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String rdProfileString = prefs.getString("RDProfile");
+    if (rdProfileString == null) {
+      rdProfile = RDProfile.fromConstant();
+    } else {
+      Map<String, dynamic> profileJson = jsonDecode(rdProfileString);
+      if (profileJson == null) {
+        rdProfile = RDProfile.fromConstant();
+      } else {
+        rdProfile = RDProfile.fromJson(profileJson);
+      }
+    }
+    tControllers[Constants.appAlias].text = rdProfile.appAlias;
+    tControllers[Constants.huaweiAppAlias].text = rdProfile.huaweiAppAlias;
+    tControllers[Constants.androidPushIntent].text = rdProfile.androidPushIntent;
+    tControllers[Constants.organizationId].text = rdProfile.organizationId;
+    tControllers[Constants.profileId].text = rdProfile.profileId;
+    tControllers[Constants.dataSource].text = rdProfile.dataSource;
+    tControllers[Constants.maxGeofenceCount].text = rdProfile.maxGeofenceCount.toString();
+  }
+
+  static HashMap<String, TextEditingController> createControllers() {
+    return HashMap.from({
+      Constants.appAlias: TextEditingController(),
+      Constants.huaweiAppAlias: TextEditingController(),
+      Constants.androidPushIntent: TextEditingController(),
+      Constants.organizationId: TextEditingController(),
+      Constants.profileId: TextEditingController(),
+      Constants.dataSource: TextEditingController(),
+      Constants.maxGeofenceCount: TextEditingController()
+    });
   }
 
   @override
@@ -40,49 +76,100 @@ class _HomeState extends State<Home> {
             body: ListView(
               children: ListTile.divideTiles(context: context, tiles: [
                 TextInputListTile(
-                    title: "App Alias",
+                    title: Constants.appAlias,
+                    controller: tControllers[Constants.appAlias],
                     onSubmitted: (String aAlias) {
-                      appAlias = aAlias;
-                      updateState();
+                      rdProfile.appAlias = aAlias;
                     }),
                 TextInputListTile(
-                    title: "Huawei App Alias",
+                    title: Constants.huaweiAppAlias,
+                    controller: tControllers[Constants.huaweiAppAlias],
                     onSubmitted: (String haAlias) {
-                      huaweiAppAlias = haAlias;
-                      updateState();
+                      rdProfile.huaweiAppAlias = haAlias;
                     }),
                 TextInputListTile(
-                    title: "Organization Id",
+                    title: Constants.androidPushIntent,
+                    controller: tControllers[Constants.androidPushIntent],
+                    onSubmitted: (String apIntent) {
+                      rdProfile.androidPushIntent = apIntent;
+                    }),
+                TextInputListTile(
+                    title: Constants.organizationId,
+                    controller: tControllers[Constants.organizationId],
                     onSubmitted: (String orgId) {
-                      organizationID = orgId;
-                      updateState();
+                      rdProfile.organizationId = orgId;
                     }),
                 TextInputListTile(
-                    title: "Site Id",
-                    onSubmitted: (String sId) {
-                      siteID = sId;
-                      updateState();
+                    title: Constants.profileId,
+                    controller: tControllers[Constants.profileId],
+                    onSubmitted: (String pId) {
+                      rdProfile.profileId = pId;
+                    }),
+                TextInputListTile(
+                    title: Constants.dataSource,
+                    controller: tControllers[Constants.dataSource],
+                    onSubmitted: (String dSource) {
+                      rdProfile.dataSource = dSource;
                     }),
                 SwitchListTile(
                   title: Text(
-                    'In App Notifications Enabled',
+                    Constants.inAppNotificationsEnabled,
                     style: Styles.settingsPrimaryText,
                   ),
-                  value: inAppNotificationsEnabled,
+                  value: rdProfile.inAppNotificationsEnabled,
                   onChanged: (bool enabled) {
-                    inAppNotificationsEnabled = enabled;
+                    rdProfile.inAppNotificationsEnabled = enabled;
+                    updateState();
+                  },
+                ),
+                SwitchListTile(
+                  title: Text(
+                    Constants.geofenceEnabled,
+                    style: Styles.settingsPrimaryText,
+                  ),
+                  value: rdProfile.geofenceEnabled,
+                  onChanged: (bool enabled) {
+                    rdProfile.geofenceEnabled = enabled;
+                    updateState();
+                  },
+                ),
+                TextInputListTile(
+                    title: Constants.maxGeofenceCount,
+                    type: TextInputType.numberWithOptions(signed: false, decimal: false),
+                    controller: tControllers[Constants.maxGeofenceCount],
+                    onSubmitted: (String mgCount) {
+                      rdProfile.maxGeofenceCount = int.tryParse(mgCount) ?? 20;
+                    }),
+                SwitchListTile(
+                  title: Text(
+                    Constants.logEnabled,
+                    style: Styles.settingsPrimaryText,
+                  ),
+                  value: rdProfile.logEnabled,
+                  onChanged: (bool enabled) {
+                    rdProfile.logEnabled = enabled;
+                    updateState();
+                  },
+                ),
+                SwitchListTile(
+                  title: Text(
+                    Constants.isIDFAEnabled,
+                    style: Styles.settingsPrimaryText,
+                  ),
+                  value: rdProfile.isIDFAEnabled,
+                  onChanged: (bool enabled) {
+                    rdProfile.isIDFAEnabled = enabled;
                     updateState();
                   },
                 ),
                 ListTile(
-                  title: Text('title'),
                   subtitle: Column(
                     children: <Widget>[
-                      Text('inapp'),
-                      FlatButton(
-                          child: Text('button'),
+                      TextButton(
+                          child: Text('INITIALIZE'),
+                          style: Styles.buttonStyle,
                           onPressed: () {
-                            customEvent();
+                            submit();
                           })
                     ],
                   ),
@@ -91,19 +178,25 @@ class _HomeState extends State<Home> {
             )));
   }
 
-  Future<void> customEvent() async {
-    String pageName = 'pragmahome';
-    Map<String, String> parameters = {
-      'OM.inapptype': 'image_button',
-    };
-    await widget.relatedDigitalPlugin.customEvent(pageName, parameters);
+  Future<void> submit() async {
+    var initRequest = RDInitRequestModel(
+      appAlias: rdProfile.appAlias,
+      huaweiAppAlias: rdProfile.huaweiAppAlias, // pass empty String if your app does not support HMS
+      androidPushIntent: rdProfile.androidPushIntent, // Android only
+      organizationId: rdProfile.organizationId,
+      siteId: rdProfile.profileId,
+      dataSource: rdProfile.dataSource,
+      maxGeofenceCount: rdProfile.maxGeofenceCount > 20 ? 20 : rdProfile.maxGeofenceCount,  // iOS only
+      geofenceEnabled: rdProfile.geofenceEnabled,
+      inAppNotificationsEnabled: rdProfile.inAppNotificationsEnabled,
+      logEnabled: rdProfile.logEnabled,
+      isIDFAEnabled: rdProfile.isIDFAEnabled,  // iOS only
+    );
+    await widget.relatedDigitalPlugin.init(initRequest, widget.notificationHandler);
+    Navigator.pushNamed(context, '/tabBarView');
   }
 
   updateState() {
     setState(() {});
-    print(appAlias);
-    print(huaweiAppAlias);
-    print(organizationID);
-    print(siteID);
   }
 }

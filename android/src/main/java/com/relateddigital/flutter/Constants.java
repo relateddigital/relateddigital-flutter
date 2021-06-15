@@ -29,11 +29,11 @@ public class Constants {
     public static String M_SIGNUP = "VL/signUp";
 
     public static String VL_CHANNEL = "Android";
-    public static String VL_SEGMENT_URL = "http://lgr.visilabs.net";
-    public static String VL_REALTIME_URL = "http://rt.visilabs.net";
-    public static String VL_TARGET_URL = "http://s.visilabs.net/json";
-    public static String VL_ACTION_URL = "http://s.visilabs.net/actjson";
-    public static String VL_GEOFENCE_URL = "http://s.visilabs.net/geojson";
+    public static String VL_SEGMENT_URL = "https://lgr.visilabs.net";
+    public static String VL_REALTIME_URL = "https://rt.visilabs.net";
+    public static String VL_TARGET_URL = "https://s.visilabs.net/json";
+    public static String VL_ACTION_URL = "https://s.visilabs.net/actjson";
+    public static String VL_GEOFENCE_URL = "https://s.visilabs.net/geojson";
     public static int VL_REQUEST_TIMEOUT = 30;
     public static String STORY_VIEW_NAME = "StoryView";
 }

@@ -30,7 +30,9 @@ class RelateddigitalFlutter {
       }
       _handleTokenRegister(response);
     } else if (methodCall.method == Constants.M_NOTIFICATION_OPENED) {
-      _readNotificationHandler(methodCall.arguments);
+      if(_readNotificationHandler != null) {
+        _readNotificationHandler(methodCall.arguments);
+      }
       _handleUtmParameters(methodCall.arguments);
     } else if (methodCall.method == Constants.M_STORY_ITEM_CLICK) {
       Map<String, String> map = {
@@ -106,7 +108,6 @@ class RelateddigitalFlutter {
     if (Platform.isAndroid) {
       return;
     }
-
     await _channel.invokeMethod(Constants.M_BADGE, {'count': count});
   }
 
