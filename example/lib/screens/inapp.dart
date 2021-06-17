@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter/rd_story_view.dart';
+import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
+import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
 
-class Story extends StatefulWidget {
+class InApp extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  Story({@required this.relatedDigitalPlugin});
+  InApp({@required this.relatedDigitalPlugin});
 
   @override
-  _StoryState createState() => _StoryState();
+  _InAppState createState() => _InAppState();
 }
 
-class _StoryState extends State<Story> {
+class _InAppState extends State<InApp> {
   TextEditingController tController = TextEditingController();
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter_example/screens/event.dart';
+import 'package:relateddigital_flutter_example/screens/inapp.dart';
 import 'package:relateddigital_flutter_example/screens/push.dart';
 import 'package:relateddigital_flutter_example/screens/story.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
@@ -24,7 +25,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 3, vsync: this);
+    controller = TabController(length: 4, vsync: this);
   }
 
   void _readNotificationCallback(dynamic result) {
@@ -65,12 +66,16 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
     return Story(relatedDigitalPlugin: relatedDigitalPlugin);
   }
 
+  Widget inAppView() {
+    return InApp(relatedDigitalPlugin: relatedDigitalPlugin);
+  }
+
   Widget tabBarView() {
     return WillPopScope(
         onWillPop: null,
         child: Scaffold(
           body: TabBarView(
-            children: <Widget>[eventView(), pushView(), storyView()],
+            children: <Widget>[eventView(), pushView(), storyView(), inAppView()],
             controller: controller,
           ),
           bottomNavigationBar: bottomNavigationBar(),
@@ -94,6 +99,9 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
           ),
           Tab(
             icon: Icon(Icons.data_usage_sharp),
+          ),
+          Tab(
+            icon: Icon(Icons.mobile_screen_share),
           ),
         ],
         // setup the controller
