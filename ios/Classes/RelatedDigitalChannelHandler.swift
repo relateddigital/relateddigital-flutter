@@ -155,6 +155,9 @@ class RelatedDigitalChannelHandler: NSObject {
 			self.functionHandler.signUp(exVisitorId: exVisitorId, properties: properties)
 			result(nil)
 		}
+        else if(call.method == Constants.M_GET_EXVISITORID) {
+            result(self.functionHandler.getExVisitorID())
+        }
 		else {
 			result(FlutterMethodNotImplemented)
 		}

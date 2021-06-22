@@ -78,37 +78,37 @@ class _HomeState extends State<Home> {
                 TextInputListTile(
                     title: Constants.appAlias,
                     controller: tControllers[Constants.appAlias],
-                    onSubmitted: (String aAlias) {
+                    onChanged: (String aAlias) {
                       rdProfile.appAlias = aAlias;
                     }),
                 TextInputListTile(
                     title: Constants.huaweiAppAlias,
                     controller: tControllers[Constants.huaweiAppAlias],
-                    onSubmitted: (String haAlias) {
+                    onChanged: (String haAlias) {
                       rdProfile.huaweiAppAlias = haAlias;
                     }),
                 TextInputListTile(
                     title: Constants.androidPushIntent,
                     controller: tControllers[Constants.androidPushIntent],
-                    onSubmitted: (String apIntent) {
+                    onChanged: (String apIntent) {
                       rdProfile.androidPushIntent = apIntent;
                     }),
                 TextInputListTile(
                     title: Constants.organizationId,
                     controller: tControllers[Constants.organizationId],
-                    onSubmitted: (String orgId) {
+                    onChanged: (String orgId) {
                       rdProfile.organizationId = orgId;
                     }),
                 TextInputListTile(
                     title: Constants.profileId,
                     controller: tControllers[Constants.profileId],
-                    onSubmitted: (String pId) {
+                    onChanged: (String pId) {
                       rdProfile.profileId = pId;
                     }),
                 TextInputListTile(
                     title: Constants.dataSource,
                     controller: tControllers[Constants.dataSource],
-                    onSubmitted: (String dSource) {
+                    onChanged: (String dSource) {
                       rdProfile.dataSource = dSource;
                     }),
                 SwitchListTile(
@@ -137,7 +137,7 @@ class _HomeState extends State<Home> {
                     title: Constants.maxGeofenceCount,
                     type: TextInputType.numberWithOptions(signed: false, decimal: false),
                     controller: tControllers[Constants.maxGeofenceCount],
-                    onSubmitted: (String mgCount) {
+                    onChanged: (String mgCount) {
                       rdProfile.maxGeofenceCount = int.tryParse(mgCount) ?? 20;
                     }),
                 SwitchListTile(

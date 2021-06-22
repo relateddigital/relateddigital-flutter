@@ -36,7 +36,7 @@ class _PushState extends State<Push> {
               children: ListTile.divideTiles(context: context, tiles: [
                 TextInputListTile(
                   title: Constants.token,
-                  controller: tController, onSubmitted: null,),
+                  controller: tController, onChanged: null,),
                 ListTile(
                   subtitle: Column(
                     children: <Widget>[

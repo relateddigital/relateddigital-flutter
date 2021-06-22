@@ -269,4 +269,8 @@ public class RelatedDigitalFunctionHandler {
             Visilabs.CallAPI().signUp(exVisitorId, properties);
         }
     }
+
+    public String getExVisitorID() {
+        return Visilabs.CallAPI().getExVisitorID();
+    }
 }

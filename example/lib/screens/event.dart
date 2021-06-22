@@ -1,9 +1,11 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
-import 'package:relateddigital_flutter/response_models.dart';
 
 class Event extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
@@ -31,11 +33,12 @@ class _EventState extends State<Event> {
     'scratchToWin',
     'spintowin',
   ];
-  String exVisitorId;
+  String exVisitorId = '';
 
   @override
   void initState() {
     super.initState();
+    setExVisitorID();
   }
 
   @override
@@ -55,7 +58,9 @@ class _EventState extends State<Event> {
                             TextInputListTile(
                               title: Constants.exVisitorId,
                               controller: tController,
-                              onSubmitted: null,
+                              onChanged: (String exVisitor) {
+                                exVisitorId = exVisitor;
+                              },
                             ),
                             ListTile(
                               subtitle: Column(
@@ -68,7 +73,31 @@ class _EventState extends State<Event> {
                                       })
                                 ],
                               ),
-                            )
+                            ),
+                            ListTile(
+                              subtitle: Column(
+                                children: <Widget>[
+                                  TextButton(
+                                      child: Text('GetExVisitorID'),
+                                      style: Styles.buttonStyle,
+                                      onPressed: () {
+                                        getExVisitorID();
+                                      })
+                                ],
+                              ),
+                            ),
+                            ListTile(
+                              subtitle: Column(
+                                children: <Widget>[
+                                  TextButton(
+                                      child: Text('Logout'),
+                                      style: Styles.buttonStyle,
+                                      onPressed: () {
+                                        logout();
+                                      })
+                                ],
+                              ),
+                            ),
                           ] +
                           getInAppListTiles())
                   .toList(),
@@ -96,5 +125,58 @@ class _EventState extends State<Event> {
 
   void login() {
     widget.relatedDigitalPlugin.login(exVisitorId);
+  }
+
+  void setExVisitorID() async {
+    exVisitorId = await widget.relatedDigitalPlugin.getExVisitorID();
+    tController.text = exVisitorId;
+  }
+
+  void getExVisitorID() async {
+    String exVisitorID = await widget.relatedDigitalPlugin.getExVisitorID();
+    showAlertDialog(title: 'ExVisitorId', content: exVisitorID);
+  }
+
+  void logout() {
+    widget.relatedDigitalPlugin.logout();
+  }
+
+  Future<bool> showAlertDialog({
+    @required String title,
+    @required String content,
+  }) async {
+    if (!Platform.isIOS) {
+      return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+    }
+    // todo : showDialog for ios
+    return showCupertinoDialog(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Close'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

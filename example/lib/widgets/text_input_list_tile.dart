@@ -7,13 +7,13 @@ typedef void TapCallback(String text);
 class TextInputListTile extends StatelessWidget {
   final String title;
   final TextEditingController controller;
-  final onSubmitted;
+  final onChanged;
   final TextInputType type;
 
   TextInputListTile(
       {@required this.title,
       @required this.controller,
-      @required this.onSubmitted,
+      @required this.onChanged,
       this.type = TextInputType.text});
 
   @override
@@ -37,7 +37,7 @@ class TextInputListTile extends StatelessWidget {
             border: InputBorder.none,
             hintText: title,
           ),
-          onSubmitted: onSubmitted),
+          onChanged: onChanged),
     );
   }
 }

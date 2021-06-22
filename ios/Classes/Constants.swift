@@ -1,7 +1,7 @@
 class Constants {
-	static let CHANNEL_NAME = "relateddigital_flutter"
-	
-	static let M_INIT = "RD/init"
+    static let CHANNEL_NAME = "relateddigital_flutter"
+    
+    static let M_INIT = "RD/init"
     static let M_PERMISSION = "RD/requestPermission"
     static let M_TOKEN_RETRIEVED = "RD/getToken"
     static let M_NOTIFICATION_OPENED = "RD/openNotification"
@@ -21,10 +21,11 @@ class Constants {
     static let M_RECOMMENDATIONS = "VL/getRecommendations"
     static let M_STORY_ITEM_CLICK = "VL/onStoryItemClick"
     static let M_FAV_ATTRIBUTE = "VL/getFavAttributes"
-		static let M_LOGOUT = "VL/logout"
-		static let M_LOGIN = "VL/login"
-		static let M_SIGNUP = "VL/signUp"
-
+    static let M_LOGOUT = "VL/logout"
+    static let M_LOGIN = "VL/login"
+    static let M_SIGNUP = "VL/signUp"
+    static let M_GET_EXVISITORID = "VL/getExVisitorID"
+    
     static let VL_CHANNEL = "IOS"
     static let VL_REQUEST_TIMEOUT = 30
     static let STORY_VIEW_NAME = "StoryView"

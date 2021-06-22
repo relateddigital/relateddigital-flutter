@@ -187,6 +187,12 @@ class RelatedDigitalFunctionHandler {
 			Visilabs.callAPI().signUp(exVisitorId: exVisitorId, properties: properties)
 		}
 	}
+    
+    public func getExVisitorID() -> String  {
+        return Visilabs.callAPI().getExVisitorId() ?? ""
+    }
+    
+    
 }
 
 public enum RelatedDigitalFavoriteAttribute: String, Encodable {
