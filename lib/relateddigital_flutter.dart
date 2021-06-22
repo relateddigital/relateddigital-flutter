@@ -164,10 +164,16 @@ class RelateddigitalFlutter {
   }
 
   Future<void> login(String userId, {Map<String, String> properties}) async {
+    if(userId == null) {
+      return;
+    }
     await _channel.invokeMethod(Constants.M_LOGIN, {'exVisitorId': userId, 'properties': properties ?? Map()});
   }
 
   Future<void> signUp(String userId, {Map<String, String> properties}) async {
+    if(userId == null) {
+      return;
+    }
     await _channel.invokeMethod(Constants.M_SIGNUP, {'exVisitorId': userId, 'properties': properties ?? Map()});
   }
 
