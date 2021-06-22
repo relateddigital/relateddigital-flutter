@@ -28,7 +28,7 @@ class _EventState extends State<Event> {
     'alert_native',
     'alert_actionsheet',
     'mailsubsform',
-    'scratch-to-win',
+    'scratchToWin',
     'spintowin',
   ];
   String exVisitorId;
