@@ -252,6 +252,15 @@ target 'NotificationService' do
 	use_frameworks!
 	pod 'Euromsg'
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+		config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+	end
+  end
+end
 ```
 - Set **NotificationService** target's deployment target to iOS 11.
 - Replace **NotificationService.swift** file content with the code below.
@@ -347,6 +356,29 @@ extension EMNotificationViewController: CarouselDelegate {
 		
 }
 
+```
+
+- In your **NotificationContent/Info.plist** add below section
+
+```xml
+<key>NSExtension</key>
+<dict>
+    <key>NSExtensionAttributes</key>
+    <dict>
+        <key>UNNotificationExtensionCategory</key>
+        <string>carousel</string>
+        <key>UNNotificationExtensionDefaultContentHidden</key>
+        <false />
+        <key>UNNotificationExtensionInitialContentSizeRatio</key>
+        <real>1</real>
+        <key>UNNotificationExtensionUserInteractionEnabled</key>
+        <true />
+    </dict>
+    <key>NSExtensionPointIdentifier</key>
+    <string>com.apple.usernotifications.content-extension</string>
+    <key>NSExtensionPrincipalClass</key>
+    <string>NotificationContent.EMNotificationViewController</string>
+</dict>
 ```
 
 ### Set Push Permit
