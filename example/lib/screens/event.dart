@@ -47,8 +47,8 @@ class _EventState extends State<Event> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
             appBar: AppBar(
-              title: const Text('Event'),
-              backgroundColor: Styles.borders,
+              title: const Text(Constants.Event),
+              backgroundColor: Styles.relatedOrange,
               automaticallyImplyLeading: false,
             ),
             body: ListView(
@@ -67,7 +67,7 @@ class _EventState extends State<Event> {
                                 children: <Widget>[
                                   TextButton(
                                       child: Text('Login'),
-                                      style: Styles.buttonStyle,
+                                      style: Styles.eventButtonStyle,
                                       onPressed: () {
                                         login();
                                       })
@@ -79,7 +79,7 @@ class _EventState extends State<Event> {
                                 children: <Widget>[
                                   TextButton(
                                       child: Text('GetExVisitorID'),
-                                      style: Styles.buttonStyle,
+                                      style: Styles.eventButtonStyle,
                                       onPressed: () {
                                         getExVisitorID();
                                       })
@@ -91,7 +91,7 @@ class _EventState extends State<Event> {
                                 children: <Widget>[
                                   TextButton(
                                       child: Text('Logout'),
-                                      style: Styles.buttonStyle,
+                                      style: Styles.eventButtonStyle,
                                       onPressed: () {
                                         logout();
                                       })
@@ -112,7 +112,7 @@ class _EventState extends State<Event> {
           children: <Widget>[
             TextButton(
                 child: Text(inAppType),
-                style: Styles.buttonStyle,
+                style: Styles.eventButtonStyle,
                 onPressed: () {
                   widget.relatedDigitalPlugin.customEvent("InAppTest", {'OM.inapptype': inAppType});
                 })

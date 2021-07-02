@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/request_models.dart';
+import 'package:relateddigital_flutter/response_models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
@@ -11,7 +12,7 @@ import 'package:relateddigital_flutter_example/models/rd_profile.dart';
 
 class Home extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
-  final Function(dynamic) notificationHandler;
+  final Function(RDNotificationResponseModel) notificationHandler;
 
   Home({@required this.relatedDigitalPlugin, @required this.notificationHandler});
 
@@ -167,7 +168,7 @@ class _HomeState extends State<Home> {
                     children: <Widget>[
                       TextButton(
                           child: Text('INITIALIZE'),
-                          style: Styles.buttonStyle,
+                          style: Styles.inAppButtonStyle,
                           onPressed: () {
                             submit();
                           })

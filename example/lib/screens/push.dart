@@ -15,7 +15,10 @@ class Push extends StatefulWidget {
 }
 
 class _PushState extends State<Push> {
-  TextEditingController tController = TextEditingController();
+  TextEditingController tokenController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  bool emailPermission = true;
+  bool isCommercial = false;
 
   @override
   void initState() {
@@ -29,41 +32,112 @@ class _PushState extends State<Push> {
         child: Scaffold(
             appBar: AppBar(
               title: const Text('Push'),
-              backgroundColor: Styles.borders,
+              backgroundColor: Styles.relatedRed,
               automaticallyImplyLeading: false,
             ),
             body: ListView(
               children: ListTile.divideTiles(context: context, tiles: [
                 TextInputListTile(
                   title: Constants.token,
-                  controller: tController, onChanged: null,),
+                  controller: tokenController,
+                  onChanged: null,
+                ),
                 ListTile(
                   subtitle: Column(
                     children: <Widget>[
                       TextButton(
                           child: Text('Request Permission'),
-                          style: Styles.buttonStyle,
+                          style: Styles.pushButtonStyle,
                           onPressed: () {
-                            this.widget.relatedDigitalPlugin.requestPermission(_getTokenCallback, isProvisional: true);
+                            this.widget.relatedDigitalPlugin.requestPermission(
+                                _getTokenCallback,
+                                isProvisional: true);
                           })
                     ],
                   ),
-                )
+                ),
+                TextInputListTile(
+                  title: Constants.email,
+                  controller: emailController,
+                  onChanged: null,
+                ),
+                SwitchListTile(
+                  title: Text(
+                    Constants.emailPermission,
+                    style: Styles.settingsPrimaryText,
+                  ),
+                  value: emailPermission,
+                  onChanged: (bool ePermission) {
+                    emailPermission = emailPermission;
+                    updateState();
+                  },
+                ),
+                SwitchListTile(
+                  title: Text(
+                    Constants.isCommercial,
+                    style: Styles.settingsPrimaryText,
+                  ),
+                  value: isCommercial,
+                  onChanged: (bool iCommercial) {
+                    isCommercial = iCommercial;
+                    updateState();
+                  },
+                ),
+                ListTile(
+                  subtitle: Column(
+                    children: <Widget>[
+                      TextButton(
+                          child: Text('Set Email'),
+                          style: Styles.pushButtonStyle,
+                          onPressed: () {
+                            submit(SubmitType.setEmail);
+                          })
+                    ],
+                  ),
+                ),
+                ListTile(
+                  subtitle: Column(
+                    children: <Widget>[
+                      TextButton(
+                          child: Text('Register Email'),
+                          style: Styles.pushButtonStyle,
+                          onPressed: () {
+                            submit(SubmitType.registerEmail);
+                          })
+                    ],
+                  ),
+                ),
               ]).toList(),
             )));
   }
 
+  Future<void> submit(SubmitType submitType) async {
+    if(submitType == SubmitType.setEmail) {
+      this.widget.relatedDigitalPlugin.setEmail(emailController.text, emailPermission);
+    } else if(submitType == SubmitType.registerEmail) {
+      this.widget.relatedDigitalPlugin.registerEmail(emailController.text, permission: emailPermission, isCommercial: isCommercial);
+    }
+
+  }
+
+  updateState() {
+    setState(() {});
+  }
+
   void _getTokenCallback(RDTokenResponseModel result) {
     print('RDTokenResponseModel ' + result.toString());
-    if(result != null && result.deviceToken != null && result.deviceToken.isNotEmpty) {
+    if (result != null &&
+        result.deviceToken != null &&
+        result.deviceToken.isNotEmpty) {
       setState(() {
-        tController.text = result.deviceToken;
+        tokenController.text = result.deviceToken;
       });
-    }
-    else {
+    } else {
       setState(() {
-        tController.text = 'Token not retrieved';
+        tokenController.text = 'Token not retrieved';
       });
     }
   }
 }
+
+enum SubmitType { setEmail, registerEmail, stopped, paused }

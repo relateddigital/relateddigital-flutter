@@ -27,7 +27,7 @@ class _StoryState extends State<Story> {
         child: Scaffold(
             appBar: AppBar(
               title: const Text('Story'),
-              backgroundColor: Styles.borders,
+              backgroundColor: Styles.relatedBlue,
               automaticallyImplyLeading: false,
             ),
             body: ListView(

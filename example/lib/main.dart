@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
+import 'package:relateddigital_flutter/response_models.dart';
 import 'package:relateddigital_flutter_example/screens/event.dart';
 import 'package:relateddigital_flutter_example/screens/inapp.dart';
 import 'package:relateddigital_flutter_example/screens/push.dart';
 import 'package:relateddigital_flutter_example/screens/story.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/screens/home.dart';
+import 'constants.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,9 +30,15 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
     controller = TabController(length: 4, vsync: this);
   }
 
-  void _readNotificationCallback(dynamic result) {
+  void _readNotificationCallback(RDNotificationResponseModel result) async {
     print('_readNotificationCallback');
     print(result);
+    showDialog(
+        context: key.currentContext,
+        builder: (context) => AlertDialog(
+              title: Text("_readNotificationCallback"),
+              content: Text(result.payload.toString()),
+            ));
   }
 
   @override
@@ -62,12 +70,12 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
     return Push(relatedDigitalPlugin: relatedDigitalPlugin);
   }
 
-  Widget storyView() {
-    return Story(relatedDigitalPlugin: relatedDigitalPlugin);
-  }
-
   Widget inAppView() {
     return InApp(relatedDigitalPlugin: relatedDigitalPlugin);
+  }
+
+  Widget storyView() {
+    return Story(relatedDigitalPlugin: relatedDigitalPlugin);
   }
 
   Widget tabBarView() {
@@ -75,7 +83,12 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
         onWillPop: null,
         child: Scaffold(
           body: TabBarView(
-            children: <Widget>[eventView(), pushView(), storyView(), inAppView()],
+            children: <Widget>[
+              eventView(),
+              pushView(),
+              inAppView(),
+              storyView(),
+            ],
             controller: controller,
           ),
           bottomNavigationBar: bottomNavigationBar(),
@@ -85,23 +98,27 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   Widget bottomNavigationBar() {
     return Material(
       // set the color of the bottom navigation bar
-      color: Styles.borders,
+      color: Colors.grey[200],
       // set the tab bar as the child of bottom navigation bar
       child: TabBar(
         indicatorColor: Styles.relatedRed,
+        labelColor: Colors.black,
         tabs: <Tab>[
           Tab(
-            // set icon to the tab
-            icon: Icon(Icons.analytics),
+            text: Constants.Event,
+            icon: Icon(Icons.analytics, color: Styles.relatedOrange),
           ),
           Tab(
-            icon: Icon(Icons.messenger),
+            text: Constants.Push,
+            icon: Icon(Icons.messenger, color: Styles.relatedRed),
           ),
           Tab(
-            icon: Icon(Icons.data_usage_sharp),
+            text: Constants.InApp,
+            icon: Icon(Icons.data_usage_sharp, color: Styles.relatedPurple),
           ),
           Tab(
-            icon: Icon(Icons.mobile_screen_share),
+            text: Constants.Story,
+            icon: Icon(Icons.mobile_screen_share, color: Styles.relatedBlue),
           ),
         ],
         // setup the controller

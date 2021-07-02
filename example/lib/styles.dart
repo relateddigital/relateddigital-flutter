@@ -39,8 +39,23 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
   );
 
-  static ButtonStyle buttonStyle = ButtonStyle (
+  static ButtonStyle eventButtonStyle = ButtonStyle (
+    backgroundColor: MaterialStateProperty.all<Color>(relatedOrange),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+  );
+
+  static ButtonStyle pushButtonStyle = ButtonStyle (
+    backgroundColor: MaterialStateProperty.all<Color>(relatedRed),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+  );
+
+  static ButtonStyle inAppButtonStyle = ButtonStyle (
     backgroundColor: MaterialStateProperty.all<Color>(relatedPurple),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+  );
+
+  static ButtonStyle storyButtonStyle = ButtonStyle (
+    backgroundColor: MaterialStateProperty.all<Color>(relatedBlue),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
   );
 
@@ -50,11 +65,15 @@ abstract class Styles {
 
   static const Color relatedOrange = Color(0xfff8aa29);
 
-  static const Color relatedBlue = Color(0xff3cc1dd);
+  static const Color relatedRed = Color(0xffd52028);
 
   static const Color relatedPurple = Color(0xff824198);
 
-  static const Color relatedRed = Color(0xffd52028);
+  static const Color relatedBlue = Color(0xff3cc1dd);
+
+
+
+
 
   static const Color borders = relatedPurple; // Color(0xff202020);
 

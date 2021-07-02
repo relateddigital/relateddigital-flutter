@@ -2,6 +2,7 @@ import Flutter
 import VisilabsIOS
 
 class RelatedDigitalChannelHandler: NSObject {
+    weak var channel: FlutterMethodChannel?
 	var functionHandler: RelatedDigitalFunctionHandler
 	
 	override init() {
@@ -15,6 +16,8 @@ class RelatedDigitalChannelHandler: NSObject {
 			print(error)
 		}
 	}
+    
+    var pushDictionary: [AnyHashable: Any]?
 	
 	private func handleCall(_ call: FlutterMethodCall, result: @escaping FlutterResult) throws {
 		let args = call.arguments as? [String : Any]
@@ -34,8 +37,16 @@ class RelatedDigitalChannelHandler: NSObject {
 			self.functionHandler.initEuroMsg(appAlias: appAlias, enableLog: enableLog)
             self.functionHandler.initVisilabs(organizationId: organizationId, profileId: siteId, dataSource: dataSource, inAppNotificationsEnabled: inAppNotificationsEnabled
                                               , geofenceEnabled: geofenceEnabled, maxGeofenceCount: maxGeofenceCount, enableLog: enableLog, isIDFAEnabled: isIDFAEnabled)
-			
-			result(nil)
+            
+            result(nil)
+        
+            if let dic = pushDictionary, let chan = self.channel {
+                chan.invokeMethod(Constants.M_NOTIFICATION_OPENED, arguments: [
+                    "userInfo": dic
+                ])
+            }
+            pushDictionary = nil
+ 
 		}
 		else if(call.method == Constants.M_PERMISSION) {
             let isProvisional = args?["isProvisional"] as? Bool ?? false

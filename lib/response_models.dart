@@ -11,38 +11,51 @@ class RDTokenResponseModel {
   }
 }
 
-class RDNotificationResponseModel {
-  String url;
-  String altUrl;
-  String mediaUrl;
-  String pushType;
-  String title;
-  String body;
-  String pushId;
-  String sound;
-  int badge;
-  dynamic payload;
+T cast<T>(x) => x is T ? x : null;
 
-  RDNotificationResponseModel({
-    @required String url,
-    @required String altUrl,
-    @required String mediaUrl,
-    @required String pushType,
-    @required String title,
-    @required String body,
-    @required String pushId,
-    @required String sound,
-    @required int badge,
-  }) {
-    this.url = url;
-    this.altUrl = altUrl;
-    this.mediaUrl = mediaUrl;
-    this.pushType = pushType;
-    this.title = title;
-    this.body = body;
-    this.pushId = pushId;
-    this.sound = sound;
-    this.badge = badge;
+class RDNotificationResponseModel {
+  dynamic payload;
+  String pushType = 'Text';
+  String pushId = '';
+  String url = '';
+  String deepLink = '';
+  String altUrl = '';
+  String mediaUrl = '';
+  int contentAvailable = 0;
+  int mutableContent = 0;
+  int badge = 0;
+  String sound = '';
+  String title = '';
+  String body = '';
+
+  RDNotificationResponseModel.fromJson(dynamic json) {
+    this.payload = json;
+    print(this.payload);
+    if (this.payload != null) {
+      if (Platform.isIOS) {
+        dynamic userInfo = this.payload["userInfo"];
+        if (userInfo != null) {
+          this.pushType = (cast<String>(userInfo["pushType"]) ?? '').isEmpty ? this.pushType : cast<String>(userInfo["pushType"]);
+          this.pushId = (cast<String>(userInfo["pushType"]) ?? '').isEmpty ? this.pushId : cast<String>(userInfo["pushId"]);
+          this.url = this.deepLink = (cast<String>(userInfo["url"]) ?? '').isEmpty ? this.url : cast<String>(userInfo["url"]);
+          this.url = this.deepLink = (cast<String>(userInfo["deepLink"]) ?? '').isEmpty ? this.deepLink : cast<String>(userInfo["deepLink"]);
+          this.altUrl = (cast<String>(userInfo["altUrl"]) ?? '').isEmpty ? this.altUrl : cast<String>(userInfo["altUrl"]);
+          this.mediaUrl = (cast<String>(userInfo["mediaUrl"]) ?? '').isEmpty ? this.mediaUrl : cast<String>(userInfo["mediaUrl"]);
+          dynamic aps = userInfo["aps"];
+          if (aps != null) {
+            this.contentAvailable = (cast<int>(aps["content-available"]) ?? 0) == 0 ? this.contentAvailable : cast<int>(aps["content-available"]);
+            this.mutableContent = (cast<int>(aps["mutable-content"]) ?? 0) == 0 ? this.mutableContent : cast<int>(aps["mutable-content"]);
+            this.badge = (cast<int>(aps["badge"]) ?? 0) == 0 ? this.badge : cast<int>(aps["badge"]);
+            this.sound = (cast<String>(aps["sound"]) ?? '').isEmpty ? this.sound : cast<String>(aps["sound"]);
+            dynamic alert = aps["alert"];
+            if (alert != null) {
+              this.title = (cast<String>(alert["title"]) ?? '').isEmpty ? this.title : cast<String>(alert["title"]);
+              this.body = (cast<String>(alert["body"]) ?? '').isEmpty ? this.body : cast<String>(alert["body"]);
+            }
+          }
+        }
+      }
+    }
   }
 }
 

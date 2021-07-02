@@ -29,7 +29,7 @@ class _InAppState extends State<InApp> {
         child: Scaffold(
             appBar: AppBar(
               title: const Text('Story'),
-              backgroundColor: Styles.borders,
+              backgroundColor: Styles.relatedPurple,
               automaticallyImplyLeading: false,
             ),
             body: ListView(
