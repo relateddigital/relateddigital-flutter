@@ -30,14 +30,14 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
     controller = TabController(length: 4, vsync: this);
   }
 
-  void _readNotificationCallback(RDNotificationResponseModel result) async {
+  void _readNotificationCallback(dynamic result) async {
     print('_readNotificationCallback');
     print(result);
     showDialog(
         context: key.currentContext,
         builder: (context) => AlertDialog(
               title: Text("_readNotificationCallback"),
-              content: Text(result.payload.toString()),
+              content: Text(result.toString()),
             ));
   }
 

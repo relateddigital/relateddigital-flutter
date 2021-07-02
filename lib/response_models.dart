@@ -13,6 +13,7 @@ class RDTokenResponseModel {
 
 T cast<T>(x) => x is T ? x : null;
 
+//TODO: after investigating all payload parameters use this model.
 class RDNotificationResponseModel {
   dynamic payload;
   String pushType = 'Text';

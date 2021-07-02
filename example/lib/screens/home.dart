@@ -12,7 +12,7 @@ import 'package:relateddigital_flutter_example/models/rd_profile.dart';
 
 class Home extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
-  final Function(RDNotificationResponseModel) notificationHandler;
+  final void Function(dynamic result) notificationHandler;
 
   Home({@required this.relatedDigitalPlugin, @required this.notificationHandler});
 
