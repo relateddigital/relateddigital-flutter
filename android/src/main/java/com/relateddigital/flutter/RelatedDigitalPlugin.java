@@ -62,9 +62,10 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          functionHandler.initVisilabs(organizationId, siteId, dataSource, geofenceEnabled, inAppNotificationsEnabled);
          VisilabsConstant.DEBUG = enableLog;
 
+         result.success(null);
+
          functionHandler.checkReportRead(mActivity.getIntent());
 
-         result.success(null);
        }
        else if (call.method.equals(Constants.M_PERMISSION)) {
          functionHandler.getToken();

@@ -122,6 +122,11 @@ public class RelatedDigitalFunctionHandler {
     }
 
     public boolean checkReportRead(Intent intent) {
+
+        if (EuroMobileManager.getInstance() == null) {
+            return true;
+        }
+
         if (intent.getExtras() != null && intent.getExtras().getSerializable("message") != null) {
             try {
                 EuroMobileManager.getInstance().reportRead(intent.getExtras());
