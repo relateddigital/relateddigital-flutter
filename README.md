@@ -90,6 +90,9 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 ```
 
+- Change your minSdkVersion to 21.
+
+
 - Add the following services to your `AndroidManifest.xml`, within the `<application></application>` tags.
 
 ```xml
