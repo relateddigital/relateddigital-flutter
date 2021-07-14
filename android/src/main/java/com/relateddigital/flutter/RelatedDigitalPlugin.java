@@ -62,9 +62,10 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          functionHandler.initVisilabs(organizationId, siteId, dataSource, geofenceEnabled, inAppNotificationsEnabled);
          VisilabsConstant.DEBUG = enableLog;
 
+         result.success(null);
+
          functionHandler.checkReportRead(mActivity.getIntent());
 
-         result.success(null);
        }
        else if (call.method.equals(Constants.M_PERMISSION)) {
          functionHandler.getToken();
@@ -174,6 +175,10 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          HashMap<String, String> properties = call.argument("properties");
 
          functionHandler.signUp(exVisitorId, properties);
+       }
+       else if (call.method.equals(Constants.M_GET_EXVISITORID)) {
+         String exVisitorID = functionHandler.getExVisitorID();
+         result.success(exVisitorID);
        }
        else {
          result.notImplemented();

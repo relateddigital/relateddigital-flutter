@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 abstract class Styles {
 
@@ -38,15 +39,43 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
   );
 
+  static ButtonStyle eventButtonStyle = ButtonStyle (
+    backgroundColor: MaterialStateProperty.all<Color>(relatedOrange),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+  );
+
+  static ButtonStyle pushButtonStyle = ButtonStyle (
+    backgroundColor: MaterialStateProperty.all<Color>(relatedRed),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+  );
+
+  static ButtonStyle inAppButtonStyle = ButtonStyle (
+    backgroundColor: MaterialStateProperty.all<Color>(relatedPurple),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+  );
+
+  static ButtonStyle storyButtonStyle = ButtonStyle (
+    backgroundColor: MaterialStateProperty.all<Color>(relatedBlue),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+  );
+
   static const transparentColor = Color(0x00000000);
 
-  static const Color background = Color(0xff020202);
+  static const Color background = relatedPurple; // Color(0xff020202);
 
-  static const Color airshipBlue = Color(0xff004bff);
+  static const Color relatedOrange = Color(0xfff8aa29);
 
-  static const Color airshipRed = Color(0xffff0D49);
+  static const Color relatedRed = Color(0xffd52028);
 
-  static const Color borders = Color(0xff202020);
+  static const Color relatedPurple = Color(0xff824198);
+
+  static const Color relatedBlue = Color(0xff3cc1dd);
+
+
+
+
+
+  static const Color borders = relatedPurple; // Color(0xff202020);
 
   static const preferenceIcon = IconData(
     0xf443,

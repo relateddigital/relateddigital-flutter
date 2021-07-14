@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/screenshots/related-digital-logo.svg" width="400px;"/>
+  <img src="/screenshots/related-digital-logo.svg?raw=true" width="400px;"/>
 </p>
 
 [![pub package](https://img.shields.io/pub/v/relateddigital_flutter.svg)](https://pub.dartlang.org/packages/relateddigital_flutter)
@@ -18,6 +18,7 @@
         - [Requesting Permission & Retrieving Token](#Requesting-Permission-&-Retrieving-Token])
         - [Rich Push Notifications](#Rich-Push-Notifications)
         - [Carousel Push Notifications](#Carousel-Push-Notifications)
+        - [Set Push Permit](#Set-Push-Permit)
     - [Data Collection](#Data-Collection)
     - [Targeting Actions](#Targeting-Actions)
         - [In-App Messaging](#In-App-Messaging)
@@ -50,7 +51,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.1.8
+    relateddigital_flutter: ^0.2.1
 ```
 - Run `flutter pub get`
 
@@ -88,6 +89,9 @@ classpath 'com.huawei.agconnect:agcp:1.4.1.300' // skip if your app does not sup
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 ```
+
+- Change your minSdkVersion to 21.
+
 
 - Add the following services to your `AndroidManifest.xml`, within the `<application></application>` tags.
 
@@ -254,6 +258,15 @@ target 'NotificationService' do
 	use_frameworks!
 	pod 'Euromsg'
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+		config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+	end
+  end
+end
 ```
 - Set **NotificationService** target's deployment target to iOS 11.
 - Replace **NotificationService.swift** file content with the code below.
@@ -349,6 +362,36 @@ extension EMNotificationViewController: CarouselDelegate {
 		
 }
 
+```
+
+- In your **NotificationContent/Info.plist** add below section
+
+```xml
+<key>NSExtension</key>
+<dict>
+    <key>NSExtensionAttributes</key>
+    <dict>
+        <key>UNNotificationExtensionCategory</key>
+        <string>carousel</string>
+        <key>UNNotificationExtensionDefaultContentHidden</key>
+        <false />
+        <key>UNNotificationExtensionInitialContentSizeRatio</key>
+        <real>1</real>
+        <key>UNNotificationExtensionUserInteractionEnabled</key>
+        <true />
+    </dict>
+    <key>NSExtensionPointIdentifier</key>
+    <string>com.apple.usernotifications.content-extension</string>
+    <key>NSExtensionPrincipalClass</key>
+    <string>NotificationContent.EMNotificationViewController</string>
+</dict>
+```
+
+### Set Push Permit
+You can only call `setNotificationPermission` method to enable or disable push notifications for the application. 
+
+```dart
+relatedDigitalPlugin.setNotificationPermission(true);
 ```
 
 ## Data Collection

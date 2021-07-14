@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 
 public class SwiftRelatedDigitalPlugin: NSObject, FlutterPlugin {
-	var channel: FlutterMethodChannel = FlutterMethodChannel()
+    var channel: FlutterMethodChannel = FlutterMethodChannel()
 	var channelHandler: RelatedDigitalChannelHandler
 	
 	override public init() {
@@ -33,7 +33,9 @@ public class SwiftRelatedDigitalPlugin: NSObject, FlutterPlugin {
 		
 		UNUserNotificationCenter.current().delegate = self
 		if let userInfo = launchOptions[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: Any] {
+            self.channelHandler.channel = self.channel
 			self.channelHandler.handlePush(pushDictionary: userInfo)
+            self.channelHandler.pushDictionary = userInfo
 		}
 		
 		return true

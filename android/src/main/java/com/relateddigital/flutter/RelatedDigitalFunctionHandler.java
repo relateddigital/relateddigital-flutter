@@ -60,9 +60,9 @@ public class RelatedDigitalFunctionHandler {
     }
 
     public void initVisilabs(String organizationId, String siteId, String datasource, boolean geofenceEnabled, boolean inAppNotificationsEnabled) {
-        // Visilabs.CreateAPI(organizationId, siteId, Constants.VL_SEGMENT_URL, datasource, Constants.VL_REALTIME_URL, Constants.VL_CHANNEL, mContext, Constants.VL_TARGET_URL, Constants.VL_ACTION_URL, Constants.VL_REQUEST_TIMEOUT, Constants.VL_GEOFENCE_URL, geofenceEnabled);
+        Visilabs.CreateAPI(organizationId, siteId, Constants.VL_SEGMENT_URL, datasource, Constants.VL_REALTIME_URL, Constants.VL_CHANNEL, mContext, Constants.VL_TARGET_URL, Constants.VL_ACTION_URL, Constants.VL_REQUEST_TIMEOUT, Constants.VL_GEOFENCE_URL, geofenceEnabled);
         mInAppNotificationsEnabled = inAppNotificationsEnabled;
-        Visilabs.CreateAPI(mContext);
+        //Visilabs.CreateAPI(mContext);
     }
 
     public void getToken() {
@@ -122,6 +122,11 @@ public class RelatedDigitalFunctionHandler {
     }
 
     public boolean checkReportRead(Intent intent) {
+
+        if (EuroMobileManager.getInstance() == null) {
+            return true;
+        }
+
         if (intent.getExtras() != null && intent.getExtras().getSerializable("message") != null) {
             try {
                 EuroMobileManager.getInstance().reportRead(intent.getExtras());
@@ -138,7 +143,7 @@ public class RelatedDigitalFunctionHandler {
     }
 
     public void customEvent(String pageName, HashMap<String, String> parameters) {
-        if(mInAppNotificationsEnabled) {
+        if(mInAppNotificationsEnabled && mActivity != null && !Constants.REGISTER_TOKEN.equals(pageName)) {
             Visilabs.CallAPI().customEvent(pageName, parameters, mActivity);
         } else {
             Visilabs.CallAPI().customEvent(pageName, parameters);
@@ -268,5 +273,9 @@ public class RelatedDigitalFunctionHandler {
         else {
             Visilabs.CallAPI().signUp(exVisitorId, properties);
         }
+    }
+
+    public String getExVisitorID() {
+        return Visilabs.CallAPI().getExVisitorID();
     }
 }

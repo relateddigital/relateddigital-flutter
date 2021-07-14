@@ -1,23 +1,18 @@
-import 'dart:io';
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:relateddigital_flutter/relateddigital_flutter.dart';
+import 'package:relateddigital_flutter/response_models.dart';
+import 'package:relateddigital_flutter_example/screens/event.dart';
+import 'package:relateddigital_flutter_example/screens/inapp.dart';
+import 'package:relateddigital_flutter_example/screens/push.dart';
+import 'package:relateddigital_flutter_example/screens/story.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/screens/home.dart';
-
-import 'package:flutter/services.dart';
-import 'package:relateddigital_flutter/relateddigital_flutter.dart';
-import 'package:relateddigital_flutter_example/constants.dart';
-import 'package:relateddigital_flutter/request_models.dart';
-import 'package:relateddigital_flutter/response_models.dart';
-import 'package:relateddigital_flutter/recommendation_filter.dart';
-import 'package:relateddigital_flutter/rd_story_view.dart';
+import 'constants.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(RDExample());
 }
-
-
 
 class RDExample extends StatefulWidget {
   @override
@@ -25,33 +20,62 @@ class RDExample extends StatefulWidget {
 }
 
 class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
+  final RelateddigitalFlutter relatedDigitalPlugin = RelateddigitalFlutter();
   TabController controller;
   final GlobalKey<NavigatorState> key = GlobalKey();
 
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 3, vsync: this);
-    //initPlatformState();
-    //addFlutterTag();
+    controller = TabController(length: 4, vsync: this);
+  }
+
+  void _readNotificationCallback(dynamic result) async {
+    print('_readNotificationCallback');
+    print(result);
+    showDialog(
+        context: key.currentContext,
+        builder: (context) => AlertDialog(
+              title: Text("_readNotificationCallback"),
+              content: Text(result.toString()),
+            ));
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      navigatorKey:key,
+      navigatorKey: key,
       title: "RDExample",
       initialRoute: "/home",
       routes: {
         '/home': (context) => homeView(),
-        '/': (context) => tabBarView(),
+        '/tabBarView': (context) => tabBarView(),
       },
     );
   }
 
   Widget homeView() {
-    return Home();
+    return Home(
+      relatedDigitalPlugin: relatedDigitalPlugin,
+      notificationHandler: _readNotificationCallback,
+    );
+  }
+
+  Widget eventView() {
+    return Event(relatedDigitalPlugin: relatedDigitalPlugin);
+  }
+
+  Widget pushView() {
+    return Push(relatedDigitalPlugin: relatedDigitalPlugin);
+  }
+
+  Widget inAppView() {
+    return InApp(relatedDigitalPlugin: relatedDigitalPlugin);
+  }
+
+  Widget storyView() {
+    return Story(relatedDigitalPlugin: relatedDigitalPlugin);
   }
 
   Widget tabBarView() {
@@ -59,7 +83,12 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
         onWillPop: null,
         child: Scaffold(
           body: TabBarView(
-            children: <Widget>[],
+            children: <Widget>[
+              eventView(),
+              pushView(),
+              inAppView(),
+              storyView(),
+            ],
             controller: controller,
           ),
           bottomNavigationBar: bottomNavigationBar(),
@@ -69,20 +98,27 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   Widget bottomNavigationBar() {
     return Material(
       // set the color of the bottom navigation bar
-      color: Styles.borders,
+      color: Colors.grey[200],
       // set the tab bar as the child of bottom navigation bar
       child: TabBar(
-        indicatorColor: Styles.airshipRed,
+        indicatorColor: Styles.relatedRed,
+        labelColor: Colors.black,
         tabs: <Tab>[
           Tab(
-            // set icon to the tab
-            icon: Icon(Icons.home),
+            text: Constants.Event,
+            icon: Icon(Icons.analytics, color: Styles.relatedOrange),
           ),
           Tab(
-            icon: Icon(Icons.inbox),
+            text: Constants.Push,
+            icon: Icon(Icons.messenger, color: Styles.relatedRed),
           ),
           Tab(
-            icon: Icon(Icons.settings),
+            text: Constants.InApp,
+            icon: Icon(Icons.data_usage_sharp, color: Styles.relatedPurple),
+          ),
+          Tab(
+            text: Constants.Story,
+            icon: Icon(Icons.mobile_screen_share, color: Styles.relatedBlue),
           ),
         ],
         // setup the controller
@@ -90,5 +126,4 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
       ),
     );
   }
-
 }
