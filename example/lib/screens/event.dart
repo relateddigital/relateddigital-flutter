@@ -6,6 +6,7 @@ import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
+import 'package:relateddigital_flutter/recommendation_filter.dart';
 
 class Event extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
@@ -90,6 +91,18 @@ class _EventState extends State<Event> {
                               subtitle: Column(
                                 children: <Widget>[
                                   TextButton(
+                                      child: Text('Get Recommendations'),
+                                      style: Styles.eventButtonStyle,
+                                      onPressed: () {
+                                        getRecommendations();
+                                      })
+                                ],
+                              ),
+                            ),
+                            ListTile(
+                              subtitle: Column(
+                                children: <Widget>[
+                                  TextButton(
                                       child: Text('Logout'),
                                       style: Styles.eventButtonStyle,
                                       onPressed: () {
@@ -121,6 +134,26 @@ class _EventState extends State<Event> {
       ));
     }
     return tiles;
+  }
+
+  Future<void> getRecommendations() async {
+    String zoneId = '6';
+    String productCode = '';
+
+    // optional
+    Map<String, Object> filter = {
+      RDRecommendationFilter.attribute: RDRecommendationFilterAttribute.PRODUCTNAME,
+      RDRecommendationFilter.filterType: RDRecommendationFilterType.like,
+      RDRecommendationFilter.value: null
+    };
+
+    List filters = [
+      filter
+    ];
+
+    List result = await widget.relatedDigitalPlugin.getRecommendations(zoneId, productCode);
+    // List result = await relatedDigitalPlugin.getRecommendations(zoneId, productCode, filters: filters);
+    print(result.toString());
   }
 
   void login() {

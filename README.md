@@ -23,6 +23,7 @@
     - [Targeting Actions](#Targeting-Actions)
         - [In-App Messaging](#In-App-Messaging)
         - [Geofencing](#Geofencing)
+    - [Recommendation](#Recommendation)
 
 
 
@@ -615,7 +616,31 @@ There are 9 types of **in-app messages**:
     android:exported="true"/>
 ```
 
+### Recommendation
+Use **getRecommendations** method as below to retrieve product recommendations. This method takes mandatory **zoneId** and **productCode** parameters with optional **filters** parameter.
+```dart
+import 'package:relateddigital_flutter/recommendation_filter.dart';
 
+Future<void> getRecommendations() async {
+  String zoneId = '6';
+  String productCode = '';
+
+  // optional
+  Map<String, Object> filter = {
+    RDRecommendationFilter.attribute: RDRecommendationFilterAttribute.PRODUCTNAME,
+    RDRecommendationFilter.filterType: RDRecommendationFilterType.like,
+    RDRecommendationFilter.value: null
+  };
+
+  List filters = [
+    filter
+  ];
+
+  List result = await widget.relatedDigitalPlugin.getRecommendations(zoneId, productCode);
+  // List result = await relatedDigitalPlugin.getRecommendations(zoneId, productCode, filters: filters);
+  print(result.toString());
+}
+```
 
 
 
