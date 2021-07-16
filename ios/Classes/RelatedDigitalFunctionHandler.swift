@@ -5,6 +5,7 @@ import VisilabsIOS
 class RelatedDigitalFunctionHandler {
     public func initEuroMsg(appAlias: String, enableLog: Bool) {
         Euromsg.configure(appAlias: appAlias, enableLog: enableLog)
+        Euromsg.sync()
     }
     
     public func initVisilabs(organizationId: String, profileId: String, dataSource: String, inAppNotificationsEnabled: Bool, geofenceEnabled: Bool, maxGeofenceCount: Int, enableLog: Bool, isIDFAEnabled: Bool) {
