@@ -52,11 +52,11 @@ public class RelatedDigitalFunctionHandler {
     public void initEuromsg(String appAlias, String huaweiAppAlias, String pushIntent) {
         mAppAlias = appAlias;
         mHuaweiAppAlias = huaweiAppAlias;
-
         EuroMobileManager euroMobileManager = EuroMobileManager.init(appAlias, huaweiAppAlias, mContext);
         euroMobileManager.registerToFCM(mContext);
         euroMobileManager.setPushIntent(pushIntent, mContext);
         euroMobileManager.setChannelName("CHANNEL", mContext); // TODO: burada niye CHANNEL var?
+        EuroMobileManager.getInstance().sync(mContext);
     }
 
     public void initVisilabs(String organizationId, String siteId, String datasource, boolean geofenceEnabled, boolean inAppNotificationsEnabled) {
