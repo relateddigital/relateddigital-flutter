@@ -111,6 +111,21 @@ class _EventState extends State<Event> {
                                 ],
                               ),
                             ),
+                            Visibility(
+                              visible: Platform.isAndroid,
+                              child: ListTile(
+                                subtitle: Column(
+                                  children: <Widget>[
+                                    TextButton(
+                                        child: Text('App Tracking'),
+                                        style: Styles.eventButtonStyle,
+                                        onPressed: () {
+                                          sendTheListOfAppsInstalled();
+                                        })
+                                  ],
+                                ),
+                              ),
+                            ),
                           ] +
                           getInAppListTiles())
                   .toList(),
@@ -170,8 +185,12 @@ class _EventState extends State<Event> {
     showAlertDialog(title: 'ExVisitorId', content: exVisitorID);
   }
 
-  void logout() {
-    widget.relatedDigitalPlugin.logout();
+  void logout() async {
+    await widget.relatedDigitalPlugin.logout();
+  }
+
+  void sendTheListOfAppsInstalled() async {
+    await widget.relatedDigitalPlugin.sendTheListOfAppsInstalled();
   }
 
   Future<bool> showAlertDialog({

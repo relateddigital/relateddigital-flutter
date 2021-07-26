@@ -28,6 +28,7 @@ public class Constants {
     public static String M_LOGIN = "VL/login";
     public static String M_SIGNUP = "VL/signUp";
     public static String M_GET_EXVISITORID = "VL/getExVisitorID";
+    public static String M_APP_TRACKER = "VL/appTracker";
 
     public static String VL_CHANNEL = "Android";
     public static String VL_SEGMENT_URL = "https://lgr.visilabs.net";

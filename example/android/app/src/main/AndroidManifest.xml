@@ -95,4 +95,9 @@
            android:exported="true" />
 
     </application>
+
+    <queries>
+        <package android:name="com.example.app1" />
+        <package android:name="com.example.app2" />
+    </queries>
 </manifest>

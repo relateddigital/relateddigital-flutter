@@ -180,6 +180,10 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          String exVisitorID = functionHandler.getExVisitorID();
          result.success(exVisitorID);
        }
+       else if (call.method.equals(Constants.M_APP_TRACKER)) {
+         functionHandler.sendTheListOfAppsInstalled();
+         result.success(null);
+       }
        else {
          result.notImplemented();
        }

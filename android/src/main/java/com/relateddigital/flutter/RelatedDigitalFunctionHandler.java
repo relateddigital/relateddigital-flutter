@@ -278,4 +278,13 @@ public class RelatedDigitalFunctionHandler {
     public String getExVisitorID() {
         return Visilabs.CallAPI().getExVisitorID();
     }
+
+    public void sendTheListOfAppsInstalled() {
+        try {
+            Visilabs.CallAPI().sendTheListOfAppsInstalled();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

@@ -13,6 +13,7 @@ class RelateddigitalFlutter {
   Function(RDTokenResponseModel) _setTokenHandler;
   void Function(dynamic result) _readNotificationHandler;
   StoryPlatformCallbackHandler _storyPlatformCallbackHandler;
+  bool _logEnabled = true;
 
   String appAlias;
   String huaweiAppAlias;
@@ -44,6 +45,7 @@ class RelateddigitalFlutter {
     this.appAlias = initRequest.appAlias;
     this.huaweiAppAlias = initRequest.huaweiAppAlias;
     this._readNotificationHandler = notificationHandler;
+    this._logEnabled = initRequest.logEnabled;
 
     await _channel.invokeMethod(Constants.M_INIT, {
       'appAlias': initRequest.appAlias,
@@ -214,5 +216,17 @@ class RelateddigitalFlutter {
 
   Future<String> getExVisitorID() async {
     return _channel.invokeMethod<String>(Constants.M_GET_EXVISITORID).then<String>((String value) => value ?? "");
+  }
+
+  Future<void> sendTheListOfAppsInstalled() async {
+    if(Platform.isIOS) {
+      if(this._logEnabled) {
+        print('Related Digital - Method not supported on iOS');
+      }
+      
+      return;
+    }
+
+    await _channel.invokeMethod(Constants.M_APP_TRACKER);
   }
 }
