@@ -24,6 +24,7 @@
         - [In-App Messaging](#In-App-Messaging)
         - [Geofencing](#Geofencing)
     - [Recommendation](#Recommendation)
+    - [App Tracking (Android Only)](#App-Tracking)
 
 
 
@@ -642,12 +643,28 @@ Future<void> getRecommendations() async {
 }
 ```
 
-
-
-
-
-
-
+### App Tracking
+*(Android Only)*
+Use **sendTheListOfAppsInstalled** method to track installed apps on android.
+```dart
+await widget.relatedDigitalPlugin.sendTheListOfAppsInstalled();
+```
+Add one of the sections below to your **AndroidManifest.xml** in order to use this feature. 
+   
+*Option 1*
+```xml
+<manifest package="com.example.myApp">
+    <queries>
+        <package android:name="com.example.app1" />
+        <package android:name="com.example.app2" />
+    </queries>
+</manifest>
+```
+*Option 2*
+```xml
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" 
+tools:ignore="QueryAllPackagesPermission" />
+```
 
 
 
