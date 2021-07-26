@@ -24,19 +24,19 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
-			<key>UNNotificationExtensionUserInteractionEnabled</key>
-			<true/>
-			<key>UNNotificationExtensionDefaultContentHidden</key>
-			<false/>
 			<key>UNNotificationExtensionCategory</key>
 			<string>carousel</string>
+			<key>UNNotificationExtensionDefaultContentHidden</key>
+			<false/>
 			<key>UNNotificationExtensionInitialContentSizeRatio</key>
 			<real>1</real>
+			<key>UNNotificationExtensionUserInteractionEnabled</key>
+			<true/>
 		</dict>
-		<key>NSExtensionPrincipalClass</key>
-		<string>NotificationContent.EMNotificationViewController</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.usernotifications.content-extension</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>NotificationContent.EMNotificationViewController</string>
 	</dict>
 </dict>
 </plist>
