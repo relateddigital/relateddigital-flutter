@@ -158,7 +158,7 @@ platform :ios, '10.0'
 
 - Enable `Push Notifications` and `Background Modes->Remote Notifications` capabilities.
 
-![Xcode Push Capability](/screenshots/xcode-push-capability.png)
+![Xcode Push Capability](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/xcode-push-capability.png)
 
 - If you want to use **AdvertisingTrackingID** with **isIDFAEnabled** parameter (see [Usage](#Usage) below), you need to add this key to your **Info.plist** file for iOS 14 and above. 
 ```xml
@@ -586,11 +586,11 @@ There are 9 types of **in-app messages**:
 
 |               Pop-up - Image, Header, Text & Button              | Mini-icon&text                                                             | Full Screen-image                                                |
 |:----------------------------------------------------------------:|----------------------------------------------------------------------------|------------------------------------------------------------------|
-| ![full](/screenshots/inappnotification/full.png)                 | ![mini](/screenshots/inappnotification/mini.png)                           | ![full_image](/screenshots/inappnotification/full_image.png)     |
+| ![full](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/full.png)                 | ![mini](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/mini.png)                           | ![full_image](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/full_image.png)     |
 | Full Screen-image&button                                         | Pop-up - Image, Header, Text & Button                                      |                              Pop-up-Survey                       |
-| ![image_button](/screenshots/inappnotification/image_button.png) | ![image_text_button](/screenshots/inappnotification/image_text_button.png) | ![smile_rating](/screenshots/inappnotification/smile_rating.png) |
+| ![image_button](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/image_button.png) | ![image_text_button](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/image_text_button.png) | ![smile_rating](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/smile_rating.png) |
 | Pop-up - NPS with Text & Button                                  | Native Alert & Actionsheet                                                 |  NPS with numbers                                                   |
-| ![nps](/screenshots/inappnotification/nps.png)                   | ![nps_with_numbers](/screenshots/inappnotification/alert.png)   | ![nps_with_numbers](/screenshots/inappnotification/nps_with_numbers.png) |
+| ![nps](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/nps.png)                   | ![nps_with_numbers](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/alert.png)   | ![nps_with_numbers](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/nps_with_numbers.png) |
 
 
 ### Geofencing
