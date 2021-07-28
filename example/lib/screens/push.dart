@@ -68,7 +68,7 @@ class _PushState extends State<Push> {
                   ),
                   value: emailPermission,
                   onChanged: (bool ePermission) {
-                    emailPermission = emailPermission;
+                    emailPermission = ePermission;
                     updateState();
                   },
                 ),

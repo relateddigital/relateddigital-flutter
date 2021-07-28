@@ -1,3 +1,3 @@
-## 0.0.1
+## 0.2.5
 
-* TODO: Describe initial release.
+Android SDK tries to read appAliases from AndroidManifest.xml

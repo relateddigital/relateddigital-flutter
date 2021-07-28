@@ -53,7 +53,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.2.1
+    relateddigital_flutter: ^0.2.5
 ```
 - Run `flutter pub get`
 
@@ -119,6 +119,10 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 ```
 - Add below meta-data parameters in your **AndroidManifest.xml**
 ```xml
+
+<meta-data android:name="GoogleAppAlias" android:value="google-app-alias" />
+<meta-data android:name="HuaweiAppAlias" android:value="huawei-app-alias" />
+
 <meta-data android:name="VisilabsOrganizationID" android:value="VisilabsOrganizationID" />
 <meta-data android:name="VisilabsSiteID" android:value="VisilabsSiteID" />
 <meta-data android:name="VisilabsSegmentURL" android:value="http://lgr.visilabs.net" />
