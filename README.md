@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/screenshots/related-digital-logo.svg?raw=true" width="400px;"/>
+  <img src="https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/related-digital-logo.svg" width="400px;"/>
 </p>
 
 [![pub package](https://img.shields.io/pub/v/relateddigital_flutter.svg)](https://pub.dartlang.org/packages/relateddigital_flutter)
