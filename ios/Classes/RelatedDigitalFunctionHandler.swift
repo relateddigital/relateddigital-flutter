@@ -87,7 +87,7 @@ class RelatedDigitalFunctionHandler {
         for filter in filters {
             let attribute = VisilabsProductFilterAttribute(rawValue: filter["attribute"] as! String)
             let filterType = VisilabsRecommendationFilterType(rawValue: filter["filterType"] as! Int)
-            let value = String(describing: filter["value"])
+            let value = filter["value"] as? String  ?? ""
             
             let filter = VisilabsRecommendationFilter(attribute: attribute!, filterType: filterType!, value: value)
             
