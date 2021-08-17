@@ -30,6 +30,6 @@ android {
 }
 
 dependencies {
-    api 'com.github.relateddigital:euromessage-android:4.5.4'
-    api 'com.github.relateddigital:visilabs-android:5.6.4'
+c    api 'com.github.relateddigital:euromessage-android:4.5.8'
+    api 'com.github.relateddigital:visilabs-android:5.6.8'
 }
