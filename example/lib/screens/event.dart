@@ -159,15 +159,14 @@ class _EventState extends State<Event> {
     Map<String, Object> filter = {
       RDRecommendationFilter.attribute: RDRecommendationFilterAttribute.PRODUCTNAME,
       RDRecommendationFilter.filterType: RDRecommendationFilterType.like,
-      RDRecommendationFilter.value: null
+      RDRecommendationFilter.value: 'Honey'
     };
 
     List filters = [
       filter
     ];
 
-    List result = await widget.relatedDigitalPlugin.getRecommendations(zoneId, productCode);
-    // List result = await relatedDigitalPlugin.getRecommendations(zoneId, productCode, filters: filters);
+    List result = await widget.relatedDigitalPlugin.getRecommendations(zoneId, productCode, filters: filters);
     print(result.toString());
   }
 
