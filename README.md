@@ -1,4 +1,7 @@
-![Related Digital Logo](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/related-digital-logo.svg){:width="400px"}
+<p style="align:center;width:400px;">
+![Related Digital Logo](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/related-digital-logo.svg)
+</p>
+
 
 
 [![pub package](https://img.shields.io/pub/v/relateddigital_flutter.svg)](https://pub.dartlang.org/packages/relateddigital_flutter)
