@@ -1,8 +1,6 @@
-<p align="center" width="400px;">
-![Related Digital Logo](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/related-digital-logo.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/relateddigital/relateddigital-flutter/master/screenshots/related-digital-logo.svg" width="400px;"/>
 </p>
-
-
 
 [![pub package](https://img.shields.io/pub/v/relateddigital_flutter.svg)](https://pub.dartlang.org/packages/relateddigital_flutter)
 
