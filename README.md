@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/related-digital-logo.svg" width="400px;"/>
-</p>
+![Related Digital Logo](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/related-digital-logo.svg)
 
 [![pub package](https://img.shields.io/pub/v/relateddigital_flutter.svg)](https://pub.dartlang.org/packages/relateddigital_flutter)
 
@@ -53,7 +51,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.2.5
+    relateddigital_flutter: ^0.2.7
 ```
 - Run `flutter pub get`
 
