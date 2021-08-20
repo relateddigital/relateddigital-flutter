@@ -1,7 +1,7 @@
 import 'dart:io';
 
 class Constants {
-  static String APP_ALIAS = Platform.isIOS ? 'EuromsgIOSTest' : 'flutter-android-demo';
+  static String APP_ALIAS = Platform.isIOS ? 'relateddigital-flutter-example-ios' : 'flutter-android-demo';
   static String HUAWEI_APP_ALIAS = 'flutter-android-huawei-demo';
   static String ANDROID_PUSH_INTENT = 'com.relateddigital.relateddigital_flutter_example.MainActivity';
   static bool LOG_ENABLED = true;

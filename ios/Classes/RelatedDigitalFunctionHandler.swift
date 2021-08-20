@@ -31,18 +31,22 @@ class RelatedDigitalFunctionHandler {
     
     public func setEuroUserId(userId: String) {
         Euromsg.setEuroUserId(userKey: userId)
+        Euromsg.sync()
     }
     
     public func setEmail(email: String, permission: Bool) {
         Euromsg.setEmail(email: email, permission: permission)
+        Euromsg.sync()
     }
     
     public func setUserProperty(key: String, value: String) {
         Euromsg.setUserProperty(key: key, value: value)
+        Euromsg.sync()
     }
     
     public func setAppVersion(appVersion: String) {
         Euromsg.setAppVersion(appVersion: appVersion)
+        Euromsg.sync()
     }
     
     public func setPushNotificationPermission(permission: Bool) {
@@ -51,10 +55,12 @@ class RelatedDigitalFunctionHandler {
     
     public func setEmailPermission(permission: Bool) {
         Euromsg.setEmail(permission: permission)
+        Euromsg.sync()
     }
     
     public func setPhoneNumberPermission(permission: Bool) {
         Euromsg.setPhoneNumber(permission: permission)
+        Euromsg.sync()
     }
     
     public func setBadgeCount(badgeCount: Int) {
@@ -63,14 +69,17 @@ class RelatedDigitalFunctionHandler {
     
     public func setAdvertisingIdentifier(identifier: String?) {
         Euromsg.setAdvertisingIdentifier(adIdentifier: identifier)
+        Euromsg.sync()
     }
     
     public func setTwitterId(twitterId: String?) {
         Euromsg.setTwitterId(twitterId: twitterId)
+        Euromsg.sync()
     }
     
     public func setFacebookId(facebookId: String?) {
         Euromsg.setFacebook(facebookId: facebookId)
+        Euromsg.sync()
     }
     
     public func customEvent(pageName: String, properties: [String : String]) {
