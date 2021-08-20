@@ -1,4 +1,4 @@
-<p style="align:center;width:400px;">
+<p align="center" width="400px;">
 ![Related Digital Logo](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/related-digital-logo.svg)
 </p>
 
