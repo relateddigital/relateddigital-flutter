@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 
-typedef void TapCallback(String text);
-
 class TextInputListTile extends StatelessWidget {
   final String title;
   final TextEditingController controller;
