@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
+import 'package:relateddigital_flutter/response_models.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/widgets/text_label_list_tile.dart';
@@ -16,7 +18,7 @@ class NotificationCenter extends StatefulWidget {
 }
 
 class _NotificationCenterState extends State<NotificationCenter> {
-  List pushNotifications = [];
+  PayloadListResponse pushNotifications = PayloadListResponse([], null);
 
   @override
   void initState() {
@@ -30,7 +32,10 @@ class _NotificationCenterState extends State<NotificationCenter> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
             appBar: AppBar(
-              leading: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
+              leading: IconButton(
+                icon: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
               title: const Text(Constants.NotificationCenter),
               backgroundColor: Styles.relatedOrange,
               automaticallyImplyLeading: false,
@@ -58,45 +63,24 @@ class _NotificationCenterState extends State<NotificationCenter> {
 
   Iterable<Widget> getPushNotificationListTiles() {
     List<Widget> tiles = [];
-    print("pushNotifications.length");
-    print(pushNotifications.length);
-
-
-    for (final pushNotification in pushNotifications) {
-      tiles.add(
-        TextLabelListTile(
-          title: "TOdDO",
-          formattedDateString: "TODO: DATE",
-        ),
-      );
+    if(pushNotifications.error != null) {
+      print(pushNotifications.error);
+    } else if(pushNotifications.payloads.length == 0) {
+      print("pushNotifications.payloads.length == 0");
+    } else {
+      for (final Payload payload in pushNotifications.payloads) {
+        tiles.add(
+          TextLabelListTile(
+            payload: payload,
+            onTap: () {
+              String content = 'title: ${payload.title}\nmessage: ${payload.message}\nformattedDate: ${payload.formattedDate}'
+              + '\ntype: ${payload.type}';
+              showAlertDialog(title: payload.title ?? '', content: content);
+            },
+          ),
+        );
+      }
     }
-    //tiles.add(TextLabelListTile(title:"sdfsdf", formattedDateString: "ggg"));
-
-    /*tiles.add(ListTile(
-      subtitle: Column(
-        children: <Widget>[
-          TextButton(
-              child: Text('Login'),
-              style: Styles.eventButtonStyle,
-              onPressed: () {
-              })
-        ],
-      ),
-    ),);*/
-
-
-
-
-    /*
-    for (final pushNotification in pushNotifications) {
-      tiles.add(
-        TextLabelListTile(
-          title: "TODO",
-          formattedDateString: "TODO: DATE",
-        ),
-      );
-    }
-     */
     return tiles;
   }
 

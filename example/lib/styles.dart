@@ -59,6 +59,11 @@ abstract class Styles {
     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
   );
 
+  static ButtonStyle refreshButtonStyle = ButtonStyle (
+    backgroundColor: MaterialStateProperty.all<Color>(relatedOrange),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+  );
+
   static const transparentColor = Color(0x00000000);
 
   static const Color background = relatedPurple; // Color(0xff020202);
