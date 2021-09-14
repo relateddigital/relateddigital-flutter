@@ -184,6 +184,9 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          functionHandler.sendTheListOfAppsInstalled();
          result.success(null);
        }
+       else if (call.method.equals(Constants.M_GET_PUSH_MESSAGES)) {
+         functionHandler.getPushMessages(result);
+       }
        else {
          result.notImplemented();
        }

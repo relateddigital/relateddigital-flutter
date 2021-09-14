@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import euromsg.com.euromobileandroid.EuroMobileManager;
+import euromsg.com.euromobileandroid.callback.PushMessageInterface;
 import euromsg.com.euromobileandroid.enums.EmailPermit;
 import euromsg.com.euromobileandroid.enums.GsmPermit;
 import euromsg.com.euromobileandroid.enums.PushPermit;
@@ -144,6 +145,7 @@ public class RelatedDigitalFunctionHandler {
 
     public void customEvent(String pageName, HashMap<String, String> parameters) {
         if(mInAppNotificationsEnabled && mActivity != null && !Constants.REGISTER_TOKEN.equals(pageName)) {
+            //TODO: burada mActivity'i sürekli değiştirmek gerekebilir.
             Visilabs.CallAPI().customEvent(pageName, parameters, mActivity);
         } else {
             Visilabs.CallAPI().customEvent(pageName, parameters);
@@ -285,6 +287,26 @@ public class RelatedDigitalFunctionHandler {
         }
         catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void getPushMessages(final MethodChannel.Result result) {
+        if(mActivity != null) {
+            EuroMobileManager.getInstance().getPushMessages(mActivity, new PushMessageInterface() {
+                @Override
+                public void success(List<Message> pushMessages) {
+                    if(pushMessages == null) {
+                        result.error("ERROR", "pushMessages list is null", null);
+                    } else {
+                        Gson gson = new Gson();
+                        result.success(gson.toJson(pushMessages));
+                    }
+                }
+                @Override
+                public void fail(String errorMessage) {
+                    result.error("ERROR", errorMessage, null);
+                }
+            });
         }
     }
 }
