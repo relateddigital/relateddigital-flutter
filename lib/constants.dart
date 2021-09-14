@@ -27,6 +27,7 @@ class Constants {
   static const String M_SIGNUP = 'VL/signUp';
   static const String M_GET_EXVISITORID = 'VL/getExVisitorID';
   static const String M_APP_TRACKER = 'VL/appTracker';
+  static const String M_GET_PUSH_MESSAGES = 'RD/getPushMessages';
 
   static const String VL_TOKEN_KEY = 'RegisterToken';
   static const String VL_TOKEN_PARAM = 'OM.sys.TokenID';
