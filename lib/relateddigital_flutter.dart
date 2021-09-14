@@ -40,8 +40,7 @@ class RelateddigitalFlutter {
     }
   }
 
-  Future<void> init(
-      RDInitRequestModel initRequest, void Function(dynamic result) notificationHandler) async {
+  Future<void> init(RDInitRequestModel initRequest, void Function(dynamic result) notificationHandler) async {
     this.appAlias = initRequest.appAlias;
     this.huaweiAppAlias = initRequest.huaweiAppAlias;
     this._readNotificationHandler = notificationHandler;
@@ -117,16 +116,18 @@ class RelateddigitalFlutter {
   }
 
   Future<void> customEvent(String pageName, Map<String, String> parameters) async {
-    await _channel.invokeMethod(Constants.M_CUSTOM_EVENT, {'pageName': pageName ?? '', 'parameters': parameters ?? Map<String, String>()});
+    await _channel.invokeMethod(
+        Constants.M_CUSTOM_EVENT, {'pageName': pageName ?? '', 'parameters': parameters ?? Map<String, String>()});
   }
 
   Future<void> registerEmail(String email, {bool permission = false, bool isCommercial = false}) async {
-    await _channel.invokeMethod(Constants.M_REGISTER_EMAIL, {'email': email, 'permission': permission, 'isCommercial': isCommercial});
+    await _channel.invokeMethod(
+        Constants.M_REGISTER_EMAIL, {'email': email, 'permission': permission, 'isCommercial': isCommercial});
   }
 
   Future<List> getRecommendations(String zoneId, String productCode, {List filters}) async {
-    String rawResponse =
-        await _channel.invokeMethod(Constants.M_RECOMMENDATIONS, {'zoneId': zoneId, 'productCode': productCode, 'filters': filters ?? []});
+    String rawResponse = await _channel.invokeMethod(
+        Constants.M_RECOMMENDATIONS, {'zoneId': zoneId, 'productCode': productCode, 'filters': filters ?? []});
 
     if (rawResponse != null && rawResponse.isNotEmpty) {
       List result = json.decode(rawResponse);
@@ -219,14 +220,28 @@ class RelateddigitalFlutter {
   }
 
   Future<void> sendTheListOfAppsInstalled() async {
-    if(Platform.isIOS) {
-      if(this._logEnabled) {
+    if (Platform.isIOS) {
+      if (this._logEnabled) {
         print('Related Digital - Method not supported on iOS');
       }
-      
       return;
     }
-
     await _channel.invokeMethod(Constants.M_APP_TRACKER);
+  }
+
+  Future<PayloadListResponse> getPushMessages() async {
+    try {
+      String rawResponse = await _channel.invokeMethod(Constants.M_GET_PUSH_MESSAGES);
+      if (rawResponse != null && rawResponse.isNotEmpty) {
+        Map result = json.decode(rawResponse);
+        return PayloadListResponse.fromJson(result);
+      }
+    } on PlatformException catch(e) {
+      return PayloadListResponse([], e.code ?? "" + " : " + e.message ?? "" + " : " + e.stacktrace ?? "");
+    }
+    on Exception catch (ex) {
+      print(ex);
+      return PayloadListResponse([], ex.toString());
+    }
   }
 }
