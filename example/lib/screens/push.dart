@@ -107,6 +107,18 @@ class _PushState extends State<Push> {
                     ],
                   ),
                 ),
+                ListTile(
+                  subtitle: Column(
+                    children: <Widget>[
+                      TextButton(
+                          child: Text('Show Notification Center'),
+                          style: Styles.pushButtonStyle,
+                          onPressed: () {
+                            showNotificationCenter();
+                          })
+                    ],
+                  ),
+                ),
               ]).toList(),
             )));
   }
@@ -117,7 +129,10 @@ class _PushState extends State<Push> {
     } else if(submitType == SubmitType.registerEmail) {
       this.widget.relatedDigitalPlugin.registerEmail(emailController.text, permission: emailPermission, isCommercial: isCommercial);
     }
+  }
 
+  showNotificationCenter() {
+    Navigator.pushNamed(context, '/notificationCenter');
   }
 
   updateState() {

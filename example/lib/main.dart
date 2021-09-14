@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
-import 'package:relateddigital_flutter/response_models.dart';
-import 'package:relateddigital_flutter_example/screens/event.dart';
-import 'package:relateddigital_flutter_example/screens/inapp.dart';
-import 'package:relateddigital_flutter_example/screens/push.dart';
-import 'package:relateddigital_flutter_example/screens/story.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
+import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/screens/home.dart';
-import 'constants.dart';
+import 'package:relateddigital_flutter_example/screens/event.dart';
+import 'package:relateddigital_flutter_example/screens/push.dart';
+import 'package:relateddigital_flutter_example/screens/inapp.dart';
+import 'package:relateddigital_flutter_example/screens/story.dart';
+import 'package:relateddigital_flutter_example/screens/notification_center.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +51,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
       routes: {
         '/home': (context) => homeView(),
         '/tabBarView': (context) => tabBarView(),
+        '/notificationCenter': (context) => notificationCenterView(),
       },
     );
   }
@@ -76,6 +77,10 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
 
   Widget storyView() {
     return Story(relatedDigitalPlugin: relatedDigitalPlugin);
+  }
+
+  Widget notificationCenterView() {
+    return NotificationCenter(relatedDigitalPlugin: relatedDigitalPlugin);
   }
 
   Widget tabBarView() {

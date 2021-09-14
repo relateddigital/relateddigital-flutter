@@ -35,4 +35,5 @@ class Constants {
   static const String Push = "Push";
   static const String InApp = "InApp";
   static const String Story = "Story";
+  static const String NotificationCenter = "NotificationCenter";
 }
