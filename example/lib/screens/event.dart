@@ -176,7 +176,9 @@ class _EventState extends State<Event> {
 
   void setExVisitorID() async {
     exVisitorId = await widget.relatedDigitalPlugin.getExVisitorID();
-    tController.text = exVisitorId;
+    setState(() {
+      tController.text = exVisitorId;
+    });
   }
 
   void getExVisitorID() async {

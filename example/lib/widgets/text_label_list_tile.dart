@@ -14,7 +14,7 @@ class TextLabelListTile extends StatelessWidget {
       leading: Container(
           padding: EdgeInsets.only(top: 5, bottom: 5.0),
           child: Text(
-            payload.formattedDate,
+            payload.formattedDate + '\n\n' + payload.pushId,
             style: Styles.payloadDateText,
           )),
       title: Container(
@@ -29,6 +29,7 @@ class TextLabelListTile extends StatelessWidget {
             payload.message,
             style: Styles.settingsSecondaryText,
           )),
+
       onTap: onTap,
     );
   }

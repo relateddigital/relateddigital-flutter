@@ -15,8 +15,24 @@ T enumFromString<T>(Iterable<T> values, String value) {
 enum PayloadType { text, image, carousel, video }
 
 class Payload {
-  Payload(this.type, this.formattedDate, this.title, this.message, this.mediaUrl, this.altUrl, this.pushId,
-      this.campaignId, this.url, this.from, this.sound, this.emPushSp, this.collapseKey, this.params, this.elements);
+  Payload(
+      this.type,
+      this.formattedDate,
+      this.title,
+      this.message,
+      this.mediaUrl,
+      this.altUrl,
+      this.pushId,
+      this.campaignId,
+      this.url,
+      this.from,
+      this.sound,
+      this.emPushSp,
+      this.collapseKey,
+      this.params,
+      this.elements,
+      this.category,
+      this.contentAvailable);
   PayloadType type;
   String formattedDate;
   String title;
@@ -33,23 +49,71 @@ class Payload {
   Map params;
   List elements;
 
+  //IOS only
+  String category;
+  int contentAvailable;
+
   static Payload fromJson(dynamic json) {
-    return Payload(
-        enumFromString<PayloadType>(PayloadType.values, json['pushType']),
-        json['date'] ?? '',
-        json['title'] ?? '',
-        json['message'] ?? '',
-        json['mediaUrl'] ?? '',
-        json['altUrl'] ?? '',
-        json['pushId'] ?? '',
-        json['campaignId'] ?? '',
-        json['url'] ?? '',
-        json['from'] ?? '',
-        json['sound'] ?? '',
-        json['emPushSp'] ?? '',
-        json['collapseKey'] ?? '',
-        json['params'] ?? Map(),
-        json['elements'] ?? []);
+    if (Platform.isIOS) {
+      String title = '';
+      String message = '';
+      String category = '';
+      String url = json['url'] ?? '';
+      if (url.isEmpty) {
+        url = json['deeplink'] ?? '';
+      }
+      String sound = '';
+      int contentAvailable = 0;
+      dynamic aps = json['aps'];
+      if (aps != null) {
+        category = aps['category'] ?? '';
+        sound = aps['sound'] ?? '';
+        contentAvailable = aps['contentAvailable'] ?? 0;
+        dynamic alert = aps['alert'];
+        if (alert != null) {
+          title = alert['title'] ?? '';
+          message = alert['body'] ?? '';
+        }
+      }
+
+      return Payload(
+          enumFromString<PayloadType>(PayloadType.values, json['pushType']),
+          json['formattedDateString'] ?? '',
+          title,
+          message,
+          json['mediaUrl'] ?? '',
+          json['altUrl'] ?? '',
+          json['pushId'] ?? '',
+          json['cid'] ?? '',
+          url,
+          json['from'] ?? '',
+          sound,
+          json['emPushSp'] ?? '',
+          json['collapseKey'] ?? '',
+          json['params'] ?? Map(),
+          json['elements'] ?? [],
+          category,
+          contentAvailable);
+    } else {
+      return Payload(
+          enumFromString<PayloadType>(PayloadType.values, json['pushType']),
+          json['date'] ?? '',
+          json['title'] ?? '',
+          json['message'] ?? '',
+          json['mediaUrl'] ?? '',
+          json['altUrl'] ?? '',
+          json['pushId'] ?? '',
+          json['campaignId'] ?? '',
+          json['url'] ?? '',
+          json['from'] ?? '',
+          json['sound'] ?? '',
+          json['emPushSp'] ?? '',
+          json['collapseKey'] ?? '',
+          json['params'] ?? Map(),
+          json['elements'] ?? [],
+          '',
+          0);
+    }
   }
 }
 
