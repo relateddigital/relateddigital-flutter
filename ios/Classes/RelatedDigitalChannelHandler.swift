@@ -169,6 +169,9 @@ class RelatedDigitalChannelHandler: NSObject {
         else if(call.method == Constants.M_GET_EXVISITORID) {
             result(self.functionHandler.getExVisitorID())
         }
+        else if(call.method == Constants.M_GET_PUSH_MESSAGES) {
+            self.functionHandler.getPushMessages(result: result)
+        }
 		else {
 			result(FlutterMethodNotImplemented)
 		}

@@ -202,6 +202,22 @@ class RelatedDigitalFunctionHandler {
         return Visilabs.callAPI().getExVisitorId() ?? ""
     }
     
+    public func getPushMessages(result: @escaping FlutterResult) {
+        Euromsg.getPushMessages(completion: { messages in
+            var resultObj = [String: [EMMessage]]()
+            resultObj["pushMessages"] = messages
+            do {
+                let jsonEncoder = JSONEncoder()
+                let jsonData = try jsonEncoder.encode(resultObj)
+                let json = String(data: jsonData, encoding: String.Encoding.utf8)
+                result(json)
+            }
+            catch {
+                result(nil)
+            }
+            
+        })
+    }
     
 }
 
