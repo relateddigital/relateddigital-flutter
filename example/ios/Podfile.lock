@@ -1,0 +1,40 @@
+PODS:
+  - Euromsg (2.4.0)
+  - Flutter (1.0.0)
+  - relateddigital_flutter (0.3.0):
+    - Euromsg (= 2.4.0)
+    - Flutter
+    - VisilabsIOS (= 3.0.9)
+  - shared_preferences (0.0.1):
+    - Flutter
+  - VisilabsIOS (3.0.9)
+
+DEPENDENCIES:
+  - Euromsg
+  - Flutter (from `Flutter`)
+  - relateddigital_flutter (from `.symlinks/plugins/relateddigital_flutter/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Euromsg
+    - VisilabsIOS
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  relateddigital_flutter:
+    :path: ".symlinks/plugins/relateddigital_flutter/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+
+SPEC CHECKSUMS:
+  Euromsg: 2e422b7512fe2fb0ff8d46957733b5004dc34d6e
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  relateddigital_flutter: 201bebaf742ec995fb4473f691e7f4e5596e8b7d
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  VisilabsIOS: 398757f71a08448e8c4b103dd3e2da828d2123dc
+
+PODFILE CHECKSUM: f3a8e12350cc24beb967d7e734d864fc73f44958
+
+COCOAPODS: 1.11.0
