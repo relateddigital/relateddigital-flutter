@@ -74,7 +74,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
             payload: payload,
             onTap: () {
               String content = 'title: ${payload.title}\nmessage: ${payload.message}\nformattedDate: ${payload.formattedDate}'
-              + '\ntype: ${payload.type}';
+              + '\ntype: ${payload.type}\nurl: ${payload.url}\nmediaUrl: ${payload.mediaUrl}';
               showAlertDialog(title: payload.title ?? '', content: content);
             },
           ),

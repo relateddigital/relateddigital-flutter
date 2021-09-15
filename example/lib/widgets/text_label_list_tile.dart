@@ -12,19 +12,19 @@ class TextLabelListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Container(
-          padding: EdgeInsets.only(top: 10, bottom: 10.0),
+          padding: EdgeInsets.only(top: 5, bottom: 5.0),
           child: Text(
             payload.formattedDate,
-            style: Styles.settingsPrimaryText,
+            style: Styles.payloadDateText,
           )),
       title: Container(
-          padding: EdgeInsets.only(top: 10, bottom: 10.0),
+          padding: EdgeInsets.only(top: 5, bottom: 5.0),
           child: Text(
             payload.title,
             style: Styles.settingsPrimaryText,
           )),
       subtitle: Container(
-          padding: EdgeInsets.only(top: 10, bottom: 10.0),
+          padding: EdgeInsets.only(top: 5, bottom: 5.0),
           child: Text(
             payload.message,
             style: Styles.settingsSecondaryText,

@@ -39,6 +39,13 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
   );
 
+  static const payloadDateText = TextStyle(
+    color: relatedRed,
+    fontSize: 12,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
   static ButtonStyle eventButtonStyle = ButtonStyle (
     backgroundColor: MaterialStateProperty.all<Color>(relatedOrange),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
