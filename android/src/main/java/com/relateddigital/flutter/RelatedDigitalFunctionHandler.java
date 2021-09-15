@@ -1,11 +1,8 @@
 package com.relateddigital.flutter;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -298,8 +295,10 @@ public class RelatedDigitalFunctionHandler {
                     if(pushMessages == null) {
                         result.error("ERROR", "pushMessages list is null", null);
                     } else {
+                        Map<String, List<Message>> map = new HashMap<>();
+                        map.put("pushMessages", pushMessages);
                         Gson gson = new Gson();
-                        result.success(gson.toJson(pushMessages));
+                        result.success(gson.toJson(map));
                     }
                 }
                 @Override
