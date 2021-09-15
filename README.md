@@ -16,7 +16,6 @@
     - [Initializing](#Initializing)
     - [Push Notifications](#Push-Notifications)
         - [Requesting Permission & Retrieving Token](#Requesting-Permission-&-Retrieving-Token])
-        - [Rich Push Notifications](#Rich-Push-Notifications)
         - [Carousel Push Notifications](#Carousel-Push-Notifications)
         - [Set Push Permit](#Set-Push-Permit)
     - [Data Collection](#Data-Collection)
@@ -160,6 +159,81 @@ platform :ios, '11.0'
 
 ![Xcode Push Capability](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/xcode-push-capability.png)
 
+- In Xcode, add a new **Notification Service Extension** target and name it **NotificationService**. NotificationServiceExtension allows your iOS application to receive rich notifications with images, videos, and badges. It's also required for Related Digital's analytics features and to store and access notification payloads of the last 30 days.
+
+- In your podfile, add below section and then run `pod install`.
+```ruby
+target 'NotificationService' do
+	use_frameworks!
+	pod 'Euromsg'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+		config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+	end
+  end
+end
+```
+- Set **NotificationService** target's deployment target to iOS 11.
+  
+- Replace **NotificationService.swift** file content with the code below.
+
+```swift
+import UserNotifications
+import Euromsg
+
+class NotificationService: UNNotificationServiceExtension {
+
+    var contentHandler: ((UNNotificationContent) -> Void)?
+    var bestAttemptContent: UNMutableNotificationContent?
+
+    override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        self.contentHandler = contentHandler
+        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+        Euromsg.configure(appAlias: "ios-app-alias", enableLog: true)
+        Euromsg.didReceive(bestAttemptContent, withContentHandler: contentHandler)
+    }
+
+    override func serviceExtensionTimeWillExpire() {
+        guard let contentHandler = self.contentHandler else {
+            return;
+        }
+        guard let bestAttemptContent = self.bestAttemptContent else {
+            return;
+        }
+        contentHandler(bestAttemptContent)
+    }
+}
+```
+
+- Enable `App Groups` Capability for your targets. App Groups allow your app to execute code when a notification is recieved, even if your app is not active. This is required for Related Digital's analytics features and to store and access notification payloads of the last 30 days.
+
+    - In your Main App Target go to `Signing & Capabilities > All`. 
+    - Click `+ Capability` if you do not have App Groups in your app yet.
+    - Select App Groups.
+    - Under App Groups click the `+` button.
+    - Set the `App Groups` container to be `group.BUNDLE_ID.relateddigital` where `BUNDLE_ID` is the same as set in `Bundle Identifier`.
+    - Press OK.
+    - In the NotificationServiceExtension Target
+    - Go to `Signing & Capabilities > All`
+    - Click `+ Capability` if you do not have App Groups in your app yet.
+    - Select App Groups
+    - In the NotificationContentExtension Target go to `Signing & Capabilities` > All`.
+    - Click `+ Capability`.
+    - Select App Groups
+    - Under App Groups click the `+` button.
+    - Set the `App Groups` container to be `group.BUNDLE_ID.relateddigital` where `BUNDLE_ID` is the same as your Main App Target `Bundle Identifier`. Do Not Include `NotificationServiceExtension` and `NotificationContentExtension`.
+    - Press OK
+
+![App Groups](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/appgroups.png)
+
+![App Groups Name](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/appgroups-name.png)
+
+
+
 - If you want to use **AdvertisingTrackingID** with **isIDFAEnabled** parameter (see [Usage](#Usage) below), you need to add this key to your **Info.plist** file for iOS 14 and above. 
 ```xml
 <key>NSUserTrackingUsageDescription</key>
@@ -196,8 +270,8 @@ void initState() {
 
 Future<void> initLib() async {
   var initRequest = RDInitRequestModel(
-    appAlias: Platform.isIOS ? 'ios-alias' : 'android-alias',
-    huaweiAppAlias: 'huawei-alias', // pass empty String if your app does not support HMS
+    appAlias: Platform.isIOS ? 'ios-app-alias' : 'android-app-alias',
+    huaweiAppAlias: 'huawei-app-alias', // pass empty String if your app does not support HMS
     androidPushIntent: 'com.test.MainActivity', // Android only
     organizationId: 'ORG_ID',
     siteId: 'SITE_ID',
@@ -253,54 +327,6 @@ Future<void> requestPermission() async {
 ```
 
 
-### Rich Push Notifications
-To be able to receive rich notifications with images, buttons and badges, follow the steps below.
-
-#### IOS
-- In Xcode, add a new **Notification Service Extension** target and name it **NotificationService**.
-- In your podfile, add below section and then run `pod install`.
-```ruby
-target 'NotificationService' do
-	use_frameworks!
-	pod 'Euromsg'
-end
-
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    flutter_additional_ios_build_settings(target)
-    target.build_configurations.each do |config|
-		config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
-	end
-  end
-end
-```
-- Set **NotificationService** target's deployment target to iOS 11.
-- Replace **NotificationService.swift** file content with the code below.
-```swift
-import UserNotifications
-import Euromsg
-
-class NotificationService: UNNotificationServiceExtension {
-
-		var contentHandler: ((UNNotificationContent) -> Void)?
-		var bestAttemptContent: UNMutableNotificationContent?
-
-		override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
-				self.contentHandler = contentHandler
-				bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-				Euromsg.didReceive(bestAttemptContent, withContentHandler: contentHandler)
-		}
-		
-		override func serviceExtensionTimeWillExpire() {
-				// Called just before the extension will be terminated by the system.
-				// Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
-				if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
-						Euromsg.didReceive(bestAttemptContent, withContentHandler: contentHandler)
-				}
-		}
-
-}
-```
 
 ### Carousel Push Notifications
 To be able to receive push notifications with carousel, follow the steps below.
@@ -330,6 +356,7 @@ class EMNotificationViewController: UIViewController, UNNotificationContentExten
 		let carouselView = EMNotificationCarousel.initView()
 		var completion: ((_ url: URL?, _ userInfo: [AnyHashable: Any]?) -> Void)?
 		func didReceive(_ notification: UNNotification) {
+		        Euromsg.configure(appAlias: "ios-app-alias", enableLog: true)
 				carouselView.didReceive(notification)
 		}
 		func didReceive(_ response: UNNotificationResponse,
