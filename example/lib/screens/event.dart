@@ -162,9 +162,7 @@ class _EventState extends State<Event> {
       RDRecommendationFilter.value: 'Honey'
     };
 
-    List filters = [
-      filter
-    ];
+    List filters = [filter];
 
     List result = await widget.relatedDigitalPlugin.getRecommendations(zoneId, productCode, filters: filters);
     print(result.toString());

@@ -236,10 +236,9 @@ class RelateddigitalFlutter {
         Map result = json.decode(rawResponse);
         return PayloadListResponse.fromJson(result);
       }
-    } on PlatformException catch(e) {
+    } on PlatformException catch (e) {
       return PayloadListResponse([], e.code ?? "" + " : " + e.message ?? "" + " : " + e.stacktrace ?? "");
-    }
-    on Exception catch (ex) {
+    } on Exception catch (ex) {
       print(ex);
       return PayloadListResponse([], ex.toString());
     }

@@ -29,7 +29,6 @@ class TextLabelListTile extends StatelessWidget {
             payload.message,
             style: Styles.settingsSecondaryText,
           )),
-
       onTap: onTap,
     );
   }
