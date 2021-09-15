@@ -140,10 +140,11 @@ class _PushState extends State<Push> {
   }
 
   void _getTokenCallback(RDTokenResponseModel result) {
-    print('RDTokenResponseModel ' + result.toString());
+    print('RDTokenResponseModel :');
     if (result != null &&
         result.deviceToken != null &&
         result.deviceToken.isNotEmpty) {
+      print(result.deviceToken);
       setState(() {
         tokenController.text = result.deviceToken;
       });
