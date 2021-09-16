@@ -18,6 +18,7 @@
         - [Requesting Permission & Retrieving Token](#Requesting-Permission-&-Retrieving-Token])
         - [Carousel Push Notifications](#Carousel-Push-Notifications)
         - [Set Push Permit](#Set-Push-Permit)
+        - [Get Payload List](#Get-Payload-List)
     - [Data Collection](#Data-Collection)
     - [Targeting Actions](#Targeting-Actions)
         - [In-App Messaging](#In-App-Messaging)
@@ -425,6 +426,14 @@ You can only call `setNotificationPermission` method to enable or disable push n
 ```dart
 relatedDigitalPlugin.setNotificationPermission(true);
 ```
+
+### Get-Payload-List
+You can access payload list of last 30 days if you have completed iOS `NotificationServiceExtension` and `App Groups` setup. Using `getPushMessages` method you can access these payloads
+
+```dart
+PayloadListResponse payloadListResponse = await relatedDigitalPlugin.getPushMessages();
+```
+
 
 ## Data Collection
 
