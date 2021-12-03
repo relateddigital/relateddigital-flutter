@@ -15,7 +15,7 @@
 		86A9EA0DC54D87BD0CC9331F /* Pods_NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AF0FBD154AF86EB5699BB6 /* Pods_NotificationService.framework */; };
 		884E2FDD26F2739A00110EAC /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 884E2FD626F2739A00110EAC /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		884E2FE626F273DE00110EAC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E2FE426F273DE00110EAC /* NotificationService.swift */; };
-		884E2FE826F2782200110EAC /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		884E2FE826F2782200110EAC /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88AE3D3527598F6A00F6BEBF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB64A59265E783A0075805C /* UserNotifications.framework */; };
 		88AE3D3727598F6A00F6BEBF /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88AE3D3627598F6A00F6BEBF /* UserNotificationsUI.framework */; };
 		88AE3D3A27598F6A00F6BEBF /* EMNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AE3D3927598F6A00F6BEBF /* EMNotificationViewController.swift */; };
@@ -61,7 +61,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				884E2FE826F2782200110EAC /* BuildFile in Embed Frameworks */,
+				884E2FE826F2782200110EAC /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -757,7 +757,7 @@
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationContent;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -796,7 +796,7 @@
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationContent;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -832,7 +832,7 @@
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationContent;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

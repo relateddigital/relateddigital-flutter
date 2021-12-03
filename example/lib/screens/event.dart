@@ -176,7 +176,7 @@ class _EventState extends State<Event> {
                 onPressed: () {
                   Map<String, String> parameters = {'OM.inapptype': inAppType};
                   if (inAppType == 'product_stat_notifier') {
-                    parameters['OM.pv'] = 'CV7933-837-837';
+                    parameters['OM.pv'] = '1147254';
                   }
                   widget.relatedDigitalPlugin
                       .customEvent("InAppTest", parameters);
