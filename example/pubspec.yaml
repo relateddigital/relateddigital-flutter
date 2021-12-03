@@ -13,8 +13,8 @@ dependencies:
     sdk: flutter
 
 
-  shared_preferences: ^2.0.6
-  cupertino_icons: ^1.0.0
+  shared_preferences: ^2.0.9
+  cupertino_icons: ^1.0.4
 
 
   relateddigital_flutter:

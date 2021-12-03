@@ -12,7 +12,7 @@ class RDStoryView extends StatefulWidget {
   final Function(Map<String, String> result) onItemClick;
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  RDStoryView({ this.actionId, this.onItemClick, this.relatedDigitalPlugin });
+  RDStoryView({this.actionId, this.onItemClick, this.relatedDigitalPlugin});
 
   @override
   _RDStoryViewState createState() => _RDStoryViewState();
@@ -36,15 +36,16 @@ class _RDStoryViewState extends State<RDStoryView> {
       'actionId': widget.actionId
     };
 
-    if(Platform.isIOS) {
+    if (Platform.isIOS) {
       return UiKitView(
         viewType: viewType,
         layoutDirection: TextDirection.ltr,
         creationParams: creationParams,
         creationParamsCodec: const StandardMessageCodec(),
         onPlatformViewCreated: (int id) {
-          if(widget.relatedDigitalPlugin != null) {
-            widget.relatedDigitalPlugin.setStoryPlatformHandler(_platformCallbackHandler);
+          if (widget.relatedDigitalPlugin != null) {
+            widget.relatedDigitalPlugin
+                .setStoryPlatformHandler(_platformCallbackHandler);
           }
         },
       );
@@ -56,8 +57,9 @@ class _RDStoryViewState extends State<RDStoryView> {
       creationParams: creationParams,
       creationParamsCodec: const StandardMessageCodec(),
       onPlatformViewCreated: (int id) {
-        if(widget.relatedDigitalPlugin != null) {
-          widget.relatedDigitalPlugin.setStoryPlatformHandler(_platformCallbackHandler);
+        if (widget.relatedDigitalPlugin != null) {
+          widget.relatedDigitalPlugin
+              .setStoryPlatformHandler(_platformCallbackHandler);
         }
       },
     );
@@ -103,7 +105,7 @@ class StoryPlatformCallbackHandler implements StoryCallbackHandler {
 
   @override
   void onItemClick(Map<String, String> result) {
-    if(storyView.onItemClick != null) {
+    if (storyView.onItemClick != null) {
       storyView.onItemClick(result);
     }
   }

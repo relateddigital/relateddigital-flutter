@@ -126,13 +126,6 @@ public class RelatedDigitalFunctionHandler {
         }
 
         if (intent.getExtras() != null && intent.getExtras().getSerializable("message") != null) {
-            try {
-                EuroMobileManager.getInstance().reportRead(intent.getExtras());
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
-
             Map<String, Object> readResult = Utilities.convertBundleToMap(intent);
             mChannel.invokeMethod(Constants.M_NOTIFICATION_OPENED, readResult);
         }
@@ -281,6 +274,15 @@ public class RelatedDigitalFunctionHandler {
     public void sendTheListOfAppsInstalled() {
         try {
             Visilabs.CallAPI().sendTheListOfAppsInstalled();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void sendLocationPermission() {
+        try {
+            Visilabs.CallAPI().sendLocationPermission();
         }
         catch (Exception ex) {
             ex.printStackTrace();

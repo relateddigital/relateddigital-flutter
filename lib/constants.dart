@@ -9,7 +9,8 @@ class Constants {
   static const String M_EMAIL_WITH_PERMISSION = 'RD/setEmail';
   static const String M_USER_PROPERTY = 'RD/setUserProperty';
   static const String M_APP_VERSION = 'RD/setAppVersion';
-  static const String M_NOTIFICATION_PERMISSION = 'RD/setPushNotificationPermission';
+  static const String M_NOTIFICATION_PERMISSION =
+      'RD/setPushNotificationPermission';
   static const String M_EMAIL_PERMISSION = 'RD/setEmailPermission';
   static const String M_PHONE_PERMISSION = 'RD/setPhoneNumberPermission';
   static const String M_BADGE = 'RD/setBadgeCount';
@@ -28,6 +29,8 @@ class Constants {
   static const String M_GET_EXVISITORID = 'VL/getExVisitorID';
   static const String M_APP_TRACKER = 'VL/appTracker';
   static const String M_GET_PUSH_MESSAGES = 'RD/getPushMessages';
+  static const String M_REQUEST_IDFA = 'VL/requestIDFA';
+  static const String M_SEND_LOCATION_PERMISSION = 'VL/sendLocationPermission';
 
   static const String VL_TOKEN_KEY = 'RegisterToken';
   static const String VL_TOKEN_PARAM = 'OM.sys.TokenID';

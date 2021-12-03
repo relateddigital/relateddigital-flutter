@@ -22,7 +22,7 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 21
@@ -30,6 +30,6 @@ android {
 }
 
 dependencies {
-    api 'com.github.relateddigital:euromessage-android:4.6.1'
-    api 'com.github.relateddigital:visilabs-android:5.7.2'
+    api 'com.github.relateddigital:euromessage-android:5.0.8'
+    api 'com.github.relateddigital:visilabs-android:5.8.6'
 }

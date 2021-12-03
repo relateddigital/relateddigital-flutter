@@ -22,3 +22,22 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - SpinToWin result requests add.
 - SpinToWin swipe feature add.
 - OM.appVersion value add to Visilabs requests.
+
+
+## 0.4.0
+
+- Push notification deliver requests convert to optional
+- requestIDFA method add
+- sendLocationPermission method add
+- Custom font for In-app messages add
+- Custom close button action for In-app messages add
+- Push permission parameter add
+- Product Stat Notifier Targeting Action add
+- Half-Screen In-app message type add
+- getStoryViewAsync method add
+- Add static codes to SpinToWin report request
+- Add remote config feature
+- Add trackRecommendationClick method 
+- Add widgetTitle property to VisilabsRecommendationResponse class
+- Improvements for Android 12 compatibility
+- Huawei push notification suport add

@@ -187,6 +187,10 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
        else if (call.method.equals(Constants.M_GET_PUSH_MESSAGES)) {
          functionHandler.getPushMessages(result);
        }
+       else if (call.method.equals(Constants.M_SEND_LOCATION_PERMISSION)) {
+         functionHandler.sendLocationPermission();
+         result.success(null);
+       }
        else {
          result.notImplemented();
        }

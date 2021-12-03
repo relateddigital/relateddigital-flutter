@@ -53,7 +53,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.3.0
+    relateddigital_flutter: ^0.4.0
 ```
 - Run `flutter pub get`
 
@@ -75,13 +75,17 @@ import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 - Add the following lines to the `repositories` section in `project/build.gradle`
 
 ```gradle
-maven {url 'http://developer.huawei.com/repo/'} // skip if your app does not support HMS
+maven {url 'https://jitpack.io'}
+maven {
+    url 'http://developer.huawei.com/repo/'
+    allowInsecureProtocol(true)
+}// skip if your app does not support HMS
 ```
 
 - Add the following lines to the `dependencies` section in `project/build.gradle`
 
 ```gradle
-classpath 'com.google.gms:google-services:4.3.5'
+classpath 'com.google.gms:google-services:4.3.10'
 classpath 'com.huawei.agconnect:agcp:1.4.1.300' // skip if your app does not support HMS
 ```
 
@@ -352,49 +356,57 @@ import Euromsg
 
 @objc(EMNotificationViewController)
 class EMNotificationViewController: UIViewController, UNNotificationContentExtension {
+    
+    let carouselView = EMNotificationCarousel.initView()
+    var completion: ((_ url: URL?, _ bestAttemptContent: UNMutableNotificationContent?) -> Void)?
+    
+    var notificationRequestIdentifier = ""
+    
+    func didReceive(_ notification: UNNotification) {
+        notificationRequestIdentifier = notification.request.identifier
+        Euromsg.configure(appAlias: "relateddigital-flutter-example-ios", launchOptions: nil, enableLog: true)
+        carouselView.didReceive(notification)
+    }
+    func didReceive(_ response: UNNotificationResponse, completionHandler completion: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
+        carouselView.didReceive(response, completionHandler: completion)
 
-		let appUrl = URL(string: "euromsgExample://")
-		let carouselView = EMNotificationCarousel.initView()
-		var completion: ((_ url: URL?, _ userInfo: [AnyHashable: Any]?) -> Void)?
-		func didReceive(_ notification: UNNotification) {
-		        Euromsg.configure(appAlias: "ios-app-alias", enableLog: true)
-				carouselView.didReceive(notification)
-		}
-		func didReceive(_ response: UNNotificationResponse,
-										completionHandler completion: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
-				carouselView.didReceive(response, completionHandler: completion)
-		}
-		override func loadView() {
-				completion = { [weak self] url, userInfo in
-						if let url = url {
-								self?.extensionContext?.open(url)
-								if url.scheme != self?.appUrl?.scheme, let userInfo = userInfo {
-										Euromsg.handlePush(pushDictionary: userInfo)
-								}
-						}
-						else if let url = self?.appUrl {
-								self?.extensionContext?.open(url)
-						}
-				}
-				carouselView.completion = completion
-				//Add if you want to track which element has been selected
-				carouselView.delegate = self
-				self.view = carouselView
-		}
+    }
+    override func loadView() {
+        completion = { [weak self] url, bestAttemptContent in
+            if let identifier = self?.notificationRequestIdentifier {
+                UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
+                UNUserNotificationCenter.current().getDeliveredNotifications(completionHandler: { notifications in
+                    bestAttemptContent?.badge =  NSNumber(value: notifications.count)
+                })
+            }
+            if let url = url {
+                if #available(iOSApplicationExtension 12.0, *) {
+                    self?.extensionContext?.dismissNotificationContentExtension()
+                }
+                self?.extensionContext?.open(url)
+            } else {
+                if #available(iOSApplicationExtension 12.0, *) {
+                    self?.extensionContext?.performNotificationDefaultAction()
+                }
+            }
+        }
+        carouselView.completion = completion
+        carouselView.delegate = self
+        self.view = carouselView
+    }
 }
 
 /**
  Add if you want to track which carousel element has been selected
  */
 extension EMNotificationViewController: CarouselDelegate {
-		
-		func selectedItem(_ element: EMMessage.Element) {
-				//Add your work...
-				print("Selected element is => \(element)")
-		}
-		
+    
+    func selectedItem(_ element: EMMessage.Element) {
+        // Add your work...
+        print("Selected element is => \(element)")
+    }
+    
 }
-
 ```
 
 - In your **NotificationContent/Info.plist** add below section
@@ -653,7 +665,7 @@ There are 9 types of **in-app messages**:
 <receiver
     android:name="com.visilabs.android.gps.geofence.GeofenceBroadcastReceiver"
     android:enabled="true"
-    android:exported="true"/>
+    android:exported="false"/>
 ```
 
 ### Recommendation

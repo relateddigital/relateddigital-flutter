@@ -219,6 +219,14 @@ class RelatedDigitalFunctionHandler {
         })
     }
     
+    public func requestIDFA() {
+        Visilabs.callAPI().requestIDFA()
+    }
+    
+    public func sendLocationPermission() {
+        Visilabs.callAPI().sendLocationPermission()
+    }
+    
 }
 
 public enum RelatedDigitalFavoriteAttribute: String, Encodable {

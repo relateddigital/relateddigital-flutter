@@ -30,9 +30,14 @@ class _EventState extends State<Event> {
     'nps',
     'alert_native',
     'alert_actionsheet',
-    'mailsubsform',
-    'scratch-to-win',
+    'subscription_email',
+    'scratch_to_win',
+    'nps-image-text-button',
+    'nps-image-text-button-image',
+    'nps-feedback',
     'spintowin',
+    'half_screen_image',
+    'product_stat_notifier'
   ];
   String exVisitorId = '';
 
@@ -126,6 +131,33 @@ class _EventState extends State<Event> {
                                 ),
                               ),
                             ),
+                            Visibility(
+                              visible: Platform.isIOS,
+                              child: ListTile(
+                                subtitle: Column(
+                                  children: <Widget>[
+                                    TextButton(
+                                        child: Text('Request IDFA'),
+                                        style: Styles.eventButtonStyle,
+                                        onPressed: () {
+                                          requestIDFA();
+                                        })
+                                  ],
+                                ),
+                              ),
+                            ),
+                            ListTile(
+                              subtitle: Column(
+                                children: <Widget>[
+                                  TextButton(
+                                      child: Text('Send Location Permission'),
+                                      style: Styles.eventButtonStyle,
+                                      onPressed: () {
+                                        sendLocationPermission();
+                                      })
+                                ],
+                              ),
+                            ),
                           ] +
                           getInAppListTiles())
                   .toList(),
@@ -140,9 +172,14 @@ class _EventState extends State<Event> {
           children: <Widget>[
             TextButton(
                 child: Text(inAppType),
-                style: Styles.eventButtonStyle,
+                style: Styles.inAppButtonStyle,
                 onPressed: () {
-                  widget.relatedDigitalPlugin.customEvent("InAppTest", {'OM.inapptype': inAppType});
+                  Map<String, String> parameters = {'OM.inapptype': inAppType};
+                  if (inAppType == 'product_stat_notifier') {
+                    parameters['OM.pv'] = 'CV7933-837-837';
+                  }
+                  widget.relatedDigitalPlugin
+                      .customEvent("InAppTest", parameters);
                 })
           ],
         ),
@@ -157,14 +194,16 @@ class _EventState extends State<Event> {
 
     // optional
     Map<String, Object> filter = {
-      RDRecommendationFilter.attribute: RDRecommendationFilterAttribute.PRODUCTNAME,
+      RDRecommendationFilter.attribute:
+          RDRecommendationFilterAttribute.PRODUCTNAME,
       RDRecommendationFilter.filterType: RDRecommendationFilterType.like,
       RDRecommendationFilter.value: 'Honey'
     };
 
     List filters = [filter];
 
-    List result = await widget.relatedDigitalPlugin.getRecommendations(zoneId, productCode, filters: filters);
+    List result = await widget.relatedDigitalPlugin
+        .getRecommendations(zoneId, productCode, filters: filters);
     print(result.toString());
   }
 
@@ -190,6 +229,14 @@ class _EventState extends State<Event> {
 
   void sendTheListOfAppsInstalled() async {
     await widget.relatedDigitalPlugin.sendTheListOfAppsInstalled();
+  }
+
+  void requestIDFA() async {
+    await widget.relatedDigitalPlugin.requestIDFA();
+  }
+
+  void sendLocationPermission() async {
+    await widget.relatedDigitalPlugin.sendLocationPermission();
   }
 
   Future<bool> showAlertDialog({
