@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter/rd_story_view.dart';
-import 'package:relateddigital_flutter_example/constants.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
-import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
 
 class InApp extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  InApp({@required this.relatedDigitalPlugin});
+  InApp({required this.relatedDigitalPlugin});
 
   @override
   _InAppState createState() => _InAppState();
@@ -40,11 +38,10 @@ class _InAppState extends State<InApp> {
                     child: RDStoryView(
                       actionId: '454',
                       relatedDigitalPlugin: widget.relatedDigitalPlugin,
-                      onItemClick: (Map<String, String> result) {
+                      onItemClick: (Map<String, String?> result) {
                         print(result);
                       },
-                    )
-                ),
+                    )),
               ]).toList(),
             )));
   }

@@ -27,7 +27,7 @@ class RDProfile {
       this.isIDFAEnabled);
 
   RDProfile.fromConstant()
-      : appAlias = Constants.APP_ALIAS,
+      : appAlias = Constants.getAppAlias(),
         huaweiAppAlias = Constants.HUAWEI_APP_ALIAS,
         androidPushIntent = Constants.ANDROID_PUSH_INTENT,
         organizationId = Constants.ORGANIZATION_ID,

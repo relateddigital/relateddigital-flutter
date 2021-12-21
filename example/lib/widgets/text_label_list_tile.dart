@@ -4,9 +4,9 @@ import 'package:relateddigital_flutter_example/styles.dart';
 
 class TextLabelListTile extends StatelessWidget {
   final Payload payload;
-  final GestureTapCallback onTap;
+  final GestureTapCallback? onTap;
 
-  TextLabelListTile({@required this.payload, @required this.onTap});
+  TextLabelListTile({required this.payload, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

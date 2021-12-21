@@ -8,7 +8,7 @@ import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart
 class Push extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  Push({@required this.relatedDigitalPlugin});
+  Push({required this.relatedDigitalPlugin});
 
   @override
   _PushState createState() => _PushState();
@@ -49,7 +49,9 @@ class _PushState extends State<Push> {
                           child: Text('Request Permission'),
                           style: Styles.pushButtonStyle,
                           onPressed: () {
-                            this.widget.relatedDigitalPlugin.requestPermission(_getTokenCallback, isProvisional: true);
+                            this.widget.relatedDigitalPlugin.requestPermission(
+                                _getTokenCallback,
+                                isProvisional: true);
                           })
                     ],
                   ),
@@ -123,12 +125,13 @@ class _PushState extends State<Push> {
 
   Future<void> submit(SubmitType submitType) async {
     if (submitType == SubmitType.setEmail) {
-      this.widget.relatedDigitalPlugin.setEmail(emailController.text, emailPermission);
-    } else if (submitType == SubmitType.registerEmail) {
       this
           .widget
           .relatedDigitalPlugin
-          .registerEmail(emailController.text, permission: emailPermission, isCommercial: isCommercial);
+          .setEmail(emailController.text, emailPermission);
+    } else if (submitType == SubmitType.registerEmail) {
+      this.widget.relatedDigitalPlugin.registerEmail(emailController.text,
+          permission: emailPermission, isCommercial: isCommercial);
     }
   }
 
@@ -142,10 +145,10 @@ class _PushState extends State<Push> {
 
   void _getTokenCallback(RDTokenResponseModel result) {
     print('RDTokenResponseModel :');
-    if (result != null && result.deviceToken != null && result.deviceToken.isNotEmpty) {
+    if (result.deviceToken != null && result.deviceToken!.isNotEmpty) {
       print(result.deviceToken);
       setState(() {
-        tokenController.text = result.deviceToken;
+        tokenController.text = result.deviceToken ?? '';
       });
     } else {
       setState(() {

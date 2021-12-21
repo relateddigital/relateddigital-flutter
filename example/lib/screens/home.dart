@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/request_models.dart';
-import 'package:relateddigital_flutter/response_models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
@@ -14,7 +13,7 @@ class Home extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
   final void Function(dynamic result) notificationHandler;
 
-  Home({@required this.relatedDigitalPlugin, @required this.notificationHandler});
+  Home({required this.relatedDigitalPlugin, required this.notificationHandler});
 
   @override
   _HomeState createState() => _HomeState();
@@ -22,7 +21,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   HashMap<String, TextEditingController> tControllers = createControllers();
-  RDProfile rdProfile;
+  late RDProfile rdProfile;
 
   @override
   void initState() {
@@ -32,24 +31,20 @@ class _HomeState extends State<Home> {
   }
   readSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String rdProfileString = prefs.getString("RDProfile");
+    String? rdProfileString = prefs.getString("RDProfile");
     if (rdProfileString == null) {
       rdProfile = RDProfile.fromConstant();
     } else {
       Map<String, dynamic> profileJson = jsonDecode(rdProfileString);
-      if (profileJson == null) {
-        rdProfile = RDProfile.fromConstant();
-      } else {
-        rdProfile = RDProfile.fromJson(profileJson);
-      }
+      rdProfile = RDProfile.fromJson(profileJson);
     }
-    tControllers[Constants.appAlias].text = rdProfile.appAlias;
-    tControllers[Constants.huaweiAppAlias].text = rdProfile.huaweiAppAlias;
-    tControllers[Constants.androidPushIntent].text = rdProfile.androidPushIntent;
-    tControllers[Constants.organizationId].text = rdProfile.organizationId;
-    tControllers[Constants.profileId].text = rdProfile.profileId;
-    tControllers[Constants.dataSource].text = rdProfile.dataSource;
-    tControllers[Constants.maxGeofenceCount].text = rdProfile.maxGeofenceCount.toString();
+    tControllers[Constants.appAlias]?.text = rdProfile.appAlias;
+    tControllers[Constants.huaweiAppAlias]?.text = rdProfile.huaweiAppAlias;
+    tControllers[Constants.androidPushIntent]?.text = rdProfile.androidPushIntent;
+    tControllers[Constants.organizationId]?.text = rdProfile.organizationId;
+    tControllers[Constants.profileId]?.text = rdProfile.profileId;
+    tControllers[Constants.dataSource]?.text = rdProfile.dataSource;
+    tControllers[Constants.maxGeofenceCount]?.text = rdProfile.maxGeofenceCount.toString();
   }
 
   static HashMap<String, TextEditingController> createControllers() {
@@ -78,37 +73,37 @@ class _HomeState extends State<Home> {
               children: ListTile.divideTiles(context: context, tiles: [
                 TextInputListTile(
                     title: Constants.appAlias,
-                    controller: tControllers[Constants.appAlias],
+                    controller: tControllers[Constants.appAlias] ?? TextEditingController(),
                     onChanged: (String aAlias) {
                       rdProfile.appAlias = aAlias;
                     }),
                 TextInputListTile(
                     title: Constants.huaweiAppAlias,
-                    controller: tControllers[Constants.huaweiAppAlias],
+                    controller: tControllers[Constants.huaweiAppAlias] ?? TextEditingController(),
                     onChanged: (String haAlias) {
                       rdProfile.huaweiAppAlias = haAlias;
                     }),
                 TextInputListTile(
                     title: Constants.androidPushIntent,
-                    controller: tControllers[Constants.androidPushIntent],
+                    controller: tControllers[Constants.androidPushIntent] ?? TextEditingController(),
                     onChanged: (String apIntent) {
                       rdProfile.androidPushIntent = apIntent;
                     }),
                 TextInputListTile(
                     title: Constants.organizationId,
-                    controller: tControllers[Constants.organizationId],
+                    controller: tControllers[Constants.organizationId] ?? TextEditingController(),
                     onChanged: (String orgId) {
                       rdProfile.organizationId = orgId;
                     }),
                 TextInputListTile(
                     title: Constants.profileId,
-                    controller: tControllers[Constants.profileId],
+                    controller: tControllers[Constants.profileId] ?? TextEditingController(),
                     onChanged: (String pId) {
                       rdProfile.profileId = pId;
                     }),
                 TextInputListTile(
                     title: Constants.dataSource,
-                    controller: tControllers[Constants.dataSource],
+                    controller: tControllers[Constants.dataSource] ?? TextEditingController(),
                     onChanged: (String dSource) {
                       rdProfile.dataSource = dSource;
                     }),
@@ -137,7 +132,7 @@ class _HomeState extends State<Home> {
                 TextInputListTile(
                     title: Constants.maxGeofenceCount,
                     type: TextInputType.numberWithOptions(signed: false, decimal: false),
-                    controller: tControllers[Constants.maxGeofenceCount],
+                    controller: tControllers[Constants.maxGeofenceCount] ?? TextEditingController(),
                     onChanged: (String mgCount) {
                       rdProfile.maxGeofenceCount = int.tryParse(mgCount) ?? 20;
                     }),

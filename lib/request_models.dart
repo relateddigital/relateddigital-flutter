@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class RDInitRequestModel {
   String appAlias;
   String huaweiAppAlias;
@@ -13,17 +11,16 @@ class RDInitRequestModel {
   bool logEnabled;
   bool isIDFAEnabled;
 
-  RDInitRequestModel({@required String appAlias, String huaweiAppAlias, String androidPushIntent, @required String organizationId, @required String siteId, @required String dataSource, int maxGeofenceCount, bool geofenceEnabled, bool inAppNotificationsEnabled, @required bool logEnabled, bool isIDFAEnabled= false}) {
-    this.appAlias = appAlias;
-    this.huaweiAppAlias = huaweiAppAlias;
-    this.androidPushIntent = androidPushIntent;
-    this.organizationId = organizationId;
-    this.siteId = siteId;
-    this.dataSource = dataSource;
-    this.maxGeofenceCount = maxGeofenceCount;
-    this.geofenceEnabled = geofenceEnabled;
-    this.inAppNotificationsEnabled = inAppNotificationsEnabled;
-    this.logEnabled = logEnabled;
-    this.isIDFAEnabled = isIDFAEnabled;
-  }
+  RDInitRequestModel(
+      {required this.appAlias,
+      required this.huaweiAppAlias,
+      required this.androidPushIntent,
+      required this.organizationId,
+      required this.siteId,
+      required this.dataSource,
+      required this.maxGeofenceCount,
+      required this.geofenceEnabled,
+      required this.inAppNotificationsEnabled,
+      required this.logEnabled,
+      this.isIDFAEnabled = false});
 }

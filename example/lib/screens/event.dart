@@ -11,7 +11,7 @@ import 'package:relateddigital_flutter/recommendation_filter.dart';
 class Event extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  Event({@required this.relatedDigitalPlugin});
+  Event({required this.relatedDigitalPlugin});
 
   @override
   _EventState createState() => _EventState();
@@ -164,7 +164,7 @@ class _EventState extends State<Event> {
             )));
   }
 
-  Iterable<StatelessWidget> getInAppListTiles() {
+  List<StatelessWidget> getInAppListTiles() {
     List<StatelessWidget> tiles = [];
     for (final inAppType in inAppTypes) {
       tiles.add(ListTile(
@@ -239,12 +239,9 @@ class _EventState extends State<Event> {
     await widget.relatedDigitalPlugin.sendLocationPermission();
   }
 
-  Future<bool> showAlertDialog({
-    @required String title,
-    @required String content,
-  }) async {
+  Future<bool?> showAlertDialog({required String title, required String content}) async {
     if (!Platform.isIOS) {
-      return showDialog(
+      return showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
           title: Text(title),

@@ -18,19 +18,19 @@ class RDRecommendationFilterType {
 }
 
 class RDRecommendationFilterAttribute {
-  static String PRODUCTNAME = 'PRODUCTNAME';
-  static String COLOR = 'COLOR';
-  static String AGEGROUP = 'AGEGROUP';
-  static String BRAND = 'BRAND';
-  static String CATEGORY = 'CATEGORY';
-  static String GENDER = 'GENDER';
-  static String MATERIAL = 'MATERIAL';
-  static String ATTRIBUTE1 = 'ATTRIBUTE1';
-  static String ATTRIBUTE2 = 'ATTRIBUTE2';
-  static String ATTRIBUTE3 = 'ATTRIBUTE3';
-  static String ATTRIBUTE4 = 'ATTRIBUTE4';
-  static String ATTRIBUTE5 = 'ATTRIBUTE5';
-  static String SHIPPINGONSAMEDAY = 'SHIPPINGONSAMEDAY';
-  static String FREESHIPPING = 'FREESHIPPING';
-  static String ISDISCOUNTED = 'ISDISCOUNTED';
+  static const String PRODUCTNAME = 'PRODUCTNAME';
+  static const String COLOR = 'COLOR';
+  static const String AGEGROUP = 'AGEGROUP';
+  static const String BRAND = 'BRAND';
+  static const String CATEGORY = 'CATEGORY';
+  static const String GENDER = 'GENDER';
+  static const String MATERIAL = 'MATERIAL';
+  static const String ATTRIBUTE1 = 'ATTRIBUTE1';
+  static const String ATTRIBUTE2 = 'ATTRIBUTE2';
+  static const String ATTRIBUTE3 = 'ATTRIBUTE3';
+  static const String ATTRIBUTE4 = 'ATTRIBUTE4';
+  static const String ATTRIBUTE5 = 'ATTRIBUTE5';
+  static const String SHIPPINGONSAMEDAY = 'SHIPPINGONSAMEDAY';
+  static const String FREESHIPPING = 'FREESHIPPING';
+  static const String ISDISCOUNTED = 'ISDISCOUNTED';
 }

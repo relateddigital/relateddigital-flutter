@@ -1,25 +1,26 @@
 import 'dart:io';
-
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class RDStoryView extends StatefulWidget {
   final String actionId;
-  final Function(Map<String, String> result) onItemClick;
+  final Function(Map<String, String?> result)? onItemClick;
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  RDStoryView({this.actionId, this.onItemClick, this.relatedDigitalPlugin});
+  RDStoryView(
+      {required this.actionId,
+      required this.onItemClick,
+      required this.relatedDigitalPlugin});
 
   @override
   _RDStoryViewState createState() => _RDStoryViewState();
 }
 
 class _RDStoryViewState extends State<RDStoryView> {
-  StoryPlatformCallbackHandler _platformCallbackHandler;
+  StoryPlatformCallbackHandler? _platformCallbackHandler;
 
   @override
   void initState() {
@@ -43,10 +44,8 @@ class _RDStoryViewState extends State<RDStoryView> {
         creationParams: creationParams,
         creationParamsCodec: const StandardMessageCodec(),
         onPlatformViewCreated: (int id) {
-          if (widget.relatedDigitalPlugin != null) {
-            widget.relatedDigitalPlugin
-                .setStoryPlatformHandler(_platformCallbackHandler);
-          }
+          widget.relatedDigitalPlugin
+              .setStoryPlatformHandler(_platformCallbackHandler);
         },
       );
     }
@@ -57,40 +56,10 @@ class _RDStoryViewState extends State<RDStoryView> {
       creationParams: creationParams,
       creationParamsCodec: const StandardMessageCodec(),
       onPlatformViewCreated: (int id) {
-        if (widget.relatedDigitalPlugin != null) {
-          widget.relatedDigitalPlugin
-              .setStoryPlatformHandler(_platformCallbackHandler);
-        }
+        widget.relatedDigitalPlugin
+            .setStoryPlatformHandler(_platformCallbackHandler);
       },
     );
-
-    // return PlatformViewLink(
-    //   viewType: viewType,
-    //   surfaceFactory:
-    //       (BuildContext context, PlatformViewController controller) {
-    //     return AndroidViewSurface(
-    //       controller: controller,
-    //       gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
-    //       hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-    //     );
-    //   },
-    //   onCreatePlatformView: (PlatformViewCreationParams params) {
-    //     return PlatformViewsService.initSurfaceAndroidView(
-    //       id: params.id,
-    //       viewType: viewType,
-    //       layoutDirection: TextDirection.ltr,
-    //       creationParams: creationParams,
-    //       creationParamsCodec: StandardMessageCodec(),
-    //     )
-    //       ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-    //       ..addOnPlatformViewCreatedListener((int id) {
-    //         if(widget.onViewCreated != null) {
-    //           widget.onViewCreated();
-    //         }
-    //       })
-    //       ..create();
-    //   },
-    // );
   }
 }
 
@@ -104,9 +73,7 @@ class StoryPlatformCallbackHandler implements StoryCallbackHandler {
   StoryPlatformCallbackHandler(this.storyView);
 
   @override
-  void onItemClick(Map<String, String> result) {
-    if (storyView.onItemClick != null) {
-      storyView.onItemClick(result);
-    }
+  void onItemClick(Map<String, String?> result) {
+    storyView.onItemClick!(result);
   }
 }
