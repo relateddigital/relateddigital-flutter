@@ -69,5 +69,4 @@ class RDProfile {
   bool validate() {
     return true;
   }
-
 }

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class Styles {
-
   static const homeButtonText = TextStyle(
     color: Color(0xfff0f0f0),
     fontSize: 24,
@@ -45,27 +44,27 @@ abstract class Styles {
     fontWeight: FontWeight.normal,
   );
 
-  static ButtonStyle eventButtonStyle = ButtonStyle (
+  static ButtonStyle eventButtonStyle = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(relatedOrange),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
   );
 
-  static ButtonStyle pushButtonStyle = ButtonStyle (
+  static ButtonStyle pushButtonStyle = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(relatedRed),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
   );
 
-  static ButtonStyle inAppButtonStyle = ButtonStyle (
+  static ButtonStyle inAppButtonStyle = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(relatedPurple),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
   );
 
-  static ButtonStyle storyButtonStyle = ButtonStyle (
+  static ButtonStyle storyButtonStyle = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(relatedBlue),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
   );
 
-  static ButtonStyle refreshButtonStyle = ButtonStyle (
+  static ButtonStyle refreshButtonStyle = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(relatedOrange),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
   );
@@ -81,10 +80,6 @@ abstract class Styles {
   static const Color relatedPurple = Color(0xff824198);
 
   static const Color relatedBlue = Color(0xff3cc1dd);
-
-
-
-
 
   static const Color borders = relatedPurple; // Color(0xff202020);
 

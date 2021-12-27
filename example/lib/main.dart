@@ -33,7 +33,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   void _readNotificationCallback(dynamic result) async {
     print('_readNotificationCallback');
     print(result);
-    if(key.currentContext == null) return;
+    if (key.currentContext == null) return;
     showDialog(
         context: key.currentContext!,
         builder: (context) => AlertDialog(

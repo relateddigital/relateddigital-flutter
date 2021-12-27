@@ -239,7 +239,8 @@ class _EventState extends State<Event> {
     await widget.relatedDigitalPlugin.sendLocationPermission();
   }
 
-  Future<bool?> showAlertDialog({required String title, required String content}) async {
+  Future<bool?> showAlertDialog(
+      {required String title, required String content}) async {
     if (!Platform.isIOS) {
       return showDialog<bool>(
         context: context,

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 class Constants {
-
   static const String IOS_APP_ALIAS = 'relateddigital-flutter-example-ios';
   static const String ANDROID_APP_ALIAS = 'flutter-android-demo';
 
@@ -10,15 +9,16 @@ class Constants {
   }
 
   static const String HUAWEI_APP_ALIAS = 'flutter-android-huawei-demo';
-  static const  String ANDROID_PUSH_INTENT = 'com.relateddigital.relateddigital_flutter_example.MainActivity';
-  static const  bool LOG_ENABLED = true;
-  static const  String ORGANIZATION_ID = '676D325830564761676D453D';
-  static const  String SITE_ID = '356467332F6533766975593D';
-  static const  String DATA_SOURCE = 'visistore';
-  static const  bool GEOFENCE_ENABLED = false;
-  static const  int MAX_GEOFENCE_COUNT = 20;
-  static const  bool IN_APP_NOTIFICATIONS_ENABLED = true;
-  static const  bool IS_IDFA_ENABLED = false;
+  static const String ANDROID_PUSH_INTENT =
+      'com.relateddigital.relateddigital_flutter_example.MainActivity';
+  static const bool LOG_ENABLED = true;
+  static const String ORGANIZATION_ID = '676D325830564761676D453D';
+  static const String SITE_ID = '356467332F6533766975593D';
+  static const String DATA_SOURCE = 'visistore';
+  static const bool GEOFENCE_ENABLED = false;
+  static const int MAX_GEOFENCE_COUNT = 20;
+  static const bool IN_APP_NOTIFICATIONS_ENABLED = true;
+  static const bool IS_IDFA_ENABLED = false;
 
   static const String appAlias = 'appAlias';
   static const String huaweiAppAlias = 'huaweiAppAlias';

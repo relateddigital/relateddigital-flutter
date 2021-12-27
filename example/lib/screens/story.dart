@@ -41,8 +41,7 @@ class _StoryState extends State<Story> {
                       onItemClick: (Map<String, String?> result) {
                         print(result);
                       },
-                    )
-                ),
+                    )),
               ]).toList(),
             )));
   }
