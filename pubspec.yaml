@@ -23,3 +23,6 @@ flutter:
         pluginClass: RelatedDigitalPlugin
       ios:
         pluginClass: RelatedDigitalPlugin
+
+false_secrets:
+ - /example/android/app/google-services.json
