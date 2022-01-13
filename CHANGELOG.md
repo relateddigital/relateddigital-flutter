@@ -46,3 +46,8 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 ## 0.4.1
 
 - OM.pushnotifystatus parameter add
+
+
+## 0.4.2
+
+- removeUserProperty and setEmailWithPermit added
