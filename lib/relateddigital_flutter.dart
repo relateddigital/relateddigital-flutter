@@ -76,16 +76,26 @@ class RelateddigitalFlutter {
     await _channel.invokeMethod(Constants.M_EURO_USER_ID, {'userId': userId});
   }
 
-  Future<void> setEmail(String email, bool permission) async {
+  Future<void> setEmailWithPermission(String email, bool permission) async {
     if (email != null && permission != null) {
       await _channel.invokeMethod(Constants.M_EMAIL_WITH_PERMISSION,
           {'email': email, 'permission': permission});
     }
   }
 
+  Future<void> setEmail(String email) async {
+    if (email != null) {
+      await _channel.invokeMethod(Constants.M_SET_EMAIL, {'email': email});
+    }
+  }
+
   Future<void> setUserProperty(String key, String value) async {
     await _channel
         .invokeMethod(Constants.M_USER_PROPERTY, {'key': key, 'value': value});
+  }
+
+  Future<void> removeUserProperty(String key) async {
+    await _channel.invokeMethod(Constants.M_REMOVE_USER_PROPERTY, {'key': key});
   }
 
   Future<void> setAppVersion(String appVersion) async {

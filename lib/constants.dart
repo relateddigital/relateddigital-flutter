@@ -6,8 +6,10 @@ class Constants {
   static const String M_TOKEN_RETRIEVED = 'RD/getToken';
   static const String M_NOTIFICATION_OPENED = 'RD/openNotification';
   static const String M_EURO_USER_ID = 'RD/setEuroUserId';
-  static const String M_EMAIL_WITH_PERMISSION = 'RD/setEmail';
+  static const String M_EMAIL_WITH_PERMISSION = 'RD/setEmailWithPermission';
+  static const String M_SET_EMAIL = 'RD/setEmail';
   static const String M_USER_PROPERTY = 'RD/setUserProperty';
+  static const String M_REMOVE_USER_PROPERTY = "RD/removeUserProperty";
   static const String M_APP_VERSION = 'RD/setAppVersion';
   static const String M_NOTIFICATION_PERMISSION =
       'RD/setPushNotificationPermission';

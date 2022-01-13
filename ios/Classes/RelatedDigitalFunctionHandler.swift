@@ -34,13 +34,23 @@ class RelatedDigitalFunctionHandler {
         Euromsg.sync()
     }
     
-    public func setEmail(email: String, permission: Bool) {
+    public func setEmailWithPermission(email: String, permission: Bool) {
         Euromsg.setEmail(email: email, permission: permission)
+        Euromsg.sync()
+    }
+
+    public func setEmail(email: String) {
+        Euromsg.setEmail(email: email)
         Euromsg.sync()
     }
     
     public func setUserProperty(key: String, value: String) {
         Euromsg.setUserProperty(key: key, value: value)
+        Euromsg.sync()
+    }
+
+    public func removeUserProperty(key: String) {
+        Euromsg.removeUserProperty(key: key)
         Euromsg.sync()
     }
     

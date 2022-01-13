@@ -77,11 +77,17 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          functionHandler.setEuroUserId(userId);
          result.success(null);
        }
+       else if (call.method.equals(Constants.M_SET_EMAIL)) {
+         String email = call.argument("email");
+
+         functionHandler.setEmail(email);
+         result.success(null);
+       }
        else if (call.method.equals(Constants.M_EMAIL_WITH_PERMISSION)) {
          String email = call.argument("email");
          boolean permission = call.argument("permission");
 
-         functionHandler.setEmail(email, permission);
+         functionHandler.setEmailWithPermission(email, permission);
          result.success(null);
        }
        else if (call.method.equals(Constants.M_USER_PROPERTY)) {
@@ -89,6 +95,12 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          String value = call.argument("value");
 
          functionHandler.setUserProperty(key, value);
+         result.success(null);
+       }
+       else if(call.method.equals(Constants.M_REMOVE_USER_PROPERTY)) {
+         String key = call.argument("key");
+
+         functionHandler.removeUserProperty(key);
          result.success(null);
        }
        else if (call.method.equals(Constants.M_APP_VERSION)) {

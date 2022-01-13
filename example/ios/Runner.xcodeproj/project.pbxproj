@@ -15,11 +15,12 @@
 		86A9EA0DC54D87BD0CC9331F /* Pods_NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AF0FBD154AF86EB5699BB6 /* Pods_NotificationService.framework */; };
 		884E2FDD26F2739A00110EAC /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 884E2FD626F2739A00110EAC /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		884E2FE626F273DE00110EAC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E2FE426F273DE00110EAC /* NotificationService.swift */; };
-		884E2FE826F2782200110EAC /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		884E2FE826F2782200110EAC /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88AE3D3527598F6A00F6BEBF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB64A59265E783A0075805C /* UserNotifications.framework */; };
 		88AE3D3727598F6A00F6BEBF /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88AE3D3627598F6A00F6BEBF /* UserNotificationsUI.framework */; };
 		88AE3D3A27598F6A00F6BEBF /* EMNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AE3D3927598F6A00F6BEBF /* EMNotificationViewController.swift */; };
 		88AE3D4127598F6A00F6BEBF /* NotificationContent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 88AE3D3427598F6A00F6BEBF /* NotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8BB74CCF2785D9F50041C588 /* TheNautigal_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BB74CCE2785D9F50041C588 /* TheNautigal_Regular.ttf */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
@@ -61,7 +62,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				884E2FE826F2782200110EAC /* BuildFile in Embed Frameworks */,
+				884E2FE826F2782200110EAC /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +106,7 @@
 		88AE3D3927598F6A00F6BEBF /* EMNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMNotificationViewController.swift; sourceTree = "<group>"; };
 		88AE3D3E27598F6A00F6BEBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88AE3D4627598F9B00F6BEBF /* NotificationContent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationContent.entitlements; sourceTree = "<group>"; };
+		8BB74CCE2785D9F50041C588 /* TheNautigal_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TheNautigal_Regular.ttf; sourceTree = "<group>"; };
 		8EF1623AA586EB0E06D7A890 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		90466C7B25C8BF89F43989CA /* Pods-NotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationService.release.xcconfig"; path = "Target Support Files/Pods-NotificationService/Pods-NotificationService.release.xcconfig"; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				8BB74CCE2785D9F50041C588 /* TheNautigal_Regular.ttf */,
 				4A6A4FF4266630CB005161F8 /* Runner.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
@@ -375,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				8BB74CCF2785D9F50041C588 /* TheNautigal_Regular.ttf in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,

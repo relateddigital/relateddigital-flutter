@@ -83,7 +83,7 @@ public class RelatedDigitalFunctionHandler {
         EuroMobileManager.getInstance().sync(mContext);
     }
 
-    public void setEmail(String email, boolean permission) {
+    public void setEmailWithPermission(String email, boolean permission) {
         setEmail(email);
         EuroMobileManager.getInstance().setEmailPermit(permission ? EmailPermit.ACTIVE : EmailPermit.PASSIVE, mContext);
         EuroMobileManager.getInstance().sync(mContext);
@@ -91,6 +91,11 @@ public class RelatedDigitalFunctionHandler {
 
     public void setUserProperty(String key, String value) {
         EuroMobileManager.getInstance().setUserProperty(key, value, mContext);
+        EuroMobileManager.getInstance().sync(mContext);
+    }
+
+    public void removeUserProperty(String key) {
+        EuroMobileManager.getInstance().removeUserProperty(mContext, key);
         EuroMobileManager.getInstance().sync(mContext);
     }
 

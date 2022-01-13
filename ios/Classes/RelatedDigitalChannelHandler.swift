@@ -63,7 +63,13 @@ class RelatedDigitalChannelHandler: NSObject {
             let email = args?["email"] as! String
             let permission = args?["permission"] as! Bool
             
-            self.functionHandler.setEmail(email: email, permission: permission)
+            self.functionHandler.setEmailWithPermission(email: email, permission: permission)
+            result(nil)
+        }
+        else if(call.method == Constants.M_SET_EMAIL) {
+            let email = args?["email"] as! String
+            
+            self.functionHandler.setEmail(email: email)
             result(nil)
         }
         else if(call.method == Constants.M_USER_PROPERTY) {
@@ -71,6 +77,12 @@ class RelatedDigitalChannelHandler: NSObject {
             let value = args?["value"] as! String
             
             self.functionHandler.setUserProperty(key: key, value: value)
+            result(nil)
+        }
+        else if(call.method == Constants.M_REMOVE_USER_PROPERTY) {
+            let key = args?["key"] as! String
+
+            self.functionHandler.removeUserProperty(key: key)
             result(nil)
         }
         else if(call.method == Constants.M_APP_VERSION) {

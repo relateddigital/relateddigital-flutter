@@ -6,8 +6,10 @@ class Constants {
     static let M_TOKEN_RETRIEVED = "RD/getToken"
     static let M_NOTIFICATION_OPENED = "RD/openNotification"
     static let M_EURO_USER_ID = "RD/setEuroUserId"
-    static let M_EMAIL_WITH_PERMISSION = "RD/setEmail"
+    static let M_EMAIL_WITH_PERMISSION = "RD/setEmailWithPermission"
+    static let M_SET_EMAIL = "RD/setEmail";
     static let M_USER_PROPERTY = "RD/setUserProperty"
+    static let M_REMOVE_USER_PROPERTY = "RD/removeUserProperty";
     static let M_APP_VERSION = "RD/setAppVersion"
     static let M_NOTIFICATION_PERMISSION = "RD/setPushNotificationPermission"
     static let M_EMAIL_PERMISSION = "RD/setEmailPermission"

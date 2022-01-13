@@ -8,8 +8,10 @@ public class Constants {
     public static String M_TOKEN_RETRIEVED = "RD/getToken";
     public static String M_NOTIFICATION_OPENED = "RD/openNotification";
     public static String M_EURO_USER_ID = "RD/setEuroUserId";
-    public static String M_EMAIL_WITH_PERMISSION = "RD/setEmail";
+    public static String M_EMAIL_WITH_PERMISSION = "RD/setEmailWithPermission";
+    public static String M_SET_EMAIL = "RD/setEmail";
     public static String M_USER_PROPERTY = "RD/setUserProperty";
+    public static String M_REMOVE_USER_PROPERTY = "RD/removeUserProperty";
     public static String M_APP_VERSION = "RD/setAppVersion";
     public static String M_NOTIFICATION_PERMISSION = "RD/setPushNotificationPermission";
     public static String M_EMAIL_PERMISSION = "RD/setEmailPermission";
