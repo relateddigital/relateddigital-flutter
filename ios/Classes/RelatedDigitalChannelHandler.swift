@@ -145,8 +145,7 @@ class RelatedDigitalChannelHandler: NSObject {
             let permission = args?["permission"] as! Bool
             let isCommercial = args?["isCommercial"] as! Bool
             
-            self.functionHandler.registerEmail(email: email, permission: permission, isCommercial: isCommercial)
-            result(nil)
+            self.functionHandler.registerEmail(email: email, permission: permission, isCommercial: isCommercial, result: result)
         }
         else if(call.method == Constants.M_RECOMMENDATIONS) {
             let zoneId = args?["zoneId"] as! String

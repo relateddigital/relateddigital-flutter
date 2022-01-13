@@ -2,6 +2,21 @@ import Flutter
 import Euromsg
 import VisilabsIOS
 
+public class RegisterDelegate : EuromsgDelegate {
+    var flutterResult: FlutterResult?
+    
+    init(flutterResult: @escaping FlutterResult) {
+        self.flutterResult = flutterResult
+    }
+    
+    public func didRegisterSuccessfully() {
+        flutterResult?(true)
+    }
+    public func didFailRegister(error: EuromsgAPIError) {
+        flutterResult?(false)
+    }
+}
+
 class RelatedDigitalFunctionHandler {
     public func initEuroMsg(appAlias: String, enableLog: Bool) {
         Euromsg.configure(appAlias: appAlias, enableLog: enableLog)
@@ -96,8 +111,14 @@ class RelatedDigitalFunctionHandler {
         Visilabs.callAPI().customEvent(pageName, properties: properties)
     }
     
-    public func registerEmail(email: String, permission: Bool, isCommercial: Bool) {
-        Euromsg.registerEmail(email: email, permission: permission, isCommercial: isCommercial)
+    
+    var customDelegate: RegisterDelegate?
+        
+    public func registerEmail(email: String, permission: Bool, isCommercial: Bool, result: @escaping FlutterResult) {
+        
+        customDelegate = RegisterDelegate(flutterResult: result)
+        
+        Euromsg.registerEmail(email: email, permission: permission, isCommercial: isCommercial, customDelegate: customDelegate)
     }
     
     public func getRecommendations(zoneId: String, productCode: String, filters: [NSDictionary] = [], result: @escaping FlutterResult) {
