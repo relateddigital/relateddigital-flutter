@@ -154,8 +154,7 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          boolean permission = call.argument("permission");
          boolean isCommercial = call.argument("isCommercial");
 
-         functionHandler.registerEmail(email, permission, isCommercial);
-         result.success(null);
+         functionHandler.registerEmail(email, permission, isCommercial, result);
        }
        else if (call.method.equals(Constants.M_RECOMMENDATIONS)) {
          String zoneId = call.argument("zoneId");

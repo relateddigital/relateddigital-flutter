@@ -25,6 +25,8 @@ class Constants {
   static const String logEnabled = 'logEnabled';
   static const String isIDFAEnabled = 'isIDFAEnabled';
 
+  static const String userProperty = 'userProperty';
+
   static const String exVisitorId = 'exVisitorId';
   static const String token = 'token';
   static const String email = 'email';

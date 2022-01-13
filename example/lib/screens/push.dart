@@ -17,6 +17,8 @@ class Push extends StatefulWidget {
 class _PushState extends State<Push> {
   TextEditingController tokenController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController userPropertyKeyController = TextEditingController();
+  TextEditingController userPropertyValueController = TextEditingController();
   bool emailPermission = true;
   bool isCommercial = false;
 
@@ -59,6 +61,16 @@ class _PushState extends State<Push> {
                 TextInputListTile(
                   title: Constants.email,
                   controller: emailController,
+                  onChanged: null,
+                ),
+                TextInputListTile(
+                  title: Constants.userProperty + " Key",
+                  controller: userPropertyKeyController,
+                  onChanged: null,
+                ),
+                TextInputListTile(
+                  title: Constants.userProperty+ " Value",
+                  controller: userPropertyValueController,
                   onChanged: null,
                 ),
                 SwitchListTile(
@@ -119,6 +131,7 @@ class _PushState extends State<Push> {
                     ],
                   ),
                 ),
+
                 ListTile(
                   subtitle: Column(
                     children: <Widget>[
@@ -139,6 +152,18 @@ class _PushState extends State<Push> {
                           style: Styles.pushButtonStyle,
                           onPressed: () {
                             setUserProperty();
+                          })
+                    ],
+                  ),
+                ),
+                ListTile(
+                  subtitle: Column(
+                    children: <Widget>[
+                      TextButton(
+                          child: Text('Remove User Property'),
+                          style: Styles.pushButtonStyle,
+                          onPressed: () {
+                            removeUserProperty();
                           })
                     ],
                   ),
@@ -168,14 +193,21 @@ class _PushState extends State<Push> {
           .relatedDigitalPlugin
           .setEmailWithPermission(emailController.text, emailPermission);
     } else if (submitType == SubmitType.registerEmail) {
-      this.widget.relatedDigitalPlugin.registerEmail(emailController.text,
-          permission: emailPermission, isCommercial: isCommercial);
-      removeEmailPermit();
+      this
+          .widget
+          .relatedDigitalPlugin
+          .registerEmail(emailController.text,
+              permission: emailPermission, isCommercial: isCommercial)
+          .then((value) => removeEmailPermit());
     }
   }
 
   setUserProperty() {
-    this.widget.relatedDigitalPlugin.setUserProperty("baris", "1");
+    this.widget.relatedDigitalPlugin.setUserProperty(userPropertyKeyController.text, userPropertyValueController.text);
+  }
+
+  removeUserProperty() {
+    this.widget.relatedDigitalPlugin.removeUserProperty(userPropertyKeyController.text);
   }
 
   removeEmailPermit() {

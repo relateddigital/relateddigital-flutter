@@ -147,15 +147,16 @@ public class RelatedDigitalFunctionHandler {
         }
     }
 
-    public void registerEmail(String email, boolean permission, boolean isCommercial) {
+    public void registerEmail(String email, boolean permission, boolean isCommercial, final MethodChannel.Result result) {
         EuroMobileManager.getInstance().registerEmail(email, permission ? EmailPermit.ACTIVE : EmailPermit.PASSIVE, isCommercial, mContext, new EuromessageCallback() {
             @Override
             public void success() {
-
+                result.success(true);
             }
 
             @Override
             public void fail(String errorMessage) {
+                result.success(false);
                 Log.e("ERROR", errorMessage);
             }
         });

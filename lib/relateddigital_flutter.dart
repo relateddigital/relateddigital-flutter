@@ -147,7 +147,7 @@ class RelateddigitalFlutter {
     });
   }
 
-  Future<void> registerEmail(String email,
+  Future<bool> registerEmail(String email,
       {bool permission = false, bool isCommercial = false}) async {
     await _channel.invokeMethod(Constants.M_REGISTER_EMAIL, {
       'email': email,
