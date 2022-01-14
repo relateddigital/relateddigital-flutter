@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 T cast<T>(x) => x is T ? x : null;
 
 bool equalsIgnoreCase(String string1, String string2) {
-  return string1?.toLowerCase()?.replaceAll(RegExp(r'ı'), 'i') == string2?.toLowerCase()?.replaceAll(RegExp(r'ı'), 'i');
+  return string1?.toLowerCase()?.replaceAll(RegExp(r'ı'), 'i') ==
+      string2?.toLowerCase()?.replaceAll(RegExp(r'ı'), 'i');
 }
 
 T enumFromString<T>(Iterable<T> values, String value) {
-  return values.firstWhere((type) => equalsIgnoreCase(type.toString().split(".").last, value),
+  return values.firstWhere(
+      (type) => equalsIgnoreCase(type.toString().split(".").last, value),
       orElse: () => values.first);
 }
 
@@ -141,7 +143,8 @@ class RDTokenResponseModel {
 
   RDTokenResponseModel.fromJson(dynamic json) {
     this.deviceToken = json["deviceToken"];
-    this.playServiceEnabled = Platform.isIOS ? true : json["playServiceEnabled"];
+    this.playServiceEnabled =
+        Platform.isIOS ? true : json["playServiceEnabled"];
   }
 }
 
@@ -168,31 +171,49 @@ class RDNotificationResponseModel {
       if (Platform.isIOS) {
         dynamic userInfo = this.payload["userInfo"];
         if (userInfo != null) {
-          this.pushType =
-              (cast<String>(userInfo["pushType"]) ?? '').isEmpty ? this.pushType : cast<String>(userInfo["pushType"]);
-          this.pushId =
-              (cast<String>(userInfo["pushType"]) ?? '').isEmpty ? this.pushId : cast<String>(userInfo["pushId"]);
-          this.url =
-              this.deepLink = (cast<String>(userInfo["url"]) ?? '').isEmpty ? this.url : cast<String>(userInfo["url"]);
+          this.pushType = (cast<String>(userInfo["pushType"]) ?? '').isEmpty
+              ? this.pushType
+              : cast<String>(userInfo["pushType"]);
+          this.pushId = (cast<String>(userInfo["pushType"]) ?? '').isEmpty
+              ? this.pushId
+              : cast<String>(userInfo["pushId"]);
           this.url = this.deepLink =
-              (cast<String>(userInfo["deepLink"]) ?? '').isEmpty ? this.deepLink : cast<String>(userInfo["deepLink"]);
-          this.altUrl =
-              (cast<String>(userInfo["altUrl"]) ?? '').isEmpty ? this.altUrl : cast<String>(userInfo["altUrl"]);
-          this.mediaUrl =
-              (cast<String>(userInfo["mediaUrl"]) ?? '').isEmpty ? this.mediaUrl : cast<String>(userInfo["mediaUrl"]);
+              (cast<String>(userInfo["url"]) ?? '').isEmpty
+                  ? this.url
+                  : cast<String>(userInfo["url"]);
+          this.url = this.deepLink =
+              (cast<String>(userInfo["deepLink"]) ?? '').isEmpty
+                  ? this.deepLink
+                  : cast<String>(userInfo["deepLink"]);
+          this.altUrl = (cast<String>(userInfo["altUrl"]) ?? '').isEmpty
+              ? this.altUrl
+              : cast<String>(userInfo["altUrl"]);
+          this.mediaUrl = (cast<String>(userInfo["mediaUrl"]) ?? '').isEmpty
+              ? this.mediaUrl
+              : cast<String>(userInfo["mediaUrl"]);
           dynamic aps = userInfo["aps"];
           if (aps != null) {
-            this.contentAvailable = (cast<int>(aps["content-available"]) ?? 0) == 0
-                ? this.contentAvailable
-                : cast<int>(aps["content-available"]);
-            this.mutableContent =
-                (cast<int>(aps["mutable-content"]) ?? 0) == 0 ? this.mutableContent : cast<int>(aps["mutable-content"]);
-            this.badge = (cast<int>(aps["badge"]) ?? 0) == 0 ? this.badge : cast<int>(aps["badge"]);
-            this.sound = (cast<String>(aps["sound"]) ?? '').isEmpty ? this.sound : cast<String>(aps["sound"]);
+            this.contentAvailable =
+                (cast<int>(aps["content-available"]) ?? 0) == 0
+                    ? this.contentAvailable
+                    : cast<int>(aps["content-available"]);
+            this.mutableContent = (cast<int>(aps["mutable-content"]) ?? 0) == 0
+                ? this.mutableContent
+                : cast<int>(aps["mutable-content"]);
+            this.badge = (cast<int>(aps["badge"]) ?? 0) == 0
+                ? this.badge
+                : cast<int>(aps["badge"]);
+            this.sound = (cast<String>(aps["sound"]) ?? '').isEmpty
+                ? this.sound
+                : cast<String>(aps["sound"]);
             dynamic alert = aps["alert"];
             if (alert != null) {
-              this.title = (cast<String>(alert["title"]) ?? '').isEmpty ? this.title : cast<String>(alert["title"]);
-              this.body = (cast<String>(alert["body"]) ?? '').isEmpty ? this.body : cast<String>(alert["body"]);
+              this.title = (cast<String>(alert["title"]) ?? '').isEmpty
+                  ? this.title
+                  : cast<String>(alert["title"]);
+              this.body = (cast<String>(alert["body"]) ?? '').isEmpty
+                  ? this.body
+                  : cast<String>(alert["body"]);
             }
           }
         }

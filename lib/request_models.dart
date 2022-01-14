@@ -13,7 +13,18 @@ class RDInitRequestModel {
   bool logEnabled;
   bool isIDFAEnabled;
 
-  RDInitRequestModel({@required String appAlias, String huaweiAppAlias, String androidPushIntent, @required String organizationId, @required String siteId, @required String dataSource, int maxGeofenceCount, bool geofenceEnabled, bool inAppNotificationsEnabled, @required bool logEnabled, bool isIDFAEnabled= false}) {
+  RDInitRequestModel(
+      {@required String appAlias,
+      String huaweiAppAlias,
+      String androidPushIntent,
+      @required String organizationId,
+      @required String siteId,
+      @required String dataSource,
+      int maxGeofenceCount,
+      bool geofenceEnabled,
+      bool inAppNotificationsEnabled,
+      @required bool logEnabled,
+      bool isIDFAEnabled = false}) {
     this.appAlias = appAlias;
     this.huaweiAppAlias = huaweiAppAlias;
     this.androidPushIntent = androidPushIntent;
