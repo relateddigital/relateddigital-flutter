@@ -51,3 +51,7 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 ## 0.4.2
 
 - removeUserProperty and setEmailWithPermit added
+
+## 0.4.3
+
+- registerEmail method convert to async
