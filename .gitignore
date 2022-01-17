@@ -7,3 +7,6 @@ pubspec.lock
 
 build/
 .idea/
+
+/example/android/app/google-services.json
+/example/android/app/agconnect-services.json
