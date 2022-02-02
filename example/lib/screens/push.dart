@@ -20,6 +20,7 @@ class _PushState extends State<Push> {
   TextEditingController userPropertyKeyController = TextEditingController();
   TextEditingController userPropertyValueController = TextEditingController();
   bool emailPermission = true;
+  bool notificationPermission = true;
   bool isCommercial = false;
 
   @override
@@ -69,7 +70,7 @@ class _PushState extends State<Push> {
                   onChanged: null,
                 ),
                 TextInputListTile(
-                  title: Constants.userProperty+ " Value",
+                  title: Constants.userProperty + " Value",
                   controller: userPropertyValueController,
                   onChanged: null,
                 ),
@@ -81,6 +82,21 @@ class _PushState extends State<Push> {
                   value: emailPermission,
                   onChanged: (bool ePermission) {
                     emailPermission = ePermission;
+                    updateState();
+                  },
+                ),
+                SwitchListTile(
+                  title: Text(
+                    Constants.notificationPermission,
+                    style: Styles.settingsPrimaryText,
+                  ),
+                  value: notificationPermission,
+                  onChanged: (bool nPermission) {
+                    notificationPermission = nPermission;
+                    this
+                        .widget
+                        .relatedDigitalPlugin
+                        .setNotificationPermission(nPermission);
                     updateState();
                   },
                 ),
@@ -131,7 +147,6 @@ class _PushState extends State<Push> {
                     ],
                   ),
                 ),
-
                 ListTile(
                   subtitle: Column(
                     children: <Widget>[
@@ -203,11 +218,15 @@ class _PushState extends State<Push> {
   }
 
   setUserProperty() {
-    this.widget.relatedDigitalPlugin.setUserProperty(userPropertyKeyController.text, userPropertyValueController.text);
+    this.widget.relatedDigitalPlugin.setUserProperty(
+        userPropertyKeyController.text, userPropertyValueController.text);
   }
 
   removeUserProperty() {
-    this.widget.relatedDigitalPlugin.removeUserProperty(userPropertyKeyController.text);
+    this
+        .widget
+        .relatedDigitalPlugin
+        .removeUserProperty(userPropertyKeyController.text);
   }
 
   removeEmailPermit() {
