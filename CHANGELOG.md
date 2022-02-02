@@ -55,3 +55,10 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 ## 0.4.3
 
 - registerEmail method convert to async
+
+## 0.4.4
+
+- Provisional push notification authorization update for iOS 15.1 and later.
+- Story label color fix
+- Add custom font feature to spintowin action
+- Support for gif files
