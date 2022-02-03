@@ -1,0 +1,108 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.relateddigital.relateddigital_flutter_example">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+   <application
+        android:label="Relateddigital Flutter Example"
+        android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <!-- Displays an Android View that continues showing the launch screen
+                 Drawable until Flutter paints its first frame, then this splash
+                 screen fades out. A splash screen is useful to avoid any visual
+                 gap between the end of Android's launch screen and the painting of
+                 Flutter's first frame. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.SplashScreenDrawable"
+              android:resource="@drawable/launch_background"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
+
+       <service
+           android:name="euromsg.com.euromobileandroid.service.EuroFirebaseMessagingService"
+           android:exported="false">
+           <intent-filter>
+               <action android:name="com.google.firebase.MESSAGING_EVENT" />
+           </intent-filter>
+       </service>
+
+       <service
+           android:name="euromsg.com.euromobileandroid.service.EuroHuaweiMessagingService"
+           android:exported="false">
+           <intent-filter>
+               <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+           </intent-filter>
+       </service>
+
+       <!--Geofence-->
+
+       <meta-data android:name="GoogleAppAlias" android:value="flutter-android-demo" />
+       <meta-data android:name="HuaweiAppAlias" android:value="flutter-android-huawei-demo" />
+
+       <meta-data android:name="AppAlias" android:value="flutter-android-demo" />
+       <meta-data android:name="VisilabsOrganizationID" android:value="676D325830564761676D453D" />
+       <meta-data android:name="VisilabsSiteID" android:value="356467332F6533766975593D" />
+       <meta-data android:name="VisilabsSegmentURL" android:value="https://lgr.visilabs.net" />
+       <meta-data android:name="VisilabsDataSource" android:value="visistore" />
+       <meta-data android:name="VisilabsRealTimeURL" android:value="https://rt.visilabs.net" />
+       <meta-data android:name="VisilabsChannel" android:value="Android" />
+       <meta-data android:name="VisilabsGeofenceURL" android:value="https://s.visilabs.net/geojson" />
+       <meta-data android:name="VisilabsGeofenceEnabled" android:value="true" />
+
+       <!-- Parameters below are optional -->
+
+       <meta-data android:name="VisilabsRequestTimeoutInSeconds" android:value="30" />
+       <meta-data android:name="VisilabsRESTURL" android:value="VisilabsRESTURL" />
+       <meta-data android:name="VisilabsEncryptedDataSource" android:value="VisilabsEncryptedDataSource" />
+       <meta-data android:name="VisilabsTargetURL" android:value="https://s.visilabs.net/json" />
+       <meta-data android:name="VisilabsActionURL" android:value="https://s.visilabs.net/actjson" />
+
+       <service
+           android:name="com.visilabs.gps.geofence.GeofenceTransitionsIntentService"
+           android:enabled="true"
+           android:permission="android.permission.BIND_JOB_SERVICE" />
+
+       <receiver
+           android:name="com.visilabs.gps.geofence.VisilabsAlarm"
+           android:exported="false" />
+
+       <receiver
+           android:name="com.visilabs.gps.geofence.GeofenceBroadcastReceiver"
+           android:enabled="true"
+           android:exported="false" />
+
+    </application>
+
+    <queries>
+        <package android:name="com.example.app1" />
+        <package android:name="com.example.app2" />
+    </queries>
+</manifest>
