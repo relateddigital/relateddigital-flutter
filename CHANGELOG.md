@@ -62,3 +62,9 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Story label color fix
 - Add custom font feature to spintowin action
 - Support for gif files
+
+
+## 0.4.5
+- Spin to Win started to support custom font type
+- Scratch to Win started to support custom font type
+- Mail Subs Form started to support custom font type

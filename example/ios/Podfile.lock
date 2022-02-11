@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   Euromsg: 8470ed156a16a11f4441087b16f844441adc71d1
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   relateddigital_flutter: 0c4947d1d3dfcdf132a9929cee98693801528871
-  shared_preferences_ios: aef470a42dc4675a1cdd50e3158b42e3d1232b32
+  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   VisilabsIOS: 90ccaa4669e0ffc9361968ca7bbe24cdf0c2d12c
 
 PODFILE CHECKSUM: fd78e62cec3bb9dd44d69a506baea583de2eb483
