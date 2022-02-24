@@ -68,3 +68,6 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Spin to Win started to support custom font type
 - Scratch to Win started to support custom font type
 - Mail Subs Form started to support custom font type
+
+## 0.4.6
+- In-App Carousel messages add

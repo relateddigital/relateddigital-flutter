@@ -37,7 +37,8 @@ class _EventState extends State<Event> {
     'nps-feedback',
     'spintowin',
     'half_screen_image',
-    'product_stat_notifier'
+    'product_stat_notifier',
+    'inappcarousel'
   ];
   String exVisitorId = '';
 
