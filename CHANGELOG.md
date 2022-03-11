@@ -71,3 +71,9 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 
 ## 0.4.6
 - In-App Carousel messages add
+
+## 0.4.7
+- Removed placeholder from feedback form
+- Added the ability to add title and message background color for 5. template
+- Added redirect feature to application settings when clicking the button for 5. template
+
