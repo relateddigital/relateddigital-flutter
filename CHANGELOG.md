@@ -77,3 +77,7 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Added the ability to add title and message background color for 5. template
 - Added redirect feature to application settings when clicking the button for 5. template
 
+## 0.4.8
+- Update Huawei agconnect v1.6.0
+- Fix for getting Huawei token
+
