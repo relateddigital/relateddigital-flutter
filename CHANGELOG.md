@@ -81,3 +81,6 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Update Huawei agconnect v1.6.0
 - Fix for getting Huawei token
 
+## 0.4.9
+- New Feature : Spin-to-Win Code Banner
+- Adds new parameters to customize Spin-to-Win
