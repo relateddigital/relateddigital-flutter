@@ -57,5 +57,7 @@
 	<array>
 		<string>TheNautigal_Regular.ttf</string>
 	</array>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>

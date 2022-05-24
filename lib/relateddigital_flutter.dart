@@ -305,4 +305,10 @@ class RelateddigitalFlutter {
   Future<void> sendLocationPermission() async {
     await _channel.invokeMethod(Constants.M_SEND_LOCATION_PERMISSION);
   }
+
+  Future<void> requestLocationPermission() async {
+    await _channel.invokeMethod(Constants.M_REQUEST_LOCATION_PERMISSION);
+  }
+
+
 }

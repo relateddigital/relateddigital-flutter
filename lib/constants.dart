@@ -33,6 +33,7 @@ class Constants {
   static const String M_GET_PUSH_MESSAGES = 'RD/getPushMessages';
   static const String M_REQUEST_IDFA = 'VL/requestIDFA';
   static const String M_SEND_LOCATION_PERMISSION = 'VL/sendLocationPermission';
+  static const String M_REQUEST_LOCATION_PERMISSION = 'VL/requestLocationPermission';
 
   static const String VL_TOKEN_KEY = 'RegisterToken';
   static const String VL_TOKEN_PARAM = 'OM.sys.TokenID';

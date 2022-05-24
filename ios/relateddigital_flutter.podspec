@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'relateddigital_flutter'
-  s.version          = '0.4.3'
+  s.version          = '0.5.0'
   s.summary          = 'Related Digital Flutter SDK'
   s.description      = 'Related Digital Flutter SDK'
   s.homepage         = 'https://relateddigital.com'
@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'Euromsg', '2.5.4'
-  s.dependency 'VisilabsIOS', '3.6.0'
+  s.dependency 'Euromsg', '2.6.0'
+  s.dependency 'VisilabsIOS', '3.6.5'
   s.platform = :ios, '10.0'
 
   # Flutter.framework does not contain a i386 slice.
