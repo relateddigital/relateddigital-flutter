@@ -38,7 +38,8 @@ class _EventState extends State<Event> {
     'spintowin',
     'half_screen_image',
     'product_stat_notifier',
-    'inappcarousel'
+    'inappcarousel',
+    'drawer'
   ];
   String exVisitorId = '';
 

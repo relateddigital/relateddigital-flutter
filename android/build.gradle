@@ -4,7 +4,7 @@ version '1.0'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -15,14 +15,14 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 21
@@ -30,6 +30,6 @@ android {
 }
 
 dependencies {
-    api 'com.github.relateddigital:euromessage-android:5.1.2'
-    api 'com.github.relateddigital:visilabs-android:5.9.4'
+    api 'com.github.relateddigital:euromessage-android:5.1.7'
+    api 'com.github.relateddigital:visilabs-android:5.9.8'
 }
