@@ -84,3 +84,7 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 ## 0.4.9
 - New Feature : Spin-to-Win Code Banner
 - Adds new parameters to customize Spin-to-Win
+
+## 0.5.0
+- New Feature : Drawer in-app
+- Video support for in-app templates
