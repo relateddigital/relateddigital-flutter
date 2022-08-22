@@ -72,7 +72,7 @@ import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 
 ### Android
 
-- Add the following lines to the `repositories` section in `project/build.gradle`
+- Add below line to your `android/build.gradle` file's both `repositories` sections.
 
 ```gradle
 maven {url 'https://jitpack.io'}
@@ -97,6 +97,8 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 ```
 
 - Change your minSdkVersion to 21.
+
+- Change your targetSdkVersion and compileSdkVersion to 32.
 
 
 - Add the following services to your `AndroidManifest.xml`, within the `<application></application>` tags.
