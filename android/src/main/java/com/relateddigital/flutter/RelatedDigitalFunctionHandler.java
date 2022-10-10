@@ -131,7 +131,6 @@ public class RelatedDigitalFunctionHandler {
         }
 
         if (intent.getExtras() != null && intent.getExtras().getSerializable("message") != null) {
-
             try {
                 Message message = (Message) intent.getExtras().getSerializable("message");
                 EuroMobileManager.getInstance().sendOpenRequest(message);
@@ -139,7 +138,6 @@ public class RelatedDigitalFunctionHandler {
             catch (Exception ex) {
                 ex.printStackTrace();
             }
-
             Map<String, Object> readResult = Utilities.convertBundleToMap(intent);
             mChannel.invokeMethod(Constants.M_NOTIFICATION_OPENED, readResult);
         }
