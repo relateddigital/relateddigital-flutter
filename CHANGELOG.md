@@ -99,4 +99,7 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - (iOS) The problem of saving the push message when there is no title has been fixed.
 - (iOS) Public getUser method add
 
-
+## 0.5.2
+- OM.lvps repetition fix
+- Bug Fix : SpinToWin color with alpha value - bug fix
+- SpinToWin deep link
