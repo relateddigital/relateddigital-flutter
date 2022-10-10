@@ -36,7 +36,7 @@ class _StoryState extends State<Story> {
                     width: MediaQuery.of(context).size.width,
                     height: 110,
                     child: RDStoryView(
-                      actionId: '497',
+                      actionId: '975',
                       relatedDigitalPlugin: widget.relatedDigitalPlugin,
                       onItemClick: (Map<String, String> result) {
                         print(result);

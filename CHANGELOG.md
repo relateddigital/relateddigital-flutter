@@ -84,3 +84,19 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 ## 0.4.9
 - New Feature : Spin-to-Win Code Banner
 - Adds new parameters to customize Spin-to-Win
+
+## 0.5.0
+- New Feature : Drawer in-app
+- Video support for in-app templates
+
+## 0.5.1
+- (iOS & Android) New Optional Feature : You can add countdown timer to stories
+- (iOS & Android) New Optional Feature : You can define different links to different spin-to-win slices
+- (iOS & Android) Fix on SpinToWin UI
+- (Android) Fix for multiple transactional notifications (To show them all in the notification center)
+- (Android) Make the SDK compatible with Android API 32
+- (Android) Makes notification priority customizable via EuroMobileManager.setNotificationPriority() method
+- (iOS) The problem of saving the push message when there is no title has been fixed.
+- (iOS) Public getUser method add
+
+
