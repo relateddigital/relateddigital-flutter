@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'Euromsg', '2.6.4'
+  s.dependency 'Euromsg', '2.6.5'
   s.dependency 'VisilabsIOS', '3.7.7'
   s.platform = :ios, '10.0'
 
