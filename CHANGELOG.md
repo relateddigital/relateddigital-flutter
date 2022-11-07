@@ -103,3 +103,6 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - OM.lvps repetition fix
 - Bug Fix : SpinToWin color with alpha value - bug fix
 - SpinToWin deep link
+
+## 0.5.3
+- Huawei SDK removed
