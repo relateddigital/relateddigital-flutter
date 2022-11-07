@@ -1,12 +1,27 @@
-.DS_Store
-.dart_tool/
-
-.packages
 .pub/
 pubspec.lock
 
-build/
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+*.iml
+*.ipr
+*.iws
 .idea/
+
+/pubspec.lock
+**/doc/api/
+.dart_tool/
+.packages
+build/
 
 /example/android/app/google-services.json
 /example/android/app/agconnect-services.json

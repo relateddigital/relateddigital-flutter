@@ -1,0 +1,30 @@
+name: relateddigital_flutter
+description: Related Digital Official Flutter SDK for analytics, recommendation and push notifications.
+version: 1.0.0
+homepage: https://www.relateddigital.com
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+  flutter: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.relateddigital.flutter
+        pluginClass: RelatedDigitalPlugin
+      ios:
+        pluginClass: RelatedDigitalPlugin
+
+false_secrets:
+  - /example/android/app/google-services.json
