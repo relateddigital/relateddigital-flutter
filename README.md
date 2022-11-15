@@ -282,7 +282,7 @@ Future<void> initLib() async {
     huaweiAppAlias: 'huawei-app-alias', // pass empty String if your app does not support HMS
     androidPushIntent: 'com.test.MainActivity', // Android only
     organizationId: 'ORG_ID',
-    siteId: 'SITE_ID',
+    profileId: 'PROFILE_ID',
     dataSource: 'DATA_SOURCE',
     maxGeofenceCount: 20,  // iOS only
     geofenceEnabled: true,

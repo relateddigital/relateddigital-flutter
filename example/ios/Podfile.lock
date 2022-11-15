@@ -4,10 +4,13 @@ PODS:
     - Flutter
     - RelatedDigitalIOS (= 4.0.8)
   - RelatedDigitalIOS (4.0.8)
+  - shared_preferences_ios (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - relateddigital_flutter (from `.symlinks/plugins/relateddigital_flutter/ios`)
+  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
 
 SPEC REPOS:
   trunk:
@@ -18,11 +21,14 @@ EXTERNAL SOURCES:
     :path: Flutter
   relateddigital_flutter:
     :path: ".symlinks/plugins/relateddigital_flutter/ios"
+  shared_preferences_ios:
+    :path: ".symlinks/plugins/shared_preferences_ios/ios"
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   relateddigital_flutter: 4bc59a4359c013813aed9ae117ce8e71ae8c5c7e
   RelatedDigitalIOS: fc7d53b6a528ba0bb0a8ce8c042b583e88435e53
+  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 

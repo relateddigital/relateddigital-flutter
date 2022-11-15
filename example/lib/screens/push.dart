@@ -199,10 +199,10 @@ class _PushState extends State<Push> {
 
   Future<void> submit(SubmitType submitType) async {
     if (submitType == SubmitType.setEmail) {
-      widget.relatedDigitalPlugin.setEmail(emailController.text);
+      widget.relatedDigitalPlugin.setEmail(emailController.text, emailPermission);
     } else if (submitType == SubmitType.setEmailWithPermission) {
       widget.relatedDigitalPlugin
-          .setEmailWithPermission(emailController.text, emailPermission);
+          .setEmail(emailController.text, emailPermission);
     } else if (submitType == SubmitType.registerEmail) {
       widget.relatedDigitalPlugin
           .registerEmail(emailController.text,

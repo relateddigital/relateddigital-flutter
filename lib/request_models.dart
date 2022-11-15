@@ -4,7 +4,7 @@ class RDInitRequestModel {
   String huaweiAppAlias;
   String androidPushIntent;
   String organizationId;
-  String siteId;
+  String profileId;
   String dataSource;
   int maxGeofenceCount;
   bool geofenceEnabled;
@@ -17,7 +17,7 @@ class RDInitRequestModel {
       required this.huaweiAppAlias,
       required this.androidPushIntent,
       required this.organizationId,
-      required this.siteId,
+      required this.profileId,
       required this.dataSource,
       required this.maxGeofenceCount,
       required this.geofenceEnabled,

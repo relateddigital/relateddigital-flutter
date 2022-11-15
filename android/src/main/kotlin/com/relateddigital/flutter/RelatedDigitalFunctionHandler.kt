@@ -30,6 +30,9 @@ import euromsg.com.euromobileandroid.model.Message
 import euromsg.com.euromobileandroid.utils.AppUtils
 import io.flutter.plugin.common.MethodChannel
 
+
+import com.relateddigital.relateddigital_android.RelatedDigital
+
 class RelatedDigitalFunctionHandler(activity: Activity, channel: MethodChannel) {
     private val mContext: Context
     private val mChannel: MethodChannel
@@ -40,8 +43,12 @@ class RelatedDigitalFunctionHandler(activity: Activity, channel: MethodChannel) 
 
     init {
         mActivity = activity
-        mContext = activity.getApplicationContext()
+        mContext = activity.applicationContext
         mChannel = channel
+    }
+
+    fun initRD(organizationId: String, profileId: String, datasource: String) {
+        RelatedDigital.init(mContext, organizationId, profileId, datasource)
     }
 
     fun initEuromsg(appAlias: String?, huaweiAppAlias: String?, pushIntent: String?) {
@@ -62,6 +69,8 @@ class RelatedDigitalFunctionHandler(activity: Activity, channel: MethodChannel) 
         geofenceEnabled: Boolean,
         inAppNotificationsEnabled: Boolean
     ) {
+        RelatedDigital.init(mContext, organizationId, siteId, datasource)
+
         Visilabs.CreateAPI(
             organizationId,
             siteId,
@@ -146,12 +155,12 @@ class RelatedDigitalFunctionHandler(activity: Activity, channel: MethodChannel) 
     }
 
     fun checkReportRead(intent: Intent): Boolean {
-        if (EuroMobileManager.getInstance() == null) {
+        if (RE.getInstance() == null) {
             return true
         }
-        if (intent.getExtras() != null && intent.getExtras().getSerializable("message") != null) {
+        if (intent.extras != null && intent.extras.getSerializable("message") != null) {
             try {
-                val message: Message = intent.getExtras().getSerializable("message") as Message
+                val message: Message = intent.extras.getSerializable("message") as Message
                 EuroMobileManager.getInstance().sendOpenRequest(message)
             } catch (ex: Exception) {
                 ex.printStackTrace()

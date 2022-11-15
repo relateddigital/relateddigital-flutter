@@ -1,7 +1,9 @@
 package com.relateddigital.flutter
 
 object Constants {
-    var CHANNEL_NAME = "relateddigital_flutter"
+    val channelName = "relateddigital_flutter"
+
+
     var M_PERMISSION = "RD/requestPermission"
     var M_INIT = "RD/init"
     var M_TOKEN_RETRIEVED = "RD/getToken"

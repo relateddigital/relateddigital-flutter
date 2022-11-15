@@ -190,7 +190,7 @@ class _HomeState extends State<Home> {
           .huaweiAppAlias, // pass empty String if your app does not support HMS
       androidPushIntent: rdProfile.androidPushIntent, // Android only
       organizationId: rdProfile.organizationId,
-      siteId: rdProfile.profileId,
+      profileId: rdProfile.profileId,
       dataSource: rdProfile.dataSource,
       maxGeofenceCount: rdProfile.maxGeofenceCount > 20
           ? 20

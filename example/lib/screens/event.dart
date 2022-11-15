@@ -216,14 +216,14 @@ class _EventState extends State<Event> {
   }
 
   void setExVisitorID() async {
-    exVisitorId = await widget.relatedDigitalPlugin.getExVisitorID();
+    exVisitorId = await widget.relatedDigitalPlugin.getExVisitorId();
     setState(() {
       tController.text = exVisitorId;
     });
   }
 
   void getExVisitorID() async {
-    String exVisitorID = await widget.relatedDigitalPlugin.getExVisitorID();
+    String exVisitorID = await widget.relatedDigitalPlugin.getExVisitorId();
     showAlertDialog(title: 'ExVisitorId', content: exVisitorID);
   }
 

@@ -31,7 +31,7 @@ class RelatedDigitalPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.Ne
   private var mActivity: Activity? = null
   @Override
   fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.getBinaryMessenger(), Constants.CHANNEL_NAME)
+    channel = MethodChannel(flutterPluginBinding.getBinaryMessenger(), Constants.channelName)
     channel.setMethodCallHandler(this)
     flutterPluginBinding
       .getPlatformViewRegistry()
@@ -45,13 +45,25 @@ class RelatedDigitalPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.Ne
   fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     try {
       if (call.method.equals(Constants.M_INIT)) {
+
+
+        val organizationId: String? = call.argument("organizationId")
+        val profileId: String? = call.argument("profileId")
+        val dataSource: String? = call.argument("dataSource")
+        if (organizationId != null && profileId != null && dataSource != null) {
+
+        }
+
+
+
+
         val appAlias: String = call.argument("appAlias")
         val huaweiAppAlias: String = call.argument("huaweiAppAlias")
         val pushIntent: String = call.argument("pushIntent")
         val enableLog: Boolean = call.argument("enableLog")
-        val organizationId: String = call.argument("organizationId")
-        val siteId: String = call.argument("siteId")
-        val dataSource: String = call.argument("dataSource")
+
+
+
         val geofenceEnabled: Boolean = call.argument("geofenceEnabled")
         val inAppNotificationsEnabled: Boolean = call.argument("inAppNotificationsEnabled")
         functionHandler.initEuromsg(appAlias, huaweiAppAlias, pushIntent)

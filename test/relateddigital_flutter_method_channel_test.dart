@@ -1,9 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:relateddigital_flutter/relateddigital_flutter_method_channel.dart';
 
 void main() {
-  MethodChannelRelateddigitalFlutter platform = MethodChannelRelateddigitalFlutter();
   const MethodChannel channel = MethodChannel('relateddigital_flutter');
 
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +16,4 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await platform.getPlatformVersion(), '42');
-  });
 }
