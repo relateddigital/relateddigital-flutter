@@ -92,7 +92,7 @@ class Constants {
   static const String requestPushNotificationPermission =
       'requestPushNotificationPermission';
 
-  static const String storyView = 'storyView';
+  static const String storyViewName = 'StoryView';
 
   static const String storyLink = 'storyLink';
 

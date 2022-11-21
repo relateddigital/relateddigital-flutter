@@ -24,7 +24,7 @@ class RDExample extends StatefulWidget {
 
 class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   final RelatedDigital relatedDigitalPlugin = RelatedDigital();
-  TabController? controller;
+  late TabController controller;
   final GlobalKey<NavigatorState> key = GlobalKey();
 
   @override

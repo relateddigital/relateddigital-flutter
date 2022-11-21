@@ -44,26 +44,17 @@ class _HomeState extends State<Home> {
         rdProfile = RDProfile.fromJson(profileJson);
       }
     }
-    tControllers[Constants.appAlias]?.text = rdProfile.appAlias;
-    tControllers[Constants.huaweiAppAlias]?.text = rdProfile.huaweiAppAlias;
-    tControllers[Constants.androidPushIntent]?.text =
-        rdProfile.androidPushIntent;
     tControllers[Constants.organizationId]?.text = rdProfile.organizationId;
     tControllers[Constants.profileId]?.text = rdProfile.profileId;
     tControllers[Constants.dataSource]?.text = rdProfile.dataSource;
-    tControllers[Constants.maxGeofenceCount]?.text =
-        rdProfile.maxGeofenceCount.toString();
   }
 
   static HashMap<String, TextEditingController> createControllers() {
     return HashMap.from({
-      Constants.appAlias: TextEditingController(),
-      Constants.huaweiAppAlias: TextEditingController(),
-      Constants.androidPushIntent: TextEditingController(),
       Constants.organizationId: TextEditingController(),
       Constants.profileId: TextEditingController(),
       Constants.dataSource: TextEditingController(),
-      Constants.maxGeofenceCount: TextEditingController()
+      Constants.askLocationPermissionAtStart: TextEditingController()
     });
   }
 
@@ -79,24 +70,6 @@ class _HomeState extends State<Home> {
             ),
             body: ListView(
               children: ListTile.divideTiles(context: context, tiles: [
-                TextInputListTile(
-                    title: Constants.appAlias,
-                    controller: tControllers[Constants.appAlias],
-                    onChanged: (String aAlias) {
-                      rdProfile.appAlias = aAlias;
-                    }),
-                TextInputListTile(
-                    title: Constants.huaweiAppAlias,
-                    controller: tControllers[Constants.huaweiAppAlias],
-                    onChanged: (String haAlias) {
-                      rdProfile.huaweiAppAlias = haAlias;
-                    }),
-                TextInputListTile(
-                    title: Constants.androidPushIntent,
-                    controller: tControllers[Constants.androidPushIntent],
-                    onChanged: (String apIntent) {
-                      rdProfile.androidPushIntent = apIntent;
-                    }),
                 TextInputListTile(
                     title: Constants.organizationId,
                     controller: tControllers[Constants.organizationId],
@@ -117,53 +90,12 @@ class _HomeState extends State<Home> {
                     }),
                 SwitchListTile(
                   title: const Text(
-                    Constants.inAppNotificationsEnabled,
+                    Constants.askLocationPermissionAtStart,
                     style: Styles.settingsPrimaryText,
                   ),
-                  value: rdProfile.inAppNotificationsEnabled,
+                  value: rdProfile.askLocationPermissionAtStart,
                   onChanged: (bool enabled) {
-                    rdProfile.inAppNotificationsEnabled = enabled;
-                    updateState();
-                  },
-                ),
-                SwitchListTile(
-                  title: const Text(
-                    Constants.geofenceEnabled,
-                    style: Styles.settingsPrimaryText,
-                  ),
-                  value: rdProfile.geofenceEnabled,
-                  onChanged: (bool enabled) {
-                    rdProfile.geofenceEnabled = enabled;
-                    updateState();
-                  },
-                ),
-                TextInputListTile(
-                    title: Constants.maxGeofenceCount,
-                    type: const TextInputType.numberWithOptions(
-                        signed: false, decimal: false),
-                    controller: tControllers[Constants.maxGeofenceCount],
-                    onChanged: (String mgCount) {
-                      rdProfile.maxGeofenceCount = int.tryParse(mgCount) ?? 20;
-                    }),
-                SwitchListTile(
-                  title: const Text(
-                    Constants.logEnabled,
-                    style: Styles.settingsPrimaryText,
-                  ),
-                  value: rdProfile.logEnabled,
-                  onChanged: (bool enabled) {
-                    rdProfile.logEnabled = enabled;
-                    updateState();
-                  },
-                ),
-                SwitchListTile(
-                  title: const Text(
-                    Constants.isIDFAEnabled,
-                    style: Styles.settingsPrimaryText,
-                  ),
-                  value: rdProfile.isIDFAEnabled,
-                  onChanged: (bool enabled) {
-                    rdProfile.isIDFAEnabled = enabled;
+                    rdProfile.askLocationPermissionAtStart = enabled;
                     updateState();
                   },
                 ),

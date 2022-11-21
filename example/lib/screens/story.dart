@@ -6,7 +6,7 @@ import 'package:relateddigital_flutter_example/styles.dart';
 class Story extends StatefulWidget {
   final RelatedDigital relatedDigitalPlugin;
 
-  const Story({required this.relatedDigitalPlugin});
+  const Story({super.key, required this.relatedDigitalPlugin});
 
   @override
   _StoryState createState() => _StoryState();

@@ -34,7 +34,7 @@ class RDStoryViewState extends State<RDStoryView> {
   @override
   Widget build(BuildContext context) {
     // This is used in the platform side to register the view.
-    const String viewType = Constants.storyView;
+    const String viewType = Constants.storyViewName;
     // Pass parameters to the platform side.
     final Map<String, dynamic> creationParams = <String, dynamic>{
       'actionId': widget.actionId
