@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:convert';
 import 'dart:developer' as developer;
@@ -25,19 +26,19 @@ class RelatedDigital {
   }
 
   Future<dynamic> _methodCallHandler(MethodCall methodCall) async {
-    if (methodCall.method == Constants.M_TOKEN_RETRIEVED) {
+    if (methodCall.method == Constants.getToken) {
       RDTokenResponseModel response =
           RDTokenResponseModel.fromJson(methodCall.arguments);
       if (_setTokenHandler != null) {
         _setTokenHandler!(response);
       }
       _handleTokenRegister(response);
-    } else if (methodCall.method == Constants.M_NOTIFICATION_OPENED) {
+    } else if (methodCall.method == Constants.notificationOpened) {
       if (_readNotificationHandler != null) {
         _readNotificationHandler!(methodCall.arguments);
       }
       _handleUtmParameters(methodCall.arguments);
-    } else if (methodCall.method == Constants.M_STORY_ITEM_CLICK) {
+    } else if (methodCall.method == Constants.onStoryItemClick) {
       Map<String, String> map = {
         'storyLink': methodCall.arguments['storyLink']
       };
@@ -47,34 +48,21 @@ class RelatedDigital {
 
   Future<void> init(RDInitRequestModel initRequest,
       void Function(dynamic result) notificationHandler) async {
-    appAlias = initRequest.appAlias;
-    huaweiAppAlias = initRequest.huaweiAppAlias;
     _readNotificationHandler = notificationHandler;
-    _logEnabled = initRequest.logEnabled;
 
-    await _channel.invokeMethod(Constants.init, {
-      'appAlias': initRequest.appAlias,
-      'huaweiAppAlias': initRequest.huaweiAppAlias,
-      'pushIntent': initRequest.androidPushIntent,
-      'enableLog': initRequest.logEnabled,
-      'organizationId': initRequest.organizationId,
-      'profileId': initRequest.profileId,
-      'dataSource': initRequest.dataSource,
-      'geofenceEnabled': initRequest.geofenceEnabled,
-      'maxGeofenceCount': initRequest.maxGeofenceCount,
-      'inAppNotificationsEnabled': initRequest.inAppNotificationsEnabled,
-      'isIDFAEnabled': initRequest.isIDFAEnabled
+    await _channel.invokeMethod(Constants.initialize, {
+      Constants.organizationId: initRequest.organizationId,
+      Constants.profileId: initRequest.profileId,
+      Constants.dataSource: initRequest.dataSource,
+      Constants.askLocationPermissionAtStart:
+          initRequest.askLocationPermissionAtStart
     });
   }
 
-  Future<void> setIsInAppNotificationEnabled(bool isInAppNotificationEnabled,
-      String googleAppAlias, String huaweiAppAlias, String iosAppAlias) async {
-    await _channel.invokeMethod(Constants.setIsInAppNotificationEnabled, {
-      Constants.isInAppNotificationEnabled: isInAppNotificationEnabled,
-      Constants.googleAppAlias: googleAppAlias,
-      Constants.huaweiAppAlias: huaweiAppAlias,
-      Constants.iosAppAlias: iosAppAlias
-    });
+  Future<void> setIsInAppNotificationEnabled(
+      bool isInAppNotificationEnabled) async {
+    await _channel.invokeMethod(Constants.setIsInAppNotificationEnabled,
+        {Constants.isInAppNotificationEnabled: isInAppNotificationEnabled});
   }
 
   Future<void> setIsGeofenceEnabled(bool isGeofenceEnabled) async {
@@ -109,6 +97,18 @@ class RelatedDigital {
         {Constants.pageName: pageName, Constants.parameters: parameters});
   }
 
+  Future<void> setIsPushNotificationEnabled(bool isPushNotificationEnabled,
+      String googleAppAlias, String huaweiAppAlias, String iosAppAlias,
+      {bool deliveredBadge = true}) async {
+    await _channel.invokeMethod(Constants.isPushNotificationEnabled, {
+      Constants.isInAppNotificationEnabled: isPushNotificationEnabled,
+      Constants.googleAppAlias: googleAppAlias,
+      Constants.huaweiAppAlias: huaweiAppAlias,
+      Constants.iosAppAlias: iosAppAlias,
+      Constants.deliveredBadge: deliveredBadge
+    });
+  }
+
   Future<void> setEmail(String email, bool permission) async {
     await _channel.invokeMethod(Constants.setEmail,
         {Constants.email: email, Constants.permission: permission});
@@ -134,8 +134,8 @@ class RelatedDigital {
         {Constants.relatedDigitalUserId: relatedDigitalUserId});
   }
 
-  Future<void> setNotificationLoginID(String notificationLoginId) async {
-    await _channel.invokeMethod(Constants.setNotificationLoginID,
+  Future<void> setNotificationLoginId(String notificationLoginId) async {
+    await _channel.invokeMethod(Constants.setNotificationLoginId,
         {Constants.notificationLoginId: notificationLoginId});
   }
 
@@ -185,10 +185,10 @@ class RelatedDigital {
     return PayloadListResponse([], 'Unknown error');
   }
 
-  Future<PayloadListResponse> getPushMessagesWithID() async {
+  Future<PayloadListResponse> getPushMessagesWithId() async {
     try {
       String? rawResponse =
-          await _channel.invokeMethod(Constants.getPushMessagesWithID);
+          await _channel.invokeMethod(Constants.getPushMessagesWithId);
       if (rawResponse != null && rawResponse.isNotEmpty) {
         Map result = json.decode(rawResponse);
         return PayloadListResponse.fromJson(result);
@@ -237,8 +237,9 @@ class RelatedDigital {
     return {};
   }
 
-  Future<List> getRecommendations(String zoneId, String productCode,
-      {List filters = const [],
+  Future<List> getRecommendations(String zoneId,
+      {String? productCode,
+      List filters = const [],
       Map<String, String> properties = const {}}) async {
     String? rawResponse =
         await _channel.invokeMethod(Constants.getRecommendations, {
@@ -268,93 +269,58 @@ class RelatedDigital {
     await _channel.invokeMethod(Constants.setBadge, {Constants.count: count});
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  Future<void> requestPermission(Function(RDTokenResponseModel) tokenHandler,
+  Future<void> requestPushNotificationPermission(Function(RDTokenResponseModel) tokenHandler,
       {bool isProvisional = false}) async {
     _setTokenHandler = tokenHandler;
-    await _channel
-        .invokeMethod(Constants.M_PERMISSION, {'isProvisional': isProvisional});
-  }
-
-  Future<void> setAppVersion(String appVersion) async {
-    await _channel
-        .invokeMethod(Constants.M_APP_VERSION, {'appVersion': appVersion});
-  }
-
-  Future<void> setNotificationPermission(bool permission) async {
     await _channel.invokeMethod(
-        Constants.M_NOTIFICATION_PERMISSION, {'permission': permission});
+        Constants.requestPushNotificationPermission, {Constants.isProvisional: isProvisional});
   }
 
-  void setStoryPlatformHandler(StoryPlatformCallbackHandler handler) {
-    _storyPlatformCallbackHandler = handler;
-  }
-
-  Future<void> clearStoryCache() async {
-    if (Platform.isAndroid) {
-      await _channel.invokeMethod(Constants.M_STORY_CLEAR_CACHE);
-    }
-  }
-
-  void _handleTokenRegister(RDTokenResponseModel response) {
-    Map<String, String> vlTokenParameters = {
-      Constants.VL_TOKEN_PARAM: response.deviceToken,
-      Constants.VL_APP_ID_PARAM:
-          response.playServiceEnabled ? appAlias : huaweiAppAlias
-    };
-    customEvent(Constants.VL_TOKEN_KEY, vlTokenParameters);
-  }
-
-  void _handleUtmParameters(dynamic payload) {
-    try {
-      if (payload != null &&
-          payload[Constants.VL_UTM_EVENT_PARAMS_KEY] != null) {
-        dynamic payloadParams = payload[Constants.VL_UTM_EVENT_PARAMS_KEY];
-
-        String? utmCampaign = payloadParams[Constants.VL_UTM_CAMPAIGN_PARAM];
-        String? utmSource = payloadParams[Constants.VL_UTM_SOURCE_PARAM];
-        String? utmMedium = payloadParams[Constants.VL_UTM_MEDIUM_PARAM];
-
-        if ((utmCampaign != null && utmCampaign.isNotEmpty) ||
-            (utmSource != null && utmSource.isNotEmpty) ||
-            (utmMedium != null && utmMedium.isNotEmpty)) {
-          Map<String, String> utmMap = {
-            Constants.VL_UTM_CAMPAIGN_PARAM: utmCampaign!,
-            Constants.VL_UTM_SOURCE_PARAM: utmSource!,
-            Constants.VL_UTM_MEDIUM_PARAM: utmMedium!
-          };
-          customEvent(Constants.VL_UTM_EVENT_KEY, utmMap);
-        }
-      }
-    } on Exception catch (ex) {
-      developer.log(ex.toString());
-    }
-  }
-
-  Future<void> requestIDFA() async {
+  Future<void> requestIdfa() async {
     if (Platform.isAndroid) {
       if (_logEnabled) {
         developer.log('Related Digital - Method not supported on Android');
       }
       return;
     }
-    await _channel.invokeMethod(Constants.M_REQUEST_IDFA);
+    await _channel.invokeMethod(Constants.requestIdfa);
+  }
+
+  void setStoryPlatformHandler(StoryPlatformCallbackHandler handler) {
+    _storyPlatformCallbackHandler = handler;
+  }
+
+  void _handleTokenRegister(RDTokenResponseModel response) {
+    Map<String, String> vlTokenParameters = {
+      Constants.omSysTokenId: response.deviceToken,
+      Constants.omSysAppId:
+          response.playServiceEnabled ? appAlias : huaweiAppAlias
+    };
+    customEvent(Constants.registerToken, vlTokenParameters);
+  }
+
+  void _handleUtmParameters(dynamic payload) {
+    try {
+      if (payload != null && payload[Constants.params] != null) {
+        dynamic payloadParams = payload[Constants.params];
+
+        String? utmCampaign = payloadParams[Constants.utmCampaign];
+        String? utmSource = payloadParams[Constants.utmSource];
+        String? utmMedium = payloadParams[Constants.utmMedium];
+
+        if ((utmCampaign != null && utmCampaign.isNotEmpty) ||
+            (utmSource != null && utmSource.isNotEmpty) ||
+            (utmMedium != null && utmMedium.isNotEmpty)) {
+          Map<String, String> utmMap = {
+            Constants.utmCampaign: utmCampaign!,
+            Constants.utmSource: utmSource!,
+            Constants.utmMedium: utmMedium!
+          };
+          customEvent(Constants.omeEvtGif, utmMap);
+        }
+      }
+    } on Exception catch (ex) {
+      developer.log(ex.toString());
+    }
   }
 }

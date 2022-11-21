@@ -1,6 +1,9 @@
 import 'dart:io';
 
 class Constants {
+  static bool falseValue = false;
+
+
   static String APP_ALIAS = Platform.isIOS
       ? 'relateddigital-flutter-example-ios'
       : 'flutter-android-demo';
@@ -22,6 +25,7 @@ class Constants {
   static const String organizationId = 'organizationId';
   static const String profileId = 'profileId';
   static const String dataSource = 'dataSource';
+  static const String askLocationPermissionAtStart = 'askLocationPermissionAtStart';
   static const String inAppNotificationsEnabled = 'inAppNotificationsEnabled';
   static const String geofenceEnabled = 'geofenceEnabled';
   static const String maxGeofenceCount = 'maxGeofenceCount';

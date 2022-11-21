@@ -185,21 +185,10 @@ class _HomeState extends State<Home> {
 
   Future<void> submit() async {
     var initRequest = RDInitRequestModel(
-      appAlias: rdProfile.appAlias,
-      huaweiAppAlias: rdProfile
-          .huaweiAppAlias, // pass empty String if your app does not support HMS
-      androidPushIntent: rdProfile.androidPushIntent, // Android only
-      organizationId: rdProfile.organizationId,
-      profileId: rdProfile.profileId,
-      dataSource: rdProfile.dataSource,
-      maxGeofenceCount: rdProfile.maxGeofenceCount > 20
-          ? 20
-          : rdProfile.maxGeofenceCount, // iOS only
-      geofenceEnabled: rdProfile.geofenceEnabled,
-      inAppNotificationsEnabled: rdProfile.inAppNotificationsEnabled,
-      logEnabled: rdProfile.logEnabled,
-      isIDFAEnabled: rdProfile.isIDFAEnabled, // iOS only
-    );
+        organizationId: rdProfile.organizationId,
+        profileId: rdProfile.profileId,
+        dataSource: rdProfile.dataSource,
+        askLocationPermissionAtStart: rdProfile.askLocationPermissionAtStart);
     await widget.relatedDigitalPlugin
         .init(initRequest, widget.notificationHandler);
     Navigator.pushNamed(context, '/tabBarView');

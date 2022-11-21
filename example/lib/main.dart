@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
@@ -11,10 +12,12 @@ import 'package:relateddigital_flutter_example/screens/notification_center.dart'
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(RDExample());
+  runApp(const RDExample());
 }
 
 class RDExample extends StatefulWidget {
+  const RDExample({super.key});
+
   @override
   _RDExample createState() => _RDExample();
 }
@@ -31,13 +34,13 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   }
 
   void _readNotificationCallback(dynamic result) async {
-    print('_readNotificationCallback');
-    print(result);
+    developer.log('_readNotificationCallback');
+    developer.log(result);
     if(key.currentContext != null) {
       showDialog(
           context: key.currentContext!,
           builder: (context) => AlertDialog(
-            title: Text("_readNotificationCallback"),
+            title: const Text("_readNotificationCallback"),
             content: Text(result.toString()),
           ));
     }
@@ -90,13 +93,13 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
         onWillPop: null,
         child: Scaffold(
           body: TabBarView(
+            controller: controller,
             children: <Widget>[
               eventView(),
               pushView(),
               inAppView(),
               storyView(),
             ],
-            controller: controller,
           ),
           bottomNavigationBar: bottomNavigationBar(),
         ));
@@ -110,7 +113,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
       child: TabBar(
         indicatorColor: Styles.relatedRed,
         labelColor: Colors.black,
-        tabs: <Tab>[
+        tabs: const <Tab>[
           Tab(
             text: Constants.Event,
             icon: Icon(Icons.analytics, color: Styles.relatedOrange),

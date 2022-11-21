@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter/response_models.dart';
@@ -8,7 +9,7 @@ import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart
 class Push extends StatefulWidget {
   final RelatedDigital relatedDigitalPlugin;
 
-  Push({required this.relatedDigitalPlugin});
+  const Push({super.key, required this.relatedDigitalPlugin});
 
   @override
   _PushState createState() => _PushState();
@@ -51,7 +52,7 @@ class _PushState extends State<Push> {
                       TextButton(
                           style: Styles.pushButtonStyle,
                           onPressed: () {
-                            widget.relatedDigitalPlugin.requestPermission(
+                            widget.relatedDigitalPlugin.requestPushNotificationPermission(
                                 _getTokenCallback,
                                 isProvisional: true);
                           },
@@ -94,7 +95,7 @@ class _PushState extends State<Push> {
                   onChanged: (bool nPermission) {
                     notificationPermission = nPermission;
                     widget.relatedDigitalPlugin
-                        .setNotificationPermission(nPermission);
+                        .setIsPushNotificationEnabled(nPermission, '', '', '');
                     updateState();
                   },
                 ),
@@ -234,9 +235,9 @@ class _PushState extends State<Push> {
   }
 
   void _getTokenCallback(RDTokenResponseModel result) {
-    print('RDTokenResponseModel :');
+    developer.log('RDTokenResponseModel :');
     if (result.deviceToken.isNotEmpty) {
-      print(result.deviceToken);
+      developer.log(result.deviceToken);
       setState(() {
         tokenController.text = result.deviceToken;
       });

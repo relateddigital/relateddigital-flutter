@@ -207,7 +207,7 @@ class _EventState extends State<Event> {
     List filters = [filter];
 
     List result = await widget.relatedDigitalPlugin
-        .getRecommendations(zoneId, productCode, filters: filters);
+        .getRecommendations(zoneId, productCode: productCode, filters: filters);
     developer.log(result.toString());
   }
 
@@ -236,7 +236,7 @@ class _EventState extends State<Event> {
   }
 
   void requestIDFA() async {
-    await widget.relatedDigitalPlugin.requestIDFA();
+    await widget.relatedDigitalPlugin.requestIdfa();
   }
 
   void sendLocationPermission() async {

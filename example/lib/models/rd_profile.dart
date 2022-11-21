@@ -12,6 +12,7 @@ class RDProfile {
   bool inAppNotificationsEnabled;
   bool logEnabled;
   bool isIDFAEnabled;
+  bool askLocationPermissionAtStart;
 
   RDProfile(
       this.appAlias,
@@ -24,7 +25,8 @@ class RDProfile {
       this.geofenceEnabled,
       this.inAppNotificationsEnabled,
       this.logEnabled,
-      this.isIDFAEnabled);
+      this.isIDFAEnabled,
+      this.askLocationPermissionAtStart);
 
   RDProfile.fromConstant()
       : appAlias = Constants.APP_ALIAS,
@@ -37,7 +39,8 @@ class RDProfile {
         geofenceEnabled = Constants.GEOFENCE_ENABLED,
         inAppNotificationsEnabled = Constants.IN_APP_NOTIFICATIONS_ENABLED,
         logEnabled = Constants.LOG_ENABLED,
-        isIDFAEnabled = Constants.IS_IDFA_ENABLED;
+        isIDFAEnabled = Constants.IS_IDFA_ENABLED,
+        askLocationPermissionAtStart = Constants.falseValue;
 
   RDProfile.fromJson(Map<String, dynamic> json)
       : appAlias = json['appAlias'],
@@ -50,24 +53,25 @@ class RDProfile {
         geofenceEnabled = json['geofenceEnabled'],
         inAppNotificationsEnabled = json['inAppNotificationsEnabled'],
         logEnabled = json['logEnabled'],
-        isIDFAEnabled = json['isIDFAEnabled'];
+        isIDFAEnabled = json['isIDFAEnabled'],
+        askLocationPermissionAtStart = json['askLocationPermissionAtStart'];
 
   Map<String, dynamic> toJson() => {
-    'appAlias': appAlias,
-    'huaweiAppAlias': huaweiAppAlias,
-    'androidPushIntent': androidPushIntent,
-    'organizationId': organizationId,
-    'profileId': profileId,
-    'dataSource': dataSource,
-    'maxGeofenceCount': maxGeofenceCount,
-    'geofenceEnabled': geofenceEnabled,
-    'inAppNotificationsEnabled': inAppNotificationsEnabled,
-    'logEnabled': logEnabled,
-    'isIDFAEnabled': isIDFAEnabled,
-  };
+        'appAlias': appAlias,
+        'huaweiAppAlias': huaweiAppAlias,
+        'androidPushIntent': androidPushIntent,
+        'organizationId': organizationId,
+        'profileId': profileId,
+        'dataSource': dataSource,
+        'maxGeofenceCount': maxGeofenceCount,
+        'geofenceEnabled': geofenceEnabled,
+        'inAppNotificationsEnabled': inAppNotificationsEnabled,
+        'logEnabled': logEnabled,
+        'isIDFAEnabled': isIDFAEnabled,
+        'askLocationPermissionAtStart': askLocationPermissionAtStart
+      };
 
   bool validate() {
     return true;
   }
-
 }
