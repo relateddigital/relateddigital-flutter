@@ -1,46 +1,138 @@
 package com.relateddigital.flutter
 
-object Constants {
-    val channelName = "relateddigital_flutter"
+class Constants {
+    companion object {
+        const val userInfo = "userInfo"
+
+        const val channelName = "relateddigital_flutter"
+        const val initialize = "initialize"
+        const val organizationId = "organizationId"
+        const val profileId = "profileId"
+        const val dataSource = "dataSource"
+        const val askLocationPermissionAtStart = "askLocationPermissionAtStart"
+        const val setIsInAppNotificationEnabled = "setIsInAppNotificationEnabled"
+        const val isInAppNotificationEnabled = "isInAppNotificationEnabled"
 
 
-    var M_PERMISSION = "RD/requestPermission"
-    var M_INIT = "RD/init"
-    var M_TOKEN_RETRIEVED = "RD/getToken"
-    var M_NOTIFICATION_OPENED = "RD/openNotification"
-    var M_EURO_USER_ID = "RD/setEuroUserId"
-    var M_EMAIL_WITH_PERMISSION = "RD/setEmailWithPermission"
-    var M_SET_EMAIL = "RD/setEmail"
-    var M_USER_PROPERTY = "RD/setUserProperty"
-    var M_REMOVE_USER_PROPERTY = "RD/removeUserProperty"
-    var M_APP_VERSION = "RD/setAppVersion"
-    var M_NOTIFICATION_PERMISSION = "RD/setPushNotificationPermission"
-    var M_EMAIL_PERMISSION = "RD/setEmailPermission"
-    var M_PHONE_PERMISSION = "RD/setPhoneNumberPermission"
-    var M_BADGE = "RD/setBadgeCount"
-    var M_ADVERTISING = "RD/setAdvertisingIdentifier"
-    var M_TWITTER = "RD/setTwitterId"
-    var M_FACEBOOK = "RD/setFacebookId"
-    var M_CUSTOM_EVENT = "VL/customEvent"
-    var M_REGISTER_EMAIL = "RD/registerEmail"
-    var M_RECOMMENDATIONS = "VL/getRecommendations"
-    var M_STORY_ITEM_CLICK = "VL/onStoryItemClick"
-    var M_STORY_CLEAR_CACHE = "VL/clearStoryCache"
-    var M_FAV_ATTRIBUTE = "VL/getFavAttributes"
-    var M_LOGOUT = "VL/logout"
-    var M_LOGIN = "VL/login"
-    var M_SIGNUP = "VL/signUp"
-    var M_GET_EXVISITORID = "VL/getExVisitorID"
-    var M_APP_TRACKER = "VL/appTracker"
-    var M_GET_PUSH_MESSAGES = "RD/getPushMessages"
-    var M_SEND_LOCATION_PERMISSION = "VL/sendLocationPermission"
-    var VL_CHANNEL = "Android"
-    var VL_SEGMENT_URL = "https://lgr.visilabs.net"
-    var VL_REALTIME_URL = "https://rt.visilabs.net"
-    var VL_TARGET_URL = "https://s.visilabs.net/json"
-    var VL_ACTION_URL = "https://s.visilabs.net/actjson"
-    var VL_GEOFENCE_URL = "https://s.visilabs.net/geojson"
-    var VL_REQUEST_TIMEOUT = 30
-    var STORY_VIEW_NAME = "StoryView"
-    var REGISTER_TOKEN = "RegisterToken"
+        const val setIsGeofenceEnabled = "setIsGeofenceEnabled"
+        const val isGeofenceEnabled = "isGeofenceEnabled"
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const val setAdvertisingIdentifier = "setAdvertisingIdentifier"
+        const val advertisingIdentifier = "advertisingIdentifier"
+
+        const val signUp = "signUp"
+        const val login = "login"
+        const val exVisitorId = "exVisitorId"
+        const val properties = "properties"
+
+
+        const val logout = "logout"
+
+
+        const val customEvent = "customEvent"
+        const val pageName = "pageName"
+        const val parameters = "parameters"
+
+
+        const val setIsPushNotificationEnabled = "setIsPushNotificationEnabled"
+        const val isPushNotificationEnabled = "isPushNotificationEnabled"
+
+        const val googleAppAlias = "googleAppAlias"
+        const val huaweiAppAlias = "huaweiAppAlias"
+        const val iosAppAlias = "iosAppAlias"
+
+        const val deliveredBadge = "deliveredBadge"
+
+
+        const val setEmail = "setEmail"
+
+        const val email = "email"
+        const val permission = "permission"
+
+        const val sendCampaignParameters = "sendCampaignParameters"
+
+
+
+        const val setTwitterId = "setTwitterId"
+        const val twitterId = "twitterId"
+
+        const val setFacebookId = "setFacebookId"
+        const val facebookId = "facebookId"
+
+        const val setRelatedDigitalUserId = "setRelatedDigitalUserId"
+        const val relatedDigitalUserId = "relatedDigitalUserId"
+
+
+        const val setNotificationLoginId = "setNotificationLoginId"
+        const val notificationLoginId = "notificationLoginId"
+
+        const val setPhoneNumber = "setPhoneNumber"
+        const val msisdn = "msisdn"
+
+        const val setUserProperty = "setUserProperty"
+        const val removeUserProperty = "removeUserProperty"
+        const val key = "key"
+        const val value = "value"
+
+
+        const val registerEmail = "registerEmail"
+        const val isCommercial = "isCommercial"
+
+        const val getPushMessages = "getPushMessages"
+        const val pushMessages = "pushMessages"
+        const val getPushMessagesWithId = "getPushMessagesWithId"
+
+
+
+        const val sendTheListOfAppsInstalled = "sendTheListOfAppsInstalled"
+
+        const val sendLocationPermission = "sendLocationPermission"
+
+        const val requestLocationPermission = "requestLocationPermission"
+
+        const val getFavoriteAttributeActions = "getFavoriteAttributeActions"
+
+        const val actionId = "actionId"
+
+        const val getRecommendations = "getRecommendations"
+        const val zoneId = "zoneId"
+        const val productCode = "productCode"
+        const val filters = "filters"
+
+
+        const val getExVisitorId = "getExVisitorId"
+
+        const val setBadge = "setBadge"
+        const val count = "count"
+
+        const val requestPushNotificationPermission = "requestPushNotificationPermission"
+        const val isProvisional = "isProvisional"
+        const val requestIdfa = "requestIdfa"
+
+
+
+
+
+
+
+        const val storyView = "StoryView"
+        const val storyLink = "storyLink"
+        const val onStoryItemClick = "onStoryItemClick";
+
+
+
+        const val notificationOpened = "notificationOpened"
+    }
 }

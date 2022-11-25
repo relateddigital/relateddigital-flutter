@@ -1,9 +1,7 @@
 package com.relateddigital.flutter
 
 import android.content.Context
-import android.graphics.Color
 import android.view.View
-import android.widget.TextView
 import java.util.HashMap
 import java.util.Map
 import io.flutter.plugin.common.MethodChannel
@@ -16,7 +14,7 @@ import com.relateddigital.relateddigital_android.inapp.story.StoryItemClickListe
 
 
 
-class RelatedDigitalStoryView internal constructor(
+class RDStoryView internal constructor(
     @NonNull context: Context,
     id: Int,
     @Nullable creationParams: Map<String?, Object?>,
