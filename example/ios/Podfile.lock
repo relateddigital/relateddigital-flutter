@@ -5,15 +5,16 @@ PODS:
     - Euromsg (= 2.6.4)
     - Flutter
     - VisilabsIOS (= 3.7.7)
-  - shared_preferences_ios (0.0.1):
+  - shared_preferences_foundation (0.0.1):
     - Flutter
+    - FlutterMacOS
   - VisilabsIOS (3.7.7)
 
 DEPENDENCIES:
   - Euromsg
   - Flutter (from `Flutter`)
   - relateddigital_flutter (from `.symlinks/plugins/relateddigital_flutter/ios`)
-  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
 
 SPEC REPOS:
   trunk:
@@ -25,14 +26,14 @@ EXTERNAL SOURCES:
     :path: Flutter
   relateddigital_flutter:
     :path: ".symlinks/plugins/relateddigital_flutter/ios"
-  shared_preferences_ios:
-    :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
 
 SPEC CHECKSUMS:
   Euromsg: 27581bafc62705cbc4ed0d4c4eb74c7416353252
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   relateddigital_flutter: 6af0f12f0e98a744203a4636ba8d2b253059e4c9
-  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
+  shared_preferences_foundation: 297b3ebca31b34ec92be11acd7fb0ba932c822ca
   VisilabsIOS: df6713cbe8843a6ead64a3075cf15954fd81c682
 
 PODFILE CHECKSUM: 3196bddfb8be38cd33ca5211b2b2c84ea6e0c5d4

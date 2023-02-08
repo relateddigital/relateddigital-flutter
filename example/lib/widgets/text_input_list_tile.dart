@@ -16,7 +16,12 @@ class TextInputListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var formatters = this.type == TextInputType.number ?  <TextInputFormatter>[ FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(2)] : <TextInputFormatter>[ FilteringTextInputFormatter.singleLineFormatter] ;
+    var formatters = this.type == TextInputType.number
+        ? <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(2)
+          ]
+        : <TextInputFormatter>[FilteringTextInputFormatter.singleLineFormatter];
     return ListTile(
       leading: Container(
           padding: EdgeInsets.only(top: 10, bottom: 10.0),

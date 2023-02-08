@@ -1,11 +1,8 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
-
-T cast<T>(x) => x is T ? x : null;
 
 bool equalsIgnoreCase(String string1, String string2) {
-  return string1?.toLowerCase()?.replaceAll(RegExp(r'ı'), 'i') ==
-      string2?.toLowerCase()?.replaceAll(RegExp(r'ı'), 'i');
+  return string1.toLowerCase().replaceAll(RegExp(r'ı'), 'i') ==
+      string2.toLowerCase().replaceAll(RegExp(r'ı'), 'i');
 }
 
 T enumFromString<T>(Iterable<T> values, String value) {
@@ -120,8 +117,8 @@ class Payload {
 }
 
 class PayloadListResponse {
-  List<Payload> payloads;
-  String error;
+  List<Payload> payloads = [];
+  String? error;
 
   PayloadListResponse(this.payloads, this.error);
 
@@ -131,15 +128,15 @@ class PayloadListResponse {
     if (json == null) {
       error = "json is null";
     } else {
-      List pushMessages = cast<List>(json['pushMessages']) ?? [];
+      List pushMessages = json['pushMessages'] as List;
       payloads = pushMessages.map(Payload.fromJson).toList();
     }
   }
 }
 
 class RDTokenResponseModel {
-  String deviceToken;
-  bool playServiceEnabled;
+  String deviceToken = '';
+  bool playServiceEnabled = true;
 
   RDTokenResponseModel.fromJson(dynamic json) {
     this.deviceToken = json["deviceToken"];
@@ -164,56 +161,86 @@ class RDNotificationResponseModel {
   String title = '';
   String body = '';
 
-  RDNotificationResponseModel.fromJson(dynamic json) {
-    this.payload = json;
-    print(this.payload);
-    if (this.payload != null) {
+  RDNotificationResponseModel.fromJson(Map<String, dynamic> json) {
+    payload = json;
+    if (payload != null) {
       if (Platform.isIOS) {
-        dynamic userInfo = this.payload["userInfo"];
+        dynamic userInfo = payload['userInfo'];
         if (userInfo != null) {
-          this.pushType = (cast<String>(userInfo["pushType"]) ?? '').isEmpty
-              ? this.pushType
-              : cast<String>(userInfo["pushType"]);
-          this.pushId = (cast<String>(userInfo["pushType"]) ?? '').isEmpty
-              ? this.pushId
-              : cast<String>(userInfo["pushId"]);
-          this.url = this.deepLink =
-              (cast<String>(userInfo["url"]) ?? '').isEmpty
-                  ? this.url
-                  : cast<String>(userInfo["url"]);
-          this.url = this.deepLink =
-              (cast<String>(userInfo["deepLink"]) ?? '').isEmpty
-                  ? this.deepLink
-                  : cast<String>(userInfo["deepLink"]);
-          this.altUrl = (cast<String>(userInfo["altUrl"]) ?? '').isEmpty
-              ? this.altUrl
-              : cast<String>(userInfo["altUrl"]);
-          this.mediaUrl = (cast<String>(userInfo["mediaUrl"]) ?? '').isEmpty
-              ? this.mediaUrl
-              : cast<String>(userInfo["mediaUrl"]);
-          dynamic aps = userInfo["aps"];
-          if (aps != null) {
-            this.contentAvailable =
-                (cast<int>(aps["content-available"]) ?? 0) == 0
-                    ? this.contentAvailable
-                    : cast<int>(aps["content-available"]);
-            this.mutableContent = (cast<int>(aps["mutable-content"]) ?? 0) == 0
-                ? this.mutableContent
-                : cast<int>(aps["mutable-content"]);
-            this.badge = (cast<int>(aps["badge"]) ?? 0) == 0
-                ? this.badge
-                : cast<int>(aps["badge"]);
-            this.sound = (cast<String>(aps["sound"]) ?? '').isEmpty
-                ? this.sound
-                : cast<String>(aps["sound"]);
-            dynamic alert = aps["alert"];
-            if (alert != null) {
-              this.title = (cast<String>(alert["title"]) ?? '').isEmpty
-                  ? this.title
-                  : cast<String>(alert["title"]);
-              this.body = (cast<String>(alert["body"]) ?? '').isEmpty
-                  ? this.body
-                  : cast<String>(alert["body"]);
+          if (userInfo.containsKey('pushType') &&
+              userInfo['pushType'] != null &&
+              userInfo['pushType'].runtimeType == String) {
+            String tempPushType = userInfo['pushType'] as String;
+            if (tempPushType.isNotEmpty) {
+              pushType = tempPushType;
+            }
+          }
+          if (userInfo.containsKey('pushId') &&
+              userInfo['pushId'] != null &&
+              userInfo['pushId'].runtimeType == String) {
+            pushId = userInfo['pushId'] as String;
+          }
+          if (userInfo.containsKey('url') &&
+              userInfo['url'] != null &&
+              userInfo['url'].runtimeType == String) {
+            url = userInfo['url'] as String;
+            deepLink = userInfo['url'] as String;
+          }
+          if (userInfo.containsKey('deepLink') &&
+              userInfo['deepLink'] != null &&
+              userInfo['deepLink'].runtimeType == String) {
+            url = userInfo['deepLink'] as String;
+            deepLink = userInfo['deepLink'] as String;
+          }
+          if (userInfo.containsKey('altUrl') &&
+              userInfo['altUrl'] != null &&
+              userInfo['altUrl'].runtimeType == String) {
+            altUrl = userInfo['altUrl'] as String;
+          }
+          if (userInfo.containsKey('mediaUrl') &&
+              userInfo['mediaUrl'] != null &&
+              userInfo['mediaUrl'].runtimeType == String) {
+            altUrl = userInfo['mediaUrl'] as String;
+          }
+
+          if (userInfo.containsKey('aps') &&
+              userInfo['aps'] != null &&
+              userInfo['mediaUrl'].runtimeType == Map<String, dynamic>) {
+            Map<String, dynamic> aps = userInfo["aps"] as Map<String, dynamic>;
+            if (aps.containsKey('content-available') &&
+                aps['content-available'] != null &&
+                aps['content-available'].runtimeType == int) {
+              contentAvailable = aps['content-available'] as int;
+            }
+            if (aps.containsKey('mutable-content') &&
+                aps['mutable-content'] != null &&
+                aps['mutable-content'].runtimeType == int) {
+              mutableContent = aps['mutable-content'] as int;
+            }
+            if (aps.containsKey('badge') &&
+                aps['badge'] != null &&
+                aps['badge'].runtimeType == int) {
+              badge = aps['badge'] as int;
+            }
+            if (aps.containsKey('sound') &&
+                aps['sound'] != null &&
+                aps['sound'].runtimeType == String) {
+              sound = aps['sound'] as String;
+            }
+            if (aps.containsKey('alert') &&
+                aps['alert'] != null &&
+                aps.runtimeType == Map<String, dynamic>) {
+              Map<String, dynamic> alert = aps["alert"] as Map<String, dynamic>;
+              if (alert.containsKey('title') &&
+                  alert['title'] != null &&
+                  alert['title'].runtimeType == String) {
+                title = alert['title'] as String;
+              }
+              if (alert.containsKey('body') &&
+                  alert['body'] != null &&
+                  alert['body'].runtimeType == String) {
+                body = alert['body'] as String;
+              }
             }
           }
         }
@@ -230,16 +257,10 @@ class RDNotificationCarouselElementModel {
   String picture;
 
   RDNotificationCarouselElementModel({
-    @required int id,
-    @required String title,
-    @required String content,
-    @required String url,
-    @required String picture,
-  }) {
-    this.id = id;
-    this.title = title;
-    this.content = content;
-    this.url = url;
-    this.picture = picture;
-  }
+    required this.id,
+    required this.title,
+    required this.content,
+    required this.url,
+    required this.picture,
+  });
 }

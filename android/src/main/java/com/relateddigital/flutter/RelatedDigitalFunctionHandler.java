@@ -242,18 +242,18 @@ public class RelatedDigitalFunctionHandler {
                         result.success(gson.toJson(favs));
                     }
                     else {
-                        result.success(null);
+                        result.success("");
                     }
                 }
 
                 @Override
                 public void fail(VisilabsResponse response) {
-                    result.success(null);
+                    result.success("");
                 }
             });
         }
         catch (Exception e) {
-            result.error("ERROR", e.getMessage(), null);
+            result.error("ERROR", e.getMessage(), "");
         }
     }
 
@@ -308,7 +308,7 @@ public class RelatedDigitalFunctionHandler {
                 @Override
                 public void success(List<Message> pushMessages) {
                     if(pushMessages == null) {
-                        result.error("ERROR", "pushMessages list is null", null);
+                        result.error("ERROR", "pushMessages list is null", "");
                     } else {
                         Map<String, List<Message>> map = new HashMap<>();
                         map.put("pushMessages", pushMessages);
@@ -318,7 +318,7 @@ public class RelatedDigitalFunctionHandler {
                 }
                 @Override
                 public void fail(String errorMessage) {
-                    result.error("ERROR", errorMessage, null);
+                    result.error("ERROR", errorMessage, "");
                 }
             });
         }

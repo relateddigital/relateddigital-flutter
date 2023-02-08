@@ -205,7 +205,7 @@ class _EventState extends State<Event> {
     List filters = [filter];
 
     List result = await widget.relatedDigitalPlugin
-        .getRecommendations(zoneId, productCode, filters: filters);
+        .getRecommendations(zoneId, productCode: productCode, filters: filters);
     print(result.toString());
   }
 

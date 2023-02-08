@@ -2,21 +2,22 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:relateddigital_flutter/constants.dart';
-import 'package:relateddigital_flutter/rd_story_view.dart';
-import 'package:relateddigital_flutter/request_models.dart';
-import 'package:relateddigital_flutter/response_models.dart';
 import 'package:flutter/services.dart';
+
+import 'constants.dart';
+import 'rd_story_view.dart';
+import 'request_models.dart';
+import 'response_models.dart';
 
 class RelateddigitalFlutter {
   MethodChannel _channel = MethodChannel(Constants.CHANNEL_NAME);
-  Function(RDTokenResponseModel) _setTokenHandler;
-  void Function(dynamic result) _readNotificationHandler;
-  StoryPlatformCallbackHandler _storyPlatformCallbackHandler;
+  Function(RDTokenResponseModel)? _setTokenHandler;
+  void Function(dynamic result)? _readNotificationHandler;
+  StoryPlatformCallbackHandler? _storyPlatformCallbackHandler;
   bool _logEnabled = true;
 
-  String appAlias;
-  String huaweiAppAlias;
+  String appAlias = '';
+  String huaweiAppAlias = '';
 
   RelateddigitalFlutter() {
     _channel.setMethodCallHandler(_methodCallHandler);
@@ -27,19 +28,19 @@ class RelateddigitalFlutter {
       RDTokenResponseModel response =
           RDTokenResponseModel.fromJson(methodCall.arguments);
       if (_setTokenHandler != null) {
-        _setTokenHandler(response);
+        _setTokenHandler!(response);
       }
       _handleTokenRegister(response);
     } else if (methodCall.method == Constants.M_NOTIFICATION_OPENED) {
       if (_readNotificationHandler != null) {
-        _readNotificationHandler(methodCall.arguments);
+        _readNotificationHandler!(methodCall.arguments);
       }
       _handleUtmParameters(methodCall.arguments);
     } else if (methodCall.method == Constants.M_STORY_ITEM_CLICK) {
       Map<String, String> map = {
         'storyLink': methodCall.arguments['storyLink']
       };
-      _storyPlatformCallbackHandler.onItemClick(map);
+      _storyPlatformCallbackHandler?.onItemClick(map);
     }
   }
 
@@ -77,16 +78,12 @@ class RelateddigitalFlutter {
   }
 
   Future<void> setEmailWithPermission(String email, bool permission) async {
-    if (email != null && permission != null) {
-      await _channel.invokeMethod(Constants.M_EMAIL_WITH_PERMISSION,
-          {'email': email, 'permission': permission});
-    }
+    await _channel.invokeMethod(Constants.M_EMAIL_WITH_PERMISSION,
+        {'email': email, 'permission': permission});
   }
 
   Future<void> setEmail(String email) async {
-    if (email != null) {
-      await _channel.invokeMethod(Constants.M_SET_EMAIL, {'email': email});
-    }
+    await _channel.invokeMethod(Constants.M_SET_EMAIL, {'email': email});
   }
 
   Future<void> setUserProperty(String key, String value) async {
@@ -141,36 +138,43 @@ class RelateddigitalFlutter {
 
   Future<void> customEvent(
       String pageName, Map<String, String> parameters) async {
-    await _channel.invokeMethod(Constants.M_CUSTOM_EVENT, {
-      'pageName': pageName ?? '',
-      'parameters': parameters ?? Map<String, String>()
-    });
+    await _channel.invokeMethod(Constants.M_CUSTOM_EVENT,
+        {'pageName': pageName, 'parameters': parameters});
   }
 
   Future<bool> registerEmail(String email,
       {bool permission = false, bool isCommercial = false}) async {
-    await _channel.invokeMethod(Constants.M_REGISTER_EMAIL, {
+    var val = await _channel.invokeMethod(Constants.M_REGISTER_EMAIL, {
       'email': email,
       'permission': permission,
       'isCommercial': isCommercial
     });
+    if (val != null && val.runtimeType == bool) {
+      return val as bool;
+    } else {
+      return false;
+    }
   }
 
-  Future<List> getRecommendations(String zoneId, String productCode,
-      {List filters}) async {
-    String rawResponse = await _channel.invokeMethod(
-        Constants.M_RECOMMENDATIONS, {
-      'zoneId': zoneId,
-      'productCode': productCode,
-      'filters': filters ?? []
+  Future<List> getRecommendations(String zoneId,
+      {String productCode = '',
+      List filters = const [],
+      Map<String, String> properties = const {}}) async {
+    String? rawResponse =
+        await _channel.invokeMethod(Constants.M_RECOMMENDATIONS, {
+          'zoneId': zoneId,
+          'productCode': productCode,
+          'filters': filters
     });
-
     if (rawResponse != null && rawResponse.isNotEmpty) {
-      List result = json.decode(rawResponse);
-      return result;
+      try {
+        List result = json.decode(rawResponse);
+        return result;
+      } on Exception catch (ex) {
+        print(ex);
+      }
     }
-
-    return null;
+    return [];
   }
 
   void setStoryPlatformHandler(StoryPlatformCallbackHandler handler) {
@@ -183,41 +187,35 @@ class RelateddigitalFlutter {
     }
   }
 
-  Future<Map> getFavoriteAttributeActions({String actionId}) async {
+  Future<Map> getFavoriteAttributeActions({String actionId = ''}) async {
     try {
       String rawResponse = await _channel
           .invokeMethod(Constants.M_FAV_ATTRIBUTE, {'actionId': actionId});
 
-      if (rawResponse != null && rawResponse.isNotEmpty) {
+      if (rawResponse.isNotEmpty) {
         Map result = json.decode(rawResponse);
         return result;
       }
     } on Exception catch (ex) {
       print(ex);
-      return null;
     }
-
-    return null;
+    return {};
   }
 
   Future<void> logout() async {
     await _channel.invokeMethod(Constants.M_LOGOUT);
   }
 
-  Future<void> login(String userId, {Map<String, String> properties}) async {
-    if (userId == null) {
-      return;
-    }
-    await _channel.invokeMethod(Constants.M_LOGIN,
-        {'exVisitorId': userId, 'properties': properties ?? Map()});
+  Future<void> login(String userId,
+      {Map<String, String> properties = const {}}) async {
+    await _channel.invokeMethod(
+        Constants.M_LOGIN, {'exVisitorId': userId, 'properties': properties});
   }
 
-  Future<void> signUp(String userId, {Map<String, String> properties}) async {
-    if (userId == null) {
-      return;
-    }
-    await _channel.invokeMethod(Constants.M_SIGNUP,
-        {'exVisitorId': userId, 'properties': properties ?? Map()});
+  Future<void> signUp(String userId,
+      {Map<String, String> properties = const {}}) async {
+    await _channel.invokeMethod(
+        Constants.M_SIGNUP, {'exVisitorId': userId, 'properties': properties});
   }
 
   void _handleTokenRegister(RDTokenResponseModel response) {
@@ -232,37 +230,33 @@ class RelateddigitalFlutter {
 
   void _handleUtmParameters(dynamic payload) {
     try {
-      if (payload != null &&
-          payload[Constants.VL_UTM_EVENT_PARAMS_KEY] != null) {
+      if (payload != null && payload[Constants.VL_UTM_EVENT_PARAMS_KEY] != null) {
         dynamic payloadParams = payload[Constants.VL_UTM_EVENT_PARAMS_KEY];
 
-        String utmCampaign =
-            payloadParams[Constants.VL_UTM_CAMPAIGN_PARAM] as String;
-        String utmSource =
-            payloadParams[Constants.VL_UTM_SOURCE_PARAM] as String;
-        String utmMedium =
-            payloadParams[Constants.VL_UTM_MEDIUM_PARAM] as String;
+        String? utmCampaign = payloadParams[Constants.VL_UTM_CAMPAIGN_PARAM];
+        String? utmSource = payloadParams[Constants.VL_UTM_SOURCE_PARAM];
+        String? utmMedium = payloadParams[Constants.VL_UTM_MEDIUM_PARAM];
 
         if ((utmCampaign != null && utmCampaign.isNotEmpty) ||
             (utmSource != null && utmSource.isNotEmpty) ||
             (utmMedium != null && utmMedium.isNotEmpty)) {
           Map<String, String> utmMap = {
-            Constants.VL_UTM_CAMPAIGN_PARAM: utmCampaign,
-            Constants.VL_UTM_SOURCE_PARAM: utmSource,
-            Constants.VL_UTM_MEDIUM_PARAM: utmMedium
+            Constants.VL_UTM_CAMPAIGN_PARAM: utmCampaign!,
+            Constants.VL_UTM_SOURCE_PARAM: utmSource!,
+            Constants.VL_UTM_MEDIUM_PARAM: utmMedium!
           };
-          this.customEvent(Constants.VL_UTM_EVENT_KEY, utmMap);
+          customEvent(Constants.VL_UTM_EVENT_KEY, utmMap);
         }
       }
     } on Exception catch (ex) {
-      print(ex);
+      print(ex.toString());
     }
   }
 
   Future<String> getExVisitorID() async {
     return _channel
-        .invokeMethod<String>(Constants.M_GET_EXVISITORID)
-        .then<String>((String value) => value ?? "");
+        .invokeMethod<String?>(Constants.M_GET_EXVISITORID)
+        .then<String>((String? value) => value ?? '');
   }
 
   Future<void> sendTheListOfAppsInstalled() async {
@@ -277,19 +271,19 @@ class RelateddigitalFlutter {
 
   Future<PayloadListResponse> getPushMessages() async {
     try {
-      String rawResponse =
+      String? rawResponse =
           await _channel.invokeMethod(Constants.M_GET_PUSH_MESSAGES);
       if (rawResponse != null && rawResponse.isNotEmpty) {
         Map result = json.decode(rawResponse);
         return PayloadListResponse.fromJson(result);
       }
     } on PlatformException catch (e) {
-      return PayloadListResponse([],
-          e.code ?? "" + " : " + e.message ?? "" + " : " + e.stacktrace ?? "");
+      return PayloadListResponse([], '${e.code}:${e.message}:${e.stacktrace}');
     } on Exception catch (ex) {
-      print(ex);
+      print(ex.toString());
       return PayloadListResponse([], ex.toString());
     }
+    return PayloadListResponse([], 'Unknown error');
   }
 
   Future<void> requestIDFA() async {
@@ -309,6 +303,4 @@ class RelateddigitalFlutter {
   Future<void> requestLocationPermission() async {
     await _channel.invokeMethod(Constants.M_REQUEST_LOCATION_PERMISSION);
   }
-
-
 }
