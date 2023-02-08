@@ -105,5 +105,5 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - SpinToWin deep link
 
 
-## 0.5.3
+## 0.5.4
 - Null-Safety Add
