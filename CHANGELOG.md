@@ -107,3 +107,8 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 
 ## 0.5.4
 - Null-Safety Add
+
+## 0.5.5
+- Huawei dependencies removed
+- New Feature : Silent Push
+- Native Sdk versions updated
