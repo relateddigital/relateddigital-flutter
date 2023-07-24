@@ -39,7 +39,9 @@ class _EventState extends State<Event> {
     'half_screen_image',
     'product_stat_notifier',
     'inappcarousel',
-    'drawer'
+    'drawer',
+    'inline_anket',
+    'nps_with_secondpopup'
   ];
   String exVisitorId = '';
 

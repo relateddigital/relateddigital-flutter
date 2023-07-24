@@ -33,7 +33,8 @@ class _NotificationCenterState extends State<NotificationCenter> {
         child: Scaffold(
             appBar: AppBar(
               leading: IconButton(
-                icon: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
+                icon: Icon(
+                    Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
                 onPressed: () => Navigator.of(context).pop(),
               ),
               title: const Text(Constants.NotificationCenter),
@@ -56,16 +57,17 @@ class _NotificationCenterState extends State<NotificationCenter> {
                                 ],
                               ),
                             ),
-                          ] + getPushNotificationListTiles())
+                          ] +
+                          getPushNotificationListTiles())
                   .toList(),
             )));
   }
 
   Iterable<Widget> getPushNotificationListTiles() {
     List<Widget> tiles = [];
-    if(pushNotifications.error != null) {
+    if (pushNotifications.error != null) {
       print(pushNotifications.error);
-    } else if(pushNotifications.payloads.length == 0) {
+    } else if (pushNotifications.payloads.length == 0) {
       print("pushNotifications.payloads.length == 0");
     } else {
       for (final Payload payload in pushNotifications.payloads) {
@@ -73,8 +75,9 @@ class _NotificationCenterState extends State<NotificationCenter> {
           TextLabelListTile(
             payload: payload,
             onTap: () {
-              String content = 'title: ${payload.title}\nmessage: ${payload.message}\nformattedDate: ${payload.formattedDate}'
-              + '\ntype: ${payload.type}\nurl: ${payload.url}\nmediaUrl: ${payload.mediaUrl}';
+              String content =
+                  'title: ${payload.title}\nmessage: ${payload.message}\nformattedDate: ${payload.formattedDate}' +
+                      '\ntype: ${payload.type}\nurl: ${payload.url}\nmediaUrl: ${payload.mediaUrl}';
               showAlertDialog(title: payload.title ?? '', content: content);
             },
           ),
@@ -88,8 +91,6 @@ class _NotificationCenterState extends State<NotificationCenter> {
     pushNotifications = await widget.relatedDigitalPlugin.getPushMessages();
     updateState();
   }
-
-
 
   updateState() {
     setState(() {});

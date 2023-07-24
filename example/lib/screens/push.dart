@@ -54,7 +54,7 @@ class _PushState extends State<Push> {
                           onPressed: () {
                             this.widget.relatedDigitalPlugin.requestPermission(
                                 _getTokenCallback,
-                                isProvisional: true);
+                                isProvisional: false);
                           })
                     ],
                   ),
