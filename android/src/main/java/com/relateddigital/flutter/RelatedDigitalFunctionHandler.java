@@ -65,8 +65,7 @@ public class RelatedDigitalFunctionHandler {
 
     public void getToken() {
         if (!EuroMobileManager.checkPlayService(mContext)) {
-            HuaweiOperations huaweiOperations = new HuaweiOperations(mContext, mChannel, mActivity);
-            huaweiOperations.setHuaweiTokenToEuromessage();
+            
         } else {
             FirebaseOperations firebaseOperations = new FirebaseOperations(mContext, mChannel);
             firebaseOperations.setExistingFirebaseTokenToEuroMessage();

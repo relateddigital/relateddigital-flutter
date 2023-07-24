@@ -76,24 +76,18 @@ import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 
 ```gradle
 maven {url 'https://jitpack.io'}
-maven {
-    url 'http://developer.huawei.com/repo/'
-    allowInsecureProtocol(true)
-}// skip if your app does not support HMS
 ```
 
 - Add the following lines to the `dependencies` section in `project/build.gradle`
 
 ```gradle
 classpath 'com.google.gms:google-services:4.3.10'
-classpath 'com.huawei.agconnect:agcp:1.4.1.300' // skip if your app does not support HMS
 ```
 
 - Add the following lines to the end of `app/build.gradle`
 
 ```gradle
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 ```
 
 - Change your minSdkVersion to 21.
@@ -113,16 +107,6 @@ apply plugin: 'com.huawei.agconnect' // skip if your app does not support HMS
 </service>
 ```
 
-```xml
-<!-- skip if your app does not support HMS  -->
-<service
-   android:name="euromsg.com.euromobileandroid.service.EuroHuaweiMessagingService"
-   android:exported="false">
-   <intent-filter>
-       <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
-   </intent-filter>
-</service>
-```
 - Add below meta-data parameters in your **AndroidManifest.xml**
 ```xml
 

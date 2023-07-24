@@ -57,11 +57,6 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <RemoteRunnable
-         runnableDebuggingMode = "0"
-         BundleIdentifier = "com.relateddigital.relateddigital-flutter-example"
-         RemotePath = "/var/containers/Bundle/Application/24E3196E-365E-4978-BC1A-09ADFD100906/Runner.app">
-      </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
