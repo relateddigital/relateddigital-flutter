@@ -22,6 +22,7 @@
     - [Data Collection](#Data-Collection)
     - [Targeting Actions](#Targeting-Actions)
         - [In-App Messaging](#In-App-Messaging)
+        - [Story](#Story)
         - [Geofencing](#Geofencing)
     - [Recommendation](#Recommendation)
     - [App Tracking (Android Only)](#App-Tracking)
@@ -625,6 +626,33 @@ There are 9 types of **in-app messages**:
 | Pop-up - NPS with Text & Button                                  | Native Alert & Actionsheet                                                 |  NPS with numbers                                                   |
 | ![nps](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/nps.png)                   | ![nps_with_numbers](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/alert.png)   | ![nps_with_numbers](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/inappnotification/nps_with_numbers.png) |
 
+### Story
+Follow the step below to add a countdown to your stories.
+
+**iOS**
+
+Add below lines to your project target's `Build Phases`->`Copy Bundle Resources` section. Select `Create folder references` when prompted.
+  * `Pods/VisilabsIOS/Sources/TargetingAction/Story/Views/timerView/timerView.xib`
+
+**Android**
+
+No special installation required
+
+**Usage**
+
+To add story view to your app, import `RDStoryView` and use as below:
+```dart
+import 'package:relateddigital_flutter/rd_story_view.dart';
+...
+...
+RDStoryView(
+	actionId: '975', // Story actionid created from panel
+	relatedDigitalPlugin: widget.relatedDigitalPlugin,
+	onItemClick: (Map<String, String> result) {
+		print(result);
+	}
+)
+```
 
 ### Geofencing
 
