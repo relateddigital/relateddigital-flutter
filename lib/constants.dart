@@ -22,6 +22,7 @@ class Constants {
   static const String M_CUSTOM_EVENT = 'VL/customEvent';
   static const String M_REGISTER_EMAIL = 'RD/registerEmail';
   static const String M_RECOMMENDATIONS = 'VL/getRecommendations';
+  static const String M_TRACK_RECOMMENDATION = 'VL/trackRecommendationClick';
   static const String M_STORY_ITEM_CLICK = 'VL/onStoryItemClick';
   static const String M_STORY_CLEAR_CACHE = 'VL/clearStoryCache';
   static const String M_FAV_ATTRIBUTE = 'VL/getFavAttributes';
@@ -33,7 +34,8 @@ class Constants {
   static const String M_GET_PUSH_MESSAGES = 'RD/getPushMessages';
   static const String M_REQUEST_IDFA = 'VL/requestIDFA';
   static const String M_SEND_LOCATION_PERMISSION = 'VL/sendLocationPermission';
-  static const String M_REQUEST_LOCATION_PERMISSION = 'VL/requestLocationPermission';
+  static const String M_REQUEST_LOCATION_PERMISSION =
+      'VL/requestLocationPermission';
 
   static const String VL_TOKEN_KEY = 'RegisterToken';
   static const String VL_TOKEN_PARAM = 'OM.sys.TokenID';
@@ -44,9 +46,4 @@ class Constants {
   static const String VL_UTM_MEDIUM_PARAM = 'utm_medium';
   static const String VL_UTM_EVENT_KEY = 'OM_evt.gif';
   static const String VL_UTM_EVENT_PARAMS_KEY = 'params';
-
-
-
-
-
 }

@@ -21,6 +21,7 @@ class Constants {
     static let M_CUSTOM_EVENT = "VL/customEvent"
     static let M_REGISTER_EMAIL = "RD/registerEmail"
     static let M_RECOMMENDATIONS = "VL/getRecommendations"
+    static let M_TRACK_RECOMMENDATION = "VL/trackRecommendationClick"
     static let M_STORY_ITEM_CLICK = "VL/onStoryItemClick"
     static let M_FAV_ATTRIBUTE = "VL/getFavAttributes"
     static let M_LOGOUT = "VL/logout"

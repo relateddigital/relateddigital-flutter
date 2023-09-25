@@ -11,6 +11,7 @@ import com.visilabs.util.VisilabsConstant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
@@ -160,8 +161,15 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          String zoneId = call.argument("zoneId");
          String productCode = call.argument("productCode");
          ArrayList<HashMap<String, Object>> filters = call.argument("filters");
+         // ArrayList<HashMap<String, String>> properties = call.argument("properties");
+         HashMap<String, String> properties = call.argument("properties");
 
-         functionHandler.getRecommendations(zoneId, productCode, filters, result);
+         functionHandler.getRecommendations(zoneId, productCode, properties, filters, result);
+       }
+       else if (call.method.equals(Constants.M_TRACK_RECOMMENDATION)) {
+         String qs = call.argument("qs");
+
+         functionHandler.trackRecommendationClick(qs);
        }
        else if (call.method.equals(Constants.M_STORY_CLEAR_CACHE)) {
          functionHandler.clearStoryCache();

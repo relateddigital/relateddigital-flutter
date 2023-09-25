@@ -53,7 +53,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.5.5
+    relateddigital_flutter: ^0.5.6
 ```
 - Run `flutter pub get`
 
@@ -674,11 +674,60 @@ Future<void> getRecommendations() async {
     filter
   ];
 
+  // optional
+  Map<String, String> properties = {
+    'OM.cat':'84'
+  };
+
   List result = await widget.relatedDigitalPlugin.getRecommendations(zoneId, productCode);
-  // List result = await relatedDigitalPlugin.getRecommendations(zoneId, productCode, filters: filters);
+  // List result = await relatedDigitalPlugin.getRecommendations(zoneId, productCode, properties:properties, filters: filters);
   print(result.toString());
 }
 ```
+
+#### Recommendation Response
+
+```json
+{
+    "recommendations": [
+        {
+            "attr1": "420494",
+            "attr10": "",
+            "attr2": "",
+            "attr3": "",
+            "attr4": "",
+            "attr5": "",
+            "attr6": "",
+            "attr7": "",
+            "attr8": "",
+            "attr9": "",
+            "brand": "Related Digital",
+            "code": "1159092",
+            "comment": 0,
+            "cur": "TRY",
+            "dcur": "TRY",
+            "dest_url": "https://relateddigital.com/example-product?OM.zn=You%20Viewed-w60&OM.zpc=1159092",
+            "discount": 0,
+            "dprice": 5.25,
+            "freeshipping": false,
+            "img": "https://cdn.relateddigital.com/example.png",
+            "price": 5.25,
+            "qs": "OM.zn=You Viewed-w60&OM.zpc=1159092",
+            "rating": 0,
+            "samedayshipping": false,
+            "title": "Titiz TP-115 Yeşil Ayakkabı"
+        }
+    ],
+    "title": "Display You Viewed"
+}
+```
+
+After clicking on each product, run the following function with the `qs` parameter. This parameter is included in the response returned from the `widget.relatedDigitalPlugin.getRecommendations` function.
+
+```dart
+widget.relatedDigitalPlugin.trackRecommendationClick(qs);
+```
+
 
 ### App Tracking
 *(Android Only)*

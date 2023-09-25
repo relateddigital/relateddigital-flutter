@@ -112,3 +112,8 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Huawei dependencies removed
 - New Feature : Silent Push
 - Native Sdk versions updated
+
+## 0.5.6
+- Added trackRecommendationClick function
+- Recommendation response model updated
+- Native sdk versions updated

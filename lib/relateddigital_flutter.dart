@@ -156,25 +156,36 @@ class RelateddigitalFlutter {
     }
   }
 
-  Future<List> getRecommendations(String zoneId,
+  Future<Map<String, dynamic>> getRecommendations(String zoneId,
       {String productCode = '',
-      List filters = const [],
-      Map<String, String> properties = const {}}) async {
+      Map<String, String> properties = const {},
+      List filters = const []}) async {
     String? rawResponse =
         await _channel.invokeMethod(Constants.M_RECOMMENDATIONS, {
-          'zoneId': zoneId,
-          'productCode': productCode,
-          'filters': filters
+      'zoneId': zoneId,
+      'productCode': productCode,
+      'properties': properties,
+      'filters': filters
     });
     if (rawResponse != null && rawResponse.isNotEmpty) {
       try {
-        List result = json.decode(rawResponse);
-        return result;
+         Map<String, dynamic> parsedJson;
+         if (Platform.isIOS) {
+            parsedJson = json.decode(rawResponse)[0];
+         } else {
+            parsedJson = json.decode(rawResponse);
+         }
+
+         return parsedJson;
       } on Exception catch (ex) {
         print(ex);
       }
     }
-    return [];
+    return {};
+  }
+
+  Future<void> trackRecommendationClick(String qs) async {
+    await _channel.invokeMethod(Constants.M_TRACK_RECOMMENDATION, {'qs': qs});
   }
 
   void setStoryPlatformHandler(StoryPlatformCallbackHandler handler) {
@@ -230,7 +241,8 @@ class RelateddigitalFlutter {
 
   void _handleUtmParameters(dynamic payload) {
     try {
-      if (payload != null && payload[Constants.VL_UTM_EVENT_PARAMS_KEY] != null) {
+      if (payload != null &&
+          payload[Constants.VL_UTM_EVENT_PARAMS_KEY] != null) {
         dynamic payloadParams = payload[Constants.VL_UTM_EVENT_PARAMS_KEY];
 
         String? utmCampaign = payloadParams[Constants.VL_UTM_CAMPAIGN_PARAM];

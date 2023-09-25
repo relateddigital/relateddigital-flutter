@@ -151,8 +151,15 @@ class RelatedDigitalChannelHandler: NSObject {
             let zoneId = args?["zoneId"] as! String
             let productCode = args?["productCode"] as! String
             let filters = args?["filters"] as! [NSDictionary]
+            let properties = args?["properties"] as! [String:String]
             
-            self.functionHandler.getRecommendations(zoneId: zoneId, productCode: productCode, filters: filters, result: result)
+            self.functionHandler.getRecommendations(zoneId: zoneId, productCode: productCode, properties: properties, filters: filters, result: result)
+        }
+        else if(call.method == Constants.M_TRACK_RECOMMENDATION) {
+            let qs = args?["qs"] as! String
+            
+            RelatedDigitalFunctionHandler.trackRecommendationClick(qs: qs)
+            result(nil)
         }
         else if(call.method == Constants.M_FAV_ATTRIBUTE) {
             let actionId = args?["actionId"] as? String

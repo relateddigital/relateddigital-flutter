@@ -168,10 +168,9 @@ public class RelatedDigitalFunctionHandler {
         });
     }
 
-    public void getRecommendations(String zoneId, String productCode, ArrayList<HashMap<String, Object>> filters, final MethodChannel.Result result) {
+    public void getRecommendations(String zoneId, String productCode, HashMap<String, String> properties, ArrayList<HashMap<String, Object>> filters, final MethodChannel.Result result) {
         try {
             List<VisilabsTargetFilter> visilabsRecoFilters = new ArrayList<VisilabsTargetFilter>();
-            HashMap<String,String> properties = new HashMap<String, String>();
 
             for (HashMap<String, Object> filter : filters) {
                 String attribute = filter.get("attribute").toString();
@@ -182,7 +181,14 @@ public class RelatedDigitalFunctionHandler {
                 visilabsRecoFilters.add(f);
             }
 
-            VisilabsTargetRequest targetRequest = Visilabs.CallAPI().buildTargetRequest(zoneId, productCode, properties, visilabsRecoFilters);
+            HashMap<String, String> propertiesToSend = new HashMap<>();
+
+            for (Map.Entry<String, String> entry : properties.entrySet()) {
+                propertiesToSend.put(entry.getKey(), (String) entry.getValue());
+            }
+
+
+            VisilabsTargetRequest targetRequest = Visilabs.CallAPI().buildTargetRequest(zoneId, productCode, propertiesToSend, visilabsRecoFilters);
             targetRequest.executeAsync(new VisilabsCallback() {
                 @Override
                 public void success(VisilabsResponse response) {
@@ -211,6 +217,10 @@ public class RelatedDigitalFunctionHandler {
             error.put("error", ex.toString());
             result.success(error);
         }
+    }
+
+    public void trackRecommendationClick(String qs){
+        Visilabs.CallAPI().trackRecommendationClick(qs);
     }
 
     public void clearStoryCache() {

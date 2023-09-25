@@ -23,6 +23,7 @@ public class Constants {
     public static String M_CUSTOM_EVENT = "VL/customEvent";
     public static String M_REGISTER_EMAIL = "RD/registerEmail";
     public static String M_RECOMMENDATIONS = "VL/getRecommendations";
+    public static String M_TRACK_RECOMMENDATION = "VL/trackRecommendationClick";
     public static String M_STORY_ITEM_CLICK = "VL/onStoryItemClick";
     public static String M_STORY_CLEAR_CACHE = "VL/clearStoryCache";
     public static String M_FAV_ATTRIBUTE = "VL/getFavAttributes";

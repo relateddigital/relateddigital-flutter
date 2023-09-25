@@ -121,7 +121,7 @@ class RelatedDigitalFunctionHandler {
         Euromsg.registerEmail(email: email, permission: permission, isCommercial: isCommercial, customDelegate: customDelegate)
     }
     
-    public func getRecommendations(zoneId: String, productCode: String, filters: [NSDictionary] = [], result: @escaping FlutterResult) {
+    public func getRecommendations(zoneId: String, productCode: String, properties: [String:String], filters: [NSDictionary] = [], result: @escaping FlutterResult) {
         var visilabsRecoFilters: [VisilabsRecommendationFilter] = []
         
         for filter in filters {
@@ -134,7 +134,7 @@ class RelatedDigitalFunctionHandler {
             visilabsRecoFilters.append(filter)
         }
         
-        Visilabs.callAPI().recommend(zoneID: zoneId, productCode: productCode, filters: visilabsRecoFilters){ response in
+        Visilabs.callAPI().recommend(zoneID: zoneId, productCode: productCode, filters: visilabsRecoFilters, properties: properties){ response in
             let resultObj: NSMutableDictionary = NSMutableDictionary()
             
             if response.error != nil {
@@ -142,16 +142,19 @@ class RelatedDigitalFunctionHandler {
             }
             else {
                 var recommendations: [RelatedDigitalRecommendationProduct] = []
+                var recoResponse: [RecoResponse] = []
                 
                 for product in response.products {
                     recommendations.append(RelatedDigitalRecommendationProduct(code: product.code, title: product.title, img: product.img
-                                                                               , brand: product.brand, price: product.price, dprice: product.dprice, cur: product.cur, dcur: product.dcur, freeshipping: product.freeshipping, samedayshipping: product.samedayshipping, rating: product.rating, comment: product.comment, discount: product.discount, attr1: product.attr1, attr2: product.attr2, attr3: product.attr3, attr4: product.attr4, attr5: product.attr5))
+                                                                               , brand: product.brand, price: product.price, dprice: product.dprice, cur: product.cur, dcur: product.dcur, freeshipping: product.freeshipping, samedayshipping: product.samedayshipping, rating: product.rating, comment: product.comment, discount: product.discount, attr1: product.attr1, attr2: product.attr2, attr3: product.attr3, attr4: product.attr4, attr5: product.attr5, qs: product.qs))
                 }
+                
+                recoResponse.append(RecoResponse(recommendations:recommendations, title:response.widgetTitle ))
                 
                 do {
                     let jsonEncoder = JSONEncoder()
                     
-                    let jsonData = try jsonEncoder.encode(recommendations)
+                    let jsonData = try jsonEncoder.encode(recoResponse)
                     let json = String(data: jsonData, encoding: String.Encoding.utf8)
                     result(json)
                 }
@@ -161,6 +164,11 @@ class RelatedDigitalFunctionHandler {
             }
         }
     }
+
+    public static func trackRecommendationClick(qs: String){
+        Visilabs.callAPI().trackRecommendationClick(qs:qs)
+	}
+
     
     public func getFavoriteAttributeActions(actionId: String?, result: @escaping FlutterResult) {
         if(actionId != nil && actionId != "") {
@@ -301,6 +309,7 @@ public class RelatedDigitalRecommendationProduct: Encodable {
         public static let attr3 = "attr3"
         public static let attr4 = "attr4"
         public static let attr5 = "attr5"
+        public static let qs = "qs"
     }
     
     public var code: String
@@ -321,8 +330,9 @@ public class RelatedDigitalRecommendationProduct: Encodable {
     public var attr3: String
     public var attr4: String
     public var attr5: String
+    public var qs: String
     
-    internal init(code: String, title: String, img: String, brand: String, price: Double, dprice: Double, cur: String, dcur: String, freeshipping: Bool, samedayshipping: Bool, rating: Int, comment: Int, discount: Double, attr1: String, attr2: String, attr3: String, attr4: String, attr5: String) {
+    internal init(code: String, title: String, img: String, brand: String, price: Double, dprice: Double, cur: String, dcur: String, freeshipping: Bool, samedayshipping: Bool, rating: Int, comment: Int, discount: Double, attr1: String, attr2: String, attr3: String, attr4: String, attr5: String, qs: String) {
         self.code = code
         self.title = title
         self.img = img
@@ -341,6 +351,7 @@ public class RelatedDigitalRecommendationProduct: Encodable {
         self.attr3 = attr3
         self.attr4 = attr4
         self.attr5 = attr5
+        self.qs = qs
     }
     
     internal init?(JSONObject: [String: Any?]?) {
@@ -371,5 +382,38 @@ public class RelatedDigitalRecommendationProduct: Encodable {
         self.attr3 = object[PayloadKey.attr3] as? String ?? ""
         self.attr4 = object[PayloadKey.attr4] as? String ?? ""
         self.attr5 = object[PayloadKey.attr5] as? String ?? ""
+        self.qs = object[PayloadKey.qs] as? String ?? ""
+    }
+}
+
+
+
+public class RecoResponse: Encodable {
+    
+    public enum RecoPayloadKey {
+        public static let recommendations = "recommendations"
+        public static let title = "title"
+    }
+    
+    public var recommendations: [RelatedDigitalRecommendationProduct]
+    public var title: String
+    
+    internal init(recommendations: [RelatedDigitalRecommendationProduct], title: String) {
+        self.recommendations = recommendations
+        self.title = title
+    }
+    
+    internal init?(JSONObject: [String: Any?]?) {
+        
+        guard let object = JSONObject else {
+            return nil
+        }
+        
+        guard let recommendations = object[RecoPayloadKey.recommendations] as? [RelatedDigitalRecommendationProduct] else {
+            return nil
+        }
+        
+        self.recommendations = recommendations
+        self.title = object[RecoPayloadKey.title] as? String ?? ""
     }
 }

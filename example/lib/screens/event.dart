@@ -193,7 +193,7 @@ class _EventState extends State<Event> {
   }
 
   Future<void> getRecommendations() async {
-    String zoneId = '6';
+    String zoneId = '14';
     String productCode = '';
 
     // optional
@@ -206,8 +206,14 @@ class _EventState extends State<Event> {
 
     List filters = [filter];
 
-    List result = await widget.relatedDigitalPlugin
-        .getRecommendations(zoneId, productCode: productCode, filters: filters);
+    // opttional
+    Map<String, String> properties = {
+       'OM.cat':'84'
+    };
+
+    Map<String, dynamic> result = await widget.relatedDigitalPlugin
+        .getRecommendations(zoneId, productCode: productCode, properties:properties, filters: filters);
+    // widget.relatedDigitalPlugin.trackRecommendationClick(result[0]['qs']);
     print(result.toString());
   }
 
