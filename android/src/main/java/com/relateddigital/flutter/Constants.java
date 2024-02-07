@@ -45,4 +45,6 @@ public class Constants {
     public static String STORY_VIEW_NAME = "StoryView";
 
     public static String REGISTER_TOKEN = "RegisterToken";
+
+    public static String SDK_TYPE = "flutter";
 }

@@ -117,3 +117,8 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Added trackRecommendationClick function
 - Recommendation response model updated
 - Native sdk versions updated
+
+## 0.5.7
+- Sdk type added
+- iOS checkbox error fixed
+- Native sdk versions updated

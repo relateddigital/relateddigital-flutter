@@ -58,7 +58,7 @@ public class RelatedDigitalFunctionHandler {
     }
 
     public void initVisilabs(String organizationId, String siteId, String datasource, boolean geofenceEnabled, boolean inAppNotificationsEnabled) {
-        Visilabs.CreateAPI(organizationId, siteId, Constants.VL_SEGMENT_URL, datasource, Constants.VL_REALTIME_URL, Constants.VL_CHANNEL, mContext, Constants.VL_TARGET_URL, Constants.VL_ACTION_URL, Constants.VL_REQUEST_TIMEOUT, Constants.VL_GEOFENCE_URL, geofenceEnabled);
+        Visilabs.CreateAPI(organizationId, siteId, Constants.VL_SEGMENT_URL, datasource, Constants.VL_REALTIME_URL, Constants.VL_CHANNEL, mContext, Constants.VL_TARGET_URL, Constants.VL_ACTION_URL, Constants.VL_REQUEST_TIMEOUT, Constants.VL_GEOFENCE_URL, geofenceEnabled, Constants.SDK_TYPE);
         mInAppNotificationsEnabled = inAppNotificationsEnabled;
         //Visilabs.CreateAPI(mContext);
     }
