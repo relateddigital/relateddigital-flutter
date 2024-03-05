@@ -122,3 +122,6 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Sdk type added
 - iOS checkbox error fixed
 - Native sdk versions updated
+
+## 0.5.8
+- Android Jitpack url added
