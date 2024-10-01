@@ -125,3 +125,6 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 
 ## 0.5.8
 - Android Jitpack url added
+
+## 0.5.9
+- Native SDK version update

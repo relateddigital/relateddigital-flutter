@@ -6,26 +6,44 @@
 
 # Table of Contents
 
-- [Introduction](#Introduction)
-    - [Requirements](#Requirements)
-- [Installation](#Installation)
-    - [Platform Integration](#Platform-Integration)
-        - [Android](#Android)
-        - [iOS](#iOS)
-- [Usage](#Usage)
-    - [Initializing](#Initializing)
-    - [Push Notifications](#Push-Notifications)
-        - [Requesting Permission & Retrieving Token](#Requesting-Permission-&-Retrieving-Token])
-        - [Carousel Push Notifications](#Carousel-Push-Notifications)
-        - [Set Push Permit](#Set-Push-Permit)
-        - [Get Payload List](#Get-Payload-List)
-    - [Data Collection](#Data-Collection)
-    - [Targeting Actions](#Targeting-Actions)
-        - [In-App Messaging](#In-App-Messaging)
-        - [Story](#Story)
-        - [Geofencing](#Geofencing)
-    - [Recommendation](#Recommendation)
-    - [App Tracking (Android Only)](#App-Tracking)
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+  - [Requirements](#requirements)
+- [Installation](#installation)
+  - [Platform-Integration](#platform-integration)
+    - [Android](#android)
+    - [iOS](#ios)
+- [Usage](#usage)
+  - [Initializing](#initializing)
+  - [Push Notifications](#push-notifications)
+    - [Requesting Permission \& Retrieving Token](#requesting-permission--retrieving-token)
+      - [IOS](#ios-1)
+    - [Carousel Push Notifications](#carousel-push-notifications)
+      - [IOS](#ios-2)
+    - [Set Push Permit](#set-push-permit)
+    - [Get-Payload-List](#get-payload-list)
+  - [Data Collection](#data-collection)
+    - [Sign Up](#sign-up)
+    - [Login](#login)
+    - [Page View](#page-view)
+    - [Product View](#product-view)
+    - [Add to Cart](#add-to-cart)
+    - [Product Purchase](#product-purchase)
+    - [Product Category Page View](#product-category-page-view)
+    - [In App Search](#in-app-search)
+    - [Banner Click](#banner-click)
+    - [Add To Favorites](#add-to-favorites)
+    - [Remove from Favorites](#remove-from-favorites)
+    - [Logout](#logout)
+  - [Targeting Actions](#targeting-actions)
+    - [In-App Messaging](#in-app-messaging)
+    - [Story](#story)
+    - [Geofencing](#geofencing)
+      - [IOS](#ios-3)
+      - [Android](#android-1)
+    - [Recommendation](#recommendation)
+      - [Recommendation Response](#recommendation-response)
+    - [App Tracking](#app-tracking)
 
 
 
@@ -54,7 +72,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.5.8
+    relateddigital_flutter: ^0.5.9
 ```
 - Run `flutter pub get`
 
