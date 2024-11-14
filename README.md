@@ -72,7 +72,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.5.9
+    relateddigital_flutter: ^0.6.0
 ```
 - Run `flutter pub get`
 

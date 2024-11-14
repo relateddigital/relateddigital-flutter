@@ -24,17 +24,17 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 34
 
     namespace 'com.relateddigital.flutter'
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
     }
 }
 
 
 dependencies {
     api 'com.github.relateddigital:euromessage-android:0.9.6'
-    api 'com.github.relateddigital:visilabs-android:6.3.4'
+    api 'com.github.relateddigital:visilabs-android:6.3.8'
 }
