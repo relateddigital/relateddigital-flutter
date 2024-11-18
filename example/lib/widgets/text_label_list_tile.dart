@@ -6,7 +6,7 @@ class TextLabelListTile extends StatelessWidget {
   final Payload payload;
   final GestureTapCallback onTap;
 
-  TextLabelListTile({@required this.payload, @required this.onTap});
+  TextLabelListTile({required this.payload, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

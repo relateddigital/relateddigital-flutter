@@ -9,9 +9,9 @@ class TextInputListTile extends StatelessWidget {
   final TextInputType type;
 
   TextInputListTile(
-      {@required this.title,
-      @required this.controller,
-      @required this.onChanged,
+      {required this.title,
+      required this.controller,
+      required this.onChanged,
       this.type = TextInputType.text});
 
   @override

@@ -8,7 +8,7 @@ import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart
 class InApp extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  InApp({@required this.relatedDigitalPlugin});
+  InApp({required this.relatedDigitalPlugin});
 
   @override
   _InAppState createState() => _InAppState();
@@ -38,6 +38,7 @@ class _InAppState extends State<InApp> {
                     width: MediaQuery.of(context).size.width,
                     height: 110,
                     child: RDStoryView(
+                      key: null,
                       actionId: '454',
                       relatedDigitalPlugin: widget.relatedDigitalPlugin,
                       onItemClick: (Map<String, String> result) {
