@@ -133,3 +133,6 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Android Native SDK version update
 - App > build.gradle > defaultconfig:targetsdkversion to 34 minsdkversion 23
 - SpinToWin action copy button fix
+
+## 0.6.1
+- Android setEmailPermission function mapping
