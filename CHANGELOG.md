@@ -136,3 +136,7 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 
 ## 0.6.1
 - Android setEmailPermission function mapping
+
+## 0.6.2
+- Close button added to Drawer
+- App Banner feature added
