@@ -123,7 +123,10 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          result.success(null);
        }
        else if (call.method.equals(Constants.M_EMAIL_PERMISSION)) {
-         result.notImplemented();
+         boolean permission = call.argument("permission");
+
+         functionHandler.setEmailPermission(permission);
+         result.success(null);
        }
        else if (call.method.equals(Constants.M_PHONE_PERMISSION)) {
          boolean permission = call.argument("permission");

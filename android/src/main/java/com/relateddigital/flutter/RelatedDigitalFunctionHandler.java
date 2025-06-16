@@ -108,6 +108,11 @@ public class RelatedDigitalFunctionHandler {
         EuroMobileManager.getInstance().sync(mContext);
     }
 
+    public void setEmailPermission(boolean permission) {
+        EuroMobileManager.getInstance().setEmailPermit(permission ? EmailPermit.ACTIVE : EmailPermit.PASSIVE, mContext);
+        EuroMobileManager.getInstance().sync(mContext);
+    }
+
     public void setPhonePermission(boolean permission) {
         EuroMobileManager.getInstance().setGsmPermit(permission ? GsmPermit.ACTIVE : GsmPermit.PASSIVE, mContext);
         EuroMobileManager.getInstance().sync(mContext);
