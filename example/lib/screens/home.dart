@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
   final void Function(dynamic result) notificationHandler;
 
-  Home({@required this.relatedDigitalPlugin, @required this.notificationHandler});
+  Home({required this.relatedDigitalPlugin, required this.notificationHandler});
 
   @override
   _HomeState createState() => _HomeState();
@@ -22,7 +22,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   HashMap<String, TextEditingController> tControllers = createControllers();
-  RDProfile rdProfile;
+  RDProfile? rdProfile;
 
   @override
   void initState() {
@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
   }
   readSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String rdProfileString = prefs.getString("RDProfile");
+    String rdProfileString = prefs.getString("RDProfile") ?? "";
     if (rdProfileString == null) {
       rdProfile = RDProfile.fromConstant();
     } else {
@@ -43,13 +43,17 @@ class _HomeState extends State<Home> {
         rdProfile = RDProfile.fromJson(profileJson);
       }
     }
-    tControllers[Constants.appAlias].text = rdProfile.appAlias;
-    tControllers[Constants.huaweiAppAlias].text = rdProfile.huaweiAppAlias;
-    tControllers[Constants.androidPushIntent].text = rdProfile.androidPushIntent;
-    tControllers[Constants.organizationId].text = rdProfile.organizationId;
-    tControllers[Constants.profileId].text = rdProfile.profileId;
-    tControllers[Constants.dataSource].text = rdProfile.dataSource;
-    tControllers[Constants.maxGeofenceCount].text = rdProfile.maxGeofenceCount.toString();
+    if(rdProfile!=null) {
+      tControllers[Constants.appAlias]?.text = rdProfile!.appAlias;
+      tControllers[Constants.huaweiAppAlias]?.text = rdProfile!.huaweiAppAlias;
+      tControllers[Constants.androidPushIntent]?.text =
+          rdProfile!.androidPushIntent;
+      tControllers[Constants.organizationId]?.text = rdProfile!.organizationId;
+      tControllers[Constants.profileId]?.text = rdProfile!.profileId;
+      tControllers[Constants.dataSource]?.text = rdProfile!.dataSource;
+      tControllers[Constants.maxGeofenceCount]?.text =
+          rdProfile!.maxGeofenceCount.toString();
+    }
   }
 
   static HashMap<String, TextEditingController> createControllers() {
@@ -78,48 +82,48 @@ class _HomeState extends State<Home> {
               children: ListTile.divideTiles(context: context, tiles: [
                 TextInputListTile(
                     title: Constants.appAlias,
-                    controller: tControllers[Constants.appAlias],
+                    controller: tControllers[Constants.appAlias]!,
                     onChanged: (String aAlias) {
-                      rdProfile.appAlias = aAlias;
+                      rdProfile?.appAlias = aAlias;
                     }),
                 TextInputListTile(
                     title: Constants.huaweiAppAlias,
-                    controller: tControllers[Constants.huaweiAppAlias],
+                    controller: tControllers[Constants.huaweiAppAlias]!,
                     onChanged: (String haAlias) {
-                      rdProfile.huaweiAppAlias = haAlias;
+                      rdProfile?.huaweiAppAlias = haAlias;
                     }),
                 TextInputListTile(
                     title: Constants.androidPushIntent,
-                    controller: tControllers[Constants.androidPushIntent],
+                    controller: tControllers[Constants.androidPushIntent]!,
                     onChanged: (String apIntent) {
-                      rdProfile.androidPushIntent = apIntent;
+                      rdProfile?.androidPushIntent = apIntent;
                     }),
                 TextInputListTile(
                     title: Constants.organizationId,
-                    controller: tControllers[Constants.organizationId],
+                    controller: tControllers[Constants.organizationId]!,
                     onChanged: (String orgId) {
-                      rdProfile.organizationId = orgId;
+                      rdProfile?.organizationId = orgId;
                     }),
                 TextInputListTile(
                     title: Constants.profileId,
-                    controller: tControllers[Constants.profileId],
+                    controller: tControllers[Constants.profileId]!,
                     onChanged: (String pId) {
-                      rdProfile.profileId = pId;
+                      rdProfile?.profileId = pId;
                     }),
                 TextInputListTile(
                     title: Constants.dataSource,
-                    controller: tControllers[Constants.dataSource],
+                    controller: tControllers[Constants.dataSource]!,
                     onChanged: (String dSource) {
-                      rdProfile.dataSource = dSource;
+                      rdProfile?.dataSource = dSource;
                     }),
                 SwitchListTile(
                   title: Text(
                     Constants.inAppNotificationsEnabled,
                     style: Styles.settingsPrimaryText,
                   ),
-                  value: rdProfile.inAppNotificationsEnabled,
+                  value: rdProfile?.inAppNotificationsEnabled ?? false,
                   onChanged: (bool enabled) {
-                    rdProfile.inAppNotificationsEnabled = enabled;
+                    rdProfile?.inAppNotificationsEnabled = enabled;
                     updateState();
                   },
                 ),
@@ -128,27 +132,27 @@ class _HomeState extends State<Home> {
                     Constants.geofenceEnabled,
                     style: Styles.settingsPrimaryText,
                   ),
-                  value: rdProfile.geofenceEnabled,
+                  value: rdProfile?.geofenceEnabled ?? false,
                   onChanged: (bool enabled) {
-                    rdProfile.geofenceEnabled = enabled;
+                    rdProfile?.geofenceEnabled = enabled;
                     updateState();
                   },
                 ),
                 TextInputListTile(
                     title: Constants.maxGeofenceCount,
                     type: TextInputType.numberWithOptions(signed: false, decimal: false),
-                    controller: tControllers[Constants.maxGeofenceCount],
+                    controller: tControllers[Constants.maxGeofenceCount]!,
                     onChanged: (String mgCount) {
-                      rdProfile.maxGeofenceCount = int.tryParse(mgCount) ?? 20;
+                      rdProfile?.maxGeofenceCount = int.tryParse(mgCount) ?? 20;
                     }),
                 SwitchListTile(
                   title: Text(
                     Constants.logEnabled,
                     style: Styles.settingsPrimaryText,
                   ),
-                  value: rdProfile.logEnabled,
+                  value: rdProfile?.logEnabled ?? false,
                   onChanged: (bool enabled) {
-                    rdProfile.logEnabled = enabled;
+                    rdProfile?.logEnabled = enabled;
                     updateState();
                   },
                 ),
@@ -157,9 +161,9 @@ class _HomeState extends State<Home> {
                     Constants.isIDFAEnabled,
                     style: Styles.settingsPrimaryText,
                   ),
-                  value: rdProfile.isIDFAEnabled,
+                  value: rdProfile?.isIDFAEnabled ?? false,
                   onChanged: (bool enabled) {
-                    rdProfile.isIDFAEnabled = enabled;
+                    rdProfile?.isIDFAEnabled = enabled;
                     updateState();
                   },
                 ),
@@ -180,21 +184,28 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> submit() async {
-    var initRequest = RDInitRequestModel(
-      appAlias: rdProfile.appAlias,
-      huaweiAppAlias: rdProfile.huaweiAppAlias, // pass empty String if your app does not support HMS
-      androidPushIntent: rdProfile.androidPushIntent, // Android only
-      organizationId: rdProfile.organizationId,
-      siteId: rdProfile.profileId,
-      dataSource: rdProfile.dataSource,
-      maxGeofenceCount: rdProfile.maxGeofenceCount > 20 ? 20 : rdProfile.maxGeofenceCount,  // iOS only
-      geofenceEnabled: rdProfile.geofenceEnabled,
-      inAppNotificationsEnabled: rdProfile.inAppNotificationsEnabled,
-      logEnabled: rdProfile.logEnabled,
-      isIDFAEnabled: rdProfile.isIDFAEnabled,  // iOS only
-    );
-    await widget.relatedDigitalPlugin.init(initRequest, widget.notificationHandler);
-    Navigator.pushNamed(context, '/tabBarView');
+    if(rdProfile!=null) {
+      var initRequest = RDInitRequestModel(
+        appAlias: rdProfile!.appAlias,
+        huaweiAppAlias: rdProfile!.huaweiAppAlias,
+        // pass empty String if your app does not support HMS
+        androidPushIntent: rdProfile!.androidPushIntent,
+        // Android only
+        organizationId: rdProfile!.organizationId,
+        siteId: rdProfile!.profileId,
+        dataSource: rdProfile!.dataSource,
+        maxGeofenceCount: rdProfile!.maxGeofenceCount > 20 ? 20 : rdProfile!
+            .maxGeofenceCount,
+        // iOS only
+        geofenceEnabled: rdProfile!.geofenceEnabled,
+        inAppNotificationsEnabled: rdProfile!.inAppNotificationsEnabled,
+        logEnabled: rdProfile!.logEnabled,
+        isIDFAEnabled: rdProfile!.isIDFAEnabled, // iOS only
+      );
+      await widget.relatedDigitalPlugin.init(
+          initRequest, widget.notificationHandler);
+      Navigator.pushNamed(context, '/tabBarView');
+    }
   }
 
   updateState() {

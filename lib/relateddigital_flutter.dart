@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 
 import 'constants.dart';
 import 'rd_story_view.dart';
+import 'rd_banner_view.dart';
 import 'request_models.dart';
 import 'response_models.dart';
 
@@ -14,6 +15,7 @@ class RelateddigitalFlutter {
   Function(RDTokenResponseModel)? _setTokenHandler;
   void Function(dynamic result)? _readNotificationHandler;
   StoryPlatformCallbackHandler? _storyPlatformCallbackHandler;
+  BannerPlatformCallbackHandler? _bannerPlatformCallbackHandler;
   bool _logEnabled = true;
 
   String appAlias = '';
@@ -41,6 +43,18 @@ class RelateddigitalFlutter {
         'storyLink': methodCall.arguments['storyLink']
       };
       _storyPlatformCallbackHandler?.onItemClick(map);
+    } else if (methodCall.method == Constants.M_BANNER_ITEM_CLICK) {
+      Map<String, String> map = {
+        'bannerLink': methodCall.arguments['bannerLink']
+      };
+      _bannerPlatformCallbackHandler?.onItemClick(map);
+    } else if (methodCall.method == Constants.M_BANNER_REQUEST_RESULT) {
+      Map<String, String> map = {
+        'isAvailable': methodCall.arguments['isAvailable']?.toString() ?? 'false',
+        'width': methodCall.arguments['width']?.toString() ?? '0',
+        'height': methodCall.arguments['height']?.toString() ?? '0'
+      };
+      _bannerPlatformCallbackHandler?.onRequestResult(map);
     }
   }
 
@@ -190,6 +204,10 @@ class RelateddigitalFlutter {
 
   void setStoryPlatformHandler(StoryPlatformCallbackHandler handler) {
     _storyPlatformCallbackHandler = handler;
+  }
+
+  void setBannerPlatformHandler(BannerPlatformCallbackHandler handler) {
+    _bannerPlatformCallbackHandler = handler;
   }
 
   Future<void> clearStoryCache() async {

@@ -8,7 +8,7 @@ import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart
 class Push extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  Push({@required this.relatedDigitalPlugin});
+  Push({required this.relatedDigitalPlugin});
 
   @override
   _PushState createState() => _PushState();

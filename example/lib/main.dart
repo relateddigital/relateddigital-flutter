@@ -21,7 +21,7 @@ class RDExample extends StatefulWidget {
 
 class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   final RelateddigitalFlutter relatedDigitalPlugin = RelateddigitalFlutter();
-  TabController controller;
+  TabController? controller;
   final GlobalKey<NavigatorState> key = GlobalKey();
 
   @override
@@ -34,7 +34,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
     print('_readNotificationCallback');
     print(result);
     showDialog(
-        context: key.currentContext,
+        context: key.currentContext!,
         builder: (context) => AlertDialog(
               title: Text("_readNotificationCallback"),
               content: Text(result.toString()),
@@ -88,6 +88,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
         onWillPop: null,
         child: Scaffold(
           body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             children: <Widget>[
               eventView(),
               pushView(),

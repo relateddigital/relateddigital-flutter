@@ -11,7 +11,7 @@ import 'package:relateddigital_flutter_example/widgets/text_label_list_tile.dart
 class NotificationCenter extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  NotificationCenter({@required this.relatedDigitalPlugin});
+  NotificationCenter({required this.relatedDigitalPlugin});
 
   @override
   _NotificationCenterState createState() => _NotificationCenterState();
@@ -63,7 +63,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
             )));
   }
 
-  Iterable<Widget> getPushNotificationListTiles() {
+  List<Widget> getPushNotificationListTiles() {
     List<Widget> tiles = [];
     if (pushNotifications.error != null) {
       print(pushNotifications.error);
@@ -96,9 +96,9 @@ class _NotificationCenterState extends State<NotificationCenter> {
     setState(() {});
   }
 
-  Future<bool> showAlertDialog({
-    @required String title,
-    @required String content,
+  Future<dynamic> showAlertDialog({
+    required String title,
+    required String content,
   }) async {
     if (!Platform.isIOS) {
       return showDialog(

@@ -6,7 +6,7 @@ import 'package:relateddigital_flutter_example/styles.dart';
 class Story extends StatefulWidget {
   final RelateddigitalFlutter relatedDigitalPlugin;
 
-  Story({@required this.relatedDigitalPlugin});
+  Story({required this.relatedDigitalPlugin});
 
   @override
   _StoryState createState() => _StoryState();
@@ -36,7 +36,8 @@ class _StoryState extends State<Story> {
                     width: MediaQuery.of(context).size.width,
                     height: 110,
                     child: RDStoryView(
-                      actionId: '975',
+                      key:null,
+                      actionId: '310',
                       relatedDigitalPlugin: widget.relatedDigitalPlugin,
                       onItemClick: (Map<String, String> result) {
                         print(result);

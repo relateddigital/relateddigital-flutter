@@ -24,6 +24,8 @@ public class Constants {
     public static String M_REGISTER_EMAIL = "RD/registerEmail";
     public static String M_RECOMMENDATIONS = "VL/getRecommendations";
     public static String M_TRACK_RECOMMENDATION = "VL/trackRecommendationClick";
+    public static String M_BANNER_ITEM_CLICK = "VL/onBannerItemClick";
+    public static String M_BANNER_REQUEST_RESULT = "VL/onBannerRequestResult";
     public static String M_STORY_ITEM_CLICK = "VL/onStoryItemClick";
     public static String M_STORY_CLEAR_CACHE = "VL/clearStoryCache";
     public static String M_FAV_ATTRIBUTE = "VL/getFavAttributes";
@@ -43,6 +45,7 @@ public class Constants {
     public static String VL_GEOFENCE_URL = "https://s.visilabs.net/geojson";
     public static int VL_REQUEST_TIMEOUT = 30;
     public static String STORY_VIEW_NAME = "StoryView";
+    public static String BANNER_VIEW_NAME = "BannerView";
 
     public static String REGISTER_TOKEN = "RegisterToken";
 
