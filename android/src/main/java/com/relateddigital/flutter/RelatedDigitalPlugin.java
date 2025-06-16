@@ -42,6 +42,12 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
     flutterPluginBinding
             .getPlatformViewRegistry()
             .registerViewFactory(Constants.STORY_VIEW_NAME, new RelatedDigitalStoryViewFactory(flutterPluginBinding.getBinaryMessenger(), channel));
+    
+    flutterPluginBinding
+            .getPlatformViewRegistry()
+            .registerViewFactory(Constants.BANNER_VIEW_NAME, new RelatedDigitalBannerViewFactory(flutterPluginBinding.getBinaryMessenger(), channel));
+  
+  
   }
 
   @Override

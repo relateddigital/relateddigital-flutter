@@ -88,6 +88,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
         onWillPop: null,
         child: Scaffold(
           body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             children: <Widget>[
               eventView(),
               pushView(),

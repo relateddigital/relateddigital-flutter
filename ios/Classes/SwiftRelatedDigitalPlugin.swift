@@ -13,10 +13,12 @@ public class SwiftRelatedDigitalPlugin: NSObject, FlutterPlugin {
         let _channel = FlutterMethodChannel(name: Constants.CHANNEL_NAME, binaryMessenger: registrar.messenger())
         let instance = SwiftRelatedDigitalPlugin()
         let factory = RelatedDigitalStoryViewFactory(messenger: registrar.messenger(), channel: _channel)
+        let bannerFactory = RelatedDigitalBannerViewFactory(messenger: registrar.messenger(), channel: _channel)
         
         registrar.addMethodCallDelegate(instance, channel: _channel)
         registrar.addApplicationDelegate(instance)
         registrar.register(factory, withId: Constants.STORY_VIEW_NAME)
+        registrar.register(bannerFactory, withId: Constants.BANNER_VIEW_NAME)
         
         instance.setChannel(fChannel: _channel)
     }

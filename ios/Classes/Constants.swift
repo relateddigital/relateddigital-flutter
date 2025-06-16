@@ -23,6 +23,8 @@ class Constants {
     static let M_RECOMMENDATIONS = "VL/getRecommendations"
     static let M_TRACK_RECOMMENDATION = "VL/trackRecommendationClick"
     static let M_STORY_ITEM_CLICK = "VL/onStoryItemClick"
+    static let M_BANNER_ITEM_CLICK = "VL/onBannerItemClick"
+    static let M_BANNER_REQUEST_RESULT = "VL/onBannerRequestResult"
     static let M_FAV_ATTRIBUTE = "VL/getFavAttributes"
     static let M_LOGOUT = "VL/logout"
     static let M_LOGIN = "VL/login"
@@ -35,4 +37,5 @@ class Constants {
     static let VL_CHANNEL = "IOS"
     static let VL_REQUEST_TIMEOUT = 30
     static let STORY_VIEW_NAME = "StoryView"
+    static let BANNER_VIEW_NAME = "BannerView"
 }

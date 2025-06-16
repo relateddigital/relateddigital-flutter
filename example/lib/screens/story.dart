@@ -37,7 +37,7 @@ class _StoryState extends State<Story> {
                     height: 110,
                     child: RDStoryView(
                       key:null,
-                      actionId: '975',
+                      actionId: '310',
                       relatedDigitalPlugin: widget.relatedDigitalPlugin,
                       onItemClick: (Map<String, String> result) {
                         print(result);

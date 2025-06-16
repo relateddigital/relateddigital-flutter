@@ -23,6 +23,8 @@ class Constants {
   static const String M_REGISTER_EMAIL = 'RD/registerEmail';
   static const String M_RECOMMENDATIONS = 'VL/getRecommendations';
   static const String M_TRACK_RECOMMENDATION = 'VL/trackRecommendationClick';
+  static const String M_BANNER_ITEM_CLICK = 'VL/onBannerItemClick';
+  static const String M_BANNER_REQUEST_RESULT = 'VL/onBannerRequestResult';
   static const String M_STORY_ITEM_CLICK = 'VL/onStoryItemClick';
   static const String M_STORY_CLEAR_CACHE = 'VL/clearStoryCache';
   static const String M_FAV_ATTRIBUTE = 'VL/getFavAttributes';
@@ -41,6 +43,7 @@ class Constants {
   static const String VL_TOKEN_PARAM = 'OM.sys.TokenID';
   static const String VL_APP_ID_PARAM = 'OM.sys.AppID';
   static const String STORY_VIEW_NAME = 'StoryView';
+  static const String BANNER_VIEW_NAME = 'BannerView';
   static const String VL_UTM_CAMPAIGN_PARAM = 'utm_campaign';
   static const String VL_UTM_SOURCE_PARAM = 'utm_source';
   static const String VL_UTM_MEDIUM_PARAM = 'utm_medium';
