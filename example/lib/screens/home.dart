@@ -32,8 +32,8 @@ class _HomeState extends State<Home> {
   }
   readSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String rdProfileString = prefs.getString("RDProfile") ?? "";
-    if (rdProfileString == null) {
+    String? rdProfileString = prefs.getString("RDProfile");
+    if (rdProfileString == null || rdProfileString.isEmpty) {
       rdProfile = RDProfile.fromConstant();
     } else {
       Map<String, dynamic> profileJson = jsonDecode(rdProfileString);
@@ -64,7 +64,9 @@ class _HomeState extends State<Home> {
       Constants.organizationId: TextEditingController(),
       Constants.profileId: TextEditingController(),
       Constants.dataSource: TextEditingController(),
-      Constants.maxGeofenceCount: TextEditingController()
+      Constants.maxGeofenceCount: TextEditingController(),
+      Constants.useNotificationLargeIcon: TextEditingController(),
+      Constants.androidIconName: TextEditingController(),
     });
   }
 
@@ -127,6 +129,23 @@ class _HomeState extends State<Home> {
                     updateState();
                   },
                 ),
+                SwitchListTile(
+                  title: Text(
+                    Constants.useNotificationLargeIcon,
+                    style: Styles.settingsPrimaryText,
+                  ),
+                  value: rdProfile?.useNotificationLargeIcon ?? false,
+                  onChanged: (bool enabled) {
+                    rdProfile?.useNotificationLargeIcon = enabled;
+                    updateState();
+                  },
+                ),
+                TextInputListTile(
+                    title: Constants.androidIconName,
+                    controller: tControllers[Constants.androidIconName]!,
+                    onChanged: (String aIconName) {
+                      rdProfile?.androidIconName = aIconName;
+                    }),
                 SwitchListTile(
                   title: Text(
                     Constants.geofenceEnabled,
@@ -201,6 +220,9 @@ class _HomeState extends State<Home> {
         inAppNotificationsEnabled: rdProfile!.inAppNotificationsEnabled,
         logEnabled: rdProfile!.logEnabled,
         isIDFAEnabled: rdProfile!.isIDFAEnabled, // iOS only
+        useNotificationLargeIcon: rdProfile!.useNotificationLargeIcon,
+        androidIconName: rdProfile!.androidIconName,
+        // Android only, e.g. "ic_launcher"
       );
       await widget.relatedDigitalPlugin.init(
           initRequest, widget.notificationHandler);

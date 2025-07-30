@@ -65,7 +65,27 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
          boolean geofenceEnabled = call.argument("geofenceEnabled");
          boolean inAppNotificationsEnabled = call.argument("inAppNotificationsEnabled");
 
-         functionHandler.initEuromsg(appAlias, huaweiAppAlias, pushIntent);
+         boolean useNotificationLargeIcon = call.argument("useNotificationLargeIcon");
+         String androidIconName = call.argument("androidIconName");
+
+          int iconResId = 0;
+          if (androidIconName != null && !androidIconName.isEmpty()) {
+              iconResId = mActivity.getResources().getIdentifier(
+                  androidIconName, "drawable", mActivity.getPackageName());
+              if (iconResId == 0) {
+                  iconResId = R.drawable.ic_carousel_icon;
+              }
+          } else {
+              try {
+                  // app default icon
+                  iconResId = mActivity.getPackageManager()
+                      .getApplicationInfo(mActivity.getPackageName(), 0).icon;
+              } catch (Exception e) {
+                  iconResId = R.drawable.ic_carousel_icon;
+              }
+          }
+
+         functionHandler.initEuromsg(appAlias, huaweiAppAlias, pushIntent, iconResId, useNotificationLargeIcon);
          functionHandler.initVisilabs(organizationId, siteId, dataSource, geofenceEnabled, inAppNotificationsEnabled);
          VisilabsConstant.DEBUG = enableLog;
 
