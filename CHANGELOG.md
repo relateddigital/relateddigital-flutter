@@ -140,3 +140,36 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 ## 0.6.2
 - Close button added to Drawer
 - App Banner feature added
+
+## 0.6.3
+- Custom notification icon(Android)
+- Notification permission dialog(Android)
+- Native sdk version update
+
+## 0.6.4
+- New init request model parameters
+
+```
+useNotificationLargeIcon: true
+androidIconName: 'ic_launcher'
+```
+
+Example;
+
+```
+RDInitRequestModel(
+    appAlias: Platform.isIOS ? 'ios-app-alias' : 'android-app-alias',
+    huaweiAppAlias: 'huawei-app-alias', // pass empty String if your app does not support HMS
+    androidPushIntent: 'com.test.MainActivity', // Android only
+    organizationId: 'ORG_ID',
+    siteId: 'SITE_ID',
+    dataSource: 'DATA_SOURCE',
+    maxGeofenceCount: 20,  // iOS only
+    geofenceEnabled: true,
+    inAppNotificationsEnabled: true,
+    logEnabled: true,
+    isIDFAEnabled: true,  // iOS only
+    useNotificationLargeIcon: true,
+    androidIconName: 'ic_launcher',
+  );
+```

@@ -73,7 +73,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.6.2
+    relateddigital_flutter: ^0.6.4
 ```
 - Run `flutter pub get`
 
@@ -292,6 +292,8 @@ Future<void> initLib() async {
     inAppNotificationsEnabled: true,
     logEnabled: true,
     isIDFAEnabled: true,  // iOS only
+    useNotificationLargeIcon: true,
+    androidIconName: 'ic_launcher',
   );
 
   await relatedDigitalPlugin.init(initRequest, _readNotificationCallback);
