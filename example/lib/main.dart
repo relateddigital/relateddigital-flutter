@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
@@ -12,6 +13,10 @@ import 'package:relateddigital_flutter_example/screens/notification_center.dart'
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(RDExample());
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  // TODO: Replace YOUR_APP_ID with your OneSignal App ID found in your OneSignal dashboard Settings > Keys & IDs.
+  OneSignal.initialize("YOUR_APP_ID"); 
+  OneSignal.Notifications.requestPermission(false);
 }
 
 class RDExample extends StatefulWidget {
