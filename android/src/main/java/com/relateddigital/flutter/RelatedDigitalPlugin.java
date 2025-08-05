@@ -21,8 +21,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
-import io.flutter.view.FlutterMain;
+
 
 /** RelatedDigitalPlugin */
 public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, PluginRegistry.NewIntentListener, ActivityAware {
@@ -73,7 +72,7 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
               iconResId = mActivity.getResources().getIdentifier(
                   androidIconName, "drawable", mActivity.getPackageName());
               if (iconResId == 0) {
-                  iconResId = R.drawable.ic_carousel_icon;
+                  iconResId = android.R.drawable.ic_menu_gallery;
               }
           } else {
               try {
@@ -81,7 +80,7 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
                   iconResId = mActivity.getPackageManager()
                       .getApplicationInfo(mActivity.getPackageName(), 0).icon;
               } catch (Exception e) {
-                  iconResId = R.drawable.ic_carousel_icon;
+                  iconResId = android.R.drawable.ic_menu_gallery;
               }
           }
 

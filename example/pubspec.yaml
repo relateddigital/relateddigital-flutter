@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  onesignal_flutter: ^5.1.2
   shared_preferences: ^2.0.9
   cupertino_icons: ^1.0.4
 

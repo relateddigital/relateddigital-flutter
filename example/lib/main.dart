@@ -8,10 +8,15 @@ import 'package:relateddigital_flutter_example/screens/push.dart';
 import 'package:relateddigital_flutter_example/screens/inapp.dart';
 import 'package:relateddigital_flutter_example/screens/story.dart';
 import 'package:relateddigital_flutter_example/screens/notification_center.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(RDExample());
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize("APP_ID");
+  OneSignal.Notifications.requestPermission(false);
+
 }
 
 class RDExample extends StatefulWidget {
@@ -28,6 +33,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = TabController(length: 4, vsync: this);
+    
   }
 
   void _readNotificationCallback(dynamic result) async {
