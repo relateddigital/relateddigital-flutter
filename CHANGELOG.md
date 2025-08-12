@@ -173,3 +173,6 @@ RDInitRequestModel(
     androidIconName: 'ic_launcher',
   );
 ```
+
+## 0.6.5
+- Remove default notificaiton icon

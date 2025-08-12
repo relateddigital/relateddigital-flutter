@@ -71,16 +71,13 @@ public class RelatedDigitalPlugin implements FlutterPlugin, MethodCallHandler, P
           if (androidIconName != null && !androidIconName.isEmpty()) {
               iconResId = mActivity.getResources().getIdentifier(
                   androidIconName, "drawable", mActivity.getPackageName());
-              if (iconResId == 0) {
-                  iconResId = android.R.drawable.ic_menu_gallery;
-              }
           } else {
               try {
                   // app default icon
                   iconResId = mActivity.getPackageManager()
                       .getApplicationInfo(mActivity.getPackageName(), 0).icon;
               } catch (Exception e) {
-                  iconResId = android.R.drawable.ic_menu_gallery;
+                  e.printStackTrace();
               }
           }
 
