@@ -110,6 +110,14 @@ classpath 'com.google.gms:google-services:4.3.10'
 apply plugin: 'com.google.gms.google-services'
 ```
 
+- If you are using Kotlin, add the following line to `settings.gradle.kts` `plugins` section.
+```gradle
+plugins {
+    ...
+    id("com.google.gms.google-services") version "4.4.0" apply false
+}
+```
+
 - Change your minSdkVersion to 21.
 
 - Change your targetSdkVersion and compileSdkVersion to 32.
