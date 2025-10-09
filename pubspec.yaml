@@ -1,6 +1,6 @@
 name: relateddigital_flutter
 description: Related Digital Official Flutter SDK for analytics, recommendation and push notifications.
-version: 0.6.5
+version: 0.6.6
 homepage: https://www.relateddigital.com
 
 environment:

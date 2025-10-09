@@ -176,3 +176,6 @@ RDInitRequestModel(
 
 ## 0.6.5
 - Remove default notificaiton icon
+
+## 0.6.6
+- iOS 26 bug fix
