@@ -120,7 +120,7 @@ plugins {
 
 - Change your minSdkVersion to 21.
 
-- Change your targetSdkVersion and compileSdkVersion to 32.
+- Change your targetSdkVersion and compileSdkVersion to 34.
 
 
 - Add the following services to your `AndroidManifest.xml`, within the `<application></application>` tags.
@@ -258,6 +258,29 @@ class NotificationService: UNNotificationServiceExtension {
 <key>NSUserTrackingUsageDescription</key>
 <string>We use advertising identifier!</string>
 ```
+
+#### Troubleshooting
+
+##### Xcode Build Cycle Error
+
+If you encounter this error:
+```
+Error (Xcode): Cycle inside Runner; building could produce unreliable results.
+```
+
+**Cause:** This occurs when build phases are in the wrong order, creating a circular dependency:
+- "Thin Binary" script runs first
+- "Embed Foundation Extensions" runs after
+
+**Solution:** Reorder the Runner build phases:
+
+1. Open your Xcode project
+2. Select the Runner target
+3. Go to Build Phases
+4. Reorder the phases so that:
+   - **Embed Foundation Extensions** comes first
+   - **Thin Binary** comes after
+
 
 
 # Usage
