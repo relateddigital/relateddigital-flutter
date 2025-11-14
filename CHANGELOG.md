@@ -179,3 +179,6 @@ RDInitRequestModel(
 
 ## 0.6.6
 - iOS 26 bug fix
+
+## 0.6.7
+- Version Update

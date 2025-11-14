@@ -41,7 +41,9 @@ class _EventState extends State<Event> {
     'inappcarousel',
     'drawer',
     'inline_anket',
-    'nps_with_secondpopup'
+    'nps_with_secondpopup',
+    'MultipleChoiceSurvey',
+    'notification_bell'
   ];
   String exVisitorId = '';
 
