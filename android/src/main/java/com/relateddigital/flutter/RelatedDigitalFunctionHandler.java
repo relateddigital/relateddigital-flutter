@@ -18,6 +18,9 @@ import com.visilabs.json.JSONArray;
 import com.visilabs.util.PersistentTargetManager;
 import com.visilabs.util.VisilabsConstant;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -207,21 +210,32 @@ public class RelatedDigitalFunctionHandler {
             targetRequest.executeAsync(new VisilabsCallback() {
                 @Override
                 public void success(VisilabsResponse response) {
-                    try{
-                        String rawResponse = response.getRawResponse();
-                        result.success(rawResponse);
-                    }
-                    catch (Exception ex){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.getRawResponse());
+                        
+                        if (!jsonObject.has("title")) {
+                            jsonObject.put("title", "");
+                        }
+                        
+                        if (jsonObject.has("recommendations")) {
+                            org.json.JSONArray recommendations = jsonObject.getJSONArray("recommendations");
+                            for (int i = 0; i < recommendations.length(); i++) {
+                                JSONObject item = recommendations.getJSONObject(i);
+                                item.remove("target");
+                                item.remove("wdt");
+                            }
+                        }
+                        result.success(jsonObject.toString());
+                    } catch (Exception ex) {
                         ex.printStackTrace();
-
-                        HashMap<String, String> error = new HashMap<String, String>();
+                        HashMap<String, String> error = new HashMap<>();
                         error.put("error", ex.toString());
                         result.success(error);
                     }
                 }
                 @Override
                 public void fail(VisilabsResponse response) {
-                    HashMap<String, String> error = new HashMap<String, String>();
+                    HashMap<String, String> error = new HashMap<>();
                     error.put("error", response.getErrorMessage());
                     result.success(error);
                 }

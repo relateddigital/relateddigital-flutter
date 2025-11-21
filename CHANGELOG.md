@@ -182,3 +182,6 @@ RDInitRequestModel(
 
 ## 0.6.7
 - Version Update
+
+## 0.6.8
+- Recommendation payload fix
