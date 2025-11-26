@@ -12,6 +12,8 @@ class RDProfile {
   bool inAppNotificationsEnabled;
   bool logEnabled;
   bool isIDFAEnabled;
+  bool useNotificationLargeIcon;
+  String androidIconName;
 
   RDProfile(
       this.appAlias,
@@ -24,7 +26,9 @@ class RDProfile {
       this.geofenceEnabled,
       this.inAppNotificationsEnabled,
       this.logEnabled,
-      this.isIDFAEnabled);
+      this.isIDFAEnabled,
+      this.useNotificationLargeIcon,
+      this.androidIconName);
 
   RDProfile.fromConstant()
       : appAlias = Constants.APP_ALIAS,
@@ -37,7 +41,9 @@ class RDProfile {
         geofenceEnabled = Constants.GEOFENCE_ENABLED,
         inAppNotificationsEnabled = Constants.IN_APP_NOTIFICATIONS_ENABLED,
         logEnabled = Constants.LOG_ENABLED,
-        isIDFAEnabled = Constants.IS_IDFA_ENABLED;
+        isIDFAEnabled = Constants.IS_IDFA_ENABLED,
+        useNotificationLargeIcon = Constants.USE_NOTIFICATION_LARGE_ICON,
+        androidIconName = Constants.ANDROID_ICON_NAME;
 
   RDProfile.fromJson(Map<String, dynamic> json)
       : appAlias = json['appAlias'],
@@ -50,7 +56,9 @@ class RDProfile {
         geofenceEnabled = json['geofenceEnabled'],
         inAppNotificationsEnabled = json['inAppNotificationsEnabled'],
         logEnabled = json['logEnabled'],
-        isIDFAEnabled = json['isIDFAEnabled'];
+        isIDFAEnabled = json['isIDFAEnabled'],
+        useNotificationLargeIcon = json['useNotificationLargeIcon'],
+        androidIconName = json['androidIconName'];
 
   Map<String, dynamic> toJson() => {
         'appAlias': appAlias,
@@ -64,6 +72,8 @@ class RDProfile {
         'inAppNotificationsEnabled': inAppNotificationsEnabled,
         'logEnabled': logEnabled,
         'isIDFAEnabled': isIDFAEnabled,
+        'useNotificationLargeIcon': useNotificationLargeIcon,
+        'androidIconName': androidIconName,
       };
 
   bool validate() {

@@ -73,7 +73,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.6.2
+    relateddigital_flutter: ^0.6.8
 ```
 - Run `flutter pub get`
 
@@ -110,9 +110,17 @@ classpath 'com.google.gms:google-services:4.3.10'
 apply plugin: 'com.google.gms.google-services'
 ```
 
+- If you are using Kotlin, add the following line to `settings.gradle.kts` `plugins` section.
+```gradle
+plugins {
+    ...
+    id("com.google.gms.google-services") version "4.4.0" apply false
+}
+```
+
 - Change your minSdkVersion to 21.
 
-- Change your targetSdkVersion and compileSdkVersion to 32.
+- Change your targetSdkVersion and compileSdkVersion to 34.
 
 
 - Add the following services to your `AndroidManifest.xml`, within the `<application></application>` tags.
@@ -251,6 +259,29 @@ class NotificationService: UNNotificationServiceExtension {
 <string>We use advertising identifier!</string>
 ```
 
+#### Troubleshooting
+
+##### Xcode Build Cycle Error
+
+If you encounter this error:
+```
+Error (Xcode): Cycle inside Runner; building could produce unreliable results.
+```
+
+**Cause:** This occurs when build phases are in the wrong order, creating a circular dependency:
+- "Thin Binary" script runs first
+- "Embed Foundation Extensions" runs after
+
+**Solution:** Reorder the Runner build phases:
+
+1. Open your Xcode project
+2. Select the Runner target
+3. Go to Build Phases
+4. Reorder the phases so that:
+   - **Embed Foundation Extensions** comes first
+   - **Thin Binary** comes after
+
+
 
 # Usage
 
@@ -292,6 +323,8 @@ Future<void> initLib() async {
     inAppNotificationsEnabled: true,
     logEnabled: true,
     isIDFAEnabled: true,  // iOS only
+    useNotificationLargeIcon: true,
+    androidIconName: 'ic_launcher',
   );
 
   await relatedDigitalPlugin.init(initRequest, _readNotificationCallback);

@@ -146,8 +146,35 @@ class RelatedDigitalFunctionHandler {
                 var recoResponse: [RecoResponse] = []
                 
                 for product in response.products {
-                    recommendations.append(RelatedDigitalRecommendationProduct(code: product.code, title: product.title, img: product.img
-                                                                               , brand: product.brand, price: product.price, dprice: product.dprice, cur: product.cur, dcur: product.dcur, freeshipping: product.freeshipping, samedayshipping: product.samedayshipping, rating: product.rating, comment: product.comment, discount: product.discount, attr1: product.attr1, attr2: product.attr2, attr3: product.attr3, attr4: product.attr4, attr5: product.attr5, qs: product.qs))
+                    recommendations.append(RelatedDigitalRecommendationProduct(
+                        code: product.code, 
+                        title: product.title, 
+                        img: product.img, 
+                        brand: product.brand, 
+                        price: product.price, 
+                        dprice: product.dprice, 
+                        cur: product.cur, 
+                        dcur: product.dcur, 
+                        freeshipping: product.freeshipping, 
+                        samedayshipping: product.samedayshipping, 
+                        rating: product.rating, 
+                        comment: product.comment, 
+                        discount: product.discount,
+                        qs: product.qs,
+                        dest_url: product.destUrl,
+                        // target: product.target,
+                        // wdt: product.wdt,
+                        attr1: product.attr1,
+                        attr2: product.attr2,
+                        attr3: product.attr3, 
+                        attr4: product.attr4, 
+                        attr5: product.attr5, 
+                        attr6: product.attr6,
+                        attr7: product.attr7,
+                        attr8: product.attr8,
+                        attr9: product.attr9,
+                        attr10: product.attr10
+                    ))
                 }
                 
                 recoResponse.append(RecoResponse(recommendations:recommendations, title:response.widgetTitle ))
@@ -305,12 +332,20 @@ public class RelatedDigitalRecommendationProduct: Encodable {
         public static let rating = "rating"
         public static let comment = "comment"
         public static let discount = "discount"
+        public static let qs = "qs"
+        public static let dest_url = "dest_url"
+        // public static let target = "target"
+        // public static let wdt = "wdt"
         public static let attr1 = "attr1"
         public static let attr2 = "attr2"
         public static let attr3 = "attr3"
         public static let attr4 = "attr4"
         public static let attr5 = "attr5"
-        public static let qs = "qs"
+        public static let attr6 = "attr6"
+        public static let attr7 = "attr7"
+        public static let attr8 = "attr8"
+        public static let attr9 = "attr9"
+        public static let attr10 = "attr10"
     }
     
     public var code: String
@@ -326,14 +361,50 @@ public class RelatedDigitalRecommendationProduct: Encodable {
     public var rating: Int = 0
     public var comment: Int = 0
     public var discount: Double = 0.0
+    public var qs: String
+    public var dest_url: String
+    // public var target: String
+    // public var wdt: String
     public var attr1: String
     public var attr2: String
     public var attr3: String
     public var attr4: String
     public var attr5: String
-    public var qs: String
+    public var attr6: String
+    public var attr7: String
+    public var attr8: String
+    public var attr9: String
+    public var attr10: String
     
-    internal init(code: String, title: String, img: String, brand: String, price: Double, dprice: Double, cur: String, dcur: String, freeshipping: Bool, samedayshipping: Bool, rating: Int, comment: Int, discount: Double, attr1: String, attr2: String, attr3: String, attr4: String, attr5: String, qs: String) {
+    internal init(
+            code: String, 
+            title: String, 
+            img: String, 
+            brand: String, 
+            price: Double, 
+            dprice: Double, 
+            cur: String, 
+            dcur: String, 
+            freeshipping: Bool, 
+            samedayshipping: Bool, 
+            rating: Int, 
+            comment: Int, 
+            discount: Double,
+            qs: String, 
+            dest_url: String, 
+            // target: String,
+            // wdt: String,
+            attr1: String,
+            attr2: String, 
+            attr3: String, 
+            attr4: String, 
+            attr5: String, 
+            attr6: String, 
+            attr7: String, 
+            attr8: String, 
+            attr9: String, 
+            attr10: String
+        ) {
         self.code = code
         self.title = title
         self.img = img
@@ -347,12 +418,20 @@ public class RelatedDigitalRecommendationProduct: Encodable {
         self.rating = rating
         self.comment = comment
         self.discount = discount
+        self.qs = qs
+        self.dest_url = dest_url
+        // self.target = target
+        // self.wdt = wdt
         self.attr1 = attr1
         self.attr2 = attr2
         self.attr3 = attr3
         self.attr4 = attr4
         self.attr5 = attr5
-        self.qs = qs
+        self.attr6 = attr6
+        self.attr7 = attr7
+        self.attr8 = attr8
+        self.attr9 = attr9
+        self.attr10 = attr10
     }
     
     internal init?(JSONObject: [String: Any?]?) {
@@ -378,12 +457,20 @@ public class RelatedDigitalRecommendationProduct: Encodable {
         self.rating = object[PayloadKey.rating] as? Int ?? 0
         self.comment = object[PayloadKey.comment] as? Int ?? 0
         self.discount = object[PayloadKey.discount] as? Double ?? 0.0
+        self.qs = object[PayloadKey.qs] as? String ?? ""
+        self.dest_url = object[PayloadKey.dest_url] as? String ?? ""
+        // self.target = object[PayloadKey.target] as? String ?? ""
+        // self.wdt = object[PayloadKey.wdt] as? String ?? ""
         self.attr1 = object[PayloadKey.attr1] as? String ?? ""
         self.attr2 = object[PayloadKey.attr2] as? String ?? ""
         self.attr3 = object[PayloadKey.attr3] as? String ?? ""
         self.attr4 = object[PayloadKey.attr4] as? String ?? ""
         self.attr5 = object[PayloadKey.attr5] as? String ?? ""
-        self.qs = object[PayloadKey.qs] as? String ?? ""
+        self.attr6 = object[PayloadKey.attr6] as? String ?? ""
+        self.attr7 = object[PayloadKey.attr7] as? String ?? ""
+        self.attr8 = object[PayloadKey.attr8] as? String ?? ""
+        self.attr9 = object[PayloadKey.attr9] as? String ?? ""
+        self.attr10 = object[PayloadKey.attr10] as? String ?? ""
     }
 }
 

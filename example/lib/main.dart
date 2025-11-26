@@ -9,13 +9,14 @@ import 'package:relateddigital_flutter_example/screens/push.dart';
 import 'package:relateddigital_flutter_example/screens/inapp.dart';
 import 'package:relateddigital_flutter_example/screens/story.dart';
 import 'package:relateddigital_flutter_example/screens/notification_center.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(RDExample());
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-  // TODO: Replace YOUR_APP_ID with your OneSignal App ID found in your OneSignal dashboard Settings > Keys & IDs.
-  OneSignal.initialize("YOUR_APP_ID"); 
+  // TODO: Replace APP_ID with your OneSignal App ID found in your OneSignal dashboard Settings > Keys & IDs.
+  OneSignal.initialize("APP_ID");
   OneSignal.Notifications.requestPermission(false);
 }
 
@@ -33,6 +34,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = TabController(length: 4, vsync: this);
+    
   }
 
   void _readNotificationCallback(dynamic result) async {

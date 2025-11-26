@@ -76,7 +76,10 @@ class RelateddigitalFlutter {
       'geofenceEnabled': initRequest.geofenceEnabled,
       'maxGeofenceCount': initRequest.maxGeofenceCount,
       'inAppNotificationsEnabled': initRequest.inAppNotificationsEnabled,
-      'isIDFAEnabled': initRequest.isIDFAEnabled
+      'isIDFAEnabled': initRequest.isIDFAEnabled,
+      'useNotificationLargeIcon': initRequest.useNotificationLargeIcon,
+      'androidIconName': initRequest.androidIconName,
+      // Android only, e.g. "ic_launcher"
     });
   }
 

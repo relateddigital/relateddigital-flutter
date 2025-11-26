@@ -15,6 +15,8 @@ class Constants {
   static int MAX_GEOFENCE_COUNT = 20;
   static bool IN_APP_NOTIFICATIONS_ENABLED = true;
   static bool IS_IDFA_ENABLED = false;
+  static bool USE_NOTIFICATION_LARGE_ICON = false;
+  static String ANDROID_ICON_NAME = '';
 
   static const String appAlias = 'appAlias';
   static const String huaweiAppAlias = 'huaweiAppAlias';
@@ -27,6 +29,10 @@ class Constants {
   static const String maxGeofenceCount = 'maxGeofenceCount';
   static const String logEnabled = 'logEnabled';
   static const String isIDFAEnabled = 'isIDFAEnabled';
+
+  static const String useNotificationLargeIcon = 'useNotificationLargeIcon';
+  static const String androidIconName = 'androidIconName';
+  
 
   static const String userProperty = 'userProperty';
 

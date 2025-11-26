@@ -18,6 +18,9 @@ import com.visilabs.json.JSONArray;
 import com.visilabs.util.PersistentTargetManager;
 import com.visilabs.util.VisilabsConstant;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +34,7 @@ import euromsg.com.euromobileandroid.enums.PushPermit;
 import euromsg.com.euromobileandroid.model.EuromessageCallback;
 import euromsg.com.euromobileandroid.model.Message;
 import euromsg.com.euromobileandroid.utils.AppUtils;
+import euromsg.com.euromobileandroid.enums.RDNotificationPriority;
 import io.flutter.plugin.common.MethodChannel;
 
 public class RelatedDigitalFunctionHandler {
@@ -47,13 +51,22 @@ public class RelatedDigitalFunctionHandler {
         mChannel = channel;
     }
 
-    public void initEuromsg(String appAlias, String huaweiAppAlias, String pushIntent) {
+    public void initEuromsg(String appAlias, String huaweiAppAlias, String pushIntent, int iconId, boolean useNotificationLargeIcon) {
         mAppAlias = appAlias;
         mHuaweiAppAlias = huaweiAppAlias;
         EuroMobileManager euroMobileManager = EuroMobileManager.init(appAlias, huaweiAppAlias, mContext);
         euroMobileManager.registerToFCM(mContext);
         euroMobileManager.setPushIntent(pushIntent, mContext);
         euroMobileManager.setChannelName("CHANNEL", mContext); // TODO: burada niye CHANNEL var?
+        
+        euroMobileManager.setNotificationTransparentSmallIcon(iconId, mContext);
+        euroMobileManager.setNotificationTransparentSmallIconDarkMode(iconId, mContext);
+        euroMobileManager.useNotificationLargeIcon(useNotificationLargeIcon);
+        euroMobileManager.setNotificationLargeIcon(iconId, mContext);
+        euroMobileManager.setNotificationLargeIconDarkMode(iconId, mContext);
+        euroMobileManager.setNotificationColor("#d1dbbd");
+        euroMobileManager.setNotificationPriority(RDNotificationPriority.NORMAL, mContext);
+
         EuroMobileManager.getInstance().sync(mContext);
     }
 
@@ -67,7 +80,7 @@ public class RelatedDigitalFunctionHandler {
         if (!EuroMobileManager.checkPlayService(mContext)) {
             
         } else {
-            FirebaseOperations firebaseOperations = new FirebaseOperations(mContext, mChannel);
+            FirebaseOperations firebaseOperations = new FirebaseOperations(mContext, mChannel, mActivity);
             firebaseOperations.setExistingFirebaseTokenToEuroMessage();
         }
     }
@@ -197,21 +210,32 @@ public class RelatedDigitalFunctionHandler {
             targetRequest.executeAsync(new VisilabsCallback() {
                 @Override
                 public void success(VisilabsResponse response) {
-                    try{
-                        String rawResponse = response.getRawResponse();
-                        result.success(rawResponse);
-                    }
-                    catch (Exception ex){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.getRawResponse());
+                        
+                        if (!jsonObject.has("title")) {
+                            jsonObject.put("title", "");
+                        }
+                        
+                        if (jsonObject.has("recommendations")) {
+                            org.json.JSONArray recommendations = jsonObject.getJSONArray("recommendations");
+                            for (int i = 0; i < recommendations.length(); i++) {
+                                JSONObject item = recommendations.getJSONObject(i);
+                                item.remove("target");
+                                item.remove("wdt");
+                            }
+                        }
+                        result.success(jsonObject.toString());
+                    } catch (Exception ex) {
                         ex.printStackTrace();
-
-                        HashMap<String, String> error = new HashMap<String, String>();
+                        HashMap<String, String> error = new HashMap<>();
                         error.put("error", ex.toString());
                         result.success(error);
                     }
                 }
                 @Override
                 public void fail(VisilabsResponse response) {
-                    HashMap<String, String> error = new HashMap<String, String>();
+                    HashMap<String, String> error = new HashMap<>();
                     error.put("error", response.getErrorMessage());
                     result.success(error);
                 }
