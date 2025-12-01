@@ -61,7 +61,8 @@ class _EventState extends State<Event> {
     'inline_anket',
     'nps_with_secondpopup',
     'MultipleChoiceSurvey',
-    'notification_bell'
+    'notification_bell',
+    'mobileCustomActions'
   ];
   String exVisitorId = '';
 

@@ -185,3 +185,6 @@ RDInitRequestModel(
 
 ## 0.6.8
 - Recommendation payload fix
+
+## 0.6.9
+- New Feature: Notification Bell
