@@ -188,3 +188,6 @@ RDInitRequestModel(
 
 ## 0.6.9
 - New Feature: Notification Bell
+
+## 0.7.0
+- Bug fix and version update

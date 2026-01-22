@@ -34,10 +34,43 @@ class _StoryState extends State<Story> {
               children: ListTile.divideTiles(context: context, tiles: [
                 SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    height: 110,
+                    height: 300,
                     child: RDStoryView(
                       key:null,
-                      actionId: '310',
+                      actionId: '2131',
+                      relatedDigitalPlugin: widget.relatedDigitalPlugin,
+                      onItemClick: (Map<String, String> result) {
+                        print(result);
+                      },
+                    )),
+                    SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
+                    child: RDStoryView(
+                      key:null,
+                      actionId: '2132',
+                      relatedDigitalPlugin: widget.relatedDigitalPlugin,
+                      onItemClick: (Map<String, String> result) {
+                        print(result);
+                      },
+                    )),
+                    SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
+                    child: RDStoryView(
+                      key:null,
+                      actionId: '2129',
+                      relatedDigitalPlugin: widget.relatedDigitalPlugin,
+                      onItemClick: (Map<String, String> result) {
+                        print(result);
+                      },
+                    )),
+                    SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
+                    child: RDStoryView(
+                      key:null,
+                      actionId: '2133',
                       relatedDigitalPlugin: widget.relatedDigitalPlugin,
                       onItemClick: (Map<String, String> result) {
                         print(result);
