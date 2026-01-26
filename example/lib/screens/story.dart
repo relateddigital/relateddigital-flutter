@@ -14,10 +14,24 @@ class Story extends StatefulWidget {
 
 class _StoryState extends State<Story> {
   TextEditingController tController = TextEditingController();
+  String actionId = '2139';
 
   @override
   void initState() {
     super.initState();
+    tController.text = '2139';
+  }
+
+  @override
+  void dispose() {
+    tController.dispose();
+    super.dispose();
+  }
+
+  void _showStory() {
+    setState(() {
+      actionId = tController.text;
+    });
   }
 
   @override
@@ -30,53 +44,50 @@ class _StoryState extends State<Story> {
               backgroundColor: Styles.relatedBlue,
               automaticallyImplyLeading: false,
             ),
-            body: ListView(
-              children: ListTile.divideTiles(context: context, tiles: [
-                SizedBox(
+            body: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: tController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Action ID',
+                            hintText: 'Action ID giriniz',
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: _showStory,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Styles.relatedBlue,
+                          foregroundColor: Colors.white,
+                        ),
+                        child: const Text('Göster'),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 300,
                     child: RDStoryView(
-                      key:null,
-                      actionId: '2131',
+                      key: ValueKey(actionId),
+                      actionId: actionId,
                       relatedDigitalPlugin: widget.relatedDigitalPlugin,
                       onItemClick: (Map<String, String> result) {
                         print(result);
                       },
-                    )),
-                    SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    child: RDStoryView(
-                      key:null,
-                      actionId: '2132',
-                      relatedDigitalPlugin: widget.relatedDigitalPlugin,
-                      onItemClick: (Map<String, String> result) {
-                        print(result);
-                      },
-                    )),
-                    SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    child: RDStoryView(
-                      key:null,
-                      actionId: '2129',
-                      relatedDigitalPlugin: widget.relatedDigitalPlugin,
-                      onItemClick: (Map<String, String> result) {
-                        print(result);
-                      },
-                    )),
-                    SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    child: RDStoryView(
-                      key:null,
-                      actionId: '2133',
-                      relatedDigitalPlugin: widget.relatedDigitalPlugin,
-                      onItemClick: (Map<String, String> result) {
-                        print(result);
-                      },
-                    )),
-              ]).toList(),
+                    ),
+                  ),
+                ),
+              ],
             )));
   }
 }

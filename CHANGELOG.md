@@ -191,3 +191,6 @@ RDInitRequestModel(
 
 ## 0.7.0
 - Bug fix and version update
+
+## 0.7.1
+- New features for banner stories
