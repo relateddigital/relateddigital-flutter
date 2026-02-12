@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:collection';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/request_models.dart';
 import 'package:relateddigital_flutter/response_models.dart';
@@ -23,11 +24,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   HashMap<String, TextEditingController> tControllers = createControllers();
   RDProfile? rdProfile;
+  bool autoInitializeIsEnabled = true;
 
   @override
   void initState() {
     rdProfile = RDProfile.fromConstant();
     readSharedPreferences();
+    autoInitialize();
     super.initState();
   }
   readSharedPreferences() async {
@@ -223,6 +226,29 @@ class _HomeState extends State<Home> {
         useNotificationLargeIcon: rdProfile!.useNotificationLargeIcon,
         androidIconName: rdProfile!.androidIconName,
         // Android only, e.g. "ic_launcher"
+      );
+      await widget.relatedDigitalPlugin.init(
+          initRequest, widget.notificationHandler);
+      Navigator.pushNamed(context, '/tabBarView');
+    }
+  }
+
+  autoInitialize() async {
+    if(autoInitializeIsEnabled) {
+      var initRequest = RDInitRequestModel(
+        appAlias: Platform.isIOS ? 'relateddigital-flutter-example-ios' : 'relateddigital-flutter-example-android',
+        huaweiAppAlias: 'relateddigital-flutter-example-android',
+        androidPushIntent: 'com.relateddigital.relateddigital_flutter_example.MainActivity',
+        organizationId: '676D325830564761676D453D',
+        siteId: '356467332F6533766975593D',
+        dataSource: 'visistore',
+        maxGeofenceCount: 20,
+        geofenceEnabled: false,
+        inAppNotificationsEnabled: true,
+        logEnabled: true,
+        isIDFAEnabled: false,
+        useNotificationLargeIcon: false,
+        androidIconName: '',
       );
       await widget.relatedDigitalPlugin.init(
           initRequest, widget.notificationHandler);

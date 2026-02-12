@@ -194,3 +194,6 @@ RDInitRequestModel(
 
 ## 0.7.1
 - New features for banner stories
+
+## 0.7.2
+- Notif Bell, drawer and half screen inapp fix

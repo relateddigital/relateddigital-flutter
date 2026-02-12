@@ -41,7 +41,22 @@ class RDStoryViewState extends State<RDStoryView> {
     };
 
     if (Platform.isIOS) {
-      return UiKitView(
+      return SizedBox.expand(
+        child: UiKitView(
+          viewType: viewType,
+          layoutDirection: TextDirection.ltr,
+          creationParams: creationParams,
+          creationParamsCodec: const StandardMessageCodec(),
+          onPlatformViewCreated: (int id) {
+            widget.relatedDigitalPlugin
+                .setStoryPlatformHandler(_platformCallbackHandler);
+          },
+        ),
+      );
+    }
+
+    return SizedBox.expand(
+      child: AndroidView(
         viewType: viewType,
         layoutDirection: TextDirection.ltr,
         creationParams: creationParams,
@@ -50,18 +65,7 @@ class RDStoryViewState extends State<RDStoryView> {
           widget.relatedDigitalPlugin
               .setStoryPlatformHandler(_platformCallbackHandler);
         },
-      );
-    }
-
-    return AndroidView(
-      viewType: viewType,
-      layoutDirection: TextDirection.ltr,
-      creationParams: creationParams,
-      creationParamsCodec: const StandardMessageCodec(),
-      onPlatformViewCreated: (int id) {
-        widget.relatedDigitalPlugin
-            .setStoryPlatformHandler(_platformCallbackHandler);
-      },
+      ),
     );
   }
 }
