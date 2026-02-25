@@ -197,3 +197,6 @@ RDInitRequestModel(
 
 ## 0.7.2
 - Notif Bell, drawer and half screen inapp fix
+
+## 0.7.3
+- Native version update(half screen inapp fix)
