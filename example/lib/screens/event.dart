@@ -78,7 +78,7 @@ class _EventState extends State<Event> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
             appBar: AppBar(
-              title: const Text(Constants.Event),
+              title: const Text("Flutter "+Constants.Event),
               backgroundColor: Styles.relatedOrange,
               automaticallyImplyLeading: false,
             ),

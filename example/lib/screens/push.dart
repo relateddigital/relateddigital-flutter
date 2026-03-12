@@ -34,7 +34,7 @@ class _PushState extends State<Push> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
             appBar: AppBar(
-              title: const Text('Push'),
+              title: const Text("Flutter "+'Push'),
               backgroundColor: Styles.relatedRed,
               automaticallyImplyLeading: false,
             ),

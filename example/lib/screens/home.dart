@@ -236,8 +236,8 @@ class _HomeState extends State<Home> {
   autoInitialize() async {
     if(autoInitializeIsEnabled) {
       var initRequest = RDInitRequestModel(
-        appAlias: Platform.isIOS ? 'relateddigital-flutter-example-ios' : 'relateddigital-flutter-example-android',
-        huaweiAppAlias: 'relateddigital-flutter-example-android',
+        appAlias: Platform.isIOS ? 'relateddigital-flutter-example-ios' : 'flutter-android-demo',
+        huaweiAppAlias: 'flutter-android-demo',
         androidPushIntent: 'com.relateddigital.relateddigital_flutter_example.MainActivity',
         organizationId: '676D325830564761676D453D',
         siteId: '356467332F6533766975593D',

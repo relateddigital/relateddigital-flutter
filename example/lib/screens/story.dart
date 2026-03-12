@@ -40,7 +40,7 @@ class _StoryState extends State<Story> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
             appBar: AppBar(
-              title: const Text('Story'),
+              title: const Text("Flutter "+'Story'),
               backgroundColor: Styles.relatedBlue,
               automaticallyImplyLeading: false,
             ),

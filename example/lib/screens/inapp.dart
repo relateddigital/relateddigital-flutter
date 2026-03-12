@@ -28,7 +28,7 @@ class _InAppState extends State<InApp> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
             appBar: AppBar(
-              title: const Text('Banner'),
+              title: const Text("Flutter "+'Banner'),
               backgroundColor: Styles.relatedPurple,
               automaticallyImplyLeading: false,
             ),

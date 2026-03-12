@@ -37,7 +37,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
                     Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              title: const Text(Constants.NotificationCenter),
+              title: const Text("Flutter "+Constants.NotificationCenter),
               backgroundColor: Styles.relatedOrange,
               automaticallyImplyLeading: false,
             ),
