@@ -1,82 +1,29 @@
 PODS:
   - Euromsg (2.7.2)
   - Flutter (1.0.0)
-  - onesignal_flutter (5.3.4):
-    - Flutter
-    - OneSignalXCFramework (= 5.2.14)
-  - OneSignalXCFramework (5.2.14):
-    - OneSignalXCFramework/OneSignalComplete (= 5.2.14)
-  - OneSignalXCFramework/OneSignal (5.2.14):
-    - OneSignalXCFramework/OneSignalCore
-    - OneSignalXCFramework/OneSignalExtension
-    - OneSignalXCFramework/OneSignalLiveActivities
-    - OneSignalXCFramework/OneSignalNotifications
-    - OneSignalXCFramework/OneSignalOSCore
-    - OneSignalXCFramework/OneSignalOutcomes
-    - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalComplete (5.2.14):
-    - OneSignalXCFramework/OneSignal
-    - OneSignalXCFramework/OneSignalInAppMessages
-    - OneSignalXCFramework/OneSignalLocation
-  - OneSignalXCFramework/OneSignalCore (5.2.14)
-  - OneSignalXCFramework/OneSignalExtension (5.2.14):
-    - OneSignalXCFramework/OneSignalCore
-    - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalInAppMessages (5.2.14):
-    - OneSignalXCFramework/OneSignalCore
-    - OneSignalXCFramework/OneSignalNotifications
-    - OneSignalXCFramework/OneSignalOSCore
-    - OneSignalXCFramework/OneSignalOutcomes
-    - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalLiveActivities (5.2.14):
-    - OneSignalXCFramework/OneSignalCore
-    - OneSignalXCFramework/OneSignalOSCore
-    - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalLocation (5.2.14):
-    - OneSignalXCFramework/OneSignalCore
-    - OneSignalXCFramework/OneSignalNotifications
-    - OneSignalXCFramework/OneSignalOSCore
-    - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalNotifications (5.2.14):
-    - OneSignalXCFramework/OneSignalCore
-    - OneSignalXCFramework/OneSignalExtension
-    - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalOSCore (5.2.14):
-    - OneSignalXCFramework/OneSignalCore
-  - OneSignalXCFramework/OneSignalOutcomes (5.2.14):
-    - OneSignalXCFramework/OneSignalCore
-  - OneSignalXCFramework/OneSignalUser (5.2.14):
-    - OneSignalXCFramework/OneSignalCore
-    - OneSignalXCFramework/OneSignalNotifications
-    - OneSignalXCFramework/OneSignalOSCore
-    - OneSignalXCFramework/OneSignalOutcomes
   - relateddigital_flutter (0.5.2):
     - Euromsg (= 2.7.2)
     - Flutter
-    - VisilabsIOS (= 4.3.55)
+    - VisilabsIOS (= 4.3.59)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - VisilabsIOS (4.3.55)
+  - VisilabsIOS (4.3.59)
 
 DEPENDENCIES:
   - Euromsg
   - Flutter (from `Flutter`)
-  - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
   - relateddigital_flutter (from `.symlinks/plugins/relateddigital_flutter/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
 
 SPEC REPOS:
   trunk:
     - Euromsg
-    - OneSignalXCFramework
     - VisilabsIOS
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  onesignal_flutter:
-    :path: ".symlinks/plugins/onesignal_flutter/ios"
   relateddigital_flutter:
     :path: ".symlinks/plugins/relateddigital_flutter/ios"
   shared_preferences_foundation:
@@ -85,11 +32,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Euromsg: e8c25dcdd4831f875adc7d2ac851cbd09e6da562
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  onesignal_flutter: 3a2b51f9262c851166a882a553d71a8ccec4e29c
-  OneSignalXCFramework: 7112f3e89563e41ebc23fe807788f11985ac541c
-  relateddigital_flutter: 2e3f3227da50092112782bcaff214af61943e443
+  relateddigital_flutter: 7beeaff8e056735c2892a19a2cbeab1d4242033b
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
-  VisilabsIOS: 3e0fb99584005e7b4431363b0f1ff91467912b8a
+  VisilabsIOS: 0a2b40b07add73fc838d44e7150735b77727752a
 
 PODFILE CHECKSUM: 2f6f9bdcc03355b1c6287e0ad8a2f453df089e0a
 

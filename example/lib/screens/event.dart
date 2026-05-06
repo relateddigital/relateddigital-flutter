@@ -38,6 +38,8 @@ class _EventState extends State<Event> {
   List<TextEditingController> filterValueControllers = [];
   
   var inAppTypes = [
+    'fullscreen_popup',
+    'full_screen_carousel',
     'mini',
     'full',
     'full_image',
@@ -62,7 +64,7 @@ class _EventState extends State<Event> {
     'nps_with_secondpopup',
     'MultipleChoiceSurvey',
     'notification_bell',
-    'mobileCustomActions'
+    'mobileCustomActions',
   ];
   String exVisitorId = '';
 

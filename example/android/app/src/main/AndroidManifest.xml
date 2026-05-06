@@ -47,15 +47,6 @@
             android:value="2" />
 
 
-       <service
-           android:name="euromsg.com.euromobileandroid.service.EuroFirebaseMessagingService"
-           android:exported="false">
-           <intent-filter>
-               <action android:name="com.google.firebase.MESSAGING_EVENT" />
-           </intent-filter>
-       </service>
-
-
        <!--Geofence-->
 
        <meta-data android:name="GoogleAppAlias" android:value="flutter-android-demo" />

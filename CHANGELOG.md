@@ -205,3 +205,6 @@ RDInitRequestModel(
 - Native version update
 - Copy icon changed
 - Fixed inapp impressions
+
+## 0.7.5
+- Full screen popup
