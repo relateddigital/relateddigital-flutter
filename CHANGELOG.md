@@ -2,7 +2,6 @@
 
 Android SDK tries to read appAliases from AndroidManifest.xml
 
-
 ## 0.2.6
 
 - SpinToWin swipe option add.
@@ -23,7 +22,6 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - SpinToWin swipe feature add.
 - OM.appVersion value add to Visilabs requests.
 
-
 ## 0.4.0
 
 - Push notification deliver requests convert to optional
@@ -42,11 +40,9 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Improvements for Android 12 compatibility
 - Huawei push notification suport add
 
-
 ## 0.4.1
 
 - OM.pushnotifystatus parameter add
-
 
 ## 0.4.2
 
@@ -63,33 +59,39 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - Add custom font feature to spintowin action
 - Support for gif files
 
-
 ## 0.4.5
+
 - Spin to Win started to support custom font type
 - Scratch to Win started to support custom font type
 - Mail Subs Form started to support custom font type
 
 ## 0.4.6
+
 - In-App Carousel messages add
 
 ## 0.4.7
+
 - Removed placeholder from feedback form
 - Added the ability to add title and message background color for 5. template
 - Added redirect feature to application settings when clicking the button for 5. template
 
 ## 0.4.8
+
 - Update Huawei agconnect v1.6.0
 - Fix for getting Huawei token
 
 ## 0.4.9
+
 - New Feature : Spin-to-Win Code Banner
 - Adds new parameters to customize Spin-to-Win
 
 ## 0.5.0
+
 - New Feature : Drawer in-app
 - Video support for in-app templates
 
 ## 0.5.1
+
 - (iOS & Android) New Optional Feature : You can add countdown timer to stories
 - (iOS & Android) New Optional Feature : You can define different links to different spin-to-win slices
 - (iOS & Android) Fix on SpinToWin UI
@@ -100,53 +102,64 @@ Android SDK tries to read appAliases from AndroidManifest.xml
 - (iOS) Public getUser method add
 
 ## 0.5.2
+
 - OM.lvps repetition fix
 - Bug Fix : SpinToWin color with alpha value - bug fix
 - SpinToWin deep link
 
-
 ## 0.5.4
+
 - Null-Safety Add
 
 ## 0.5.5
+
 - Huawei dependencies removed
 - New Feature : Silent Push
 - Native Sdk versions updated
 
 ## 0.5.6
+
 - Added trackRecommendationClick function
 - Recommendation response model updated
 - Native sdk versions updated
 
 ## 0.5.7
+
 - Sdk type added
 - iOS checkbox error fixed
 - Native sdk versions updated
 
 ## 0.5.8
+
 - Android Jitpack url added
 
 ## 0.5.9
+
 - Native SDK version update
-  
+
 ## 0.6.0
+
 - Android Native SDK version update
 - App > build.gradle > defaultconfig:targetsdkversion to 34 minsdkversion 23
 - SpinToWin action copy button fix
 
 ## 0.6.1
+
 - Android setEmailPermission function mapping
 
 ## 0.6.2
+
 - Close button added to Drawer
 - App Banner feature added
 
 ## 0.6.3
+
 - Custom notification icon(Android)
 - Notification permission dialog(Android)
 - Native sdk version update
 
 ## 0.6.4
+
 - New init request model parameters
 
 ```
@@ -175,36 +188,57 @@ RDInitRequestModel(
 ```
 
 ## 0.6.5
+
 - Remove default notificaiton icon
 
 ## 0.6.6
+
 - iOS 26 bug fix
 
 ## 0.6.7
+
 - Version Update
 
 ## 0.6.8
+
 - Recommendation payload fix
 
 ## 0.6.9
+
 - New Feature: Notification Bell
 
 ## 0.7.0
+
 - Bug fix and version update
 
 ## 0.7.1
+
 - New features for banner stories
 
 ## 0.7.2
+
 - Notif Bell, drawer and half screen inapp fix
 
 ## 0.7.3
+
 - Native version update(half screen inapp fix)
 
 ## 0.7.4
+
 - Native version update
 - Copy icon changed
 - Fixed inapp impressions
 
 ## 0.7.5
+
 - Full screen popup
+
+## 0.7.6
+
+- Added `requestLocationPermission()` method that guides the user through the full location permission flow required for geofencing.
+  - **iOS:** Requests *When In Use* permission first; if already granted, upgrades to *Always Allow*. Calls `sendLocationPermission` automatically afterwards.
+  - **Android:** Requests foreground location (`ACCESS_FINE_LOCATION` / `ACCESS_COARSE_LOCATION`) first; once granted, requests `ACCESS_BACKGROUND_LOCATION` on Android 10+. Calls `sendLocationPermission` automatically afterwards.
+- Updated README with detailed geofencing setup instructions for both iOS and Android, including a new *Location Permission* section with usage examples for `requestLocationPermission` and `sendLocationPermission`.
+- Fixed Android Visilabs geofence class package names (`com.visilabs.android.gps.geofence` → `com.visilabs.gps.geofence`) in README setup guide.
+- Updated example Visilabs URLs from `http` to `https` in README.
+

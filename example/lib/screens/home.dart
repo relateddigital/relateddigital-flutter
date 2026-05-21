@@ -227,6 +227,7 @@ class _HomeState extends State<Home> {
         androidIconName: rdProfile!.androidIconName,
         // Android only, e.g. "ic_launcher"
       );
+      print('initRequest: $initRequest');
       await widget.relatedDigitalPlugin.init(
           initRequest, widget.notificationHandler);
       Navigator.pushNamed(context, '/tabBarView');
@@ -243,13 +244,14 @@ class _HomeState extends State<Home> {
         siteId: '356467332F6533766975593D',
         dataSource: 'visistore',
         maxGeofenceCount: 20,
-        geofenceEnabled: false,
+        geofenceEnabled: true,
         inAppNotificationsEnabled: true,
         logEnabled: true,
         isIDFAEnabled: false,
         useNotificationLargeIcon: false,
         androidIconName: '',
       );
+      print('initRequest.geofenceEnabled: ${initRequest.geofenceEnabled}');
       await widget.relatedDigitalPlugin.init(
           initRequest, widget.notificationHandler);
       Navigator.pushNamed(context, '/tabBarView');

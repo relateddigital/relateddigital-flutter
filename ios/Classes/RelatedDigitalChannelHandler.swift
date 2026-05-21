@@ -36,7 +36,7 @@ class RelatedDigitalChannelHandler: NSObject {
             
             self.functionHandler.initEuroMsg(appAlias: appAlias, enableLog: enableLog)
             self.functionHandler.initVisilabs(organizationId: organizationId, profileId: siteId, dataSource: dataSource, inAppNotificationsEnabled: inAppNotificationsEnabled
-                                              , geofenceEnabled: geofenceEnabled, maxGeofenceCount: maxGeofenceCount, enableLog: enableLog, isIDFAEnabled: isIDFAEnabled)
+            , geofenceEnabled: geofenceEnabled, maxGeofenceCount: maxGeofenceCount, enableLog: enableLog, isIDFAEnabled: isIDFAEnabled)
             
             result(nil)
             
@@ -196,6 +196,10 @@ class RelatedDigitalChannelHandler: NSObject {
         }
         else if(call.method == Constants.M_SEND_LOCATION_PERMISSION) {
             self.functionHandler.sendLocationPermission()
+            result(nil)
+        }
+        else if(call.method == Constants.M_REQUEST_LOCATION_PERMISSION) {
+            self.functionHandler.requestLocationPermission()
             result(nil)
         }
         else {

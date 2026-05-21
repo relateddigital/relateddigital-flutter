@@ -1,6 +1,7 @@
 import Flutter
 import Euromsg
 import VisilabsIOS
+import CoreLocation
 
 public class RegisterDelegate : EuromsgDelegate {
     var flutterResult: FlutterResult?
@@ -18,6 +19,7 @@ public class RegisterDelegate : EuromsgDelegate {
 }
 
 class RelatedDigitalFunctionHandler {
+    private var locationManager: CLLocationManager?
     public func initEuroMsg(appAlias: String, enableLog: Bool) {
         Euromsg.configure(appAlias: appAlias, enableLog: enableLog)
         Euromsg.sync()
@@ -291,6 +293,27 @@ class RelatedDigitalFunctionHandler {
     }
     
     public func sendLocationPermission() {
+        Visilabs.callAPI().sendLocationPermission()
+    }
+
+    public func requestLocationPermission() {
+        if locationManager == nil {
+            locationManager = CLLocationManager()
+        }
+        let status: CLAuthorizationStatus
+        if #available(iOS 14.0, *) {
+            status = locationManager!.authorizationStatus
+        } else {
+            status = CLLocationManager.authorizationStatus()
+        }
+        switch status {
+        case .notDetermined:
+            locationManager?.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse:
+            locationManager?.requestAlwaysAuthorization()
+        default:
+            break
+        }
         Visilabs.callAPI().sendLocationPermission()
     }
     

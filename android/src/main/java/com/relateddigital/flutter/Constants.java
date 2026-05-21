@@ -36,6 +36,7 @@ public class Constants {
     public static String M_APP_TRACKER = "VL/appTracker";
     public static String M_GET_PUSH_MESSAGES = "RD/getPushMessages";
     public static String M_SEND_LOCATION_PERMISSION = "VL/sendLocationPermission";
+    public static String M_REQUEST_LOCATION_PERMISSION = "VL/requestLocationPermission";
 
     public static String VL_CHANNEL = "Android";
     public static String VL_SEGMENT_URL = "https://lgr.visilabs.net";

@@ -42,6 +42,7 @@
     - [Geofencing](#geofencing)
       - [IOS](#ios-3)
       - [Android](#android-1)
+    - [Location Permission](#location-permission)
     - [Recommendation](#recommendation)
       - [Recommendation Response](#recommendation-response)
     - [App Tracking](#app-tracking)
@@ -73,7 +74,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.7.5
+    relateddigital_flutter: ^0.7.6
 ```
 - Run `flutter pub get`
 
@@ -143,11 +144,11 @@ plugins {
 
 <meta-data android:name="VisilabsOrganizationID" android:value="VisilabsOrganizationID" />
 <meta-data android:name="VisilabsSiteID" android:value="VisilabsSiteID" />
-<meta-data android:name="VisilabsSegmentURL" android:value="http://lgr.visilabs.net" />
+<meta-data android:name="VisilabsSegmentURL" android:value="https://lgr.visilabs.net" />
 <meta-data android:name="VisilabsDataSource" android:value="VisilabsDataSource" />
-<meta-data android:name="VisilabsRealTimeURL" android:value="http://rt.visilabs.net" />
+<meta-data android:name="VisilabsRealTimeURL" android:value="https://rt.visilabs.net" />
 <meta-data android:name="VisilabsChannel" android:value="Android" />
-<meta-data android:name="VisilabsGeofenceURL" android:value="http://s.visilabs.net/geojson" />
+<meta-data android:name="VisilabsGeofenceURL" android:value="https://s.visilabs.net/geojson" />
 <meta-data android:name="VisilabsGeofenceEnabled" android:value="true" />
 
 <!-- Parameters below are optional -->
@@ -155,8 +156,8 @@ plugins {
 <meta-data android:name="VisilabsRequestTimeoutInSeconds" android:value="30" />
 <meta-data android:name="VisilabsRESTURL" android:value="VisilabsRESTURL" />
 <meta-data android:name="VisilabsEncryptedDataSource" android:value="VisilabsEncryptedDataSource" />
-<meta-data android:name="VisilabsTargetURL" android:value="http://s.visilabs.net/json" />
-<meta-data android:name="VisilabsActionURL" android:value="http://s.visilabs.net/actjson" />
+<meta-data android:name="VisilabsTargetURL" android:value="https://s.visilabs.net/json" />
+<meta-data android:name="VisilabsActionURL" android:value="https://s.visilabs.net/actjson" />
 ```
 
 - Add `google-services.json` file to your application’s `app` directory.
@@ -736,9 +737,31 @@ RDBannerView(
 ### Geofencing
 
 #### IOS
-- In Xcode, add **NSLocationAlwaysAndWhenInUseUsageDescription** and **NSLocationWhenInUseUsageDescription** keys to the **Info.plist** file.
-- In Xcode, enable **Background fetch** and **Location updates** background modes.
-- When initializing plugin, set **geofenceEnabled** to **true**. Also provide a number for **maxGeofenceCount** parameter (max. 20 supported).
+- Add the following keys to your **Info.plist** file:
+```xml
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>We need access to your location for better user experience.</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need access to your location for better user experience.</string>
+```
+- Add `location` to **UIBackgroundModes** in your **Info.plist** file (also enable **Background fetch** and **Location updates** in Xcode's **Signing & Capabilities** tab):
+```xml
+<key>UIBackgroundModes</key>
+<array>
+    <string>fetch</string>
+    <string>location</string>
+    <string>remote-notification</string>
+</array>
+```
+- When initializing the plugin, set **geofenceEnabled** to **true**. Also provide a number for **maxGeofenceCount** parameter (max. 20 supported):
+```dart
+var initRequest = RDInitRequestModel(
+  // ...
+  geofenceEnabled: true,
+  maxGeofenceCount: 20,
+);
+```
+- After initialization, request location permission from the user. See [Location Permission](#location-permission) section below.
 
 #### Android
 - Add below permissions in your **AndroidManifest.xml**
@@ -746,19 +769,54 @@ RDBannerView(
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-````
-- Add below service and receivers in your **AndroidManifest.xml**
+```
+- Add below service and receivers in your **AndroidManifest.xml**, within the `<application></application>` tags:
 ```xml
-<service android:name="com.visilabs.android.gps.geofence.GeofenceTransitionsIntentService"
+<service
+    android:name="com.visilabs.gps.geofence.GeofenceTransitionsIntentService"
     android:enabled="true"
     android:permission="android.permission.BIND_JOB_SERVICE" />
 
-<receiver android:name="com.visilabs.android.gps.geofence.VisilabsAlarm" android:exported="false"/>
+<receiver android:name="com.visilabs.gps.geofence.VisilabsAlarm" android:exported="false"/>
 
 <receiver
-    android:name="com.visilabs.android.gps.geofence.GeofenceBroadcastReceiver"
+    android:name="com.visilabs.gps.geofence.GeofenceBroadcastReceiver"
     android:enabled="true"
     android:exported="false"/>
+```
+- After initialization, request location permission from the user. See [Location Permission](#location-permission) section below.
+
+
+### Location Permission
+
+Location permission must be requested **after** the SDK is initialized (i.e. after `relatedDigitalPlugin.init(...)` has completed) and **geofencing is enabled**. Calling it before initialization has no effect.
+
+Use `requestLocationPermission` to show the system location permission dialog to the user. The SDK handles the permission flow automatically:
+
+**iOS behavior:**
+- If the user has not yet made a choice (`notDetermined`) → shows the *When In Use* permission dialog.
+- If the user has already granted *When In Use* (`authorizedWhenInUse`) → shows the *Always Allow* upgrade dialog.
+- If permission is already at *Always* or was permanently denied → no dialog is shown.
+
+**Android behavior:**
+- If `ACCESS_FINE_LOCATION` or `ACCESS_COARSE_LOCATION` is not granted → requests both permissions.
+- If both are granted and the device runs Android 10 (Q) or higher → requests `ACCESS_BACKGROUND_LOCATION` (required for geofence triggers while the app is in the background).
+- If all permissions are already granted → no dialog is shown.
+
+After calling `requestLocationPermission`, the current permission status is automatically sent to Related Digital servers via `sendLocationPermission`.
+
+```dart
+// Call this after init() completes, for example in a button handler
+// or after a brief delay to avoid showing the dialog immediately on app launch.
+await relatedDigitalPlugin.requestLocationPermission();
+```
+
+> **Note:** On Android 10+, the system requires the user to grant foreground location permission **before** the background location dialog is shown. The SDK handles this in two separate steps automatically.
+
+If you only want to report the current permission status to Related Digital servers without showing any dialog (e.g. on each app launch to keep the server state in sync), use `sendLocationPermission` instead:
+
+```dart
+await relatedDigitalPlugin.sendLocationPermission();
 ```
 
 ### Recommendation

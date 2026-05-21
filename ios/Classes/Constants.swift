@@ -33,6 +33,7 @@ class Constants {
     static let M_GET_PUSH_MESSAGES = "RD/getPushMessages"
     static let M_REQUEST_IDFA = "VL/requestIDFA"
     static let M_SEND_LOCATION_PERMISSION = "VL/sendLocationPermission"
+    static let M_REQUEST_LOCATION_PERMISSION = "VL/requestLocationPermission"
     
     static let VL_CHANNEL = "IOS"
     static let VL_REQUEST_TIMEOUT = 30

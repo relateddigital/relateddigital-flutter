@@ -38,6 +38,7 @@ class _EventState extends State<Event> {
   List<TextEditingController> filterValueControllers = [];
   
   var inAppTypes = [
+    'nps_with_multiple_popup',
     'fullscreen_popup',
     'full_screen_carousel',
     'mini',
@@ -186,6 +187,18 @@ class _EventState extends State<Event> {
                                 ],
                               ),
                             ),
+                            ListTile(
+                              subtitle: Column(
+                                children: <Widget>[
+                                  TextButton(
+                                    child: Text('Request Location Permission'),
+                                    style: Styles.eventButtonStyle,
+                                    onPressed: () {
+                                      requestLocationPermission();
+                                    })
+                                ],
+                              ),
+                            ),
                           ] +
                           getInAppListTiles())
                   .toList(),
@@ -318,6 +331,10 @@ class _EventState extends State<Event> {
 
   void sendLocationPermission() async {
     await widget.relatedDigitalPlugin.sendLocationPermission();
+  }
+
+  void requestLocationPermission() async {
+    await widget.relatedDigitalPlugin.requestLocationPermission();
   }
 
   Future<dynamic> showAlertDialog({
