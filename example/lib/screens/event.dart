@@ -38,6 +38,7 @@ class _EventState extends State<Event> {
   List<TextEditingController> filterValueControllers = [];
   
   var inAppTypes = [
+    'CountdownTimerBanner',
     'nps_with_multiple_popup',
     'fullscreen_popup',
     'full_screen_carousel',

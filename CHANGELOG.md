@@ -242,3 +242,6 @@ RDInitRequestModel(
 - Fixed Android Visilabs geofence class package names (`com.visilabs.android.gps.geofence` → `com.visilabs.gps.geofence`) in README setup guide.
 - Updated example Visilabs URLs from `http` to `https` in README.
 
+## 0.7.7
+
+- New feature: Countdown timer
