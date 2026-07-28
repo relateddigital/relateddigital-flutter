@@ -245,3 +245,7 @@ RDInitRequestModel(
 ## 0.7.7
 
 - New feature: Countdown timer
+
+## 0.7.8
+
+- Minor bug fixes
