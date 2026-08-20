@@ -40,7 +40,7 @@ class _InAppState extends State<InApp> {
                     child: RDBannerView(
                       key: null,
                       relatedDigitalPlugin: widget.relatedDigitalPlugin,
-                      properties: {'key1': 'value1', 'key2': 'value2','OM.baris': 'baris'},
+                      properties: {'key1': 'value1', 'key2': 'value2','OM.baris': 'baris', 'OM.uri': 'home'},
                       onItemClick: (Map<String, String> result) {
                         print("onItemClick client: $result");
                       },

@@ -36,6 +36,9 @@ class Constants {
 
   static const String userProperty = 'userProperty';
 
+  static const String customEventName = 'customEventName';
+  static const String customEventParameter = 'customEventParameter';
+
   static const String exVisitorId = 'exVisitorId';
   static const String token = 'token';
   static const String email = 'email';

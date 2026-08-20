@@ -21,6 +21,14 @@ class Event extends StatefulWidget {
 
 class _EventState extends State<Event> {
   TextEditingController tController = TextEditingController();
+
+  // Custom Event Form Controllers
+  TextEditingController customEventNameController =
+      TextEditingController(text: 'CustomEventTest');
+  TextEditingController customEventParameterKeyController =
+      TextEditingController(text: 'OM.custom');
+  TextEditingController customEventParameterValueController =
+      TextEditingController();
   
   // Get Recommendations Form Controllers
   TextEditingController zoneIdController = TextEditingController(text: '83');
@@ -200,6 +208,33 @@ class _EventState extends State<Event> {
                                 ],
                               ),
                             ),
+                            TextInputListTile(
+                              title: Constants.customEventName,
+                              controller: customEventNameController,
+                              onChanged: null,
+                            ),
+                            TextInputListTile(
+                              title: Constants.customEventParameter + ' Key',
+                              controller: customEventParameterKeyController,
+                              onChanged: null,
+                            ),
+                            TextInputListTile(
+                              title: Constants.customEventParameter + ' Value',
+                              controller: customEventParameterValueController,
+                              onChanged: null,
+                            ),
+                            ListTile(
+                              subtitle: Column(
+                                children: <Widget>[
+                                  TextButton(
+                                      child: Text('Send Custom Event'),
+                                      style: Styles.eventButtonStyle,
+                                      onPressed: () {
+                                        sendCustomEvent();
+                                      })
+                                ],
+                              ),
+                            ),
                           ] +
                           getInAppListTiles())
                   .toList(),
@@ -228,6 +263,29 @@ class _EventState extends State<Event> {
       ));
     }
     return tiles;
+  }
+
+  void sendCustomEvent() {
+    String eventName = customEventNameController.text.trim();
+    if (eventName.isEmpty) {
+      showAlertDialog(
+          title: 'Custom Event', content: 'Event ismi boş olamaz');
+      return;
+    }
+
+    Map<String, String> parameters = {};
+    String parameterKey = customEventParameterKeyController.text.trim();
+    if (parameterKey.isNotEmpty) {
+      parameters[parameterKey] =
+          customEventParameterValueController.text.trim();
+    }
+
+    widget.relatedDigitalPlugin.customEvent(eventName, parameters);
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('$eventName gönderildi: $parameters'),
+      duration: Duration(seconds: 2),
+    ));
   }
 
   void _showRecommendationsForm() {
