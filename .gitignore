@@ -8,7 +8,17 @@ pubspec.lock
 build/
 .idea/
 
+# FVM (Flutter Version Management)
+.fvm/flutter_sdk
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
 /example/android/app/google-services.json
 /example/android/app/agconnect-services.json
 /example/android/app/flutter
 /example/android/app/debug.keystore
+
+# FVM Version Cache
+.fvm/

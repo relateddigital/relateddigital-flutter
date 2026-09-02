@@ -246,6 +246,13 @@ RDInitRequestModel(
 
 - New feature: Countdown timer
 
+## 0.8.0
+
+- Added Swift Package Manager (SPM) support for iOS (Flutter 3.44+). CocoaPods integration remains available for existing projects.
+- Updated native iOS dependencies: VisilabsIOS 4.5.0, Euromsg 2.7.2.
+- Minimum iOS deployment target raised to 15.0 for projects upgrading to this version.
+- Removed Objective-C plugin shim; iOS plugin entry point is now `SwiftRelatedDigitalPlugin`.
+
 ## 0.7.8
 
 - Minor bug fixes

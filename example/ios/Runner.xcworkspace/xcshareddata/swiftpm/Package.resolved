@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "euromessage-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/relateddigital/euromessage-ios.git",
+      "state" : {
+        "revision" : "0a97505224f4036457b8a2400f8d49e5c76170f5",
+        "version" : "2.7.2"
+      }
+    },
+    {
+      "identity" : "visilabs-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/relateddigital/visilabs-ios.git",
+      "state" : {
+        "revision" : "78e3f1e1141418f793f20e076214d507dc14ee1c",
+        "version" : "4.5.0"
+      }
+    }
+  ],
+  "version" : 2
+}

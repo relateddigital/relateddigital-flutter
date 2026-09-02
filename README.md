@@ -13,6 +13,9 @@
   - [Platform-Integration](#platform-integration)
     - [Android](#android)
     - [iOS](#ios)
+      - [Choose SPM or CocoaPods](#choose-spm-or-cocoapods)
+      - [Swift Package Manager](#swift-package-manager)
+      - [CocoaPods](#cocoapods)
 - [Usage](#usage)
   - [Initializing](#initializing)
   - [Push Notifications](#push-notifications)
@@ -61,7 +64,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ## Requirements
 
-- iOS 11.0 or later
+- iOS 15.0 or later (for `relateddigital_flutter` 0.8.0 and above; 0.7.x supports iOS 11+)
 - Android API level 21 or later
 
 
@@ -74,7 +77,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.7.8
+    relateddigital_flutter: ^0.8.0
 ```
 - Run `flutter pub get`
 
@@ -167,21 +170,39 @@ plugins {
 
 ### iOS
 
-- Change the ios platform version to 11.0 or higher in `Podfile`
+`relateddigital_flutter` 0.8.0+ supports **both** Swift Package Manager and CocoaPods. Pick one path and follow it for the whole app (including notification extensions). Mixing them in the same app is not recommended.
+
+#### Choose SPM or CocoaPods
+
+| | **Swift Package Manager** | **CocoaPods** |
+|--|---------------------------|---------------|
+| When | Flutter **3.44+** (SPM is on by default) | Flutter **before 3.44**, or SPM disabled (`flutter config --no-enable-swift-package-manager`) |
+| Plugin (`relateddigital_flutter`) | Automatic after `flutter pub get` / `flutter run` | Via `ios/Podfile` + `pod install` |
+| Notification Service / Content | Add **Euromsg** as an SPM package on those targets (see below) | `pod 'Euromsg'` on those targets |
+| How to confirm | Log shows `Fetching from ... visilabs-ios` / `euromessage-ios`. There is **no** `Running pod install...` | Log shows `Running pod install...` |
+
+Minimum iOS for 0.8.0+: **15.0** (0.7.x: 11.0+).
+
+#### Swift Package Manager
+
+1. Use Flutter 3.44 or later. Do not add a `Podfile` unless you still need CocoaPods for something else.
+2. Run `flutter pub get` then `flutter run` (or build). The plugin resolves **VisilabsIOS** and **Euromsg** through SPM. No extra plugin setup.
+3. Notification extensions **do not** inherit the plugin’s packages. In Xcode: **File → Add Package Dependencies…**
+   - URL: `https://github.com/relateddigital/euromessage-ios.git`
+   - Version: exact **2.7.2** (same pin as the plugin)
+   - Add the **Euromsg** product to **NotificationService** and, if you use carousel, **NotificationContent**
+4. Set those targets’ iOS deployment target to **15.0**.
+
+#### CocoaPods
+
+1. In `ios/Podfile`, set the platform:
 
 ```ruby
-platform :ios, '11.0'
+platform :ios, '15.0'
 ```
 
-- In your project directory, open the file `ios/Runner.xcworkspace` with Xcode.
+2. Add the Notification Service target and `post_install`, then run `pod install`:
 
-- Enable `Push Notifications` and `Background Modes->Remote Notifications` capabilities.
-
-![Xcode Push Capability](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/xcode-push-capability.png)
-
-- In Xcode, add a new **Notification Service Extension** target and name it **NotificationService**. NotificationServiceExtension allows your iOS application to receive rich notifications with images, videos, and badges. It's also required for Related Digital's analytics features and to store and access notification payloads of the last 30 days.
-
-- In your podfile, add below section and then run `pod install`.
 ```ruby
 target 'NotificationService' do
 	use_frameworks!
@@ -197,7 +218,18 @@ post_install do |installer|
   end
 end
 ```
-- Set **NotificationService** target's deployment target to iOS 11.
+
+3. Set **NotificationService** target's deployment target to iOS 15 (or 11 if using SDK 0.7.x).
+
+#### Shared Xcode setup (SPM and CocoaPods)
+
+- In your project directory, open `ios/Runner.xcworkspace` with Xcode.
+
+- Enable `Push Notifications` and `Background Modes->Remote Notifications` capabilities.
+
+![Xcode Push Capability](https://github.com/relateddigital/relateddigital-flutter/blob/master/screenshots/xcode-push-capability.png)
+
+- In Xcode, add a new **Notification Service Extension** target and name it **NotificationService**. NotificationServiceExtension allows your iOS application to receive rich notifications with images, videos, and badges. It's also required for Related Digital's analytics features and to store and access notification payloads of the last 30 days.
   
 - Replace **NotificationService.swift** file content with the code below.
 
@@ -378,14 +410,15 @@ To be able to receive push notifications with carousel, follow the steps below.
 
 #### IOS
 - In Xcode, add a new **Notification Content Extension** target and name it **NotificationContent**.
-- In your podfile, add below section and then run `pod install`.
+- **SPM:** add the **Euromsg** product (package `euromessage-ios` 2.7.2) to the **NotificationContent** target (same as NotificationService).
+- **CocoaPods:** add the section below to `Podfile` and run `pod install`.
 ```ruby
 target 'NotificationContent' do
 	use_frameworks!
 	pod 'Euromsg'
 end
 ```
-- Set **NotificationContent** target's deployment target to iOS 11.
+- Set **NotificationContent** target's deployment target to iOS 15 (or 11 if using SDK 0.7.x).
 - Delete **MainInterface.storyboard** and **NotificationContent.swift** files. Then create a swift file named **EMNotificationViewController.swift** under the NotificationContent folder.
 - Replace **EMNotificationViewController.swift** file content with the code below.
 ```swift
@@ -684,8 +717,9 @@ Follow the step below to add a countdown to your stories.
 
 **iOS**
 
-Add below lines to your project target's `Build Phases`->`Copy Bundle Resources` section. Select `Create folder references` when prompted.
-  * `Pods/VisilabsIOS/Sources/TargetingAction/Story/Views/timerView/timerView.xib`
+When using CocoaPods, you may optionally add the story timer XIB to Copy Bundle Resources. With Swift Package Manager (Flutter 3.44+), this step is not required — resources are bundled automatically.
+
+  * `Pods/VisilabsIOS/Sources/TargetingAction/Story/Views/timerView/timerView.xib` (CocoaPods only)
 
 **Android**
 
