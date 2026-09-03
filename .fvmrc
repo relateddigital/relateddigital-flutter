@@ -1,0 +1,9 @@
+{
+  "flutter": "3.32.8",
+  "flavors": {
+    "cocoapods": "3.32.8",
+    "spm": "3.44.8"
+  },
+  "updateGitIgnore": false,
+  "runPubGetOnSdkChanges": false
+}

@@ -249,3 +249,7 @@ RDInitRequestModel(
 ## 0.7.8
 
 - Minor bug fixes
+
+## 0.7.9
+
+- NPS Feedback Keyboard Bug Fix

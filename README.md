@@ -61,7 +61,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ## Requirements
 
-- iOS 11.0 or later
+- iOS 15.0 or later
 - Android API level 21 or later
 
 
@@ -74,7 +74,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.7.8
+    relateddigital_flutter: ^0.7.9
 ```
 - Run `flutter pub get`
 
@@ -167,10 +167,10 @@ plugins {
 
 ### iOS
 
-- Change the ios platform version to 11.0 or higher in `Podfile`
+- Change the ios platform version to 15.0 or higher in `Podfile`
 
 ```ruby
-platform :ios, '11.0'
+platform :ios, '15.0'
 ```
 
 - In your project directory, open the file `ios/Runner.xcworkspace` with Xcode.

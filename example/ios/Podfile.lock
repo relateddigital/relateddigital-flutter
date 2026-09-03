@@ -4,11 +4,11 @@ PODS:
   - relateddigital_flutter (0.5.2):
     - Euromsg (= 2.7.2)
     - Flutter
-    - VisilabsIOS (= 4.3.60)
+    - VisilabsIOS (= 4.5.1)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - VisilabsIOS (4.3.60)
+  - VisilabsIOS (4.5.1)
 
 DEPENDENCIES:
   - Euromsg
@@ -32,10 +32,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Euromsg: e8c25dcdd4831f875adc7d2ac851cbd09e6da562
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  relateddigital_flutter: 65b5a9ea82f74fa32ca33c168d606707e295b3d4
+  relateddigital_flutter: 9b312b875d1270d17360397702ea282bd44436e3
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
-  VisilabsIOS: c59f3318f56ea53d6df679472ba33af471574c8d
+  VisilabsIOS: 58ce3cd01e6d4343aa988b54c25f67c3c17bbc7d
 
-PODFILE CHECKSUM: ef330e7064a954e29dbd6bf2c28985a89f0a72bc
+PODFILE CHECKSUM: c7ccb6baf6f7502134595714b82a1c47ad89d0e3
 
 COCOAPODS: 1.16.2
