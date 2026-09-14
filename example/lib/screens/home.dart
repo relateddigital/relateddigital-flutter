@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:collection';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/request_models.dart';
 import 'package:relateddigital_flutter/response_models.dart';
@@ -237,19 +236,19 @@ class _HomeState extends State<Home> {
   autoInitialize() async {
     if(autoInitializeIsEnabled) {
       var initRequest = RDInitRequestModel(
-        appAlias: Platform.isIOS ? 'relateddigital-flutter-example-ios' : 'flutter-android-demo',
-        huaweiAppAlias: 'flutter-android-demo',
-        androidPushIntent: 'com.relateddigital.relateddigital_flutter_example.MainActivity',
-        organizationId: '676D325830564761676D453D',
-        siteId: '356467332F6533766975593D',
-        dataSource: 'visistore',
-        maxGeofenceCount: 20,
-        geofenceEnabled: true,
-        inAppNotificationsEnabled: true,
-        logEnabled: true,
-        isIDFAEnabled: false,
-        useNotificationLargeIcon: false,
-        androidIconName: '',
+        appAlias: Constants.APP_ALIAS,
+        huaweiAppAlias: Constants.HUAWEI_APP_ALIAS,
+        androidPushIntent: Constants.ANDROID_PUSH_INTENT,
+        organizationId: Constants.ORGANIZATION_ID,
+        siteId: Constants.SITE_ID,
+        dataSource: Constants.DATA_SOURCE,
+        maxGeofenceCount: Constants.MAX_GEOFENCE_COUNT,
+        geofenceEnabled: Constants.GEOFENCE_ENABLED,
+        inAppNotificationsEnabled: Constants.IN_APP_NOTIFICATIONS_ENABLED,
+        logEnabled: Constants.LOG_ENABLED,
+        isIDFAEnabled: Constants.IS_IDFA_ENABLED,
+        useNotificationLargeIcon: Constants.USE_NOTIFICATION_LARGE_ICON,
+        androidIconName: Constants.ANDROID_ICON_NAME,
       );
       print('initRequest.geofenceEnabled: ${initRequest.geofenceEnabled}');
       await widget.relatedDigitalPlugin.init(

@@ -27,6 +27,7 @@ public class Constants {
     public static String M_BANNER_ITEM_CLICK = "VL/onBannerItemClick";
     public static String M_BANNER_REQUEST_RESULT = "VL/onBannerRequestResult";
     public static String M_STORY_ITEM_CLICK = "VL/onStoryItemClick";
+    public static String M_STORY_REQUEST_RESULT = "VL/onStoryRequestResult";
     public static String M_STORY_CLEAR_CACHE = "VL/clearStoryCache";
     public static String M_FAV_ATTRIBUTE = "VL/getFavAttributes";
     public static String M_LOGOUT = "VL/logout";

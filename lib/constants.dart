@@ -26,6 +26,7 @@ class Constants {
   static const String M_BANNER_ITEM_CLICK = 'VL/onBannerItemClick';
   static const String M_BANNER_REQUEST_RESULT = 'VL/onBannerRequestResult';
   static const String M_STORY_ITEM_CLICK = 'VL/onStoryItemClick';
+  static const String M_STORY_REQUEST_RESULT = 'VL/onStoryRequestResult';
   static const String M_STORY_CLEAR_CACHE = 'VL/clearStoryCache';
   static const String M_FAV_ATTRIBUTE = 'VL/getFavAttributes';
   static const String M_LOGOUT = 'VL/logout';

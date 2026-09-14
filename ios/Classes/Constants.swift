@@ -23,6 +23,7 @@ class Constants {
     static let M_RECOMMENDATIONS = "VL/getRecommendations"
     static let M_TRACK_RECOMMENDATION = "VL/trackRecommendationClick"
     static let M_STORY_ITEM_CLICK = "VL/onStoryItemClick"
+    static let M_STORY_REQUEST_RESULT = "VL/onStoryRequestResult"
     static let M_BANNER_ITEM_CLICK = "VL/onBannerItemClick"
     static let M_BANNER_REQUEST_RESULT = "VL/onBannerRequestResult"
     static let M_FAV_ATTRIBUTE = "VL/getFavAttributes"

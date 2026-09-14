@@ -14,12 +14,12 @@ class Story extends StatefulWidget {
 
 class _StoryState extends State<Story> {
   TextEditingController tController = TextEditingController();
-  String actionId = '2139';
+  String actionId = '2245';
 
   @override
   void initState() {
     super.initState();
-    tController.text = '2139';
+    tController.text = '2245';
   }
 
   @override
@@ -45,6 +45,7 @@ class _StoryState extends State<Story> {
               automaticallyImplyLeading: false,
             ),
             body: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -73,20 +74,17 @@ class _StoryState extends State<Story> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    child: RDStoryView(
-                      key: ValueKey(actionId),
-                      actionId: actionId,
-                      relatedDigitalPlugin: widget.relatedDigitalPlugin,
-                      onItemClick: (Map<String, String> result) {
-                        print(result);
-                      },
-                    ),
-                  ),
+                const Divider(height: 1, thickness: 1, color: Colors.red),
+                RDStoryView(
+                  key: ValueKey(actionId),
+                  actionId: actionId,
+                  // backgroundColor: Colors.red,
+                  relatedDigitalPlugin: widget.relatedDigitalPlugin,
+                  onItemClick: (Map<String, String> result) {
+                    print(result);
+                  },
                 ),
+                const Divider(height: 1, thickness: 1, color: Colors.green),
               ],
             )));
   }

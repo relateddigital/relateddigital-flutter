@@ -43,6 +43,11 @@ class RelateddigitalFlutter {
         'storyLink': methodCall.arguments['storyLink']
       };
       _storyPlatformCallbackHandler?.onItemClick(map);
+    } else if (methodCall.method == Constants.M_STORY_REQUEST_RESULT) {
+      Map<String, String> map = {
+        'height': methodCall.arguments['height']?.toString() ?? '0'
+      };
+      _storyPlatformCallbackHandler?.onRequestResult(map);
     } else if (methodCall.method == Constants.M_BANNER_ITEM_CLICK) {
       Map<String, String> map = {
         'bannerLink': methodCall.arguments['bannerLink']
