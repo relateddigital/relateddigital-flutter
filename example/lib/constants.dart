@@ -14,8 +14,6 @@ class Constants {
   static String SITE_ID = '356467332F6533766975593D';
   static String DATA_SOURCE = 'visistore';
 
-  
-
   static bool GEOFENCE_ENABLED = true;
   static int MAX_GEOFENCE_COUNT = 20;
   static bool IN_APP_NOTIFICATIONS_ENABLED = true;

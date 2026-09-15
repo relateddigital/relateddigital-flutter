@@ -34,20 +34,16 @@ class _InAppState extends State<InApp> {
             ),
             body: ListView(
               children: ListTile.divideTiles(context: context, tiles: [
-                SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 110,
-                    child: RDBannerView(
-                      key: null,
-                      relatedDigitalPlugin: widget.relatedDigitalPlugin,
-                      properties: {'key1': 'value1', 'key2': 'value2','OM.baris': 'baris', 'OM.uri': 'home'},
-                      onItemClick: (Map<String, String> result) {
-                        print("onItemClick client: $result");
-                      },
-                      onRequestResult: (Map<String, String> result) {
-                        print("onRequestResult client: $result");
-                      },
-                    )
+                RDBannerView(
+                  key: null,
+                  relatedDigitalPlugin: widget.relatedDigitalPlugin,
+                  properties: {'key1': 'value1', 'key2': 'value2','OM.baris': 'baris', 'OM.uri': 'home'},
+                  onItemClick: (Map<String, String> result) {
+                    print("onItemClick client: $result");
+                  },
+                  onRequestResult: (Map<String, String> result) {
+                    print("onRequestResult client: $result");
+                  },
                 ),
               ]).toList(),
             )));

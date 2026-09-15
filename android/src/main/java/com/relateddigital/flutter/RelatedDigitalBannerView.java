@@ -85,12 +85,12 @@ public class RelatedDigitalBannerView implements PlatformView {
                             channel.invokeMethod(Constants.M_BANNER_REQUEST_RESULT, result);
 
                             handler.post(() -> {
+                                // Flutter SizedBox is the size source of truth. Fill the
+                                // platform view instead of applying panel px as layout params.
                                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                                        width == 600 ? FrameLayout.LayoutParams.MATCH_PARENT :
-                                                (width > 0 ? width : FrameLayout.LayoutParams.MATCH_PARENT),
-                                        height > 0 ? height : FrameLayout.LayoutParams.WRAP_CONTENT
+                                        FrameLayout.LayoutParams.MATCH_PARENT,
+                                        FrameLayout.LayoutParams.MATCH_PARENT
                                 );
-
                                 bannerRecyclerView.setLayoutParams(params);
                                 bannerRecyclerView.requestLayout();
                             });

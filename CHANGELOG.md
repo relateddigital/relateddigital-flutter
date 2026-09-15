@@ -253,3 +253,8 @@ RDInitRequestModel(
 ## 0.7.9
 
 - NPS Feedback Keyboard Bug Fix
+
+## 0.8.0
+
+- New: Slider Drawer
+- Fix: App Banner, banner story
