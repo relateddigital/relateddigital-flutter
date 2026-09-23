@@ -29,11 +29,17 @@ class RelateddigitalFlutter {
     if (methodCall.method == Constants.M_TOKEN_RETRIEVED) {
       RDTokenResponseModel response =
           RDTokenResponseModel.fromJson(methodCall.arguments);
+      if (_logEnabled) {
+        print('[RDPush][Dart] token retrieved: ${response.deviceToken}');
+      }
       if (_setTokenHandler != null) {
         _setTokenHandler!(response);
       }
       _handleTokenRegister(response);
-    } else if (methodCall.method == Constants.M_NOTIFICATION_OPENED) {
+    } else if (methodCall.method == Constants.M_DEBUG_LOG) {
+      if (_logEnabled) {
+        print(methodCall.arguments);
+      } else if (methodCall.method == Constants.M_NOTIFICATION_OPENED) {
       if (_readNotificationHandler != null) {
         _readNotificationHandler!(methodCall.arguments);
       }

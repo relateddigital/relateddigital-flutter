@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
+import 'package:relateddigital_flutter_example/fcm_coexistence.dart';
 import 'package:relateddigital_flutter_example/screens/home.dart';
 import 'package:relateddigital_flutter_example/screens/event.dart';
 import 'package:relateddigital_flutter_example/screens/push.dart';
@@ -9,8 +10,9 @@ import 'package:relateddigital_flutter_example/screens/inapp.dart';
 import 'package:relateddigital_flutter_example/screens/story.dart';
 import 'package:relateddigital_flutter_example/screens/notification_center.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FcmCoexistence.init();
   runApp(RDExample());
 }
 
@@ -32,8 +34,7 @@ class _RDExample extends State<RDExample> with SingleTickerProviderStateMixin {
   }
 
   void _readNotificationCallback(dynamic result) async {
-    print('_readNotificationCallback');
-    print(result);
+    print('[RDPush][Dart][_readNotificationCallback] $result');
     showDialog(
         context: key.currentContext!,
         builder: (context) => AlertDialog(

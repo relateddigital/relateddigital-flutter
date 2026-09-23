@@ -36,6 +36,7 @@ end
 target 'NotificationService' do
     use_frameworks!
     pod 'Euromsg'
+    pod 'Firebase/Messaging'
 end
 
 target 'NotificationContent' do
@@ -46,10 +47,17 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
-        target.build_configurations.each do |config|
-            config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
-            config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
-        end
+    target.build_configurations.each do |config|
+      config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+    end
+  end
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      end
+    end
   end
 end
 

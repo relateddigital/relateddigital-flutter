@@ -22,6 +22,7 @@
       - [IOS](#ios-2)
     - [Set Push Permit](#set-push-permit)
     - [Get-Payload-List](#get-payload-list)
+    - [Using with other push providers (FCM or any other provider)](#using-with-other-push-providers-fcm-or-any-other-provider)
   - [Data Collection](#data-collection)
     - [Sign Up](#sign-up)
     - [Login](#login)
@@ -74,7 +75,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.8.0
+    relateddigital_flutter: ^0.8.1
 ```
 - Run `flutter pub get`
 
@@ -124,17 +125,9 @@ plugins {
 - Change your targetSdkVersion and compileSdkVersion to 34.
 
 
-- Add the following services to your `AndroidManifest.xml`, within the `<application></application>` tags.
+- **Do not** add `EuroFirebaseMessagingService` or any other `com.google.firebase.MESSAGING_EVENT` service for Related Digital. The plugin already registers `com.relateddigital.flutter.RelatedDigitalMessagingService` through its own AndroidManifest. Adding a second FCM service in your app manifest will compete with it and one of the two will silently stop receiving messages. If an older README led you to declare `EuroFirebaseMessagingService` in the app, remove it.
 
-```xml
-<service
-   android:name="euromsg.com.euromobileandroid.service.EuroFirebaseMessagingService"
-   android:exported="false">
-   <intent-filter>
-       <action android:name="com.google.firebase.MESSAGING_EVENT" />
-   </intent-filter>
-</service>
-```
+- If your app already uses `firebase_messaging` or another FCM library, skip this default service and follow [Using with other push providers (FCM or any other provider)](#using-with-other-push-providers-fcm-or-any-other-provider).
 
 - Add below meta-data parameters in your **AndroidManifest.xml**
 ```xml
@@ -228,6 +221,8 @@ class NotificationService: UNNotificationServiceExtension {
     }
 }
 ```
+
+If the app also uses Firebase Cloud Messaging or another push SDK, do not use this extension as-is. Follow [Using with other push providers (FCM or any other provider)](#using-with-other-push-providers-fcm-or-any-other-provider) so non-Related Digital payloads are forwarded to the other provider.
 
 - Enable `App Groups` Capability for your targets. App Groups allow your app to execute code when a notification is recieved, even if your app is not active. This is required for Related Digital's analytics features and to store and access notification payloads of the last 30 days.
 
@@ -485,6 +480,223 @@ You can access payload list of last 30 days if you have completed iOS `Notificat
 ```dart
 PayloadListResponse payloadListResponse = await relatedDigitalPlugin.getPushMessages();
 ```
+
+
+### Using with other push providers (FCM or any other provider)
+
+Use this section when the app already has its own push stack (`firebase_messaging`, a custom `FirebaseMessagingService`, or similar) **and** Related Digital push.
+
+Android delivers `com.google.firebase.MESSAGING_EVENT` to **one** `FirebaseMessagingService`. iOS allows **one** `UNUserNotificationCenterDelegate`. Intent-filter priority does **not** make two FCM services work together; it only picks a winner. The supported integration is: **your app owns the FCM service / notification delegate, and forwards Related Digital payloads to this SDK.**
+
+Do not call both `relatedDigitalPlugin.requestPermission` and another SDK's permission API for the same prompt. Request permission from one place; both stacks can still receive the resulting APNs/FCM token.
+
+If you only use Related Digital push, skip this section and keep the default Android service from [Android](#android).
+
+Send Related Digital campaigns with the token from `requestPermission` (iOS: APNs hex, Android: FCM). Send Firebase Console tests with the FCM token from `FirebaseMessaging.instance.getToken()` — never paste the iOS APNs hex into Firebase.
+
+This SDK renders Related Digital rich push (image, carousel). Foreground FCM banners and FCM images are your existing FCM code; the helper does not draw them.
+
+#### Android
+
+1. Add `xmlns:tools="http://schemas.android.com/tools"` to the `<manifest>` tag if it is not already there.
+
+2. Remove the plugin FCM service so your service is the only one that receives messages. If you extend `FlutterFirebaseMessagingService`, also remove FlutterFire's default service so you do not end up with two services again.
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application>
+        <service
+            android:name="com.relateddigital.flutter.RelatedDigitalMessagingService"
+            tools:node="remove" />
+
+        <!-- Only if your router extends FlutterFirebaseMessagingService -->
+        <service
+            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
+            tools:node="remove" />
+
+        <service
+            android:name=".RouterFCMService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
+```
+
+3. Create `RouterFCMService` next to `MainActivity`. Related Digital messages must be handled natively (carousel / image). Other messages go to your existing provider. The Java sample is the same API in Kotlin.
+
+**`firebase_messaging` (recommended when you already use FlutterFire):**
+
+```java
+package com.yourapp;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.messaging.RemoteMessage;
+import com.relateddigital.flutter.RelatedDigitalFCMHelper;
+
+import io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService;
+
+public class RouterFCMService extends FlutterFirebaseMessagingService {
+    @Override
+    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
+        if (RelatedDigitalFCMHelper.isRelatedDigitalMessage(remoteMessage)) {
+            RelatedDigitalFCMHelper.onMessageReceived(this, remoteMessage);
+            return;
+        }
+        super.onMessageReceived(remoteMessage);
+    }
+
+    @Override
+    public void onNewToken(@NonNull String token) {
+        RelatedDigitalFCMHelper.onNewToken(this, token);
+        super.onNewToken(token);
+    }
+}
+```
+
+**Your own `FirebaseMessagingService` (no FlutterFire service):**
+
+```java
+package com.yourapp;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
+import com.relateddigital.flutter.RelatedDigitalFCMHelper;
+
+public class RouterFCMService extends FirebaseMessagingService {
+    @Override
+    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
+        if (RelatedDigitalFCMHelper.isRelatedDigitalMessage(remoteMessage)) {
+            RelatedDigitalFCMHelper.onMessageReceived(this, remoteMessage);
+            return;
+        }
+        // Existing FCM handling
+    }
+
+    @Override
+    public void onNewToken(@NonNull String token) {
+        RelatedDigitalFCMHelper.onNewToken(this, token);
+        // Existing token handling
+    }
+}
+```
+
+**Any other provider in the same router:** keep a single service. After the Related Digital check, handle that provider’s payloads with its own API. Do not register a second `FirebaseMessagingService` next to this router. Always call `RelatedDigitalFCMHelper.onNewToken` in `onNewToken` in addition to the other provider’s token callback. The Android FCM token is shared; Related Digital and your own backend both subscribe to the same token.
+
+#### iOS
+
+If the host never assigns `UNUserNotificationCenter.current().delegate`, the plugin assigns itself so Related Digital-only apps keep receiving taps and foreground presentation. Flutter does **not** do this automatically.
+
+If **your app** uses its own `UNUserNotificationCenterDelegate` (`AppDelegate`, `firebase_messaging`, or any other provider), set that delegate **before** `super.application(...)` so the plugin does not take it over. Then forward Related Digital notifications from your delegate. Native methods:
+
+- `RelatedDigitalPushHandler.isRelatedDigitalPayload(_:)`
+- `RelatedDigitalPushHandler.handlePush(_:)` — click / open tracking (`Euromsg.handlePush`)
+- `RelatedDigitalPushHandler.registerToken(_:)` — APNs token
+
+On iOS, Related Digital uses the **APNs** device token. Firebase uses a different **FCM** token mapped from the same APNs token. Both can be registered. If you disable Firebase swizzling (`FirebaseAppDelegateProxyEnabled = NO`), set `Messaging.messaging().apnsToken` yourself. Put the APNs hex in the Related Digital panel and the FCM string in Firebase Console.
+
+**`AppDelegate.swift` when you own the notification delegate:**
+
+```swift
+import UIKit
+import Flutter
+import UserNotifications
+import relateddigital_flutter
+
+@main
+@objc class AppDelegate: FlutterAppDelegate {
+  override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+    GeneratedPluginRegistrant.register(with: self)
+    UNUserNotificationCenter.current().delegate = self // before super, so the plugin does not take over
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+
+  override func application(_ application: UIApplication,
+                            didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    RelatedDigitalPushHandler.registerToken(deviceToken)
+    super.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+  }
+
+  override func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                       didReceive response: UNNotificationResponse,
+                                       withCompletionHandler completionHandler: @escaping () -> Void) {
+    let userInfo = response.notification.request.content.userInfo
+    if RelatedDigitalPushHandler.isRelatedDigitalPayload(userInfo) {
+      RelatedDigitalPushHandler.handlePush(userInfo)
+    }
+    super.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+  }
+
+  override func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                       willPresent notification: UNNotification,
+                                       withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    if #available(iOS 14.0, *) {
+      completionHandler([.banner, .list, .badge, .sound])
+    } else {
+      completionHandler([.alert, .badge, .sound])
+    }
+  }
+}
+```
+
+If `import relateddigital_flutter` is not available from Runner, set Runner `IPHONEOS_DEPLOYMENT_TARGET` to **15.0** (or add `pod 'Euromsg'` to Runner and call `Euromsg.handlePush(pushDictionary:)` / `Euromsg.registerToken(tokenData:)`). Only forward when `userInfo["emPushSp"]` or `userInfo["pushId"]` is present.
+
+Call `super` in `didRegisterForRemoteNotificationsWithDeviceToken` and `didReceive` so Flutter plugins (`firebase_messaging` or any other provider) still receive callbacks. Implement `willPresent` once and call `completionHandler` once; do not also rely on another plugin to complete the same invocation.
+
+**Notification Service Extension** (rich push + other-provider images):
+
+```swift
+import UserNotifications
+import Euromsg
+import FirebaseMessaging
+
+class NotificationService: UNNotificationServiceExtension {
+    var contentHandler: ((UNNotificationContent) -> Void)?
+    var bestAttemptContent: UNMutableNotificationContent?
+
+    override func didReceive(_ request: UNNotificationRequest,
+                             withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        self.contentHandler = contentHandler
+        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+
+        guard let bestAttemptContent = bestAttemptContent else { return }
+
+        var userInfo = bestAttemptContent.userInfo
+        if userInfo["emPushSp"] != nil || userInfo["pushId"] != nil {
+            userInfo.removeValue(forKey: "fcm_options")
+            bestAttemptContent.userInfo = userInfo
+            Euromsg.configure(appAlias: "ios-app-alias", enableLog: true)
+            Euromsg.didReceive(bestAttemptContent, withContentHandler: contentHandler)
+        } else {
+            Messaging.serviceExtension().populateNotificationContent(bestAttemptContent,
+                                                                     withContentHandler: contentHandler)
+        }
+    }
+
+    override func serviceExtensionTimeWillExpire() {
+        if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
+            contentHandler(bestAttemptContent)
+        }
+    }
+}
+```
+
+Add `pod 'Firebase/Messaging'` (or the version your app already uses) to the `NotificationService` target next to `pod 'Euromsg'`. For any other provider, use that SDK’s NSE helper in the `else` branch instead of `Messaging.serviceExtension()`.
+
+If you only use Related Digital push, keep the [default NotificationService example](#ios) (`Euromsg.didReceive` for every payload). Do not add Firebase to the extension unless another provider needs it.
+
+Carousel still needs the [Notification Content Extension](#carousel-push-notifications); the NSE `else` branch only attaches the other provider’s images.
+
+**Check:** one Android `MESSAGING_EVENT` service and one iOS notification delegate; RD payloads (`emPushSp` / `pushId`) go to this SDK, everything else to your FCM or other-provider code; iOS RMC uses APNs hex, Firebase uses FCM token.
 
 
 ## Data Collection

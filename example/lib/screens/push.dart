@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:relateddigital_flutter/relateddigital_flutter.dart';
 import 'package:relateddigital_flutter/response_models.dart';
 import 'package:relateddigital_flutter_example/constants.dart';
+import 'package:relateddigital_flutter_example/fcm_coexistence.dart';
 import 'package:relateddigital_flutter_example/styles.dart';
 import 'package:relateddigital_flutter_example/widgets/text_input_list_tile.dart';
 
@@ -16,6 +17,7 @@ class Push extends StatefulWidget {
 
 class _PushState extends State<Push> {
   TextEditingController tokenController = TextEditingController();
+  TextEditingController fcmTokenController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController userPropertyKeyController = TextEditingController();
   TextEditingController userPropertyValueController = TextEditingController();
@@ -26,6 +28,27 @@ class _PushState extends State<Push> {
   @override
   void initState() {
     super.initState();
+    FcmCoexistence.tokenNotifier.addListener(_onFcmTokenChanged);
+    fcmTokenController.text = FcmCoexistence.token ?? '';
+    _refreshFcmToken();
+  }
+
+  @override
+  void dispose() {
+    FcmCoexistence.tokenNotifier.removeListener(_onFcmTokenChanged);
+    super.dispose();
+  }
+
+  void _onFcmTokenChanged() {
+    if (!mounted) {
+      return;
+    }
+    final value = FcmCoexistence.tokenNotifier.value ?? '';
+    if (fcmTokenController.text != value) {
+      setState(() {
+        fcmTokenController.text = value;
+      });
+    }
   }
 
   @override
@@ -45,6 +68,11 @@ class _PushState extends State<Push> {
                   controller: tokenController,
                   onChanged: null,
                 ),
+                TextInputListTile(
+                  title: 'FCM token',
+                  controller: fcmTokenController,
+                  onChanged: null,
+                ),
                 ListTile(
                   subtitle: Column(
                     children: <Widget>[
@@ -55,6 +83,12 @@ class _PushState extends State<Push> {
                             this.widget.relatedDigitalPlugin.requestPermission(
                                 _getTokenCallback,
                                 isProvisional: false);
+                          }),
+                      TextButton(
+                          child: Text('Refresh FCM Token'),
+                          style: Styles.pushButtonStyle,
+                          onPressed: () {
+                            _refreshFcmToken();
                           })
                     ],
                   ),
@@ -242,11 +276,11 @@ class _PushState extends State<Push> {
   }
 
   void _getTokenCallback(RDTokenResponseModel result) {
-    print('RDTokenResponseModel :');
+    print('[RDPush][Dart] APNs token callback:');
     if (result != null &&
         result.deviceToken != null &&
         result.deviceToken.isNotEmpty) {
-      print(result.deviceToken);
+      print('[RDPush][Dart] APNs token=${result.deviceToken}');
       setState(() {
         tokenController.text = result.deviceToken;
       });
@@ -255,6 +289,17 @@ class _PushState extends State<Push> {
         tokenController.text = 'Token not retrieved';
       });
     }
+    _refreshFcmToken();
+  }
+
+  Future<void> _refreshFcmToken() async {
+    final token = await FcmCoexistence.refreshToken();
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      fcmTokenController.text = token ?? 'FCM token not retrieved';
+    });
   }
 }
 

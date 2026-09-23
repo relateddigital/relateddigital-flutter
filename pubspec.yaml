@@ -1,6 +1,6 @@
 name: relateddigital_flutter
 description: Related Digital Official Flutter SDK for analytics, recommendation and push notifications.
-version: 0.8.0
+version: 0.8.1
 homepage: https://www.relateddigital.com
 
 environment:
@@ -26,3 +26,4 @@ flutter:
 
 false_secrets:
  - /example/android/app/google-services.json
+ - /example/ios/Runner/GoogleService-Info.plist

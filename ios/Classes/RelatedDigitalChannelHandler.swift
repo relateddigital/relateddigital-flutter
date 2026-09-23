@@ -37,6 +37,9 @@ class RelatedDigitalChannelHandler: NSObject {
             self.functionHandler.initEuroMsg(appAlias: appAlias, enableLog: enableLog)
             self.functionHandler.initVisilabs(organizationId: organizationId, profileId: siteId, dataSource: dataSource, inAppNotificationsEnabled: inAppNotificationsEnabled
             , geofenceEnabled: geofenceEnabled, maxGeofenceCount: maxGeofenceCount, enableLog: enableLog, isIDFAEnabled: isIDFAEnabled)
+
+            RelatedDigitalPushHandler.log("SDK init appAlias=\(appAlias) enableLog=\(enableLog)")
+            RelatedDigitalPushHandler.flushPendingLogs()
             
             result(nil)
             
@@ -50,6 +53,7 @@ class RelatedDigitalChannelHandler: NSObject {
         }
         else if(call.method == Constants.M_PERMISSION) {
             let isProvisional = args?["isProvisional"] as? Bool ?? false
+            RelatedDigitalPushHandler.log("requestPermission isProvisional=\(isProvisional)")
             self.functionHandler.requestPermission(isProvisional: isProvisional)
             result(nil)
         }

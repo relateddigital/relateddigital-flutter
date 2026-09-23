@@ -21,6 +21,7 @@ public class RegisterDelegate : EuromsgDelegate {
 class RelatedDigitalFunctionHandler {
     private var locationManager: CLLocationManager?
     public func initEuroMsg(appAlias: String, enableLog: Bool) {
+        RelatedDigitalPushHandler.enableLog = enableLog
         Euromsg.configure(appAlias: appAlias, enableLog: enableLog)
         Euromsg.sync()
     }
@@ -32,6 +33,7 @@ class RelatedDigitalFunctionHandler {
     }
     
     public func requestPermission(isProvisional: Bool) {
+        RelatedDigitalPushHandler.log("Euromsg.askForNotificationPermission register=true provisional=\(isProvisional)")
         if (isProvisional) {
             Euromsg.askForNotificationPermissionProvisional(register: true)
         } else {
@@ -40,11 +42,11 @@ class RelatedDigitalFunctionHandler {
     }
     
     public func registerToken(deviceToken: Data) {
-        Euromsg.registerToken(tokenData: deviceToken)
+        RelatedDigitalPushHandler.registerToken(deviceToken)
     }
     
     public func handlePush(pushDictionary: [AnyHashable: Any]) {
-        Euromsg.handlePush(pushDictionary: pushDictionary)
+        RelatedDigitalPushHandler.handlePush(pushDictionary)
     }
     
     public func setEuroUserId(userId: String) {

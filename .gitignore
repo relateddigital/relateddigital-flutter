@@ -10,6 +10,7 @@ build/
 
 /example/android/app/google-services.json
 /example/android/app/agconnect-services.json
+/example/ios/Runner/GoogleService-Info.plist
 /example/android/app/flutter
 /example/android/app/debug.keystore
 .fvm/flutter_sdk
