@@ -39,7 +39,8 @@ class RelateddigitalFlutter {
     } else if (methodCall.method == Constants.M_DEBUG_LOG) {
       if (_logEnabled) {
         print(methodCall.arguments);
-      } else if (methodCall.method == Constants.M_NOTIFICATION_OPENED) {
+      }
+    } else if (methodCall.method == Constants.M_NOTIFICATION_OPENED) {
       if (_readNotificationHandler != null) {
         _readNotificationHandler!(methodCall.arguments);
       }
