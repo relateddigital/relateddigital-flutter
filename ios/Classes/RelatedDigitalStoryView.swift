@@ -20,10 +20,8 @@ class RelatedDigitalStoryView: NSObject, FlutterPlatformView, VisilabsStoryURLDe
 		if let backgroundColor = Self.parseBackgroundColor(args) {
 			container.backgroundColor = backgroundColor
 		}
-		container.onHeightReady = { [weak self] height in
-			self?.channel.invokeMethod(Constants.M_STORY_REQUEST_RESULT, arguments: [
-				"height": height
-			])
+		container.onRequestResult = { [weak self] isAvailable, width, height in
+			self?.storyRequestResult(isAvailable: isAvailable, width: width, height: height)
 		}
 		container.load(actionId: Self.parseActionId(args), urlDelegate: self)
 	}
@@ -32,10 +30,32 @@ class RelatedDigitalStoryView: NSObject, FlutterPlatformView, VisilabsStoryURLDe
 		return container
 	}
 
+	func storyRequestResult(isAvailable: Bool, width: Int, height: Int) {
+		let result: NSMutableDictionary = NSMutableDictionary()
+		result.setValue(isAvailable, forKey: "isAvailable")
+		result.setValue(width, forKey: "width")
+		result.setValue(height, forKey: "height")
+		channel.invokeMethod(Constants.M_STORY_REQUEST_RESULT, arguments: result)
+	}
+
 	func urlClicked(_ url: URL) {
 		channel.invokeMethod(Constants.M_STORY_ITEM_CLICK, arguments: [
 			"storyLink": url.absoluteString
 		])
+		// Visilabs opens links with the deprecated openURL: selector, which iOS rejects.
+		// Skin-based stories only notify this delegate and never open the link themselves.
+		openStoryURL(url)
+	}
+
+	private func openStoryURL(_ url: URL) {
+		let open = {
+			UIApplication.shared.open(url, options: [:], completionHandler: nil)
+		}
+		if Thread.isMainThread {
+			open()
+		} else {
+			DispatchQueue.main.async(execute: open)
+		}
 	}
 
 	private static func parseActionId(_ args: Any?) -> Int? {
@@ -66,10 +86,9 @@ class RelatedDigitalStoryView: NSObject, FlutterPlatformView, VisilabsStoryURLDe
 /// then reuses it as the first rectangle story — that is what made the first item look tiny.
 private class StoryPlatformContainerView: UIView {
 
-	var onHeightReady: ((Int) -> Void)?
+	var onRequestResult: ((Bool, Int, Int) -> Void)?
 	private var storyHomeView: VisilabsStoryHomeView?
 	private var didRequest = false
-	private var didReportHeight = false
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -88,8 +107,14 @@ private class StoryPlatformContainerView: UIView {
 
 		Visilabs.callAPI().getStoryViewAsync(actionId: actionId, urlDelegate: urlDelegate) { [weak self] storyHomeView in
 			DispatchQueue.main.async {
-				guard let self = self, let storyHomeView = storyHomeView else { return }
+				guard let self = self else { return }
+				guard let storyHomeView = storyHomeView else {
+					self.onRequestResult?(false, 0, 0)
+					return
+				}
 				self.embed(storyHomeView)
+				let size = self.resolvedStorySize(storyHomeView)
+				self.onRequestResult?(true, size.width, size.height)
 			}
 		}
 	}
@@ -106,7 +131,6 @@ private class StoryPlatformContainerView: UIView {
 		storyHomeView.updateCollectionHeight()
 		setNeedsLayout()
 		layoutIfNeeded()
-		reportHeightIfNeeded()
 	}
 
 	override func layoutSubviews() {
@@ -116,27 +140,27 @@ private class StoryPlatformContainerView: UIView {
 			storyHomeView.frame = bounds
 		}
 		storyHomeView.updateCollectionHeight()
-		reportHeightIfNeeded()
 	}
 
-	private func reportHeightIfNeeded() {
-		guard !didReportHeight, let storyHomeView = storyHomeView else { return }
-		guard let collection = storyHomeView.subviews.compactMap({ $0 as? UICollectionView }).first else { return }
-		collection.layoutIfNeeded()
+	/// Height is the native item size from `sizeForItemAt` (rectangle 220, circle 100).
+	/// The collection's own height constraint is taller than the cell and leaves a gap.
+	private func resolvedStorySize(_ storyHomeView: VisilabsStoryHomeView) -> (width: Int, height: Int) {
+		let width = Int(UIScreen.main.bounds.width.rounded())
+		guard let collection = storyHomeView.subviews.compactMap({ $0 as? UICollectionView }).first else {
+			return (width, 100)
+		}
 
-		var itemHeight: CGFloat = 100
 		let indexPath = IndexPath(item: 0, section: 0)
 		if collection.numberOfItems(inSection: 0) > 0,
 		   let flowDelegate = collection.delegate as? UICollectionViewDelegateFlowLayout,
-		   let size = flowDelegate.collectionView?(collection, layout: collection.collectionViewLayout, sizeForItemAt: indexPath) {
-			itemHeight = size.height
-		} else if let cell = collection.visibleCells.first {
-			itemHeight = cell.bounds.height
+		   let size = flowDelegate.collectionView?(collection, layout: collection.collectionViewLayout, sizeForItemAt: indexPath),
+		   size.height > 0 {
+			return (width, Int(size.height.rounded()))
 		}
 
-		// Rectangle item is 220; label + native top inset need a bit more. Circle item is 100.
-		let height = itemHeight >= 200 ? 258 : 100
-		didReportHeight = true
-		onHeightReady?(height)
+		if let heightConstraint = collection.constraints.first(where: { $0.firstAttribute == .height && $0.constant > 0 }) {
+			return (width, Int(heightConstraint.constant.rounded()))
+		}
+		return (width, 100)
 	}
 }

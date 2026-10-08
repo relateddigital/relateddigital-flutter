@@ -140,10 +140,8 @@ class RelatedDigitalFunctionHandler {
         }
         
         Visilabs.callAPI().recommend(zoneID: zoneId, productCode: productCode, filters: visilabsRecoFilters, properties: properties){ response in
-            let resultObj: NSMutableDictionary = NSMutableDictionary()
-            
             if response.error != nil {
-                resultObj.setValue("recommendation error", forKey: "error")
+                result("[{\"recommendations\":[],\"title\":\"\"}]")
             }
             else {
                 var recommendations: [RelatedDigitalRecommendationProduct] = []
@@ -177,7 +175,8 @@ class RelatedDigitalFunctionHandler {
                         attr7: product.attr7,
                         attr8: product.attr8,
                         attr9: product.attr9,
-                        attr10: product.attr10
+                        attr10: product.attr10,
+                        variants2: product.variants2
                     ))
                 }
                 
@@ -371,6 +370,7 @@ public class RelatedDigitalRecommendationProduct: Encodable {
         public static let attr8 = "attr8"
         public static let attr9 = "attr9"
         public static let attr10 = "attr10"
+        public static let variants2 = "variants2"
     }
     
     public var code: String
@@ -400,6 +400,7 @@ public class RelatedDigitalRecommendationProduct: Encodable {
     public var attr8: String
     public var attr9: String
     public var attr10: String
+    public var variants2: [VisilabsProductVariant2]?
     
     internal init(
             code: String, 
@@ -428,7 +429,8 @@ public class RelatedDigitalRecommendationProduct: Encodable {
             attr7: String, 
             attr8: String, 
             attr9: String, 
-            attr10: String
+            attr10: String,
+            variants2: [VisilabsProductVariant2]? = nil
         ) {
         self.code = code
         self.title = title
@@ -457,6 +459,7 @@ public class RelatedDigitalRecommendationProduct: Encodable {
         self.attr8 = attr8
         self.attr9 = attr9
         self.attr10 = attr10
+        self.variants2 = variants2
     }
     
     internal init?(JSONObject: [String: Any?]?) {
@@ -496,6 +499,11 @@ public class RelatedDigitalRecommendationProduct: Encodable {
         self.attr8 = object[PayloadKey.attr8] as? String ?? ""
         self.attr9 = object[PayloadKey.attr9] as? String ?? ""
         self.attr10 = object[PayloadKey.attr10] as? String ?? ""
+        if let variants2Raw = object[PayloadKey.variants2] as? [[String: Any]] {
+            self.variants2 = variants2Raw.compactMap { VisilabsProductVariant2(JSONObject: $0) }
+        } else if let variants2RawAny = object[PayloadKey.variants2] as? [[String: Any?]] {
+            self.variants2 = variants2RawAny.compactMap { VisilabsProductVariant2(JSONObject: $0) }
+        }
     }
 }
 

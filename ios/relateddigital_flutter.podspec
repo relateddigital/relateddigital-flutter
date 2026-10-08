@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Classes/**/*.{h,m,swift}'
   s.dependency 'Flutter'
   s.dependency 'Euromsg', '2.7.2'
-  s.dependency 'VisilabsIOS', '4.5.2'
+  s.dependency 'VisilabsIOS', '4.5.4'
   s.platform = :ios, '10.0'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.swift_version = '5.0'

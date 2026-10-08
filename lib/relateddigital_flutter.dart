@@ -52,6 +52,8 @@ class RelateddigitalFlutter {
       _storyPlatformCallbackHandler?.onItemClick(map);
     } else if (methodCall.method == Constants.M_STORY_REQUEST_RESULT) {
       Map<String, String> map = {
+        'isAvailable': methodCall.arguments['isAvailable']?.toString() ?? 'false',
+        'width': methodCall.arguments['width']?.toString() ?? '0',
         'height': methodCall.arguments['height']?.toString() ?? '0'
       };
       _storyPlatformCallbackHandler?.onRequestResult(map);
@@ -189,28 +191,45 @@ class RelateddigitalFlutter {
       {String productCode = '',
       Map<String, String> properties = const {},
       List filters = const []}) async {
-    String? rawResponse =
-        await _channel.invokeMethod(Constants.M_RECOMMENDATIONS, {
-      'zoneId': zoneId,
-      'productCode': productCode,
-      'properties': properties,
-      'filters': filters
-    });
-    if (rawResponse != null && rawResponse.isNotEmpty) {
-      try {
-         Map<String, dynamic> parsedJson;
-         if (Platform.isIOS) {
-            parsedJson = json.decode(rawResponse)[0];
-         } else {
-            parsedJson = json.decode(rawResponse);
-         }
+    try {
+      final dynamic rawResponse =
+          await _channel.invokeMethod(Constants.M_RECOMMENDATIONS, {
+        'zoneId': zoneId,
+        'productCode': productCode,
+        'properties': properties,
+        'filters': filters
+      });
+      final Map<String, dynamic>? parsedJson =
+          _parseRecommendationsResponse(rawResponse);
+      if (parsedJson != null) {
+        return parsedJson;
+      }
+    } on Exception catch (ex) {
+      print(ex);
+    }
+    return {'recommendations': [], 'title': ''};
+  }
 
-         return parsedJson;
-      } on Exception catch (ex) {
-        print(ex);
+  Map<String, dynamic>? _parseRecommendationsResponse(dynamic rawResponse) {
+    if (rawResponse == null) {
+      return null;
+    }
+
+    if (rawResponse is Map) {
+      return Map<String, dynamic>.from(rawResponse);
+    }
+
+    if (rawResponse is String && rawResponse.isNotEmpty) {
+      final dynamic decoded = json.decode(rawResponse);
+      if (decoded is List && decoded.isNotEmpty && decoded[0] is Map) {
+        return Map<String, dynamic>.from(decoded[0] as Map);
+      }
+      if (decoded is Map) {
+        return Map<String, dynamic>.from(decoded);
       }
     }
-    return {};
+
+    return null;
   }
 
   Future<void> trackRecommendationClick(String qs) async {

@@ -14,6 +14,7 @@ class RDStoryView extends StatefulWidget {
 
   final String actionId;
   final Function(Map<String, String> result) onItemClick;
+  final Function(Map<String, String> result) onRequestResult;
   final RelateddigitalFlutter relatedDigitalPlugin;
   /// `null` = native shape geldikten sonra otomatik boyutlan.
   final double? height;
@@ -23,6 +24,7 @@ class RDStoryView extends StatefulWidget {
       {required super.key,
       required this.actionId,
       required this.onItemClick,
+      required this.onRequestResult,
       required this.relatedDigitalPlugin,
       this.height,
       this.backgroundColor});
@@ -134,5 +136,6 @@ class StoryPlatformCallbackHandler implements StoryCallbackHandler {
     if (parsed != null && parsed > 0) {
       onHeight?.call(parsed);
     }
+    storyView.onRequestResult(result);
   }
 }

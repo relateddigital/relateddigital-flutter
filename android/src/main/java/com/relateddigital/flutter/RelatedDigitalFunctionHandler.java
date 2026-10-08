@@ -234,23 +234,28 @@ public class RelatedDigitalFunctionHandler {
                         result.success(jsonObject.toString());
                     } catch (Exception ex) {
                         ex.printStackTrace();
-                        HashMap<String, String> error = new HashMap<>();
-                        error.put("error", ex.toString());
-                        result.success(error);
+                        sendRecommendationError(result);
                     }
                 }
                 @Override
                 public void fail(VisilabsResponse response) {
-                    HashMap<String, String> error = new HashMap<>();
-                    error.put("error", response.getErrorMessage());
-                    result.success(error);
+                    sendRecommendationError(result);
                 }
             });
         }
         catch (Exception ex) {
-            HashMap<String, String> error = new HashMap<String, String>();
-            error.put("error", ex.toString());
-            result.success(error);
+            sendRecommendationError(result);
+        }
+    }
+
+    private void sendRecommendationError(MethodChannel.Result result) {
+        try {
+            JSONObject emptyResponse = new JSONObject();
+            emptyResponse.put("recommendations", new org.json.JSONArray());
+            emptyResponse.put("title", "");
+            result.success(emptyResponse.toString());
+        } catch (Exception e) {
+            result.success("{\"recommendations\":[],\"title\":\"\"}");
         }
     }
 

@@ -83,6 +83,9 @@ class _StoryState extends State<Story> {
                   onItemClick: (Map<String, String> result) {
                     print(result);
                   },
+                  onRequestResult: (Map<String, String> result) {
+                    print("onRequestResult: $result");
+                  },
                 ),
                 const Divider(height: 1, thickness: 1, color: Colors.green),
               ],

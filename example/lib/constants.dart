@@ -16,9 +16,14 @@ class Constants {
   static bool ENABLE_FCM = true;
 
   // DEMO
-  static String ORGANIZATION_ID = '676D325830564761676D453D';
-  static String SITE_ID = '356467332F6533766975593D';
-  static String DATA_SOURCE = 'visistore';
+  // static String ORGANIZATION_ID = '676D325830564761676D453D';
+  // static String SITE_ID = '356467332F6533766975593D';
+  // static String DATA_SOURCE = 'visistore';
+
+  // Avva
+  static String ORGANIZATION_ID = '7053447678532B615239343D';
+  static String SITE_ID = '312F6A5A637979585A75383D';
+  static String DATA_SOURCE = 'avva';
 
 
   static bool GEOFENCE_ENABLED = true;

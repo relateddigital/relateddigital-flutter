@@ -75,7 +75,7 @@ This library is the official Flutter SDK of Related Digital.
 
 ```yaml
 dependencies:
-    relateddigital_flutter: ^0.8.1
+    relateddigital_flutter: ^0.8.2
 ```
 - Run `flutter pub get`
 
@@ -593,11 +593,17 @@ public class RouterFCMService extends FirebaseMessagingService {
 
 If the host never assigns `UNUserNotificationCenter.current().delegate`, the plugin assigns itself so Related Digital-only apps keep receiving taps and foreground presentation. Flutter does **not** do this automatically.
 
-If **your app** uses its own `UNUserNotificationCenterDelegate` (`AppDelegate`, `firebase_messaging`, or any other provider), set that delegate **before** `super.application(...)` so the plugin does not take it over. Then forward Related Digital notifications from your delegate. Native methods:
+If **your app** uses its own `UNUserNotificationCenterDelegate` (`AppDelegate`, `firebase_messaging`, or any other provider), set that delegate **before** `super.application(...)` so the plugin does not take it over.
+
+`super.userNotificationCenter(...)` forwards the same call to **every** Flutter plugin in the chain (this SDK and `firebase_messaging`). This plugin already runs `handlePush` for Related Digital taps and **always** calls `completionHandler`. Call `handlePush` in AppDelegate only if you do **not** call `super`; calling both sends open tracking twice.
+
+Pass a first-wins wrapper into `super`. Both plugins complete the same handler; iOS allows that only once. If you call `completionHandler` yourself, do not also call `super` for that invocation.
+
+Native methods (use `handlePush` only when `super` is not called):
 
 - `RelatedDigitalPushHandler.isRelatedDigitalPayload(_:)`
 - `RelatedDigitalPushHandler.handlePush(_:)` — click / open tracking (`Euromsg.handlePush`)
-- `RelatedDigitalPushHandler.registerToken(_:)` — APNs token
+- `RelatedDigitalPushHandler.registerToken(_:)` — APNs `Data` from `didRegisterForRemoteNotificationsWithDeviceToken`, not the FCM string
 
 On iOS, Related Digital uses the **APNs** device token. Firebase uses a different **FCM** token mapped from the same APNs token. Both can be registered. If you disable Firebase swizzling (`FirebaseAppDelegateProxyEnabled = NO`), set `Messaging.messaging().apnsToken` yourself. Put the APNs hex in the Related Digital panel and the FCM string in Firebase Console.
 
@@ -622,35 +628,48 @@ import relateddigital_flutter
 
   override func application(_ application: UIApplication,
                             didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    RelatedDigitalPushHandler.registerToken(deviceToken)
+    RelatedDigitalPushHandler.registerToken(deviceToken) // APNs Data only, not Firebase getToken()
     super.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
   }
 
   override func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        didReceive response: UNNotificationResponse,
                                        withCompletionHandler completionHandler: @escaping () -> Void) {
-    let userInfo = response.notification.request.content.userInfo
-    if RelatedDigitalPushHandler.isRelatedDigitalPayload(userInfo) {
-      RelatedDigitalPushHandler.handlePush(userInfo)
-    }
-    super.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+    // Do not call handlePush here: the plugin does it for RD payloads when super runs.
+    super.userNotificationCenter(center, didReceive: response,
+                                 withCompletionHandler: firstCall(completionHandler))
   }
 
   override func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        willPresent notification: UNNotification,
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    if #available(iOS 14.0, *) {
-      completionHandler([.banner, .list, .badge, .sound])
-    } else {
-      completionHandler([.alert, .badge, .sound])
+    super.userNotificationCenter(center, willPresent: notification,
+                                 withCompletionHandler: firstCall(completionHandler))
+  }
+
+  private func firstCall<T>(_ handler: @escaping (T) -> Void) -> (T) -> Void {
+    var done = false
+    return { value in
+      guard !done else { return }
+      done = true
+      handler(value)
+    }
+  }
+
+  private func firstCall(_ handler: @escaping () -> Void) -> () -> Void {
+    var done = false
+    return {
+      guard !done else { return }
+      done = true
+      handler()
     }
   }
 }
 ```
 
-If `import relateddigital_flutter` is not available from Runner, set Runner `IPHONEOS_DEPLOYMENT_TARGET` to **15.0** (or add `pod 'Euromsg'` to Runner and call `Euromsg.handlePush(pushDictionary:)` / `Euromsg.registerToken(tokenData:)`). Only forward when `userInfo["emPushSp"]` or `userInfo["pushId"]` is present.
+If `import relateddigital_flutter` is not available from Runner, set Runner `IPHONEOS_DEPLOYMENT_TARGET` to **15.0** (or add `pod 'Euromsg'` to Runner and call `Euromsg.handlePush(pushDictionary:)` / `Euromsg.registerToken(tokenData:)`). Only forward when `userInfo["emPushSp"]` or `userInfo["pushId"]` is present, and then complete the handler yourself without `super`.
 
-Call `super` in `didRegisterForRemoteNotificationsWithDeviceToken` and `didReceive` so Flutter plugins (`firebase_messaging` or any other provider) still receive callbacks. Implement `willPresent` once and call `completionHandler` once; do not also rely on another plugin to complete the same invocation.
+Call `super` in `didRegisterForRemoteNotificationsWithDeviceToken` so other Flutter plugins still receive the APNs token. For `didReceive` / `willPresent`, either `super` plus the first-wins wrapper above, or complete once yourself with no `super` — not both.
 
 **Notification Service Extension** (rich push + other-provider images):
 
@@ -915,6 +934,10 @@ RDStoryView(
 	relatedDigitalPlugin: widget.relatedDigitalPlugin,
 	onItemClick: (Map<String, String> result) {
 		print(result);
+	},
+	onRequestResult: (Map<String, String> result) {
+		// isAvailable, height, width — fired after the campaign response
+		print(result);
 	}
 )
 ```
@@ -1092,7 +1115,20 @@ Future<void> getRecommendations() async {
             "qs": "OM.zn=You Viewed-w60&OM.zpc=1159092",
             "rating": 0,
             "samedayshipping": false,
-            "title": "Titiz TP-115 Yeşil Ayakkabı"
+            "title": "Titiz TP-115 Yeşil Ayakkabı",
+            "variants2": [
+                {
+                    "color": "Gümüş Rengi",
+                    "colors": [
+                        {
+                            "size": "STANDART",
+                            "product_id": 12345,
+                            "cart_id": "56789",
+                            "stock": 123
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "title": "Display You Viewed"

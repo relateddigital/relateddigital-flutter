@@ -264,3 +264,8 @@ RDInitRequestModel(
 - Android: Added `RelatedDigitalFCMHelper` so apps that already own a `FirebaseMessagingService` (`firebase_messaging`, OneSignal, or a custom service) can forward Related Digital payloads without a second FCM service.
 - iOS: Assigned `UNUserNotificationCenter` delegate only when the host has not set one, and added `RelatedDigitalPushHandler` so apps with their own delegate can forward Related Digital clicks.
 - README: Documented official coexistence setup for FCM/OneSignal on Android and iOS, and removed the duplicate `EuroFirebaseMessagingService` app-manifest instruction.
+
+## 0.8.2
+
+- Half Screen Close Button Fix
+- New recommendation parameters added

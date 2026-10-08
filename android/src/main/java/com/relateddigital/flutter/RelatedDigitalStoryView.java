@@ -25,7 +25,7 @@ public class RelatedDigitalStoryView implements PlatformView {
 
     private final VisilabsRecyclerView recyclerView;
     private final MethodChannel channel;
-    private boolean heightReported = false;
+    private boolean resultReported = false;
 
     RelatedDigitalStoryView(@NonNull Context context, int id, @Nullable Map<String, Object> creationParams, MethodChannel channel) {
         this.channel = channel;
@@ -97,12 +97,30 @@ public class RelatedDigitalStoryView implements PlatformView {
             StoryRequestListener requestListener = new StoryRequestListener() {
                 @Override
                 public void onRequestResult(boolean isAvailable) {
+                    if (!isAvailable) {
+                        reportResult(false, 0, 0);
+                        return;
+                    }
                     recyclerView.post(new Runnable() {
                         @Override
                         public void run() {
                             if (recyclerView.getChildCount() > 0) {
                                 reportHeight(recyclerView.getChildAt(0));
+                                return;
                             }
+                            recyclerView.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (resultReported) {
+                                        return;
+                                    }
+                                    if (recyclerView.getChildCount() > 0) {
+                                        reportHeight(recyclerView.getChildAt(0));
+                                    } else {
+                                        reportResult(false, 0, 0);
+                                    }
+                                }
+                            });
                         }
                     });
                 }
@@ -119,20 +137,19 @@ public class RelatedDigitalStoryView implements PlatformView {
     }
 
     private void reportHeight(final View child) {
-        if (heightReported || child == null) {
+        if (resultReported || child == null) {
             return;
         }
         recyclerView.post(new Runnable() {
             @Override
             public void run() {
-                if (heightReported) {
+                if (resultReported) {
                     return;
                 }
                 int imageHeightPx = findMaxImageHeightPx(child);
                 if (imageHeightPx <= 0) {
                     return;
                 }
-                heightReported = true;
                 float density = recyclerView.getResources().getDisplayMetrics().density;
                 int imageDp = Math.round(imageHeightPx / density);
                 // Native rectangle image is 240dp; circle/square image is 72dp.
@@ -140,11 +157,24 @@ public class RelatedDigitalStoryView implements PlatformView {
                 int heightDp = imageDp >= 200
                         ? imageDp + RECTANGLE_EXTRA_DP
                         : CIRCLE_OR_SQUARE_HEIGHT_DP;
-                Map<String, Object> result = new HashMap<String, Object>();
-                result.put("height", heightDp);
-                channel.invokeMethod(Constants.M_STORY_REQUEST_RESULT, result);
+                int widthDp = density > 0
+                        ? Math.round(recyclerView.getResources().getDisplayMetrics().widthPixels / density)
+                        : 0;
+                reportResult(true, widthDp, heightDp);
             }
         });
+    }
+
+    private void reportResult(boolean isAvailable, int width, int height) {
+        if (resultReported) {
+            return;
+        }
+        resultReported = true;
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("isAvailable", isAvailable);
+        result.put("width", width);
+        result.put("height", height);
+        channel.invokeMethod(Constants.M_STORY_REQUEST_RESULT, result);
     }
 
     private int findMaxImageHeightPx(View view) {
