@@ -269,3 +269,7 @@ RDInitRequestModel(
 
 - Half Screen Close Button Fix
 - New recommendation parameters added
+
+## 0.8.3
+
+- Notification Bell close button fix
